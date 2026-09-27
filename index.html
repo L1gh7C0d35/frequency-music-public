@@ -1,0 +1,175 @@
+<!doctype html>
+<html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070908">
+<title>Frequency Music</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% -8%,#173025 0,#0b0f0c 38%,#070908 100%);color:#f4f7f5;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;min-height:100vh}
+main{width:min(94vw,760px);margin:auto;padding:38px 0 130px}.brand{font-size:11px;letter-spacing:2.3px;color:#8fc8a1;font-weight:850}
+h1{font-size:38px;line-height:1;margin:8px 0 10px}.lead{color:#9ca8a0;line-height:1.5;margin:0 0 24px;max-width:620px}.list{display:grid;gap:11px}
+.song{display:grid;grid-template-columns:58px 1fr;gap:14px;align-items:start;background:rgba(20,26,22,.92);border:1px solid rgba(164,205,178,.14);border-radius:22px;padding:16px;box-shadow:0 12px 38px rgba(0,0,0,.16)}
+.song.active{border-color:rgba(183,239,200,.48);background:rgba(23,33,27,.96)}.songPlay{width:56px;height:56px;border:0;border-radius:50%;background:#b7efc8;display:grid;place-items:center;margin-top:2px}
+.playIcon{width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:14px solid #071009;margin-left:3px}.song.active .songPlay .playIcon{width:14px;height:18px;border:0;margin:0;background:linear-gradient(to right,#071009 0 34%,transparent 34% 66%,#071009 66% 100%)}
+.songTop{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.rank{display:inline-grid;place-items:center;min-width:25px;height:25px;border-radius:50%;background:#1f2d25;color:#b7efc8;font-size:11px;font-weight:900}
+h2{font-size:19px;line-height:1.1;margin:0}.badge{font-size:10px;font-weight:850;background:#263d30;color:#b7efc8;border-radius:999px;padding:5px 8px}.sub{font-size:12px;color:#9ccbaa;margin-top:6px}.desc{font-size:13px;line-height:1.48;color:#99a59d;margin:9px 0 8px}.details{font-size:12px;font-weight:800;color:#aee9c0;text-decoration:none}
+.player{position:fixed;z-index:30;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(94vw,720px);background:rgba(15,20,17,.97);border:1px solid rgba(183,239,200,.2);border-radius:18px;padding:12px 14px;box-shadow:0 20px 60px rgba(0,0,0,.5);display:none;grid-template-columns:42px 1fr auto;gap:11px;align-items:center;backdrop-filter:blur(18px)}.player.show{display:grid}
+.miniPlay{width:40px;height:40px;border:0;border-radius:50%;background:#b7efc8;display:grid;place-items:center}.miniPlay .playIcon{border-top-width:7px;border-bottom-width:7px;border-left-width:11px}.miniPlay.playing .playIcon{width:12px;height:15px;border:0;margin:0;background:linear-gradient(to right,#071009 0 33%,transparent 33% 67%,#071009 67% 100%)}.nowTitle{font-size:13px;font-weight:850}.progressWrap{display:flex;align-items:center;gap:8px;margin-top:5px}.time{font-size:10px;color:#748078;min-width:30px;font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:#b7efc8}.openNow{font-size:11px;font-weight:850;color:#071009;background:#b7efc8;text-decoration:none;padding:8px 10px;border-radius:10px;white-space:nowrap}
+@media(max-width:520px){main{padding-top:28px}h1{font-size:34px}.song{grid-template-columns:50px 1fr;padding:14px;gap:12px}.songPlay{width:48px;height:48px}h2{font-size:17px}.desc{font-size:12px}.player{grid-template-columns:40px 1fr}.openNow{grid-column:2}}
+</style></head>
+<body><main><div class="brand">FREQUENCY</div><h1>Music</h1><p class="lead">Play the songs directly here. Open a song page when you want to share just that track.</p><div class="list">
+<article class="song" data-slug="crowned-by-fire" data-audio="audio/crowned-by-fire.m4a" data-title="Crowned by Fire">
+  <button class="songPlay" aria-label="Play Crowned by Fire"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">1</span><h2>Crowned by Fire</h2><span class="badge">Top pick</span></div>
+    <div class="sub">Victory · cinematic folk · 3:12</div>
+    <p class="desc">Triumphant future-self duet about leadership, earned confidence and becoming the person you kept imagining.</p>
+    <a class="details" href="song-crowned-by-fire.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="storm-in-my-blood" data-audio="audio/storm-in-my-blood.m4a" data-title="Storm in My Blood">
+  <button class="songPlay" aria-label="Play Storm in My Blood"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">2</span><h2>Storm in My Blood</h2><span class="badge">Top pick</span></div>
+    <div class="sub">Cinematic warrior · folk-pop · 3:10</div>
+    <p class="desc">Grounded courage anthem with low male lead, soaring counter-vocal, frame drums and a large identity hook.</p>
+    <a class="details" href="song-storm-in-my-blood.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="built-for-this" data-audio="audio/built-for-this.m4a" data-title="Built for This">
+  <button class="songPlay" aria-label="Play Built for This"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">3</span><h2>Built for This</h2><span class="badge">Top pick</span></div>
+    <div class="sub">Male Afrobeat / melodic pop-rap · 2:48</div>
+    <p class="desc">Lower male vocal lane with rhythmic sung-spoken delivery, sparse verses and chantable hook.</p>
+    <a class="details" href="song-built-for-this.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="momentum-is-mine" data-audio="audio/momentum-is-mine.m4a" data-title="Momentum Is Mine">
+  <button class="songPlay" aria-label="Play Momentum Is Mine"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">4</span><h2>Momentum Is Mine</h2><span class="badge">Top pick</span></div>
+    <div class="sub">Dark phonk / trap · 2:30</div>
+    <p class="desc">Short aggressive power track with heavier sub, compact structure and faster social-first pacing.</p>
+    <a class="details" href="song-momentum-is-mine.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="already-grateful" data-audio="audio/already-grateful.m4a" data-title="Already Grateful">
+  <button class="songPlay" aria-label="Play Already Grateful"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">5</span><h2>Already Grateful</h2><span class="badge">Top pick</span></div>
+    <div class="sub">Gospel-house / soulful uplift · 3:15</div>
+    <p class="desc">Piano, house pulse, choir lift and a bigger celebratory chorus for gratitude and morning energy.</p>
+    <a class="details" href="song-already-grateful.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="i-do-not-break" data-audio="audio/i-do-not-break.m4a" data-title="I Do Not Break">
+  <button class="songPlay" aria-label="Play I Do Not Break"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">6</span><h2>I Do Not Break</h2></div>
+    <div class="sub">Warrior focus · tribal trap · 3:04</div>
+    <p class="desc">Darker resilience track with chant-led vocals, heavy drums, heartbeat space and a vow-like hook.</p>
+    <a class="details" href="song-i-do-not-break.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="watch-me-build" data-audio="audio/watch-me-build.m4a" data-title="Watch Me Build">
+  <button class="songPlay" aria-label="Play Watch Me Build"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">7</span><h2>Watch Me Build</h2></div>
+    <div class="sub">Male melodic rap / pop-trap · 2:34</div>
+    <p class="desc">Short male-led power track with sparse verses, 808 weight, a cold vocal open and a compact repeatable hook.</p>
+    <a class="details" href="song-watch-me-build.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="golden-hour" data-audio="audio/golden-hour.m4a" data-title="Golden Hour">
+  <button class="songPlay" aria-label="Play Golden Hour"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">8</span><h2>Golden Hour</h2></div>
+    <div class="sub">Disco-house / dance-pop · 3:04</div>
+    <p class="desc">Bright female-led dance lane with four-on-the-floor pulse, faster rhythmic density and a larger final lift.</p>
+    <a class="details" href="song-golden-hour.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="good-things-find-me" data-audio="audio/good-things-find-me.m4a" data-title="Good Things Find Me">
+  <button class="songPlay" aria-label="Play Good Things Find Me"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">9</span><h2>Good Things Find Me</h2></div>
+    <div class="sub">Sunlit Afro-house / Afro-soul · 2:58</div>
+    <p class="desc">Brighter female-led rhythm lane with faster hook arrival, organic percussion and more transient energy.</p>
+    <a class="details" href="song-good-things-find-me.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="soft-life-strong-mind" data-audio="audio/soft-life-strong-mind.m4a" data-title="Soft Life, Strong Mind">
+  <button class="songPlay" aria-label="Play Soft Life, Strong Mind"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">10</span><h2>Soft Life, Strong Mind</h2></div>
+    <div class="sub">Dreamy alt-pop duet · 3:08</div>
+    <p class="desc">Male/female duet with intimate verses, wider pop chorus and a deliberately softer energy arc.</p>
+    <a class="details" href="song-soft-life-strong-mind.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="money-meets-motion" data-audio="audio/money-meets-motion.m4a" data-title="Money Meets Motion">
+  <button class="songPlay" aria-label="Play Money Meets Motion"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">11</span><h2>Money Meets Motion</h2></div>
+    <div class="sub">Market-informed prototype · 3:05</div>
+    <p class="desc">Our first song generated from aggregate niche research: shorter discovery format, early hook, abundance framed through value creation and action.</p>
+    <a class="details" href="song-money-meets-motion.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="i-decide" data-audio="audio/i-decide.m4a" data-title="I Decide">
+  <button class="songPlay" aria-label="Play I Decide"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">12</span><h2>I Decide</h2></div>
+    <div class="sub">Power · leadership · 3:35</div>
+    <p class="desc">Clear decisions, setting the standard, and moving before perfect certainty arrives.</p>
+    <a class="details" href="song-i-decide.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="future-in-the-room" data-audio="audio/future-in-the-room.m4a" data-title="Future in the Room">
+  <button class="songPlay" aria-label="Play Future in the Room"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">13</span><h2>Future in the Room</h2></div>
+    <div class="sub">Visualization · 3:45</div>
+    <p class="desc">A specific future made sensory, familiar, and close enough to shape the next decision.</p>
+    <a class="details" href="song-future-in-the-room.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="quiet-empire" data-audio="audio/quiet-empire.m4a" data-title="Quiet Empire">
+  <button class="songPlay" aria-label="Play Quiet Empire"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">14</span><h2>Quiet Empire</h2></div>
+    <div class="sub">Night wealth · 4:10</div>
+    <p class="desc">Patient wealth, stewardship, margin, long-term building, and ambition that can coexist with deep rest.</p>
+    <a class="details" href="song-quiet-empire.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="this-is-my-normal" data-audio="audio/this-is-my-normal.m4a" data-title="This Is My Normal">
+  <button class="songPlay" aria-label="Play This Is My Normal"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">15</span><h2>This Is My Normal</h2></div>
+    <div class="sub">Wealth identity · 3:50</div>
+    <p class="desc">Thinking in decades, building at scale, and becoming capable of holding a bigger life.</p>
+    <a class="details" href="song-this-is-my-normal.html">Open song page</a>
+  </div>
+</article>
+<article class="song" data-slug="open-to-more" data-audio="audio/open-to-more.m4a" data-title="Open to More">
+  <button class="songPlay" aria-label="Play Open to More"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">16</span><h2>Open to More</h2></div>
+    <div class="sub">Morning abundance · 3:40</div>
+    <p class="desc">Opportunity, value creation, receiving with care, and taking the next useful action.</p>
+    <a class="details" href="song-open-to-more.html">Open song page</a>
+  </div>
+</article></div></main>
+<div id="player" class="player"><button id="miniPlay" class="miniPlay" aria-label="Play"><span class="playIcon"></span></button><div><div id="nowTitle" class="nowTitle"></div><div class="progressWrap"><span id="cur" class="time">0:00</span><input id="seek" type="range" min="0" max="1" step=".1" value="0"><span id="dur" class="time">0:00</span></div></div><a id="openNow" class="openNow" href="#">Open</a></div><audio id="audio" preload="metadata"></audio>
+<script>
+const audio=document.getElementById('audio'),player=document.getElementById('player'),miniPlay=document.getElementById('miniPlay'),seek=document.getElementById('seek'),cur=document.getElementById('cur'),dur=document.getElementById('dur'),nowTitle=document.getElementById('nowTitle'),openNow=document.getElementById('openNow');let activeCard=null;
+const fmt=s=>{s=Math.max(0,Math.round(Number(s)||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function setPlaying(on){miniPlay.classList.toggle('playing',on);if(activeCard)activeCard.classList.toggle('active',on)}
+function loadCard(card){if(activeCard&&activeCard!==card)activeCard.classList.remove('active');const same=activeCard===card;activeCard=card;if(!same){audio.src=card.dataset.audio;nowTitle.textContent=card.dataset.title;openNow.href='song-'+card.dataset.slug+'.html';player.classList.add('show')}audio.play().then(()=>setPlaying(true)).catch(()=>{})}
+document.querySelectorAll('.songPlay').forEach(btn=>btn.onclick=()=>{const card=btn.closest('.song');if(activeCard===card&&!audio.paused){audio.pause();setPlaying(false)}else loadCard(card)});
+miniPlay.onclick=()=>{if(!activeCard)return;if(audio.paused)audio.play().then(()=>setPlaying(true));else{audio.pause();setPlaying(false)}};
+audio.addEventListener('loadedmetadata',()=>{seek.max=audio.duration||1;dur.textContent=fmt(audio.duration)});audio.addEventListener('timeupdate',()=>{seek.value=audio.currentTime;cur.textContent=fmt(audio.currentTime)});audio.addEventListener('ended',()=>setPlaying(false));seek.oninput=()=>{audio.currentTime=Number(seek.value)};
+</script></body></html>
