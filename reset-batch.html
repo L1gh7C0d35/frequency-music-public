@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b0a"><title>Frequency | Reset Batch</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -8%,#25352b 0,#0d1210 38%,#070908 100%);color:#f4f7f5;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;min-height:100vh}
+main{width:min(94vw,760px);margin:auto;padding:38px 0 70px}.brand{font-size:11px;letter-spacing:2.3px;color:#9bd5ac;font-weight:850}h1{font-size:38px;line-height:1;margin:8px 0 10px}.lead{color:#a0aba3;line-height:1.5;margin:0 0 8px}.note{font-size:12px;color:#718078;line-height:1.5;margin:0 0 26px}
+.group{margin:28px 0 12px}.group h2{font-size:23px;margin:0 0 5px}.group p{font-size:13px;color:#8e9c93;margin:0 0 12px;line-height:1.45}
+.list{display:grid;gap:10px}.card{background:rgba(20,27,23,.94);border:1px solid rgba(170,219,185,.14);border-radius:19px;padding:14px}.top{display:flex;gap:10px;align-items:center}.letter{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#203128;color:#b8efc8;font-weight:900;font-size:12px}.title{font-weight:850;font-size:16px}.sub{font-size:11px;color:#82a78e;margin-top:2px}audio{width:100%;height:36px;margin-top:11px}
+.vote{display:flex;gap:8px;margin-top:9px}.vote button{border:1px solid rgba(184,239,200,.16);background:#141d18;color:#cae5d2;border-radius:10px;padding:8px 10px;font-size:11px;font-weight:850}.vote button.on{background:#b8efc8;color:#071009}
+.rule{padding:13px 14px;background:rgba(184,239,200,.06);border:1px solid rgba(184,239,200,.12);border-radius:15px;font-size:12px;color:#9fb1a5;line-height:1.48}.back{display:inline-block;margin-top:22px;color:#b8efc8;text-decoration:none;font-size:12px;font-weight:850}
+</style></head><body><main>
+<div class="brand">FREQUENCY · RESET TEST</div><h1>Same song. Three rolls.</h1>
+<p class="lead">This batch deliberately returns to the method that produced the early songs: musical/emotional briefs, full songs, real scenes in the lyrics, and no analyzer numbers in the generator prompt.</p>
+<p class="note">There are only two songs here, but three independent generations of each. That lets us separate “bad concept” from “bad roll” without rewriting the song every time.</p>
+<div class="rule"><b>Listen test:</b> ignore the candidate letter and don’t overthink the mix. Ask: Do I want to replay it? Does the singer have personality? Do I remember the chorus 30 seconds later? If one version has the magic but one section is weak, we will edit that source audio instead of regenerating the whole song.</div>
+
+<section class="group"><h2>My Name Is On It</h2><p>Female Afro-pop / Afro-soul abundance song. Concrete morning scene → expansive chorus. Same prompt and lyrics for A, B and C.</p>
+<div class="list">
+<article class="card"><div class="top"><span class="letter">A</span><div><div class="title">Candidate A</div><div class="sub">My Name Is On It · full song</div></div></div><audio controls preload="metadata" playsinline src="audio/my-name-is-on-it-c1.m4a"></audio><div class="vote"><button data-vote="yes">⭐ Has something</button><button data-vote="no">Skip</button></div></article>
+<article class="card"><div class="top"><span class="letter">B</span><div><div class="title">Candidate B</div><div class="sub">My Name Is On It · full song</div></div></div><audio controls preload="metadata" playsinline src="audio/my-name-is-on-it-c2.m4a"></audio><div class="vote"><button data-vote="yes">⭐ Has something</button><button data-vote="no">Skip</button></div></article>
+<article class="card"><div class="top"><span class="letter">C</span><div><div class="title">Candidate C</div><div class="sub">My Name Is On It · full song</div></div></div><audio controls preload="metadata" playsinline src="audio/my-name-is-on-it-c3.m4a"></audio><div class="vote"><button data-vote="yes">⭐ Has something</button><button data-vote="no">Skip</button></div></article>
+</div></section>
+
+<section class="group"><h2>Look What Found Me</h2><p>Female sunlit Afro-pop / amapiano abundance song. Conversational verse, playful hook, early chorus. Same prompt and lyrics for A, B and C.</p>
+<div class="list">
+<article class="card"><div class="top"><span class="letter">A</span><div><div class="title">Candidate A</div><div class="sub">Look What Found Me · full song</div></div></div><audio controls preload="metadata" playsinline src="audio/look-what-found-me-c1.m4a"></audio><div class="vote"><button data-vote="yes">⭐ Has something</button><button data-vote="no">Skip</button></div></article>
+<article class="card"><div class="top"><span class="letter">B</span><div><div class="title">Candidate B</div><div class="sub">Look What Found Me · full song</div></div></div><audio controls preload="metadata" playsinline src="audio/look-what-found-me-c2.m4a"></audio><div class="vote"><button data-vote="yes">⭐ Has something</button><button data-vote="no">Skip</button></div></article>
+<article class="card"><div class="top"><span class="letter">C</span><div><div class="title">Candidate C</div><div class="sub">Look What Found Me · full song</div></div></div><audio controls preload="metadata" playsinline src="audio/look-what-found-me-c3.m4a"></audio><div class="vote"><button data-vote="yes">⭐ Has something</button><button data-vote="no">Skip</button></div></article>
+</div></section>
+<a class="back" href="index.html">Back to full catalog</a></main>
+<script>
+document.querySelectorAll('audio').forEach(a=>a.addEventListener('play',()=>document.querySelectorAll('audio').forEach(o=>{if(o!==a)o.pause()})));
+document.querySelectorAll('.card').forEach((card,i)=>{const key='frequency-reset-'+i,val=localStorage.getItem(key);if(val)card.querySelector('[data-vote="'+val+'"]')?.classList.add('on');card.querySelectorAll('[data-vote]').forEach(b=>b.onclick=()=>{card.querySelectorAll('[data-vote]').forEach(x=>x.classList.remove('on'));b.classList.add('on');localStorage.setItem(key,b.dataset.vote)})});
+</script></body></html>
