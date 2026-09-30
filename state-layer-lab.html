@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070908"><title>Frequency | State Layer Lab</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% -10%,#18312c 0,#0d1412 40%,#070908 100%);color:#f5f7f6;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;min-height:100vh}
+main{width:min(94vw,760px);margin:auto;padding:38px 0 80px}.brand{font-size:11px;letter-spacing:2.4px;color:#9bd4b0;font-weight:850}
+h1{font-size:38px;line-height:1;margin:8px 0 10px}.lead{color:#a2aca6;line-height:1.52;margin:0 0 8px}.note{font-size:12px;color:#789083;line-height:1.5;margin:0 0 24px}
+.card{background:rgba(20,27,23,.94);border:1px solid rgba(183,239,200,.14);border-radius:22px;padding:16px;margin:0 0 12px}
+.top{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.num{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#203128;color:#b7efc8;font-size:11px;font-weight:900}
+h2{font-size:19px;margin:0}.tag{font-size:9px;font-weight:900;background:#b7efc8;color:#071009;border-radius:999px;padding:5px 7px}
+.desc{font-size:13px;line-height:1.5;color:#99a79f;margin:9px 0 12px}audio{width:100%;height:36px}
+.back{display:inline-block;margin-top:16px;color:#b7efc8;text-decoration:none;font-size:12px;font-weight:850}
+</style>
+</head>
+<body><main>
+<div class="brand">FREQUENCY · HEADPHONE LAB</div>
+<h1>State Layer A/B Test</h1>
+<p class="lead">The same 50-second section of <strong>Already Grateful</strong>, with different optional Frequency layers underneath it.</p>
+<p class="note">Use headphones. The song is intentionally identical in every version so you can judge only the extra stereo / binaural layer. These are sound-design experiments, not guaranteed neurological or therapeutic effects.</p>
+
+<div class="card"><div class="top"><span class="num">0</span><h2>Dry reference</h2><span class="tag">NO LAYER</span></div><p class="desc">Baseline. Same song, no added Frequency layer.</p><audio controls preload="metadata" playsinline src="audio/already-grateful-dry.m4a"></audio></div>
+
+<div class="card"><div class="top"><span class="num">1</span><h2>Stereo Drift</h2><span class="tag">LEFT ↔ RIGHT</span></div><p class="desc">Warm 220 Hz tone moving slowly between the ears on an 8-second orbit. No binaural difference — just spatial motion.</p><audio controls preload="metadata" playsinline src="audio/already-grateful-stereo-drift.m4a"></audio></div>
+
+<div class="card"><div class="top"><span class="num">2</span><h2>Theta Orbit</h2><span class="tag">BINAURAL + MOTION</span></div><p class="desc">220 / 226 Hz stereo pair for a 6 Hz binaural interval, with a gentler left-right drift layered over it.</p><audio controls preload="metadata" playsinline src="audio/already-grateful-theta-orbit.m4a"></audio></div>
+
+<div class="card"><div class="top"><span class="num">3</span><h2>Phi Orbit 432</h2><span class="tag">GOLDEN RATIO</span></div><p class="desc">432 Hz moving between the ears on a φ-inspired ~6.85-second orbit. Mathematical sound design rather than a brain-state claim.</p><audio controls preload="metadata" playsinline src="audio/already-grateful-phi-orbit.m4a"></audio></div>
+
+<div class="card"><div class="top"><span class="num">4</span><h2>Gamma Pulse 40</h2><span class="tag">RHYTHMIC</span></div><p class="desc">A quiet 240 Hz carrier amplitude-modulated at 40 Hz. This one is centered and speaker-friendly rather than left-right.</p><audio controls preload="metadata" playsinline src="audio/already-grateful-gamma-pulse.m4a"></audio></div>
+
+<a class="back" href="index.html">Back to full catalog</a>
+</main>
+<script>
+document.querySelectorAll('audio').forEach(a=>a.addEventListener('play',()=>document.querySelectorAll('audio').forEach(o=>{if(o!==a)o.pause()})));
+</script>
+</body></html>
