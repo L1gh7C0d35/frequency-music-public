@@ -1,0 +1,248 @@
+<!doctype html>
+<html><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070908"><title>Frequency | Wave 1</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% -8%,#173025 0,#0b0f0c 38%,#070908 100%);color:#f4f7f5;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;min-height:100vh}
+main{width:min(94vw,780px);margin:auto;padding:34px 0 130px}.brand{font-size:11px;letter-spacing:2.3px;color:#8fc8a1;font-weight:850}
+h1{font-size:38px;line-height:1;margin:8px 0 10px}.lead{color:#9ca8a0;line-height:1.5;margin:0 0 24px;max-width:660px}
+.back{display:inline-block;color:#aee9c0;text-decoration:none;font-size:12px;font-weight:850;margin-bottom:22px}
+.group{margin:0 0 28px}.groupHead{padding:0 3px 10px}.eyebrow{font-size:10px;letter-spacing:1.7px;color:#78a989;font-weight:900}
+h3{font-size:24px;margin:4px 0}.groupHead p{font-size:12px;color:#819087;margin:0}.list{display:grid;gap:10px}
+.song{display:grid;grid-template-columns:54px 1fr;gap:13px;align-items:center;background:rgba(20,26,22,.92);border:1px solid rgba(164,205,178,.14);border-radius:20px;padding:13px 14px}
+.song.active{border-color:rgba(183,239,200,.48);background:rgba(23,33,27,.96)}.songPlay{width:52px;height:52px;border:0;border-radius:50%;background:#b7efc8;display:grid;place-items:center}
+.playIcon{width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #071009;margin-left:3px}
+.song.active .songPlay .playIcon{width:13px;height:17px;border:0;margin:0;background:linear-gradient(to right,#071009 0 34%,transparent 34% 66%,#071009 66% 100%)}
+.songTop{display:flex;align-items:center;gap:9px}.rank{display:inline-grid;place-items:center;min-width:23px;height:23px;border-radius:50%;background:#1f2d25;color:#b7efc8;font-size:10px;font-weight:900}
+h2{font-size:17px;margin:0}.sub{font-size:11px;color:#9ccbaa;margin-top:5px}.vote{display:flex;gap:7px;margin-top:9px}
+.vote button{border:1px solid rgba(183,239,200,.16);background:#131a16;color:#8f9c94;border-radius:9px;padding:6px 9px;font-size:10px;font-weight:850}
+.vote button.sel{background:#b7efc8;color:#071009;border-color:#b7efc8}
+.player{position:fixed;z-index:30;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(94vw,720px);background:rgba(15,20,17,.97);border:1px solid rgba(183,239,200,.2);border-radius:18px;padding:12px 14px;display:none;grid-template-columns:42px 1fr;gap:11px;align-items:center;box-shadow:0 20px 60px rgba(0,0,0,.5);backdrop-filter:blur(18px)}
+.player.show{display:grid}.miniPlay{width:40px;height:40px;border:0;border-radius:50%;background:#b7efc8;display:grid;place-items:center}
+.miniPlay .playIcon{border-top-width:7px;border-bottom-width:7px;border-left-width:11px}.miniPlay.playing .playIcon{width:12px;height:15px;border:0;margin:0;background:linear-gradient(to right,#071009 0 33%,transparent 33% 67%,#071009 67% 100%)}
+.nowTitle{font-size:13px;font-weight:850}.progressWrap{display:flex;align-items:center;gap:8px;margin-top:5px}.time{font-size:10px;color:#748078;min-width:30px;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:#b7efc8}
+@media(max-width:520px){main{padding-top:26px}h1{font-size:34px}.song{grid-template-columns:48px 1fr;padding:12px}.songPlay{width:46px;height:46px}}
+</style></head><body>
+<main><div class="brand">FREQUENCY</div><h1>Wave 1 · 18 candidates</h1>
+<p class="lead">Six new songs, three candidates each. Listen blind first, then mark Keep, Maybe, or Pass. Your choices stay on this device.</p>
+<a class="back" href="index.html">← Back to Frequency Music</a>
+
+<section class="group">
+  <div class="groupHead"><span class="eyebrow">SONG 1</span><h3>Good News Has My Number</h3><p>Afro-house / Afro-pop · Abundance · momentum</p></div>
+  <div class="list">
+<article class="song" data-audio="audio/good-news-has-my-number-c1.m4a" data-title="Good News Has My Number · Candidate 1">
+  <button class="songPlay" aria-label="Play Good News Has My Number candidate 1"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">1</span><h2>Candidate 1</h2></div>
+    <div class="sub">Afro-house / Afro-pop · Abundance · momentum</div>
+    <div class="vote" data-key="good-news-has-my-number-c1">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/good-news-has-my-number-c2.m4a" data-title="Good News Has My Number · Candidate 2">
+  <button class="songPlay" aria-label="Play Good News Has My Number candidate 2"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">2</span><h2>Candidate 2</h2></div>
+    <div class="sub">Afro-house / Afro-pop · Abundance · momentum</div>
+    <div class="vote" data-key="good-news-has-my-number-c2">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/good-news-has-my-number-c3.m4a" data-title="Good News Has My Number · Candidate 3">
+  <button class="songPlay" aria-label="Play Good News Has My Number candidate 3"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">3</span><h2>Candidate 3</h2></div>
+    <div class="sub">Afro-house / Afro-pop · Abundance · momentum</div>
+    <div class="vote" data-key="good-news-has-my-number-c3">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article></div>
+</section>
+<section class="group">
+  <div class="groupHead"><span class="eyebrow">SONG 2</span><h3>Life Keeps Saying Yes</h3><p>Gospel-house / soulful uplift · Gratitude · self-belief</p></div>
+  <div class="list">
+<article class="song" data-audio="audio/life-keeps-saying-yes-c1.m4a" data-title="Life Keeps Saying Yes · Candidate 1">
+  <button class="songPlay" aria-label="Play Life Keeps Saying Yes candidate 1"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">1</span><h2>Candidate 1</h2></div>
+    <div class="sub">Gospel-house / soulful uplift · Gratitude · self-belief</div>
+    <div class="vote" data-key="life-keeps-saying-yes-c1">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/life-keeps-saying-yes-c2.m4a" data-title="Life Keeps Saying Yes · Candidate 2">
+  <button class="songPlay" aria-label="Play Life Keeps Saying Yes candidate 2"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">2</span><h2>Candidate 2</h2></div>
+    <div class="sub">Gospel-house / soulful uplift · Gratitude · self-belief</div>
+    <div class="vote" data-key="life-keeps-saying-yes-c2">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/life-keeps-saying-yes-c3.m4a" data-title="Life Keeps Saying Yes · Candidate 3">
+  <button class="songPlay" aria-label="Play Life Keeps Saying Yes candidate 3"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">3</span><h2>Candidate 3</h2></div>
+    <div class="sub">Gospel-house / soulful uplift · Gratitude · self-belief</div>
+    <div class="vote" data-key="life-keeps-saying-yes-c3">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article></div>
+</section>
+<section class="group">
+  <div class="groupHead"><span class="eyebrow">SONG 3</span><h3>My Name Is On It</h3><p>UK garage / electro-pop · Confidence · action</p></div>
+  <div class="list">
+<article class="song" data-audio="audio/wave1-my-name-is-on-it-c1.m4a" data-title="My Name Is On It · Candidate 1">
+  <button class="songPlay" aria-label="Play My Name Is On It candidate 1"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">1</span><h2>Candidate 1</h2></div>
+    <div class="sub">UK garage / electro-pop · Confidence · action</div>
+    <div class="vote" data-key="my-name-is-on-it-c1">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/wave1-my-name-is-on-it-c2.m4a" data-title="My Name Is On It · Candidate 2">
+  <button class="songPlay" aria-label="Play My Name Is On It candidate 2"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">2</span><h2>Candidate 2</h2></div>
+    <div class="sub">UK garage / electro-pop · Confidence · action</div>
+    <div class="vote" data-key="my-name-is-on-it-c2">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/wave1-my-name-is-on-it-c3.m4a" data-title="My Name Is On It · Candidate 3">
+  <button class="songPlay" aria-label="Play My Name Is On It candidate 3"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">3</span><h2>Candidate 3</h2></div>
+    <div class="sub">UK garage / electro-pop · Confidence · action</div>
+    <div class="vote" data-key="my-name-is-on-it-c3">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article></div>
+</section>
+<section class="group">
+  <div class="groupHead"><span class="eyebrow">SONG 4</span><h3>Paid in Peace</h3><p>Luxury R&amp;B / neo-soul · Calm ambition · night</p></div>
+  <div class="list">
+<article class="song" data-audio="audio/paid-in-peace-c1.m4a" data-title="Paid in Peace · Candidate 1">
+  <button class="songPlay" aria-label="Play Paid in Peace candidate 1"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">1</span><h2>Candidate 1</h2></div>
+    <div class="sub">Luxury R&amp;B / neo-soul · Calm ambition · night</div>
+    <div class="vote" data-key="paid-in-peace-c1">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/paid-in-peace-c2.m4a" data-title="Paid in Peace · Candidate 2">
+  <button class="songPlay" aria-label="Play Paid in Peace candidate 2"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">2</span><h2>Candidate 2</h2></div>
+    <div class="sub">Luxury R&amp;B / neo-soul · Calm ambition · night</div>
+    <div class="vote" data-key="paid-in-peace-c2">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/paid-in-peace-c3.m4a" data-title="Paid in Peace · Candidate 3">
+  <button class="songPlay" aria-label="Play Paid in Peace candidate 3"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">3</span><h2>Candidate 3</h2></div>
+    <div class="sub">Luxury R&amp;B / neo-soul · Calm ambition · night</div>
+    <div class="vote" data-key="paid-in-peace-c3">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article></div>
+</section>
+<section class="group">
+  <div class="groupHead"><span class="eyebrow">SONG 5</span><h3>Fire Under Calm</h3><p>Cinematic tribal / modern epic · Grounded power · resilience</p></div>
+  <div class="list">
+<article class="song" data-audio="audio/fire-under-calm-c1.m4a" data-title="Fire Under Calm · Candidate 1">
+  <button class="songPlay" aria-label="Play Fire Under Calm candidate 1"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">1</span><h2>Candidate 1</h2></div>
+    <div class="sub">Cinematic tribal / modern epic · Grounded power · resilience</div>
+    <div class="vote" data-key="fire-under-calm-c1">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/fire-under-calm-c2.m4a" data-title="Fire Under Calm · Candidate 2">
+  <button class="songPlay" aria-label="Play Fire Under Calm candidate 2"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">2</span><h2>Candidate 2</h2></div>
+    <div class="sub">Cinematic tribal / modern epic · Grounded power · resilience</div>
+    <div class="vote" data-key="fire-under-calm-c2">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/fire-under-calm-c3.m4a" data-title="Fire Under Calm · Candidate 3">
+  <button class="songPlay" aria-label="Play Fire Under Calm candidate 3"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">3</span><h2>Candidate 3</h2></div>
+    <div class="sub">Cinematic tribal / modern epic · Grounded power · resilience</div>
+    <div class="vote" data-key="fire-under-calm-c3">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article></div>
+</section>
+<section class="group">
+  <div class="groupHead"><span class="eyebrow">SONG 6</span><h3>Golden on Purpose</h3><p>Disco-house / soulful dance · Confidence · celebration</p></div>
+  <div class="list">
+<article class="song" data-audio="audio/golden-on-purpose-c1.m4a" data-title="Golden on Purpose · Candidate 1">
+  <button class="songPlay" aria-label="Play Golden on Purpose candidate 1"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">1</span><h2>Candidate 1</h2></div>
+    <div class="sub">Disco-house / soulful dance · Confidence · celebration</div>
+    <div class="vote" data-key="golden-on-purpose-c1">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/golden-on-purpose-c2.m4a" data-title="Golden on Purpose · Candidate 2">
+  <button class="songPlay" aria-label="Play Golden on Purpose candidate 2"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">2</span><h2>Candidate 2</h2></div>
+    <div class="sub">Disco-house / soulful dance · Confidence · celebration</div>
+    <div class="vote" data-key="golden-on-purpose-c2">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article>
+<article class="song" data-audio="audio/golden-on-purpose-c3.m4a" data-title="Golden on Purpose · Candidate 3">
+  <button class="songPlay" aria-label="Play Golden on Purpose candidate 3"><span class="playIcon"></span></button>
+  <div class="songBody">
+    <div class="songTop"><span class="rank">3</span><h2>Candidate 3</h2></div>
+    <div class="sub">Disco-house / soulful dance · Confidence · celebration</div>
+    <div class="vote" data-key="golden-on-purpose-c3">
+      <button data-v="keep">Keep</button><button data-v="maybe">Maybe</button><button data-v="pass">Pass</button>
+    </div>
+  </div>
+</article></div>
+</section>
+</main>
+<div id="player" class="player"><button id="miniPlay" class="miniPlay" aria-label="Play"><span class="playIcon"></span></button><div><div id="nowTitle" class="nowTitle"></div><div class="progressWrap"><span id="cur" class="time">0:00</span><input id="seek" type="range" min="0" max="1" step=".1"><span id="dur" class="time">0:00</span></div></div></div>
+<audio id="audio" preload="metadata"></audio>
+<script>
+const audio=document.getElementById('audio'),player=document.getElementById('player'),miniPlay=document.getElementById('miniPlay'),seek=document.getElementById('seek'),cur=document.getElementById('cur'),dur=document.getElementById('dur'),nowTitle=document.getElementById('nowTitle');let activeCard=null;
+const fmt=s=>{s=Math.max(0,Math.round(Number(s)||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function setPlaying(on){miniPlay.classList.toggle('playing',on);if(activeCard)activeCard.classList.toggle('active',on)}
+function loadCard(card){if(activeCard&&activeCard!==card)activeCard.classList.remove('active');const same=activeCard===card;activeCard=card;if(!same){audio.src=card.dataset.audio;nowTitle.textContent=card.dataset.title;player.classList.add('show')}audio.play().then(()=>setPlaying(true)).catch(()=>{})}
+document.querySelectorAll('.songPlay').forEach(btn=>btn.onclick=()=>{const card=btn.closest('.song');if(activeCard===card&&!audio.paused){audio.pause();setPlaying(false)}else loadCard(card)});
+miniPlay.onclick=()=>{if(!activeCard)return;if(audio.paused)audio.play().then(()=>setPlaying(true));else{audio.pause();setPlaying(false)}};
+audio.addEventListener('loadedmetadata',()=>{seek.max=audio.duration||1;dur.textContent=fmt(audio.duration)});audio.addEventListener('timeupdate',()=>{seek.value=audio.currentTime;cur.textContent=fmt(audio.currentTime)});audio.addEventListener('ended',()=>setPlaying(false));seek.oninput=()=>audio.currentTime=Number(seek.value);
+document.querySelectorAll('.vote').forEach(v=>{const key='frequency-wave1-'+v.dataset.key;const saved=localStorage.getItem(key);if(saved){const b=v.querySelector('[data-v="'+saved+'"]');if(b)b.classList.add('sel')}v.querySelectorAll('button').forEach(b=>b.onclick=()=>{v.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');localStorage.setItem(key,b.dataset.v)})});
+</script></body></html>
