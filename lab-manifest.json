@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-08T15:30:49.825016+00:00",
+  "generated_at": "2026-10-08T15:40:04.368685+00:00",
   "tracks": [
     {
       "filename": "already-arrived.m4a",
@@ -345,6 +345,30 @@
     {
       "filename": "wave1-my-name-is-on-it-c3.m4a",
       "duration": 158.0
+    },
+    {
+      "filename": "wave2-built-like-morning.m4a",
+      "duration": 190.0
+    },
+    {
+      "filename": "wave2-higher-ground-same-feet.m4a",
+      "duration": 188.0
+    },
+    {
+      "filename": "wave2-quiet-electricity.m4a",
+      "duration": 196.0
+    },
+    {
+      "filename": "wave2-signal-is-clear.m4a",
+      "duration": 186.0
+    },
+    {
+      "filename": "wave2-soft-power.m4a",
+      "duration": 202.0
+    },
+    {
+      "filename": "wave2-the-door-was-already-open.m4a",
+      "duration": 184.0
     },
     {
       "filename": "wealth-feels-familiar.m4a",
