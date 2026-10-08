@@ -1,0 +1,354 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-08T15:30:49.825016+00:00",
+  "tracks": [
+    {
+      "filename": "already-arrived.m4a",
+      "duration": 182.0
+    },
+    {
+      "filename": "already-grateful-dry.m4a",
+      "duration": 50.0
+    },
+    {
+      "filename": "already-grateful-gamma-pulse.m4a",
+      "duration": 50.0
+    },
+    {
+      "filename": "already-grateful-phi-orbit.m4a",
+      "duration": 50.0
+    },
+    {
+      "filename": "already-grateful-stereo-drift.m4a",
+      "duration": 50.0
+    },
+    {
+      "filename": "already-grateful-stereo-pulse.m4a",
+      "duration": 50.0
+    },
+    {
+      "filename": "already-grateful-theta-orbit.m4a",
+      "duration": 50.0
+    },
+    {
+      "filename": "already-grateful.m4a",
+      "duration": 195.0
+    },
+    {
+      "filename": "built-for-this.m4a",
+      "duration": 168.0
+    },
+    {
+      "filename": "built-in-silence.m4a",
+      "duration": 224.0
+    },
+    {
+      "filename": "command-the-day.m4a",
+      "duration": 160.0
+    },
+    {
+      "filename": "crowned-by-fire.m4a",
+      "duration": 192.0
+    },
+    {
+      "filename": "everything-knows-my-name-hook.m4a",
+      "duration": 50.0
+    },
+    {
+      "filename": "everything-opens.m4a",
+      "duration": 186.0
+    },
+    {
+      "filename": "fast-forward.m4a",
+      "duration": 136.0
+    },
+    {
+      "filename": "fire-under-calm-c1.m4a",
+      "duration": 184.0
+    },
+    {
+      "filename": "fire-under-calm-c2.m4a",
+      "duration": 184.0
+    },
+    {
+      "filename": "fire-under-calm-c3.m4a",
+      "duration": 184.0
+    },
+    {
+      "filename": "future-in-the-room.m4a",
+      "duration": 225.05
+    },
+    {
+      "filename": "gold-finds-me-dancing-c1.m4a",
+      "duration": 188.0
+    },
+    {
+      "filename": "gold-finds-me-dancing-c2.m4a",
+      "duration": 188.0
+    },
+    {
+      "filename": "gold-finds-me-dancing-c3.m4a",
+      "duration": 188.0
+    },
+    {
+      "filename": "gold-on-my-mind.m4a",
+      "duration": 174.0
+    },
+    {
+      "filename": "golden-hour.m4a",
+      "duration": 184.0
+    },
+    {
+      "filename": "golden-on-purpose-c1.m4a",
+      "duration": 174.0
+    },
+    {
+      "filename": "golden-on-purpose-c2.m4a",
+      "duration": 174.0
+    },
+    {
+      "filename": "golden-on-purpose-c3.m4a",
+      "duration": 174.0
+    },
+    {
+      "filename": "good-money-energy.m4a",
+      "duration": 165.0
+    },
+    {
+      "filename": "good-news-has-my-number-c1.m4a",
+      "duration": 178.0
+    },
+    {
+      "filename": "good-news-has-my-number-c2.m4a",
+      "duration": 178.0
+    },
+    {
+      "filename": "good-news-has-my-number-c3.m4a",
+      "duration": 178.0
+    },
+    {
+      "filename": "good-news-has-my-number-hook.m4a",
+      "duration": 47.0
+    },
+    {
+      "filename": "good-things-find-me.m4a",
+      "duration": 178.0
+    },
+    {
+      "filename": "i-decide.m4a",
+      "duration": 215.06
+    },
+    {
+      "filename": "i-do-not-break.m4a",
+      "duration": 184.0
+    },
+    {
+      "filename": "i-give-the-signal.m4a",
+      "duration": 198.0
+    },
+    {
+      "filename": "i-stand-with-me.m4a",
+      "duration": 215.0
+    },
+    {
+      "filename": "i-walk-in-like-its-mine-hook.m4a",
+      "duration": 48.0
+    },
+    {
+      "filename": "it-all-clicks.m4a",
+      "duration": 142.0
+    },
+    {
+      "filename": "life-keeps-saying-yes-c1.m4a",
+      "duration": 186.0
+    },
+    {
+      "filename": "life-keeps-saying-yes-c2.m4a",
+      "duration": 186.0
+    },
+    {
+      "filename": "life-keeps-saying-yes-c3.m4a",
+      "duration": 186.0
+    },
+    {
+      "filename": "life-keeps-saying-yes-hook.m4a",
+      "duration": 48.0
+    },
+    {
+      "filename": "light-finds-me.m4a",
+      "duration": 190.0
+    },
+    {
+      "filename": "look-what-found-me-c1.m4a",
+      "duration": 182.0
+    },
+    {
+      "filename": "look-what-found-me-c2.m4a",
+      "duration": 182.0
+    },
+    {
+      "filename": "look-what-found-me-c3.m4a",
+      "duration": 182.0
+    },
+    {
+      "filename": "luck-follows-action.m4a",
+      "duration": 146.0
+    },
+    {
+      "filename": "lucky-looks-good-on-me-hook.m4a",
+      "duration": 45.0
+    },
+    {
+      "filename": "made-of-mountains.m4a",
+      "duration": 184.0
+    },
+    {
+      "filename": "momentum-is-mine.m4a",
+      "duration": 150.0
+    },
+    {
+      "filename": "money-meets-motion.m4a",
+      "duration": 185.0
+    },
+    {
+      "filename": "morning-is-mine.m4a",
+      "duration": 200.0
+    },
+    {
+      "filename": "move-like-money.m4a",
+      "duration": 166.0
+    },
+    {
+      "filename": "my-name-is-on-it-c1.m4a",
+      "duration": 188.0
+    },
+    {
+      "filename": "my-name-is-on-it-c2.m4a",
+      "duration": 188.0
+    },
+    {
+      "filename": "my-name-is-on-it-c3.m4a",
+      "duration": 188.0
+    },
+    {
+      "filename": "open-to-more-vB-reconstruction.m4a",
+      "duration": 220.0
+    },
+    {
+      "filename": "open-to-more-vC-clarity.m4a",
+      "duration": 220.0
+    },
+    {
+      "filename": "open-to-more-vD-precision.m4a",
+      "duration": 220.0
+    },
+    {
+      "filename": "open-to-more.m4a",
+      "duration": 220.0
+    },
+    {
+      "filename": "overflow-mode.m4a",
+      "duration": 146.0
+    },
+    {
+      "filename": "paid-in-peace-c1.m4a",
+      "duration": 192.0
+    },
+    {
+      "filename": "paid-in-peace-c2.m4a",
+      "duration": 192.0
+    },
+    {
+      "filename": "paid-in-peace-c3.m4a",
+      "duration": 192.0
+    },
+    {
+      "filename": "paid-in-peace-hook.m4a",
+      "duration": 48.0
+    },
+    {
+      "filename": "power-in-motion.m4a",
+      "duration": 162.0
+    },
+    {
+      "filename": "pressure-into-power.m4a",
+      "duration": 148.0
+    },
+    {
+      "filename": "quiet-empire.m4a",
+      "duration": 250.05
+    },
+    {
+      "filename": "run-with-the-light.m4a",
+      "duration": 202.0
+    },
+    {
+      "filename": "soft-life-strong-mind.m4a",
+      "duration": 188.0
+    },
+    {
+      "filename": "storm-in-my-blood-vB-reconstruction.m4a",
+      "duration": 190.0
+    },
+    {
+      "filename": "storm-in-my-blood-vC-clarity.m4a",
+      "duration": 190.0
+    },
+    {
+      "filename": "storm-in-my-blood-vD-ace-vocal.m4a",
+      "duration": 190.0
+    },
+    {
+      "filename": "storm-in-my-blood.m4a",
+      "duration": 190.0
+    },
+    {
+      "filename": "the-room-changes.m4a",
+      "duration": 188.0
+    },
+    {
+      "filename": "the-room-turns-gold-c1.m4a",
+      "duration": 194.0
+    },
+    {
+      "filename": "the-room-turns-gold-c2.m4a",
+      "duration": 194.0
+    },
+    {
+      "filename": "the-room-turns-gold-c3.m4a",
+      "duration": 194.0
+    },
+    {
+      "filename": "this-is-my-normal.m4a",
+      "duration": 230.06
+    },
+    {
+      "filename": "too-good-to-be-random-hook.m4a",
+      "duration": 47.0
+    },
+    {
+      "filename": "watch-how-easy-this-gets-hook.m4a",
+      "duration": 45.0
+    },
+    {
+      "filename": "watch-me-build.m4a",
+      "duration": 154.0
+    },
+    {
+      "filename": "wave1-my-name-is-on-it-c1.m4a",
+      "duration": 158.0
+    },
+    {
+      "filename": "wave1-my-name-is-on-it-c2.m4a",
+      "duration": 158.0
+    },
+    {
+      "filename": "wave1-my-name-is-on-it-c3.m4a",
+      "duration": 158.0
+    },
+    {
+      "filename": "wealth-feels-familiar.m4a",
+      "duration": 186.0
+    }
+  ]
+}
