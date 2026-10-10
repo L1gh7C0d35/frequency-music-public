@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-10T21:43:38.328012+00:00",
+  "generated_at": "2026-10-10T21:45:59.716120+00:00",
   "tracks": [
     {
       "filename": "already-arrived.m4a",
@@ -37,6 +37,10 @@
     {
       "filename": "better-than-yesterday.m4a",
       "duration": 175.0
+    },
+    {
+      "filename": "bright-side-of-the-moon.m4a",
+      "duration": 180.0
     },
     {
       "filename": "built-for-this.m4a",
