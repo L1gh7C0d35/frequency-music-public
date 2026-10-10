@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-10T21:33:30.393034+00:00",
+  "generated_at": "2026-10-10T21:35:53.604227+00:00",
   "tracks": [
     {
       "filename": "already-arrived.m4a",
@@ -313,6 +313,10 @@
     {
       "filename": "storm-in-my-blood.m4a",
       "duration": 190.0
+    },
+    {
+      "filename": "the-good-comes-around.m4a",
+      "duration": 185.0
     },
     {
       "filename": "the-room-changes.m4a",
