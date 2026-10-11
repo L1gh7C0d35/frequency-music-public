@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-11T02:19:31.586682+00:00",
+  "generated_at": "2026-10-11T02:21:49.958271+00:00",
   "tracks": [
     {
       "filename": "abundance-it-looks-good-on-me.m4a",
@@ -17,6 +17,10 @@
     {
       "filename": "abundance-the-door-was-never-locked.m4a",
       "duration": 195.0
+    },
+    {
+      "filename": "abundance-today-is-mine-to-make.m4a",
+      "duration": 185.0
     },
     {
       "filename": "already-arrived.m4a",
