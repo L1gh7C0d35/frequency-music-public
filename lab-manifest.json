@@ -1,10 +1,14 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-11T02:14:40.313078+00:00",
+  "generated_at": "2026-10-11T02:16:54.257542+00:00",
   "tracks": [
     {
       "filename": "abundance-it-looks-good-on-me.m4a",
       "duration": 190.0
+    },
+    {
+      "filename": "abundance-little-wins-are-loud.m4a",
+      "duration": 180.0
     },
     {
       "filename": "abundance-the-door-was-never-locked.m4a",
