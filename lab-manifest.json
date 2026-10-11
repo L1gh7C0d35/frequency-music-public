@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-11T02:16:54.257542+00:00",
+  "generated_at": "2026-10-11T02:19:31.586682+00:00",
   "tracks": [
     {
       "filename": "abundance-it-looks-good-on-me.m4a",
@@ -9,6 +9,10 @@
     {
       "filename": "abundance-little-wins-are-loud.m4a",
       "duration": 180.0
+    },
+    {
+      "filename": "abundance-soft-life-strong-roots.m4a",
+      "duration": 195.0
     },
     {
       "filename": "abundance-the-door-was-never-locked.m4a",
