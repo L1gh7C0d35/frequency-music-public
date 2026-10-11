@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-11T02:29:12.593421+00:00",
+  "generated_at": "2026-10-11T02:31:57.640663+00:00",
   "tracks": [
     {
       "filename": "abundance-it-looks-good-on-me.m4a",
@@ -385,6 +385,10 @@
     {
       "filename": "too-good-to-be-random-hook.m4a",
       "duration": 47.0
+    },
+    {
+      "filename": "viking-keep-the-lantern-high.m4a",
+      "duration": 210.0
     },
     {
       "filename": "viking-stone-by-stone.m4a",
