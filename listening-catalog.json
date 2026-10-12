@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "collection": "Frequency Listening Room",
+  "worlds": [
+    {
+      "id": "velvet-sun",
+      "name": "Velvet Sun",
+      "short": "Soul & light",
+      "subtitle": "Warm soul · possibility · gratitude",
+      "description": "Warmth, gratitude, and the feeling of something good arriving.",
+      "image": "artwork/already-grateful.jpg",
+      "count": 7
+    },
+    {
+      "id": "iron-horizon",
+      "name": "Iron Horizon",
+      "short": "Courage & rise",
+      "subtitle": "Cinematic · courage · conviction",
+      "description": "For the moments you choose to keep going.",
+      "image": "artwork/crowned-by-fire.jpg",
+      "count": 8
+    },
+    {
+      "id": "quiet-atlas",
+      "name": "Quiet Atlas",
+      "short": "Calm & depth",
+      "subtitle": "Stillness · reflection · deep focus",
+      "description": "A quieter world with more room to breathe.",
+      "image": "artwork/quiet-empire.jpg",
+      "count": 5
+    },
+    {
+      "id": "electric-bloom",
+      "name": "Electric Bloom",
+      "short": "Energy & motion",
+      "subtitle": "Rhythm · energy · celebration",
+      "description": "Movement for the life you're making.",
+      "image": "artwork/golden-hour.jpg",
+      "count": 8
+    }
+  ],
+  "tracks": [
+    {
+      "id": "already-arrived",
+      "title": "Already Arrived",
+      "world": "velvet-sun",
+      "artist": "Frequency Originals",
+      "image": "artwork/already-arrived.jpg",
+      "audio": "audio/already-arrived.m4a",
+      "duration": 182,
+      "subtitle": "Warm soul · possibility · gratitude",
+      "description": "Warmth, gratitude, and the feeling of something good arriving."
+    },
+    {
+      "id": "already-grateful",
+      "title": "Already Grateful",
+      "world": "velvet-sun",
+      "artist": "Frequency Originals",
+      "image": "artwork/already-grateful.jpg",
+      "audio": "audio/already-grateful.m4a",
+      "duration": 195,
+      "subtitle": "Warm soul · possibility · gratitude",
+      "description": "Piano, house pulse, choir lift and a bigger celebratory chorus for gratitude and morning energy."
+    },
+    {
+      "id": "gold-on-my-mind",
+      "title": "Gold On My Mind",
+      "world": "velvet-sun",
+      "artist": "Frequency Originals",
+      "image": "artwork/gold-on-my-mind.jpg",
+      "audio": "audio/gold-on-my-mind.m4a",
+      "duration": 174,
+      "subtitle": "Warm soul · possibility · gratitude",
+      "description": "Warmth, gratitude, and the feeling of something good arriving."
+    },
+    {
+      "id": "light-finds-me",
+      "title": "Light Finds Me",
+      "world": "velvet-sun",
+      "artist": "Frequency Originals",
+      "image": "artwork/light-finds-me.jpg",
+      "audio": "audio/light-finds-me.m4a",
+      "duration": 190,
+      "subtitle": "Warm soul · possibility · gratitude",
+      "description": "Warmth, gratitude, and the feeling of something good arriving."
+    },
+    {
+      "id": "open-to-more",
+      "title": "Open to More",
+      "world": "velvet-sun",
+      "artist": "Frequency Originals",
+      "image": "artwork/open-to-more.jpg",
+      "audio": "audio/open-to-more.m4a",
+      "duration": 220,
+      "subtitle": "Warm soul · possibility · gratitude",
+      "description": "Opportunity, value creation, receiving with care, and taking the next useful action."
+    },
+    {
+      "id": "everything-opens",
+      "title": "Everything Opens",
+      "world": "velvet-sun",
+      "artist": "Frequency Originals",
+      "image": "artwork/everything-opens.jpg",
+      "audio": "audio/everything-opens.m4a",
+      "duration": 186,
+      "subtitle": "Warm soul · possibility · gratitude",
+      "description": "Warmth, gratitude, and the feeling of something good arriving."
+    },
+    {
+      "id": "i-give-the-signal",
+      "title": "I Give The Signal",
+      "world": "velvet-sun",
+      "artist": "Frequency Originals",
+      "image": "artwork/i-give-the-signal.jpg",
+      "audio": "audio/i-give-the-signal.m4a",
+      "duration": 198,
+      "subtitle": "Warm soul · possibility · gratitude",
+      "description": "Warmth, gratitude, and the feeling of something good arriving."
+    },
+    {
+      "id": "crowned-by-fire",
+      "title": "Crowned by Fire",
+      "world": "iron-horizon",
+      "artist": "Frequency Originals",
+      "image": "artwork/crowned-by-fire.jpg",
+      "audio": "audio/crowned-by-fire.m4a",
+      "duration": 192,
+      "subtitle": "Cinematic · courage · conviction",
+      "description": "Triumphant future-self duet about leadership, earned confidence and becoming the person you kept imagining."
+    },
+    {
+      "id": "storm-in-my-blood",
+      "title": "Storm in My Blood",
+      "world": "iron-horizon",
+      "artist": "Frequency Originals",
+      "image": "artwork/storm-in-my-blood.jpg",
+      "audio": "audio/storm-in-my-blood.m4a",
+      "duration": 190,
+      "subtitle": "Cinematic · courage · conviction",
+      "description": "Grounded courage anthem with low male lead, soaring counter-vocal, frame drums and a large identity hook."
+    },
+    {
+      "id": "i-do-not-break",
+      "title": "I Do Not Break",
+      "world": "iron-horizon",
+      "artist": "Frequency Originals",
+      "image": "artwork/i-do-not-break.jpg",
+      "audio": "audio/i-do-not-break.m4a",
+      "duration": 184,
+      "subtitle": "Cinematic · courage · conviction",
+      "description": "Darker resilience track with chant-led vocals, heavy drums, heartbeat space and a vow-like hook."
+    },
+    {
+      "id": "made-of-mountains",
+      "title": "Made Of Mountains",
+      "world": "iron-horizon",
+      "artist": "Frequency Originals",
+      "image": "artwork/made-of-mountains.jpg",
+      "audio": "audio/made-of-mountains.m4a",
+      "duration": 184,
+      "subtitle": "Cinematic · courage · conviction",
+      "description": "For the moments you choose to keep going."
+    },
+    {
+      "id": "pressure-into-power",
+      "title": "Pressure Into Power",
+      "world": "iron-horizon",
+      "artist": "Frequency Originals",
+      "image": "artwork/pressure-into-power.jpg",
+      "audio": "audio/pressure-into-power.m4a",
+      "duration": 148,
+      "subtitle": "Cinematic · courage · conviction",
+      "description": "For the moments you choose to keep going."
+    },
+    {
+      "id": "watch-me-build",
+      "title": "Watch Me Build",
+      "world": "iron-horizon",
+      "artist": "Frequency Originals",
+      "image": "artwork/watch-me-build.jpg",
+      "audio": "audio/watch-me-build.m4a",
+      "duration": 154,
+      "subtitle": "Cinematic · courage · conviction",
+      "description": "Short male-led power track with sparse verses, 808 weight, a cold vocal open and a compact repeatable hook."
+    },
+    {
+      "id": "command-the-day",
+      "title": "Command The Day",
+      "world": "iron-horizon",
+      "artist": "Frequency Originals",
+      "image": "artwork/command-the-day.jpg",
+      "audio": "audio/command-the-day.m4a",
+      "duration": 160,
+      "subtitle": "Cinematic · courage · conviction",
+      "description": "For the moments you choose to keep going."
+    },
+    {
+      "id": "i-decide",
+      "title": "I Decide",
+      "world": "iron-horizon",
+      "artist": "Frequency Originals",
+      "image": "artwork/i-decide.jpg",
+      "audio": "audio/i-decide.m4a",
+      "duration": 215,
+      "subtitle": "Cinematic · courage · conviction",
+      "description": "Clear decisions, setting the standard, and moving before perfect certainty arrives."
+    },
+    {
+      "id": "quiet-empire",
+      "title": "Quiet Empire",
+      "world": "quiet-atlas",
+      "artist": "Frequency Originals",
+      "image": "artwork/quiet-empire.jpg",
+      "audio": "audio/quiet-empire.m4a",
+      "duration": 250,
+      "subtitle": "Stillness · reflection · deep focus",
+      "description": "Patient wealth, stewardship, margin, long-term building, and ambition that can coexist with deep rest."
+    },
+    {
+      "id": "built-in-silence",
+      "title": "Built In Silence",
+      "world": "quiet-atlas",
+      "artist": "Frequency Originals",
+      "image": "artwork/built-in-silence.jpg",
+      "audio": "audio/built-in-silence.m4a",
+      "duration": 224,
+      "subtitle": "Stillness · reflection · deep focus",
+      "description": "A quieter world with more room to breathe."
+    },
+    {
+      "id": "future-in-the-room",
+      "title": "Future in the Room",
+      "world": "quiet-atlas",
+      "artist": "Frequency Originals",
+      "image": "artwork/future-in-the-room.jpg",
+      "audio": "audio/future-in-the-room.m4a",
+      "duration": 225,
+      "subtitle": "Stillness · reflection · deep focus",
+      "description": "A specific future made sensory, familiar, and close enough to shape the next decision."
+    },
+    {
+      "id": "soft-life-strong-mind",
+      "title": "Soft Life, Strong Mind",
+      "world": "quiet-atlas",
+      "artist": "Frequency Originals",
+      "image": "artwork/soft-life-strong-mind.jpg",
+      "audio": "audio/soft-life-strong-mind.m4a",
+      "duration": 188,
+      "subtitle": "Stillness · reflection · deep focus",
+      "description": "Male/female duet with intimate verses, wider pop chorus and a deliberately softer energy arc."
+    },
+    {
+      "id": "this-is-my-normal",
+      "title": "This Is My Normal",
+      "world": "quiet-atlas",
+      "artist": "Frequency Originals",
+      "image": "artwork/this-is-my-normal.jpg",
+      "audio": "audio/this-is-my-normal.m4a",
+      "duration": 230,
+      "subtitle": "Stillness · reflection · deep focus",
+      "description": "Thinking in decades, building at scale, and becoming capable of holding a bigger life."
+    },
+    {
+      "id": "momentum-is-mine",
+      "title": "Momentum Is Mine",
+      "world": "electric-bloom",
+      "artist": "Frequency Originals",
+      "image": "artwork/momentum-is-mine.jpg",
+      "audio": "audio/momentum-is-mine.m4a",
+      "duration": 150,
+      "subtitle": "Rhythm · energy · celebration",
+      "description": "Short aggressive power track with heavier sub, compact structure and faster social-first pacing."
+    },
+    {
+      "id": "money-meets-motion",
+      "title": "Money Meets Motion",
+      "world": "electric-bloom",
+      "artist": "Frequency Originals",
+      "image": "artwork/money-meets-motion.jpg",
+      "audio": "audio/money-meets-motion.m4a",
+      "duration": 185,
+      "subtitle": "Rhythm · energy · celebration",
+      "description": "Our first song generated from aggregate niche research: shorter discovery format, early hook, abundance framed through value creation and action."
+    },
+    {
+      "id": "run-with-the-light",
+      "title": "Run With The Light",
+      "world": "electric-bloom",
+      "artist": "Frequency Originals",
+      "image": "artwork/run-with-the-light.jpg",
+      "audio": "audio/run-with-the-light.m4a",
+      "duration": 202,
+      "subtitle": "Rhythm · energy · celebration",
+      "description": "Movement for the life you're making."
+    },
+    {
+      "id": "golden-hour",
+      "title": "Golden Hour",
+      "world": "electric-bloom",
+      "artist": "Frequency Originals",
+      "image": "artwork/golden-hour.jpg",
+      "audio": "audio/golden-hour.m4a",
+      "duration": 184,
+      "subtitle": "Rhythm · energy · celebration",
+      "description": "Bright female-led dance lane with four-on-the-floor pulse, faster rhythmic density and a larger final lift."
+    },
+    {
+      "id": "move-like-money",
+      "title": "Move Like Money",
+      "world": "electric-bloom",
+      "artist": "Frequency Originals",
+      "image": "artwork/move-like-money.jpg",
+      "audio": "audio/move-like-money.m4a",
+      "duration": 166,
+      "subtitle": "Rhythm · energy · celebration",
+      "description": "Movement for the life you're making."
+    },
+    {
+      "id": "luck-follows-action",
+      "title": "Luck Follows Action",
+      "world": "electric-bloom",
+      "artist": "Frequency Originals",
+      "image": "artwork/luck-follows-action.jpg",
+      "audio": "audio/luck-follows-action.m4a",
+      "duration": 146,
+      "subtitle": "Rhythm · energy · celebration",
+      "description": "Movement for the life you're making."
+    },
+    {
+      "id": "built-for-this",
+      "title": "Built for This",
+      "world": "electric-bloom",
+      "artist": "Frequency Originals",
+      "image": "artwork/built-for-this.jpg",
+      "audio": "audio/built-for-this.m4a",
+      "duration": 168,
+      "subtitle": "Rhythm · energy · celebration",
+      "description": "Lower male vocal lane with rhythmic sung-spoken delivery, sparse verses and chantable hook."
+    },
+    {
+      "id": "the-room-changes",
+      "title": "The Room Changes",
+      "world": "electric-bloom",
+      "artist": "Frequency Originals",
+      "image": "artwork/the-room-changes.jpg",
+      "audio": "audio/the-room-changes.m4a",
+      "duration": 188,
+      "subtitle": "Rhythm · energy · celebration",
+      "description": "Movement for the life you're making."
+    }
+  ]
+}
