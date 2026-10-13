@@ -1,7 +1,7 @@
 {
   "timekeeper-audio-528-hz-sacred-grace": {
     "source_url": "https://flowmusic.app/song/2f839b87-b9f1-4f69-b8a8-5ee63b08d821",
-    "sound": "Ethereal sound bath meditation, 528 Hz healing ambient drone, shimmering glass harmonica, gentle binaural wave pulses, soft angelic choir affirmations, divine wealth and sacred grace, 70 BPM.",
+    "sound": "Ethereal sound bath meditation, 528 Hz healing ambient drone, shimmering glass harmonica, gentle binaural wave pulses, soft angelic choir affirmations, divine wealth and sacred grace, 70 BPM",
     "bpm": 70,
     "instruments": [
       "ambient drone",
@@ -12,10 +12,18 @@
     "experiences": [
       "sound-bath"
     ],
-    "metadata_provenance": "Flow Music song page screenshot supplied by creator, October 13, 2026",
+    "metadata_provenance": "Direct creator-supplied Flow Music song URL; publicly visible source data, imported October 2026",
     "notice": "The word 'healing' is part of the original music-creation description, not a validated medical claim.",
     "voice_group": "golden-current-528-singer",
-    "voice_match_provenance": "Creator confirmed this is the same singer as 528 Hz Miracle Awakening, October 13 2026."
+    "voice_match_provenance": "Creator confirmed this is the same singer as 528 Hz Miracle Awakening, October 13 2026.",
+    "lyrics": "[Intro]\n(528 Hz healing frequency)\n(Pure light)\n\n[Verse]\nCells awakening with the dawn\nEvery heavy shadow gone\nCrowned in favor, bathed in light\nSpirit radiant and bright\nMillions flowing without strain\nSunlight washing out the pain\n\n[Chorus]\nSacred wealth and sacred grace\nPeace within this holy place\nI accept this grand supply\nRising like the morning sky\n[End - 0:45]",
+    "lyric_status": "source-Flow-lyrics-sheet-not-synced",
+    "flow_clip_id": "2f839b87-b9f1-4f69-b8a8-5ee63b08d821",
+    "source_duration_seconds": 164.07466666666667,
+    "source_title": "528 Hz Sacred Grace",
+    "source_created_at": "2026-10-11T20:50:27.307783Z",
+    "source_retrieved_from_public_page": true,
+    "lyrics_provenance": "Flow Music supplied lyrics text (not necessarily every sung word)"
   },
   "timekeeper-audio-528-hz-miracle-awakening": {
     "voice_group": "golden-current-528-singer",

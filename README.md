@@ -131,3 +131,20 @@ turns auto-follow off; no word causes layout reflow.
 Flow 528 Hz sound-bath recordings currently lack full lyric sheets in
 the app export, so the player does not invent karaoke for them.
 Sacred Grace instead links to its source Flow Music song page.
+
+
+## Keep visitors in Frequency; Flow source URLs are editorial only
+
+Do not render external Flow Music URLs in the player or missing-lyrics UI.
+The offline import script `python3 scripts/import_flow_song_metadata.py` reads
+only explicitly supplied original Flow Music URLs in the source catalog.
+It extracts the original SOUND description, song timing, creator-written
+lyrics, and available provenance without guessing performer identities.
+For 528 Hz Sacred Grace, the original lyrics are now imported and displayed
+inside Frequency; no exit to the source site is necessary.
+
+The public JSON catalog only includes listener-relevant approved fields,
+not the source URL or source ID. The GitHub Pages packaging step excludes
+`flow-song-metadata.json`; generated source metadata is not part of the
+public website bundle. If other songs lack source URLs, the importer will
+not fabricate them; their verified app metadata remains intact.

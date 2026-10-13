@@ -51,8 +51,19 @@ def build():
         if not (ROOT/record['audio']).is_file():raise ValueError('Audio missing for app song: '+record['id'])
         if not (ROOT/record['image']).is_file():raise ValueError('Artwork missing for app song: '+record['id'])
         enriched=record.copy()
+        # Creator-approved golden sacred-geometry cover overrides the old blue landscape.
+        if record['id']=='timekeeper-audio-528-hz-sacred-grace':
+            enriched['image']='artwork/timekeeper-audio-528-hz-sacred-grace-gold.jpg'
         if record['id'] in flow_metadata:
-            enriched.update(flow_metadata[record['id']])
+            # Import approved source details, not the outbound source URL.
+            public_fields={'sound','lyrics','bpm','instruments','experiences',
+                           'voice_group','voice_match_provenance','source_title',
+                           'source_duration_seconds','source_created_at'}
+            enriched.update({k:v for k,v in flow_metadata[record['id']].items()
+                             if k in public_fields})
+        # Even a future source snapshot must not push a listener offsite.
+        enriched.pop('source_url',None)
+        enriched.pop('flow_clip_id',None)
         timeline=LYRIC_TIMINGS/(record['id']+'.json')
         if timeline.is_file() and record.get('lyrics'):
             data=json.loads(timeline.read_text())
@@ -89,7 +100,7 @@ def build():
                 experiences=metadata.get('experiences') or [],
                 sound=metadata.get('sound') or '',bpm=metadata.get('bpm'),
                 instruments=metadata.get('instruments') or [],
-                source_url=metadata.get('source_url') or '',
+                # Flow provenance is a publishing input, never a listening exit link.
                 audio=str(p.relative_to(ROOT)),image=cover_name,duration=duration(p),
                 source='Public preview upload',type='song',new=True))
     if extras:

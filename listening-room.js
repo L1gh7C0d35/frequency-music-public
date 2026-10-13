@@ -382,18 +382,11 @@
     const follow=$('nowLyricFollow');
     const lines=String(t?.lyrics||'').replace(/\r/g,'').trim().split('\n');
     const hasLyrics=!!String(t?.lyrics||'').trim();
-    // An original Flow page may have a lyric sheet even when the app's source
-    // export omitted it. Say so visibly, but never manufacture lyric text.
-    const flowSource=String(t?.source_url||'');
-    const pendingLyrics=!hasLyrics && /^https:\/\/(www\.)?flowmusic\.app\/song\//i.test(flowSource);
-    section.hidden=!(hasLyrics||pendingLyrics);
-    $('nowLyrics').hidden=!(hasLyrics||pendingLyrics);
+    // The listening experience must stay inside Frequency.
+    section.hidden=!hasLyrics;
+    $('nowLyrics').hidden=!hasLyrics;
     if(!hasLyrics){
-      content.innerHTML=pendingLyrics
-        ? '<p class="lyric-line">The original Flow Music page has song details, but the complete lyric sheet has not been imported into Frequency yet. Word-by-word highlighting will appear after that lyric sheet is available and checked against the audio.</p>'+
-          '<p class="lyric-line"><a class="lyric-source" href="'+safeText(flowSource)+'" target="_blank" rel="noopener noreferrer">Open original Flow Music song ↗</a></p>'
-        : '';
-      $('nowLyricsStatus').textContent='Lyrics not yet imported · no invented timing';
+      content.textContent='';
       follow.hidden=true;
       currentLyricIndex=-1;currentLyricLine=null;
       return;

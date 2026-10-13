@@ -82,14 +82,16 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertEqual(sacred['bpm'],70)
         self.assertIn('sound-bath',sacred['experiences'])
         self.assertIn('glass harmonica',sacred['sound'])
-        self.assertIn('flowmusic.app/song/',sacred['source_url'])
+        self.assertNotIn('source_url',sacred)
+        self.assertNotIn('flow_clip_id',sacred)
+        self.assertIn('source_url',__import__('json').loads((ROOT/'flow-song-metadata.json').read_text())['timekeeper-audio-528-hz-sacred-grace'])
         rendered=page(sacred)
         self.assertIn('property="og:title"',rendered)
         self.assertIn('property="og:image"',rendered)
         self.assertIn('glass harmonica',rendered)
         self.assertIn('timekeeper-audio-528-hz-sacred-grace',rendered)
         self.assertIn('location.replace',rendered)
-        self.assertIn('Flow Music',sacred['metadata_provenance'])
+        self.assertIn('Cells awakening with the dawn',sacred['lyrics'])
 
     def test_every_song_in_one_artist_world(self):
         names={w['id'] for w in self.data['worlds']}
@@ -120,7 +122,7 @@ class ListeningRoomTests(unittest.TestCase):
     def test_lyrics_match_source_word_counts_without_invented_times(self):
         from align_word_lyrics import lines_to_words
         tracks=[t for t in self.data['tracks'] if t.get('lyrics','').strip()]
-        self.assertEqual(len(tracks),28)
+        self.assertEqual(len(tracks),29)
         synced=[t for t in tracks if t.get('wordTimes')]
         self.assertGreaterEqual(len(synced),25)
         for t in synced:
@@ -140,10 +142,21 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn('function syncNowLyrics()',source)
         self.assertIn('renderNowLyrics(t);',source)
         self.assertIn('Automatic lyric timing preview',source)
-        self.assertIn('The original Flow Music page has song details',source)
+        self.assertNotIn('Open original Flow Music song',source)
+        self.assertNotIn('Flow page has song details',source)
         css=(ROOT/'frequency-parity.css').read_text()
         self.assertIn('max-height:none',css)
         self.assertIn('.lyric-word.is-current',css)
+
+    def test_public_listening_has_no_source_site_exit(self):
+        song=next(t for t in self.data['tracks'] if t['id']=='timekeeper-audio-528-hz-sacred-grace')
+        self.assertIn('Cells awakening with the dawn',song['lyrics'])
+        self.assertEqual(song['bpm'],70)
+        self.assertNotIn('source_url',song)
+        self.assertNotIn('flow_clip_id',song)
+        self.assertTrue(all('source_url' not in t for t in self.data['tracks']))
+        self.assertNotIn('flowmusic.app', (ROOT/'listening-room.js').read_text())
+        self.assertNotIn('Open original Flow Music', self.html)
 
     def test_links_and_controls(self):
         for path in ('listening-room.css','listening-room.js','frequency-parity.js','frequency-parity.css','manifest.webmanifest','sw.js','music.html','studio.html','legacy-library.html'):
