@@ -7,9 +7,10 @@
   let app,mode='pure',deadline=0,remaining=300,ritualRunning=false,tick=null,installPrompt=null;
   let currentTab='home';
   function tab(id) {
+    if(app?.state?.activeWorld)app.closeWorld({restoreScroll:false});
     currentTab=id;
     document.body.dataset.appTab=id;
-    document.querySelectorAll('[data-app-tab]').forEach(b=>{
+    document.querySelectorAll('button[data-app-tab]').forEach(b=>{
       const active=b.dataset.appTab===id;
       b.classList.toggle('selected',active);
       if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
@@ -48,6 +49,7 @@
   }
   function shortCut(id) {
     tab('sounds');filterType('all');
+    $('library').scrollIntoView({behavior:'smooth',block:'start'});
     if(id==='favorites') {
       app.state.favoritesOnly=true;
       app.renderLibrary();$('crumb').textContent='Favorites';
@@ -121,7 +123,7 @@
     ritualArtwork();resetRitual();
   }
   function bind() {
-    document.querySelectorAll('[data-app-tab]').forEach(b=>b.addEventListener('click',()=>tab(b.dataset.appTab)));
+    document.querySelectorAll('button[data-app-tab]').forEach(b=>b.addEventListener('click',()=>tab(b.dataset.appTab)));
     document.querySelectorAll('[data-shortcut]').forEach(b=>b.addEventListener('click',()=>shortCut(b.dataset.shortcut)));
     document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>filterType(b.dataset.mode)));
     document.querySelectorAll('[data-ritual-mode]').forEach(b=>b.addEventListener('click',()=>{
@@ -163,7 +165,9 @@
     // Update the existing site layout to Beta44's 5-tab navigation,
     // without impersonating unavailable native AlarmKit/StoreKit integrations.
     document.body.dataset.appTab='home';
-    filters();setupRituals();renderLyrics();renderYou();bind();tab('home');
+    window.FrequencyWebNavigation={tab};
+    filters();setupRituals();renderLyrics();renderYou();bind();
+    if(!app.state.activeWorld)tab('home');
     const url=new URL(window.location.href);
     if(url.searchParams.has('track'))app.openNow();
     if('serviceWorker' in navigator && location.protocol==='https:'){

@@ -40,6 +40,37 @@ class ListeningRoomTests(unittest.TestCase):
             self.assertIn('id="'+ident+'"',self.html)
         self.assertIn('listening-catalog.json',(ROOT/'listening-room.js').read_text())
         self.assertIn('location.replace',(ROOT/'music.html').read_text())
+    def test_artist_world_detail_has_dedicated_navigation(self):
+        for ident in ('worldDetail','worldDetailCover','worldDetailTitle','worldDetailTracks',
+                      'worldDetailBack','worldDetailPlay','worldDetailShare'):
+            self.assertIn('id="'+ident+'"',self.html)
+        source=(ROOT/'listening-room.js').read_text()
+        world_route=source.split('function chooseWorld(id) {',1)[1].split('function renderWorlds()',1)[0]
+        self.assertIn('showWorld(id);',world_route)
+        self.assertNotIn('scrollIntoView',world_route)
+        self.assertIn("history.pushState({frequencyWorld:id}",source)
+        self.assertIn("window.addEventListener('popstate'",source)
+        self.assertIn('const requestedWorld=new URL(location.href).searchParams.get',source)
+
+    def test_all_worlds_have_actual_descriptions_and_media(self):
+        for w in self.data['worlds']:
+            self.assertTrue(w.get('subtitle'),w['id'])
+            self.assertTrue(w.get('description'),w['id'])
+            matching=[t for t in self.data['tracks'] if t['world']==w['id'] or w['id'] in t.get('worlds',[])]
+            self.assertEqual(len(matching),w['count'],w['id'])
+        source=(ROOT/'listening-room.js').read_text()
+        self.assertIn('w.subtitle',source)
+        self.assertNotIn('safeText(w.short)',source)
+
+    def test_tabs_never_bind_to_entire_body(self):
+        source=(ROOT/'frequency-parity.js').read_text()
+        self.assertNotIn("querySelectorAll('[data-app-tab]')",source)
+        self.assertEqual(source.count("querySelectorAll('button[data-app-tab]')"),2)
+        self.assertIn("app.closeWorld({restoreScroll:false})",source)
+        # Body itself carries data-app-tab for CSS. Attaching a click handler
+        # to it made every artist/track click silently navigate Home.
+        self.assertIn('document.body.dataset.appTab=id',source)
+
     def test_javascript_syntax(self):
         p=subprocess.run(['node','--check',str(ROOT/'listening-room.js')],capture_output=True,text=True)
         self.assertEqual(p.returncode,0,p.stderr)

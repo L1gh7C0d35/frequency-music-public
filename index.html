@@ -14,10 +14,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="listening-room.css?v=20261013b">
-  <link rel="stylesheet" href="frequency-parity.css?v=20261013b">
-  <script src="listening-room.js?v=20261013b" defer></script>
-  <script src="frequency-parity.js?v=20261013b" defer></script>
+  <link rel="stylesheet" href="listening-room.css?v=20261013c">
+  <link rel="stylesheet" href="frequency-parity.css?v=20261013c">
+  <script src="listening-room.js?v=20261013c" defer></script>
+  <script src="frequency-parity.js?v=20261013c" defer></script>
 </head>
 <body>
 <div class="app-shell">
@@ -78,6 +78,16 @@
   <section id="worlds" class="section worlds-section">
         <div class="section-head"><div><div class="section-eyebrow">ARTIST WORLDS</div><h2>Find your sound <em>world.</em></h2></div><div class="head-foot" id="worldCount">ORIGINAL SOUND WORLDS</div></div>
         <div class="world-grid" id="worldGrid" aria-label="Sound worlds"></div>
+      </section>
+      <section id="worldDetail" class="world-detail" hidden aria-label="Artist World">
+        <div class="world-detail-navigation"><button id="worldDetailBack" class="world-detail-back" aria-label="Back to Artist Worlds"><span aria-hidden="true">‹</span> Back</button><button id="worldDetailShare" class="world-detail-share" aria-label="Share this Artist World">↗ Share</button></div>
+        <div class="world-detail-hero">
+          <img id="worldDetailCover" class="world-detail-cover" alt="">
+          <div class="world-detail-shade"></div>
+          <div class="world-detail-headline"><span id="worldDetailCategory" class="section-eyebrow">ARTIST WORLD</span><h1 id="worldDetailTitle" tabindex="-1">Artist World</h1><p id="worldDetailSubtitle"></p></div>
+        </div>
+        <div class="world-detail-body"><div class="world-detail-section-head"><div><span class="section-eyebrow">LISTEN WITHIN THIS WORLD</span><h2>Tracks <small id="worldDetailCount"></small></h2></div><button id="worldDetailPlay" class="primary-action">▶ Play all</button></div>
+        <div id="worldDetailTracks" class="world-detail-tracks"></div></div>
       </section>
       <section id="picks" class="section picks-section">
         <div class="section-head"><div><div class="section-eyebrow">HANDPICKED STARTING POINTS</div><h2>A little something <em>for you.</em></h2></div><button class="quiet-link" id="shufflePicks">Mix it up <span>↗</span></button></div>

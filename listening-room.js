@@ -22,6 +22,91 @@
   const world = id => state.worlds.find(w => w.id === id);
   const selected = () => state.current && state.byId.get(state.current);
   const rand = array => array[Math.floor(Math.random()*array.length)];
+  let openWorldId = null;
+  let worldOrigin = {tab:'home',scrollY:0};
+  const worldTracks = id => state.tracks.filter(t => t.world===id || (t.worlds||[]).includes(id));
+  function worldUrl(id) {
+    const u = new URL(window.location.href);
+    u.searchParams.delete('track');
+    if (id) u.searchParams.set('world',id); else u.searchParams.delete('world');
+    u.hash='';
+    return u.pathname+u.search;
+  }
+  function renderWorldDetail(id) {
+    const w=world(id);
+    if(!w) return;
+    const tracks=worldTracks(id);
+    $('worldDetailCover').src=w.image;
+    $('worldDetailCover').alt=w.name+' cover artwork';
+    $('worldDetailCategory').textContent='ORIGINAL SOUND WORLD · '+tracks.length+' TRACKS';
+    $('worldDetailTitle').textContent=w.name;
+    $('worldDetailSubtitle').textContent=w.subtitle||'Original Frequency music';
+    $('worldDetailCount').textContent=tracks.length+' song'+(tracks.length===1?'':'s');
+    $('worldDetailTracks').innerHTML=tracks.map(t=>`
+      <article class="world-song ${state.current===t.id?'active':''}" data-world-row="${safeText(t.id)}">
+        <button class="world-song-main" data-world-open="${safeText(t.id)}" aria-label="Open ${safeText(t.title)}">
+          <img src="${safeText(t.image)}" alt="" loading="lazy">
+          <span><b>${safeText(t.title)}</b><small>${safeText(t.subtitle||t.description||'Original music')}</small></span>
+        </button>
+        <button class="world-song-play" data-world-play="${safeText(t.id)}" aria-label="Play ${safeText(t.title)}">
+          <svg viewBox="0 0 24 24">${state.current===t.id&&state.playing?PAUSE:PLAY}</svg>
+        </button>
+      </article>`).join('');
+    $('worldDetailTracks').querySelectorAll('[data-world-open]').forEach(b=>b.onclick=()=>{
+      const id=b.dataset.worldOpen;state.queue=tracks.map(t=>t.id);showTrack(id);
+    });
+    $('worldDetailTracks').querySelectorAll('[data-world-play]').forEach(b=>b.onclick=()=>{
+      const id=b.dataset.worldPlay;state.queue=tracks.map(t=>t.id);playTrack(id,true);
+    });
+    $('worldDetailPlay').disabled=!tracks.length;
+    $('worldDetailPlay').onclick=()=>{
+      if(!tracks.length)return;
+      state.queue=tracks.map(t=>t.id);
+      playTrack(tracks[0].id,true);
+    };
+    $('worldDetailShare').onclick=()=>share(w.name+' · Frequency Artist World',new URL(worldUrl(id),location.origin).href);
+  }
+  function syncWorldPlayback() {
+    if(!openWorldId) return;
+    $('worldDetailTracks').querySelectorAll('[data-world-row]').forEach(row=>{
+      const active=row.dataset.worldRow===state.current;
+      row.classList.toggle('active',active);
+      const control=row.querySelector('[data-world-play]');
+      if(control){
+        control.setAttribute('aria-label',active&&state.playing?'Pause '+(state.byId.get(state.current)?.title||'song'):'Play '+(state.byId.get(row.dataset.worldRow)?.title||'song'));
+        control.querySelector('svg').innerHTML=active&&state.playing?PAUSE:PLAY;
+      }
+    });
+  }
+  function showWorld(id,{push=true,scroll=true}={}) {
+    if(!world(id))return false;
+    if(!openWorldId)worldOrigin={tab:document.body.dataset.appTab||'home',scrollY:window.scrollY};
+    openWorldId=id;state.activeWorld=id;
+    $('worldDetail').hidden=false;
+    document.body.dataset.worldDetail='open';
+    $('crumb').textContent=world(id).name;
+    renderWorldDetail(id);
+    if(push && new URL(location.href).searchParams.get('world')!==id){
+      history.pushState({frequencyWorld:id},'',worldUrl(id));
+    }
+    if(scroll)window.scrollTo({top:0,behavior:'instant'});
+    $('worldDetailTitle').focus({preventScroll:true});
+    return true;
+  }
+  function closeWorld({restoreScroll=true,urlMode='replace'}={}) {
+    if(!openWorldId)return;
+    openWorldId=null;state.activeWorld=null;
+    $('worldDetail').hidden=true;
+    delete document.body.dataset.worldDetail;
+    if(urlMode==='replace')history.replaceState(null,'',worldUrl(null));
+    $('crumb').textContent=(worldOrigin.tab||'home').replace(/^./,c=>c.toUpperCase());
+    if(restoreScroll)window.scrollTo({top:worldOrigin.scrollY,behavior:'instant'});
+  }
+  function goBackFromWorld() {
+    if(!openWorldId)return;
+    if(history.state?.frequencyWorld===openWorldId && history.length>1){history.back();}
+    else closeWorld();
+  }
   function loadLocal() {
     try {
       const o = JSON.parse(localStorage.getItem(STORAGE) || '{}');
@@ -40,6 +125,7 @@
     toastTimer = setTimeout(()=>{el.hidden=true;},3300);
   }
   function nav(section) {
+    if(openWorldId)closeWorld({restoreScroll:false});
     if (section === 'favorites') {
       state.favoritesOnly=true;
       state.filter='all';
@@ -66,7 +152,7 @@
     try {
       const u=new URL(window.location.href);
       if(id)u.searchParams.set('track',id); else u.searchParams.delete('track');
-      window.history.replaceState(null,'',u.pathname+u.search);
+      window.history.replaceState(window.history.state,'',u.pathname+u.search);
     } catch (_) {}
   }
   async function share(text,url) {
@@ -90,20 +176,17 @@
     });
   }
   function chooseWorld(id) {
-    state.favoritesOnly=false; state.filter=id; state.query='';
-    $('searchInput').value='';
-    $('crumb').textContent=world(id)?.name || 'Sound worlds';
-    renderLibrary();
-    document.querySelectorAll('[data-nav]').forEach(b=>b.classList.toggle('selected',b.dataset.nav==='worlds'));
-    $('library').scrollIntoView({behavior:'smooth',block:'start'});
+    // Home deliberately hides the library. The old hidden scroll destination
+    // jumped to the top, instead of opening an artist world.
+    showWorld(id);
   }
   function renderWorlds() {
     $('worldGrid').innerHTML=state.worlds.map((w,i)=>`
       <button class="world-card" data-world="${safeText(w.id)}" aria-label="Explore ${safeText(w.name)}">
         <img src="${safeText(w.image)}" alt="" loading="lazy">
         <span class="world-arrow">↗</span>
-        <span class="world-content"><span class="world-small">0${i+1} · ${w.count} TRACKS</span>
-          <span class="world-title">${safeText(w.name)}</span><span class="world-desc">${safeText(w.short)}</span></span>
+        <span class="world-content"><span class="world-small">${String(i+1).padStart(2,"0")} · ${w.count} TRACKS</span>
+          <span class="world-title">${safeText(w.name)}</span><span class="world-desc">${safeText(w.subtitle)}</span></span>
       </button>`).join('');
     $('worldGrid').querySelectorAll('[data-world]').forEach(b=>b.addEventListener('click',()=>chooseWorld(b.dataset.world)));
   }
@@ -178,12 +261,12 @@
       $('nowArt').src=t.image;$('nowArt').alt=t.title+' artwork';
       $('nowBack').style.backgroundImage='url("'+t.image+'")';
       $('nowTitle').textContent=t.title;$('nowSub').textContent=t.artist;
-      $('nowWorld').textContent=(world(t.world)?.name||'Frequency')+' · '+(world(t.world)?.short||'');
+      $('nowWorld').textContent=(world(t.world)?.name||'Frequency')+' · '+(world(t.world)?.subtitle||'');
       $('miniCover').src=t.image;$('miniTitle').textContent=t.title;
       $('miniSubtitle').textContent=world(t.world)?.name||t.artist;
       $('miniPlayer').hidden=false;
       $('playState').textContent='READY TO LISTEN';
-      setUrlTrack(id);updateMediaSession(t);renderLibrary();renderPicks();syncHearts();renderQueue();updateProgress();
+      setUrlTrack(id);updateMediaSession(t);renderLibrary();renderPicks();syncHearts();syncWorldPlayback();renderQueue();updateProgress();
     }
     if(play)requestPlay();
     else syncPlayState();
@@ -224,6 +307,7 @@
     document.querySelectorAll('.button-symbol').forEach(svg=>svg.innerHTML=sym);
     $('miniPlay').setAttribute('aria-label',state.playing?'Pause':'Play');
     $('nowPlay').setAttribute('aria-label',state.playing?'Pause':'Play');
+    syncWorldPlayback();
     $('miniEq').classList.toggle('playing',state.playing);
     document.querySelector('.hero-art-caption .eq')?.classList.toggle('playing',state.playing);
     $('playState').textContent=state.playing?'NOW PLAYING':'PAUSED';
@@ -330,8 +414,19 @@
       state.featuredIds=state.tracks.map(t=>t.id).sort(()=>Math.random()-.5).slice(0,5);renderPicks();
     };
     $('searchInput').oninput=e=>{state.query=e.target.value;renderLibrary();};
-    $('topSearch').onclick=()=>{nav('library');$('searchInput').focus({preventScroll:true});};
+    $('topSearch').onclick=()=>{
+      if(window.FrequencyWebNavigation)window.FrequencyWebNavigation.tab('sounds');
+      else nav('library');
+      $('library').scrollIntoView({behavior:'smooth',block:'start'});
+      $('searchInput').focus({preventScroll:true});
+    };
     $('clearFilters').onclick=()=>{state.query='';state.filter='all';state.favoritesOnly=false;$('searchInput').value='';renderLibrary();};
+    $('worldDetailBack').onclick=goBackFromWorld;
+    window.addEventListener('popstate',()=>{
+      const id=new URL(location.href).searchParams.get('world');
+      if(id&&world(id))showWorld(id,{push:false});
+      else if(openWorldId)closeWorld({urlMode:'none'});
+    });
     $('shareRoom').onclick=()=>share('Frequency · Listening Room',location.origin+location.pathname);
     $('miniOpen').onclick=openNow;$('miniPlay').onclick=togglePlay;$('miniNext').onclick=()=>next();
     $('closeNow').onclick=closeNow;$('nowShare').onclick=()=>{if(selected())share(selected().title+' · Frequency Originals',trackUrl(state.current));};
@@ -387,8 +482,10 @@
       if(feature){$('heroCover').src=feature.image;$('heroBack').style.backgroundImage='url("'+feature.image+'")';}
       renderWorlds();renderPicks();renderLibrary();syncModes();syncPlayState();
       const id=new URL(location.href).searchParams.get('track');
+      const requestedWorld=new URL(location.href).searchParams.get('world');
+      if(requestedWorld&&world(requestedWorld))showWorld(requestedWorld,{push:false});
       if(id&&state.byId.has(id)){queueFromContext(id);loadTrack(id,false);openNow();}
-      window.FrequencyPreview={state,playTrack,loadTrack,requestPlay,togglePlay,next,nav,chooseWorld,renderLibrary,renderPicks,openNow,closeNow,openReview,exportFeedback,share,trackUrl,world,toggleFavorite,currentList,toast};
+      window.FrequencyPreview={state,playTrack,loadTrack,requestPlay,togglePlay,next,nav,chooseWorld,showWorld,closeWorld,renderLibrary,renderPicks,openNow,closeNow,openReview,exportFeedback,share,trackUrl,world,toggleFavorite,currentList,toast};
       document.dispatchEvent(new CustomEvent('frequency:ready',{detail:{count:state.tracks.length}}));
     } catch(err) {
       $('trackList').innerHTML='<div class="empty-state" style="display:block"><h3>Unable to load the listening library.</h3><p>Please reload the page or try again with a connection.</p></div>';
