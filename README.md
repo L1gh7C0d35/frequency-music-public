@@ -47,3 +47,34 @@ Mobile-optimized public M4A streams store the MP4 moov metadata before audio sam
     python3 scripts/faststart_public_audio.py --fix
 
 The iOS music exporter preserves this metadata order when mirroring future music. Data-Saver connections skip optional home-page audio preloading. Playback latency still depends on real device and network conditions.
+
+
+## Original recording lengths (October 13, 2026)
+
+A full byte-for-byte SHA-256 comparison confirmed all 33 public Timekeeper
+soundscapes are identical to their corresponding source Timekeeper audio files.
+The website did not truncate these recordings. All 28 core Frequency songs run
+longer than two minutes. Nine soundscapes are under 90 seconds:
+
+| Original soundscape | Recorded duration |
+|---|---:|
+| 396 Hz Grounded Foundation | 1:07 |
+| 432 Hz Crystal Abundance | 1:05 |
+| 852 Hz Spiritual Oneness | 1:05 |
+| Balearic Gold Horizon | 1:01 |
+| Unstoppable Golden Rise | 1:03 |
+| Cozy Coffee & Lo-Fi Vinyl | 1:08 |
+| Morning Velvet Bliss | 1:10 |
+| Turquoise Truth Awakening | 1:09 |
+| Sacred Abundance Stream | 1:18 |
+
+The user-facing music browser marks these as **short original soundscapes**,
+with true running time and an optional **Loop continuously** control. Repeat
+does not constitute a new or full-length musical composition.
+
+Future release work should write and approve *new* 3-5 minute arrangements
+for the nine short items before calling them full-length songs; do not
+mislabel loops, use artificial time stretches, or silently replace masters.
+The Timekeeper source model currently says "Full track" for some 1-minute
+assets; its native-app metadata should be corrected in the next deliberate
+Timekeeper app update by that app's developer.

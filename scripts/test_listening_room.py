@@ -42,6 +42,26 @@ class ListeningRoomTests(unittest.TestCase):
                 self.assertFalse(is_slow_start(p),
                     'M4A metadata at the end makes mobile playback request extra bytes')
 
+    def test_short_soundscapes_are_labeled_and_repeat_is_opt_in(self):
+        tracks=self.data['tracks']
+        soundscapes=[t for t in tracks if t.get('type')=='soundscape']
+        short=[t for t in soundscapes if t['duration']<90]
+        self.assertEqual(len(soundscapes),33)
+        self.assertEqual(len(short),9)
+        self.assertEqual(len([t for t in tracks if t.get('type')=='song']),28)
+        grounded=next(t for t in tracks if t['id']=='timekeeper-audio-396-hz-grounded-foundation')
+        self.assertAlmostEqual(grounded['duration'],66.58,places=1)
+        for ident in ('shortSoundscapeHint','shortSoundscapeCopy','shortSoundscapeLoop'):
+            self.assertIn('id="'+ident+'"',self.html)
+        source=(ROOT/'listening-room.js').read_text()
+        self.assertIn("t.type==='soundscape' && t.duration<90",source)
+        self.assertIn('Original recording',source)
+        self.assertIn("state.repeat=!state.repeat;",source)
+        self.assertIn("syncShortSoundscape(t);",source)
+        # The recording is not extended, time-stretched, or deceptively
+        # presented as a full-length mastered song.
+        self.assertNotIn('Extended Version',self.html)
+
     def test_one_tap_playback_is_requested_before_rendering(self):
         source=(ROOT/'listening-room.js').read_text()
         load=source.split('function loadTrack(id,play=false)',1)[1].split('function playTrack(',1)[0]

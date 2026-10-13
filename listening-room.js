@@ -19,6 +19,10 @@
   const STORAGE = 'frequency-listening-room-v1';
   const safeText = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const fmt = s => { const n = Math.max(0,Math.floor(Number.isFinite(Number(s)) ? Number(s) : 0)); return Math.floor(n/60)+':'+String(n%60).padStart(2,'0'); };
+  const shortSoundscape = t => !!t && t.type==='soundscape' && t.duration<90;
+  const listeningLabel = t => shortSoundscape(t)
+    ? 'Short soundscape · '+fmt(Math.round(t.duration))+' · Original recording'
+    : (t.subtitle || t.description || 'Original Frequency music');
   const world = id => state.worlds.find(w => w.id === id);
   const selected = () => state.current && state.byId.get(state.current);
   const rand = array => array[Math.floor(Math.random()*array.length)];
@@ -46,7 +50,7 @@
       <article class="world-song ${state.current===t.id?'active':''}" data-world-row="${safeText(t.id)}">
         <button class="world-song-main" data-world-open="${safeText(t.id)}" aria-label="Open ${safeText(t.title)}">
           <img src="${safeText(t.image)}" alt="" loading="lazy">
-          <span><b>${safeText(t.title)}</b><small>${safeText(t.subtitle||t.description||'Original music')}</small></span>
+          <span><b>${safeText(t.title)}</b><small>${safeText(listeningLabel(t))}</small></span>
         </button>
         <button class="world-song-play" data-world-play="${safeText(t.id)}" aria-label="Play ${safeText(t.title)}">
           <svg viewBox="0 0 24 24">${state.current===t.id&&state.playing?PAUSE:PLAY}</svg>
@@ -198,7 +202,7 @@
         <img src="${safeText(t.image)}" alt="${safeText(t.title)} cover artwork" loading="lazy">
         <span class="pick-play"><svg viewBox="0 0 24 24">${PLAY}</svg></span></button>
         <div class="pick-meta"><div style="min-width:0"><button data-play="${t.id}" class="pick-title">${safeText(t.title)}</button>
-          <div class="pick-world">${safeText(world(t.world)?.name || 'Frequency Originals')}</div></div>
+          <div class="pick-world">${safeText(shortSoundscape(t) ? listeningLabel(t) : world(t.world)?.name || 'Frequency Originals')}</div></div>
           <button class="heart-small ${state.favorites.has(t.id)?'active':''}" data-heart="${t.id}" aria-label="${state.favorites.has(t.id)?'Remove from':'Add to'} favorites" aria-pressed="${state.favorites.has(t.id)}"><svg viewBox="0 0 24 24">${HEART}</svg></button></div></article>`).join('');
     wireInteractive($('featuredGrid'));
   }
@@ -221,7 +225,7 @@
       <article class="track-row ${state.current===t.id?'active':''}" data-row="${t.id}">
         <span class="track-no">${String(i+1).padStart(2,'0')}</span>
         <button class="track-thumb" data-play="${t.id}" aria-label="Play ${safeText(t.title)}"><img src="${safeText(t.image)}" alt="" loading="lazy"></button>
-        <div class="track-main"><button class="track-name" data-open="${t.id}">${safeText(t.title)}</button><div class="track-descriptor">${safeText(t.description)}</div></div>
+        <div class="track-main"><button class="track-name" data-open="${t.id}">${safeText(t.title)}</button><div class="track-descriptor">${safeText(shortSoundscape(t) ? listeningLabel(t) : t.description)}</div></div>
         <div class="track-world">${safeText(world(t.world)?.name||'Frequency Originals')}</div>
         <div class="track-length">${fmt(t.duration)}</div>
         <button class="heart-small ${state.favorites.has(t.id)?'active':''}" data-heart="${t.id}" aria-pressed="${state.favorites.has(t.id)}" aria-label="${state.favorites.has(t.id)?'Remove from':'Add to'} favorites"><svg viewBox="0 0 24 24">${HEART}</svg></button>
@@ -271,6 +275,7 @@
       $('nowBack').style.backgroundImage='url("'+t.image+'")';
       $('nowTitle').textContent=t.title;$('nowSub').textContent=t.artist;
       $('nowWorld').textContent=(world(t.world)?.name||'Frequency')+' · '+(world(t.world)?.subtitle||'');
+      syncShortSoundscape(t);
       $('miniCover').src=t.image;$('miniTitle').textContent=t.title;
       $('miniSubtitle').textContent=world(t.world)?.name||t.artist;
       $('miniPlayer').hidden=false;
@@ -487,6 +492,11 @@
     $('nowPlay').onclick=togglePlay;$('nowNext').onclick=()=>next();$('nowPrev').onclick=()=>next(true);
     $('nowShuffle').onclick=()=>{state.shuffle=!state.shuffle;syncModes();};
     $('nowRepeat').onclick=()=>{state.repeat=!state.repeat;syncModes();};
+    $('shortSoundscapeLoop').onclick=()=>{
+      state.repeat=!state.repeat;
+      syncModes();
+      toast(state.repeat?'Short recording will repeat until stopped':'Continuous loop turned off');
+    };
     $('nowSeek').addEventListener('input',e=>{
       if(Number.isFinite(audio.duration)&&audio.duration>0){
         const proposed=audio.duration*Number(e.target.value)/1000;
@@ -524,7 +534,19 @@
       $('playState').textContent='TAP PLAY TO RETRY';
     });
   }
+  function syncShortSoundscape(t) {
+    const el=$('shortSoundscapeHint');
+    const isShort=shortSoundscape(t);
+    el.hidden=!isShort;
+    if(!isShort)return;
+    $('shortSoundscapeCopy').textContent='Original '+fmt(Math.round(t.duration))+' recording';
+    const control=$('shortSoundscapeLoop');
+    control.textContent=state.repeat?'✓ Repeating recording':'↻ Loop continuously';
+    control.classList.toggle('active',state.repeat);
+    control.setAttribute('aria-pressed',String(state.repeat));
+  }
   function syncModes() {
+    syncShortSoundscape(selected());
     $('nowShuffle').classList.toggle('on',state.shuffle);
     $('nowRepeat').classList.toggle('on',state.repeat);
     $('nowShuffle').setAttribute('aria-pressed',String(state.shuffle));
