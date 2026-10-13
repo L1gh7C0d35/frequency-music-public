@@ -113,3 +113,20 @@ body:not([data-world-detail="open"]) #worldDetail {display:none!important}
   font-size:11px;font-weight:650;white-space:nowrap;touch-action:manipulation}
 .short-soundscape-hint button.active {background:#e4d3a1;color:#18231d;border-color:#e4d3a1}
 @media(max-width:650px){.short-soundscape-hint{padding:6px 8px}.short-soundscape-hint span{font-size:10px}.short-soundscape-hint button{font-size:10px;padding:8px 9px;min-height:34px}}
+
+/* Instant-listening browser: library stays in place while music plays below. */
+.experience-scroll {display:flex;gap:8px;overflow:auto;scrollbar-width:none;margin:3px 0 13px}
+.experience-scroll button {flex:0 0 auto;min-height:36px;padding:7px 15px;
+ border:1px solid #cdbb8245;border-radius:999px;color:#c7cabe;
+ background:#122018;font-size:12px;font-weight:600}
+.experience-scroll button.selected {background:#e8e5d8;color:#152017;border-color:#e8e5d8}
+.artist-link {border:0;background:none;color:#cfbd82;font-size:12px;font-weight:650;padding:7px 0 0;text-align:left}
+.now-sound {font-size:11px;line-height:1.5;color:#b3bead;margin:0;max-height:4.5em;overflow:auto}
+.now-browse {align-self:center;border:1px solid #cdbb8250;border-radius:999px;color:#efe4bd;
+  background:#cdbb820c;min-height:36px;padding:7px 16px;font-size:12px;font-weight:650}
+.now-browse:active,.artist-link:active {opacity:.7}
+@media(max-width:650px){
+  .now-sound{max-height:3.5em}
+  .now-container{gap:8px}
+  .experience-scroll {margin-right:-15px;padding-right:15px}
+}

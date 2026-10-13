@@ -1,5 +1,5 @@
 /* Lightweight shell cache. Audio streams over the network; catalog is network-first. */
-const VERSION='frequency-web-v47-length-labels-20261013';
+const VERSION='frequency-web-v48-catalog-sharing-20261013';
 const CORE=['./','./index.html','./listening-room.css','./listening-room.js','./frequency-parity.css','./frequency-parity.js','./manifest.webmanifest','./artwork/fresh-cuts.svg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(CORE)));self.skipWaiting();});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('frequency-web-')&&k!==VERSION).map(k=>caches.delete(k)))));self.clients.claim();});

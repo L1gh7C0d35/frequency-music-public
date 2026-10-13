@@ -17,7 +17,7 @@
     });
     $('crumb').textContent=id.charAt(0).toUpperCase()+id.slice(1);
     ['ritualsScreen','wordsScreen','youScreen'].forEach(x=>$(x).hidden=!x.toLowerCase().startsWith(id));
-    if(id==='sounds'){$('library').hidden=false;app.state.favoritesOnly=false;app.renderLibrary();}
+    if(id==='sounds'){$('library').hidden=false;app.renderLibrary();}
     if(id==='you')renderYou();
     if(id==='words')renderLyrics();
     window.scrollTo({top:0,behavior:'smooth'});
@@ -40,12 +40,17 @@
     if(songCount)songCount.setAttribute('title',counts+' tracks included from Frequency Beta44');
   }
   function filterType(value) {
-    app.state.previewType=value;
-    app.state.previewGoal='all';app.state.previewRecent=false;
+    app.state.previewType=value==='music'?'song':value;
+    app.state.previewGoal='all';app.state.previewRecent=false;app.state.previewExperience='all';
     app.state.favoritesOnly=false;app.state.filter='all';app.state.query='';
     $('searchInput').value='';
     $('appModeRow').querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.mode===value));
     app.renderLibrary();
+  }
+  function syncFilters(){
+    const value=app.state.previewType==='song'?'music':app.state.previewType||'all';
+    document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.mode===value));
+    document.querySelectorAll('[data-intent]').forEach(b=>b.classList.toggle('selected',b.dataset.intent===(app.state.previewGoal||'all')));
   }
   function shortCut(id) {
     tab('sounds');filterType('all');
@@ -165,8 +170,8 @@
     // Update the existing site layout to Beta44's 5-tab navigation,
     // without impersonating unavailable native AlarmKit/StoreKit integrations.
     document.body.dataset.appTab='home';
-    window.FrequencyWebNavigation={tab};
-    filters();setupRituals();renderLyrics();renderYou();bind();
+    window.FrequencyWebNavigation={tab,syncFilters};
+    filters();syncFilters();setupRituals();renderLyrics();renderYou();bind();
     if(!app.state.activeWorld)tab('home');
     const url=new URL(window.location.href);
     if(url.searchParams.has('track'))app.openNow();

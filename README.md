@@ -78,3 +78,28 @@ mislabel loops, use artificial time stretches, or silently replace masters.
 The Timekeeper source model currently says "Full track" for some 1-minute
 assets; its native-app metadata should be corrected in the next deliberate
 Timekeeper app update by that app's developer.
+
+
+## Public song share links and Flow Music sound briefs
+
+Every published song has a static social-preview landing URL. For example:
+https://l1gh7c0d35.github.io/frequency-music-public/song/timekeeper-audio-528-hz-sacred-grace/
+
+The landing page includes song-specific title, cover art, description and
+Open Graph preview metadata, then opens that track in Frequency. Playback
+still requires a tap. Users can open the artist world or explore all songs.
+
+The MP3/M4A file does not reliably contain the original Flow Music SOUND
+prompt, lyrics, BPM or creator's genre and intended experience. Share the
+Flow song page URL with the approved audio file; if the link is private,
+provide the SOUND text or screenshot. Save the metadata once in
+flow-song-metadata.json keyed by the public track ID. The website catalog
+merges creator-supplied details without guessing them from the audio.
+
+The initial verified Flow metadata for 528 Hz Sacred Grace was transcribed
+from the user's screenshot (70 BPM, Sound Bath category, and sound brief).
+For a new, explicitly public upload create audio/new/slug.m4a and optional
+audio/new/slug.json with title, world, sound, source_url, experiences,
+instruments, bpm and description. The automated publish workflow generates
+that new track's share page. Private Flow drafts stay private until approved.
+Editorial sound worlds are not fake verified human performer identities.

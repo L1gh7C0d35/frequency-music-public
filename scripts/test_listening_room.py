@@ -68,12 +68,37 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertLess(load.index('if(play)requestPlay();'),load.index('renderLibrary();'),
                         'Invoke HTMLMediaElement.play while the tap is still active')
         show=source.split('function showTrack(id)',1)[1].split('function queueFromContext',1)[0]
-        self.assertIn('playTrack(id,true)',show)
+        self.assertIn('playTrack(id,false)',show)
         self.assertIn("audio.addEventListener('waiting'",source)
         self.assertIn("audio.addEventListener('playing'",source)
         self.assertIn('audio-buffering',source)
         self.assertIn('Loading music…',source)
         self.assertIn('TAP PLAY TO RETRY',source)
+
+    def test_flow_metadata_and_song_sharing_pages(self):
+        from generate_song_pages import page
+        sacred=next(t for t in self.data['tracks']
+                    if t['id']=='timekeeper-audio-528-hz-sacred-grace')
+        self.assertEqual(sacred['bpm'],70)
+        self.assertIn('sound-bath',sacred['experiences'])
+        self.assertIn('glass harmonica',sacred['sound'])
+        self.assertIn('flowmusic.app/song/',sacred['source_url'])
+        rendered=page(sacred)
+        self.assertIn('property="og:title"',rendered)
+        self.assertIn('property="og:image"',rendered)
+        self.assertIn('glass harmonica',rendered)
+        self.assertIn('timekeeper-audio-528-hz-sacred-grace',rendered)
+        self.assertIn('location.replace',rendered)
+        self.assertIn('Flow Music',sacred['metadata_provenance'])
+
+    def test_every_song_in_one_artist_world(self):
+        names={w['id'] for w in self.data['worlds']}
+        self.assertTrue(all(t.get('world') in names for t in self.data['tracks']))
+        for t in self.data['tracks']:
+            self.assertIn(t['world'], t.get('worlds') or [t['world']])
+        covers={w['id']:w['image'] for w in self.data['worlds']}
+        self.assertNotEqual(covers['golden-current'],covers['future-signal'])
+        self.assertIn('this-is-my-normal',covers['future-signal'])
 
     def test_links_and_controls(self):
         for path in ('listening-room.css','listening-room.js','frequency-parity.js','frequency-parity.css','manifest.webmanifest','sw.js','music.html','studio.html','legacy-library.html'):

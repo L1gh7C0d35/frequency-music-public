@@ -14,10 +14,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="listening-room.css?v=20261013c">
-  <link rel="stylesheet" href="frequency-parity.css?v=20261013c">
-  <script src="listening-room.js?v=20261013c" defer></script>
-  <script src="frequency-parity.js?v=20261013c" defer></script>
+  <link rel="stylesheet" href="listening-room.css?v=20261013flow1">
+  <link rel="stylesheet" href="frequency-parity.css?v=20261013flow1">
+  <script src="listening-room.js?v=20261013flow1" defer></script>
+  <script src="frequency-parity.js?v=20261013flow1" defer></script>
 </head>
 <body>
 <div class="app-shell">
@@ -96,6 +96,7 @@
       <section id="library" class="section library-section">
         <div class="section-head"><div><div class="section-eyebrow">YOUR NEXT FAVORITE IS HERE</div><h2>Explore the <em>collection.</em></h2></div><div class="head-foot" id="trackCount"></div></div>
         <div class="app-mode-row" id="appModeRow"><button class="app-mode selected" data-mode="music">Music</button><button class="app-mode" data-mode="soundscape">Soundscapes</button><button class="app-mode" data-mode="all">All</button></div>
+        <div class="experience-scroll" aria-label="Choose a listening experience"><button data-experience="all" class="experience-chip selected">All experiences</button><button data-experience="sound-bath" class="experience-chip">◌ Sound baths</button></div>
         <div class="library-controls"><div class="filter-scroll" id="filterBar" aria-label="Filter by sound world"></div><label class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m16 16 4.5 4.5"/></svg><input id="searchInput" placeholder="Search songs" type="search" autocomplete="off" aria-label="Search songs"></label></div>
         <div class="track-list" id="trackList"></div>
         <div class="empty-state" id="emptyState" hidden><span>✧</span><h3>Nothing in this mix yet.</h3><p>Try another sound world or save a song to favorites.</p><button id="clearFilters" class="outline-action">Explore all music</button></div>
@@ -153,7 +154,8 @@
   <div class="now-container">
     <div class="now-top"><button id="closeNow" class="now-icon" aria-label="Close now playing"><svg viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></svg></button><span>NOW PLAYING <small>FREQUENCY ORIGINALS</small></span><button id="nowShare" class="now-icon" aria-label="Share current track"><svg viewBox="0 0 24 24"><path d="M12 16V3m0 0-4.5 4.5M12 3l4.5 4.5M5 14v5.5c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V14"/></svg></button></div>
     <div class="now-art-wrap"><img id="nowArt" alt="Album artwork"><span class="now-art-halo"></span></div>
-    <div class="now-song-info"><div><div class="now-kicker" id="nowWorld">ORIGINAL SOUND WORLD</div><h2 id="nowTitle">Now playing</h2><p id="nowSub">Frequency Originals</p></div><button id="nowHeart" class="now-heart" aria-label="Favorite track"><svg viewBox="0 0 24 24"><path d="M20.7 5.3a5.4 5.4 0 0 0-7.6 0L12 6.4l-1.1-1.1a5.4 5.4 0 0 0-7.6 7.6L12 21l8.7-8.1a5.4 5.4 0 0 0 0-7.6Z"/></svg></button></div>
+    <div class="now-song-info"><div><div class="now-kicker" id="nowWorld">ORIGINAL SOUND WORLD</div><h2 id="nowTitle">Now playing</h2><button id="nowArtist" class="artist-link" type="button">View artist songs ↗</button><p id="nowSub">Frequency Originals</p></div><button id="nowHeart" class="now-heart" aria-label="Favorite track"><svg viewBox="0 0 24 24"><path d="M20.7 5.3a5.4 5.4 0 0 0-7.6 0L12 6.4l-1.1-1.1a5.4 5.4 0 0 0-7.6 7.6L12 21l8.7-8.1a5.4 5.4 0 0 0 0-7.6Z"/></svg></button></div>
+    <p id="nowSound" class="now-sound"></p>
     <div class="now-seek"><input id="nowSeek" aria-label="Seek audio" type="range" min="0" value="0" max="1000" step="1"><div class="now-times"><span id="elapsed">0:00</span><span id="remaining">-0:00</span></div></div>
     <div class="now-controls"><button id="nowShuffle" class="aux-control" aria-label="Toggle shuffle" title="Shuffle"><svg viewBox="0 0 24 24"><path d="M4 5h3c6 0 7 14 13 14M17 16l3 3-3 3M4 19h3c2.8 0 4-3 5.7-5.5M14.3 8.3C16 6 17.1 5 20 5M17 2l3 3-3 3"/></svg></button>
       <button id="nowPrev" class="transport" aria-label="Previous song"><svg viewBox="0 0 24 24"><path d="M19 4v16L8 12zM5 4v16"/></svg></button>
@@ -162,6 +164,7 @@
       <button id="nowRepeat" class="aux-control" aria-label="Toggle repeat" title="Repeat"><svg viewBox="0 0 24 24"><path d="M17 2l3 3-3 3M4 11V8a3 3 0 0 1 3-3h13M7 22l-3-3 3-3M20 13v3a3 3 0 0 1-3 3H4"/></svg></button>
     </div>
     <div id="shortSoundscapeHint" class="short-soundscape-hint" hidden><span id="shortSoundscapeCopy">Short original recording</span><button type="button" id="shortSoundscapeLoop" aria-pressed="false">↻ Loop continuously</button></div>
+    <button id="nowBrowse" class="now-browse" type="button">← Explore all music</button>
     <div class="now-bottom"><button id="nowReview">✧ Keep / Maybe / Pass</button><span id="playState">YOUR LISTENING MOMENT</span><button id="nowLyrics">❝ Lyrics</button><button id="nowQueue">☷ Up next</button></div>
   </div>
 </div>
