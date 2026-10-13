@@ -24,7 +24,7 @@ jobs:
       - name: Prepare site bundle
         run: |
           mkdir -p _site
-          rsync -a --exclude='.git' --exclude='.github' --exclude='.site' --exclude='_site' --exclude='scripts' --exclude='README.md' --exclude='*.pyc' --exclude='__pycache__' ./ _site/
+          rsync -a --exclude='.git' --exclude='.github' --exclude='.site' --exclude='_site' --exclude='scripts' --exclude='README.md' --exclude='flow-song-metadata.json' --exclude='word-timing' --exclude='*.pyc' --exclude='__pycache__' ./ _site/
           test -f _site/index.html
           test -f _site/listening-catalog.json
       - name: Build individual song share pages with artwork previews
