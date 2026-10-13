@@ -12,19 +12,24 @@
   <title>Frequency — Listening Room</title>
   <link rel="icon" href="artwork/already-arrived.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="listening-room.css?v=20261012c">
-  <script src="listening-room.js?v=20261012c" defer></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="listening-room.css?v=20261013b">
+  <link rel="stylesheet" href="frequency-parity.css?v=20261013b">
+  <script src="listening-room.js?v=20261013b" defer></script>
+  <script src="frequency-parity.js?v=20261013b" defer></script>
 </head>
 <body>
 <div class="app-shell">
   <aside class="sidebar" aria-label="Main navigation">
     <a class="brand" href="./" aria-label="Listening Room home"><span class="brand-mark"><span>◒</span></span><span class="brand-words"><b>frequency</b><small>LISTENING ROOM</small></span></a>
-    <span class="nav-caption">YOUR SPACE</span>
+    <span class="nav-caption">FREQUENCY</span>
     <nav class="side-links" aria-label="Browse">
-      <button class="side-link selected" data-nav="discover"><span class="nav-icon">✧</span><span>Discover</span></button>
-      <button class="side-link" data-nav="worlds"><span class="nav-icon">▦</span><span>Sound worlds</span></button>
-      <button class="side-link" data-nav="library"><span class="nav-icon">♫</span><span>All music</span></button>
-      <button class="side-link" data-nav="favorites"><span class="nav-icon">♡</span><span>Favorites</span></button>
+      <button class="side-link selected" data-app-tab="home"><span class="nav-icon">⌂</span><span>Home</span></button>
+      <button class="side-link" data-app-tab="rituals"><span class="nav-icon">◉</span><span>Rituals</span></button>
+      <button class="side-link" data-app-tab="sounds"><span class="nav-icon">♫</span><span>Sounds</span></button>
+      <button class="side-link" data-app-tab="words"><span class="nav-icon">❝</span><span>Words</span></button>
+      <button class="side-link" data-app-tab="you"><span class="nav-icon">◯</span><span>You</span></button>
     </nav>
     <div class="sidebar-lower">
       <div class="side-note"><span class="note-dot"></span> ORIGINAL SOUND WORLDS <p>Explore the feeling. Find your favorites.</p></div>
@@ -47,9 +52,9 @@
         <div class="hero-back" id="heroBack"></div>
         <div class="hero-shade"></div>
         <div class="hero-text">
-          <div class="hero-kicker"><span class="kicker-line"></span> YOUR MOMENT HAS A SOUND</div>
-          <h1>Feel more.<br><i>Become more.</i></h1>
-          <p>Music for the mornings you rise, the moments you reflect, and everything you're becoming.</p>
+          <div class="hero-kicker"><span class="kicker-line"></span> LISTEN TO WHAT MOVES YOU</div>
+          <h1>Listen to what<br><i>moves you.</i></h1>
+          <p>Music, soundscapes, and original sound worlds. Your Frequency library, now on any phone.</p>
           <div class="hero-actions">
             <button id="heroPlay" class="primary-action"><span class="triangle-icon"></span><span>Start listening</span></button>
             <button id="heroShuffle" class="glass-action"><svg viewBox="0 0 24 24"><path d="M4 5h3.5c5.5 0 7 14 12.5 14M17 16l3 3-3 3M4 19h3.5c2.3 0 3.8-2.7 5.1-5.4M14.5 8.6C16 6.5 17.2 5 20 5M17 2l3 3-3 3"/></svg> Surprise me</button>
@@ -61,8 +66,17 @@
         </button>
         <div class="hero-corner"><span class="glow-pulse"></span> CURRENT FEATURE · 01</div>
       </section>
-      <section id="worlds" class="section worlds-section">
-        <div class="section-head"><div><div class="section-eyebrow">GO WHERE THE MUSIC TAKES YOU</div><h2>Find your sound <em>world.</em></h2></div><div class="head-foot">FOUR WAYS TO FEEL IT</div></div>
+      <section class="app-shortcuts section">
+    <div class="section-eyebrow">QUICK ACCESS</div>
+    <div class="app-shortcut-row">
+      <button data-shortcut="all">♫ All music</button><button data-shortcut="recent">◷ Recently added</button>
+      <button data-shortcut="favorites">♡ Favorites</button><button data-shortcut="sleep">☾ Sleep</button>
+    </div>
+    <div class="section-eyebrow intent-label">LISTEN FOR A FEELING</div>
+    <div id="intentFilters" class="intent-filters"></div>
+  </section>
+  <section id="worlds" class="section worlds-section">
+        <div class="section-head"><div><div class="section-eyebrow">ARTIST WORLDS</div><h2>Find your sound <em>world.</em></h2></div><div class="head-foot" id="worldCount">ORIGINAL SOUND WORLDS</div></div>
         <div class="world-grid" id="worldGrid" aria-label="Sound worlds"></div>
       </section>
       <section id="picks" class="section picks-section">
@@ -71,19 +85,52 @@
       </section>
       <section id="library" class="section library-section">
         <div class="section-head"><div><div class="section-eyebrow">YOUR NEXT FAVORITE IS HERE</div><h2>Explore the <em>collection.</em></h2></div><div class="head-foot" id="trackCount"></div></div>
+        <div class="app-mode-row" id="appModeRow"><button class="app-mode selected" data-mode="music">Music</button><button class="app-mode" data-mode="soundscape">Soundscapes</button><button class="app-mode" data-mode="all">All</button></div>
         <div class="library-controls"><div class="filter-scroll" id="filterBar" aria-label="Filter by sound world"></div><label class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m16 16 4.5 4.5"/></svg><input id="searchInput" placeholder="Search songs" type="search" autocomplete="off" aria-label="Search songs"></label></div>
         <div class="track-list" id="trackList"></div>
         <div class="empty-state" id="emptyState" hidden><span>✧</span><h3>Nothing in this mix yet.</h3><p>Try another sound world or save a song to favorites.</p><button id="clearFilters" class="outline-action">Explore all music</button></div>
       </section>
       <footer class="footer"><div><span class="footer-logo">◒ frequency</span><span>Original sessions • Made to be felt</span></div><div><button id="footerFeedback">Share your listening notes</button><span>© 2026 Frequency Music</span></div></footer>
-    </main>
+    <section id="ritualsScreen" class="app-screen" hidden>
+    <div class="app-screen-top"><span class="section-eyebrow">RITUALS</span><h2>Find your <em>moment.</em></h2><p>Pick a sound and create a small listening ritual.</p></div>
+    <div class="ritual-modes" aria-label="Listening mode">
+      <button class="selected" data-ritual-mode="pure">♫ <b>Pure</b><small>Just the music</small></button>
+      <button data-ritual-mode="immersive">◌ <b>Immersive</b><small>Music + motion</small></button>
+      <button data-ritual-mode="guided">❝ <b>Guided</b><small>Music + a prompt</small></button>
+    </div>
+    <div class="ritual-panel">
+      <div id="ritualArtwork" class="ritual-artwork"></div>
+      <label for="ritualTrack">SOUND FOR YOUR SESSION</label><select id="ritualTrack"></select>
+      <label for="ritualMinutes">LISTENING LENGTH</label><select id="ritualMinutes"><option value="3">3 minutes</option><option value="5" selected>5 minutes</option><option value="10">10 minutes</option><option value="20">20 minutes</option></select>
+      <div class="ritual-focus" id="ritualFocus">Give yourself a few minutes to listen.</div>
+      <div class="ritual-clock" id="ritualClock">05:00</div>
+      <div class="ritual-actions"><button id="startRitual" class="primary-action">▶ Start listening</button><button id="resetRitual" class="outline-action">Reset</button></div>
+      <p class="app-fine">This is an in-browser listening session. It won't replace a phone alarm or guarantee playback with the browser closed.</p>
+    </div></section>
+    <section id="wordsScreen" class="app-screen" hidden>
+      <div class="app-screen-top"><span class="section-eyebrow">WORDS</span><h2>Words worth <em>keeping.</em></h2><p>Read the lyrics from your favorite Frequency songs.</p></div>
+      <div class="words-panel"><label for="wordsSong">SONG LYRICS</label><select id="wordsSong"></select>
+        <div class="lyrics-body" id="lyricsBody"></div>
+        <p class="app-fine">Lyrics text is supplied from the Frequency app. This web preview doesn't yet provide verified word-by-word timing.</p>
+        <div class="words-actions"><button id="playWords" class="primary-action">▶ Play song</button><button id="noteWords" class="outline-action">Add listening note</button></div>
+      </div>
+    </section>
+    <section id="youScreen" class="app-screen" hidden>
+      <div class="app-screen-top"><span class="section-eyebrow">YOU</span><h2>Your listening <em>space.</em></h2><p>Favorites and music ratings stay private on this device until you export them.</p></div>
+      <div class="you-metrics"><div><strong id="youFavorites">0</strong><small>Favorites</small></div><div><strong id="youNotes">0</strong><small>Rated tracks</small></div><div><strong id="youSongs">0</strong><small>Songs to explore</small></div></div>
+      <div class="you-card"><h3>My collection</h3><button id="youOpenFavorites">♡ Saved favorites <span>›</span></button><button id="youOpenFeedback">✎ Listening notes <span>›</span></button><button id="youExport">⇧ Export feedback <span>›</span></button><button id="youShare">↗ Share Frequency <span>›</span></button></div>
+      <div class="you-card"><h3>Use Frequency on Android</h3><p>Open this link in Chrome. You can add it to your home screen for an app-like shortcut; audio plays through the browser.</p><button id="installHelp">＋ Add to home screen <span>›</span></button></div>
+      <div class="app-fine">Web test build · Android & iPhone · Original sound worlds aren't separate verified performer credits.</div>
+    </section>
+</main>
   </div>
 </div>
-<nav class="mobile-nav" aria-label="Mobile navigation">
-  <button data-nav="discover" class="selected"><span>✧</span><small>Discover</small></button>
-  <button data-nav="worlds"><span>▦</span><small>Worlds</small></button>
-  <button data-nav="library"><span>♫</span><small>Music</small></button>
-  <button data-nav="favorites"><span>♡</span><small>Favorites</small></button>
+<nav class="mobile-nav" aria-label="Frequency tabs">
+  <button data-app-tab="home" class="selected" aria-label="Home"><span>⌂</span><small>Home</small></button>
+  <button data-app-tab="rituals" aria-label="Rituals"><span>◉</span><small>Rituals</small></button>
+  <button data-app-tab="sounds" aria-label="Sounds"><span>♫</span><small>Sounds</small></button>
+  <button data-app-tab="words" aria-label="Words"><span>❝</span><small>Words</small></button>
+  <button data-app-tab="you" aria-label="You"><span>◯</span><small>You</small></button>
 </nav>
 <div class="mini-player" id="miniPlayer" hidden>
   <button id="miniOpen" class="mini-information" aria-label="Open now playing"><img id="miniCover" alt="Current song artwork" src="artwork/already-arrived.jpg"><span class="mini-copy"><b id="miniTitle">Music</b><small id="miniSubtitle">Frequency Originals</small></span><span class="eq mini-eq" id="miniEq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
@@ -104,7 +151,7 @@
       <button id="nowNext" class="transport" aria-label="Next song"><svg viewBox="0 0 24 24"><path d="M5 4v16l11-8zM19 4v16"/></svg></button>
       <button id="nowRepeat" class="aux-control" aria-label="Toggle repeat" title="Repeat"><svg viewBox="0 0 24 24"><path d="M17 2l3 3-3 3M4 11V8a3 3 0 0 1 3-3h13M7 22l-3-3 3-3M20 13v3a3 3 0 0 1-3 3H4"/></svg></button>
     </div>
-    <div class="now-bottom"><button id="nowReview">✧ Rate this track</button><span id="playState">YOUR LISTENING MOMENT</span><button id="nowQueue">☷ Up next</button></div>
+    <div class="now-bottom"><button id="nowReview">✧ Keep / Maybe / Pass</button><span id="playState">YOUR LISTENING MOMENT</span><button id="nowLyrics">❝ Lyrics</button><button id="nowQueue">☷ Up next</button></div>
   </div>
 </div>
 <div class="modal-backdrop" id="feedbackModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Your listening notes">

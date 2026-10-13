@@ -1,352 +1,1685 @@
 {
-  "version": 1,
-  "collection": "Frequency Listening Room",
+  "version": 3,
+  "collection": "Frequency Originals · Android/iOS web preview",
   "worlds": [
     {
       "id": "velvet-sun",
       "name": "Velvet Sun",
-      "short": "Soul & light",
       "subtitle": "Warm soul · possibility · gratitude",
-      "description": "Warmth, gratitude, and the feeling of something good arriving.",
-      "image": "artwork/already-grateful.jpg",
-      "count": 7
+      "description": "Warm intimate melodic leads, restrained percussion, Rhodes, round bass, lyrical details, emotionally lifted chorus, original motifs.",
+      "visual": "Sunlit cinematic warmth; real-world textured locations and inviting but original dreamlike portraiture. Consistent identity, never copied from an existing performer.",
+      "image": "artwork/open-to-more.jpg",
+      "count": 10
     },
     {
       "id": "iron-horizon",
       "name": "Iron Horizon",
-      "short": "Courage & rise",
-      "subtitle": "Cinematic · courage · conviction",
-      "description": "For the moments you choose to keep going.",
-      "image": "artwork/crowned-by-fire.jpg",
-      "count": 8
+      "subtitle": "Resilience · cinematic courage",
+      "description": "Grounded low register leads, spacious rhythm, organic cinematic strings, dynamic restraint then a clear bold anthem hook.",
+      "visual": "Weathered stone, expressive natural landscapes, wide heroic framing, warm horizon edge light.",
+      "image": "artwork/i-do-not-break.jpg",
+      "count": 7
     },
     {
       "id": "quiet-atlas",
       "name": "Quiet Atlas",
-      "short": "Calm & depth",
-      "subtitle": "Stillness · reflection · deep focus",
-      "description": "A quieter world with more room to breathe.",
+      "subtitle": "Stillness · deep focus · future self",
+      "description": "Soft textured vocals or instrumentals, slow grooves, delicate room ambience, open harmonic space, gradual emotional motion.",
+      "visual": "Minimal architecture, evening reflections, subtle sky gradients and shadow play.",
       "image": "artwork/quiet-empire.jpg",
-      "count": 5
+      "count": 9
     },
     {
       "id": "electric-bloom",
       "name": "Electric Bloom",
-      "short": "Energy & motion",
-      "subtitle": "Rhythm · energy · celebration",
-      "description": "Movement for the life you're making.",
-      "image": "artwork/golden-hour.jpg",
-      "count": 8
+      "subtitle": "Movement · energy · celebration",
+      "description": "Rhythmic Afro-influenced original pop and dance grooves, strong clean hooks, confident short lyric phrases, joyful bridges.",
+      "visual": "Bright natural colors, kinetic light trails, lush scenes and distinct recurring wardrobe colors.",
+      "image": "artwork/momentum-is-mine.jpg",
+      "count": 7
+    },
+    {
+      "id": "golden-current",
+      "name": "Golden Current",
+      "subtitle": "Harmonics · atmosphere · inner calm",
+      "description": "Spacious instrumental soundscapes and gently layered harmonics from the Timekeeper listening library. Created for musical atmosphere, not as a medical intervention.",
+      "visual": "Warm golden light, reflective water and subtle geometric arcs.",
+      "image": "artwork/timekeeper-audio-golden-ratio-harmonic-bloom.jpg",
+      "count": 7
+    },
+    {
+      "id": "future-signal",
+      "name": "Future Signal",
+      "subtitle": "Possibility · luminous pop · forward motion",
+      "description": "Expansive vocal-driven future-self pop, analog synthesizers, clear choruses and cinematic lifts. Original recordings from Frequency.",
+      "visual": "Sunlit architectural horizons, mirrored water and reflective blue-gold light.",
+      "image": "artwork/already-arrived.jpg",
+      "count": 4
+    },
+    {
+      "id": "apex-rhythm",
+      "name": "Apex Rhythm",
+      "subtitle": "Hip-hop · trap · strength",
+      "description": "Rhythmic rap-pop, bass-forward trap, punchy affirmations and confident production built for movement and action.",
+      "visual": "Night-city light, bold mountain forms, rhythmic motion and deep contrast.",
+      "image": "artwork/built-for-this.jpg",
+      "count": 4
+    },
+    {
+      "id": "sovereign-groove",
+      "name": "Sovereign Groove",
+      "subtitle": "Afrobeat · amapiano · soul",
+      "description": "Warm Afro-pop, melodic hooks, expressive groove and bright keyboard textures. These are editorial listening collections, not fictional performer credits.",
+      "visual": "Terracotta sunset, warm dancing lights and rhythmic tropical color.",
+      "image": "artwork/move-like-money.jpg",
+      "count": 3
+    },
+    {
+      "id": "infinite-gold",
+      "name": "Infinite Gold",
+      "subtitle": "Morning light · abundance · gentle momentum",
+      "description": "Warm morning soundscapes, uplifting instrumentals and airy melodic textures from the original Timekeeper listening library.",
+      "visual": "Saffron gold light, open coastlines, soft luminous gradients.",
+      "image": "artwork/timekeeper-audio-lucky-magnetic-morning.jpg",
+      "count": 4
+    },
+    {
+      "id": "ether-codes",
+      "name": "Ether Codes",
+      "subtitle": "Harmonic experiments · spacious sound",
+      "description": "Sound-art explorations of numeric frequencies with drifting tonal layers. Frequency labels describe composition rather than proven health effects.",
+      "visual": "Minimal generative geometry, softly glowing spectral light and subtle sound-wave halos.",
+      "image": "artwork/timekeeper-audio-111-hz-cellular-rejuvenation.jpg",
+      "count": 6
     }
   ],
   "tracks": [
     {
-      "id": "already-arrived",
-      "title": "Already Arrived",
-      "world": "velvet-sun",
-      "artist": "Frequency Originals",
-      "image": "artwork/already-arrived.jpg",
-      "audio": "audio/already-arrived.m4a",
-      "duration": 182,
-      "subtitle": "Warm soul · possibility · gratitude",
-      "description": "Warmth, gratitude, and the feeling of something good arriving."
-    },
-    {
-      "id": "already-grateful",
-      "title": "Already Grateful",
-      "world": "velvet-sun",
-      "artist": "Frequency Originals",
-      "image": "artwork/already-grateful.jpg",
-      "audio": "audio/already-grateful.m4a",
-      "duration": 195,
-      "subtitle": "Warm soul · possibility · gratitude",
-      "description": "Piano, house pulse, choir lift and a bigger celebratory chorus for gratitude and morning energy."
-    },
-    {
-      "id": "gold-on-my-mind",
-      "title": "Gold On My Mind",
-      "world": "velvet-sun",
-      "artist": "Frequency Originals",
-      "image": "artwork/gold-on-my-mind.jpg",
-      "audio": "audio/gold-on-my-mind.m4a",
-      "duration": 174,
-      "subtitle": "Warm soul · possibility · gratitude",
-      "description": "Warmth, gratitude, and the feeling of something good arriving."
-    },
-    {
-      "id": "light-finds-me",
-      "title": "Light Finds Me",
-      "world": "velvet-sun",
-      "artist": "Frequency Originals",
-      "image": "artwork/light-finds-me.jpg",
-      "audio": "audio/light-finds-me.m4a",
-      "duration": 190,
-      "subtitle": "Warm soul · possibility · gratitude",
-      "description": "Warmth, gratitude, and the feeling of something good arriving."
-    },
-    {
       "id": "open-to-more",
       "title": "Open to More",
-      "world": "velvet-sun",
+      "subtitle": "Morning abundance · neo-soul",
+      "description": "Warm affirmation music about noticing opportunity, creating value, receiving with care, and taking the next useful action.",
+      "goals": [
+        "abundance",
+        "morning",
+        "gratitude"
+      ],
+      "genres": [
+        "Neo-soul",
+        "R&B"
+      ],
       "artist": "Frequency Originals",
-      "image": "artwork/open-to-more.jpg",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
       "audio": "audio/open-to-more.m4a",
-      "duration": 220,
-      "subtitle": "Warm soul · possibility · gratitude",
-      "description": "Opportunity, value creation, receiving with care, and taking the next useful action."
-    },
-    {
-      "id": "everything-opens",
-      "title": "Everything Opens",
-      "world": "velvet-sun",
-      "artist": "Frequency Originals",
-      "image": "artwork/everything-opens.jpg",
-      "audio": "audio/everything-opens.m4a",
-      "duration": 186,
-      "subtitle": "Warm soul · possibility · gratitude",
-      "description": "Warmth, gratitude, and the feeling of something good arriving."
-    },
-    {
-      "id": "i-give-the-signal",
-      "title": "I Give The Signal",
-      "world": "velvet-sun",
-      "artist": "Frequency Originals",
-      "image": "artwork/i-give-the-signal.jpg",
-      "audio": "audio/i-give-the-signal.m4a",
-      "duration": 198,
-      "subtitle": "Warm soul · possibility · gratitude",
-      "description": "Warmth, gratitude, and the feeling of something good arriving."
-    },
-    {
-      "id": "crowned-by-fire",
-      "title": "Crowned by Fire",
-      "world": "iron-horizon",
-      "artist": "Frequency Originals",
-      "image": "artwork/crowned-by-fire.jpg",
-      "audio": "audio/crowned-by-fire.m4a",
-      "duration": 192,
-      "subtitle": "Cinematic · courage · conviction",
-      "description": "Triumphant future-self duet about leadership, earned confidence and becoming the person you kept imagining."
-    },
-    {
-      "id": "storm-in-my-blood",
-      "title": "Storm in My Blood",
-      "world": "iron-horizon",
-      "artist": "Frequency Originals",
-      "image": "artwork/storm-in-my-blood.jpg",
-      "audio": "audio/storm-in-my-blood.m4a",
-      "duration": 190,
-      "subtitle": "Cinematic · courage · conviction",
-      "description": "Grounded courage anthem with low male lead, soaring counter-vocal, frame drums and a large identity hook."
-    },
-    {
-      "id": "i-do-not-break",
-      "title": "I Do Not Break",
-      "world": "iron-horizon",
-      "artist": "Frequency Originals",
-      "image": "artwork/i-do-not-break.jpg",
-      "audio": "audio/i-do-not-break.m4a",
-      "duration": 184,
-      "subtitle": "Cinematic · courage · conviction",
-      "description": "Darker resilience track with chant-led vocals, heavy drums, heartbeat space and a vow-like hook."
-    },
-    {
-      "id": "made-of-mountains",
-      "title": "Made Of Mountains",
-      "world": "iron-horizon",
-      "artist": "Frequency Originals",
-      "image": "artwork/made-of-mountains.jpg",
-      "audio": "audio/made-of-mountains.m4a",
-      "duration": 184,
-      "subtitle": "Cinematic · courage · conviction",
-      "description": "For the moments you choose to keep going."
-    },
-    {
-      "id": "pressure-into-power",
-      "title": "Pressure Into Power",
-      "world": "iron-horizon",
-      "artist": "Frequency Originals",
-      "image": "artwork/pressure-into-power.jpg",
-      "audio": "audio/pressure-into-power.m4a",
-      "duration": 148,
-      "subtitle": "Cinematic · courage · conviction",
-      "description": "For the moments you choose to keep going."
-    },
-    {
-      "id": "watch-me-build",
-      "title": "Watch Me Build",
-      "world": "iron-horizon",
-      "artist": "Frequency Originals",
-      "image": "artwork/watch-me-build.jpg",
-      "audio": "audio/watch-me-build.m4a",
-      "duration": 154,
-      "subtitle": "Cinematic · courage · conviction",
-      "description": "Short male-led power track with sparse verses, 808 weight, a cold vocal open and a compact repeatable hook."
-    },
-    {
-      "id": "command-the-day",
-      "title": "Command The Day",
-      "world": "iron-horizon",
-      "artist": "Frequency Originals",
-      "image": "artwork/command-the-day.jpg",
-      "audio": "audio/command-the-day.m4a",
-      "duration": 160,
-      "subtitle": "Cinematic · courage · conviction",
-      "description": "For the moments you choose to keep going."
-    },
-    {
-      "id": "i-decide",
-      "title": "I Decide",
-      "world": "iron-horizon",
-      "artist": "Frequency Originals",
-      "image": "artwork/i-decide.jpg",
-      "audio": "audio/i-decide.m4a",
-      "duration": 215,
-      "subtitle": "Cinematic · courage · conviction",
-      "description": "Clear decisions, setting the standard, and moving before perfect certainty arrives."
-    },
-    {
-      "id": "quiet-empire",
-      "title": "Quiet Empire",
-      "world": "quiet-atlas",
-      "artist": "Frequency Originals",
-      "image": "artwork/quiet-empire.jpg",
-      "audio": "audio/quiet-empire.m4a",
-      "duration": 250,
-      "subtitle": "Stillness · reflection · deep focus",
-      "description": "Patient wealth, stewardship, margin, long-term building, and ambition that can coexist with deep rest."
-    },
-    {
-      "id": "built-in-silence",
-      "title": "Built In Silence",
-      "world": "quiet-atlas",
-      "artist": "Frequency Originals",
-      "image": "artwork/built-in-silence.jpg",
-      "audio": "audio/built-in-silence.m4a",
-      "duration": 224,
-      "subtitle": "Stillness · reflection · deep focus",
-      "description": "A quieter world with more room to breathe."
-    },
-    {
-      "id": "future-in-the-room",
-      "title": "Future in the Room",
-      "world": "quiet-atlas",
-      "artist": "Frequency Originals",
-      "image": "artwork/future-in-the-room.jpg",
-      "audio": "audio/future-in-the-room.m4a",
-      "duration": 225,
-      "subtitle": "Stillness · reflection · deep focus",
-      "description": "A specific future made sensory, familiar, and close enough to shape the next decision."
-    },
-    {
-      "id": "soft-life-strong-mind",
-      "title": "Soft Life, Strong Mind",
-      "world": "quiet-atlas",
-      "artist": "Frequency Originals",
-      "image": "artwork/soft-life-strong-mind.jpg",
-      "audio": "audio/soft-life-strong-mind.m4a",
-      "duration": 188,
-      "subtitle": "Stillness · reflection · deep focus",
-      "description": "Male/female duet with intimate verses, wider pop chorus and a deliberately softer energy arc."
+      "image": "artwork/open-to-more.jpg",
+      "duration": 220.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Verse 1]\nI wake with room around me\nA little clearer than before\nI notice what is working\nI notice every open door\nThe future meets the way I move\nI can meet it where I stand\nI can learn, I can create\nI can move with steady hands\n\n[Pre-Chorus]\nI make space for what can grow\nI give value, I let value flow\n\n[Chorus]\nI'm open to more\nMore ways to build, more ways to give\nI'm open to more\nMore life inside the life I live\nWhat I can change, I change today\nWhat I can learn, I learn my way\nI'm open to more\nAnd I move when the door appears\n\n[Verse 2]\nMy worth is bigger than a number\nMy choices shape the road ahead\nI can welcome opportunity\nAnd still keep wisdom in my head\nI receive with care and purpose\nI invest in what I know\nSmall decisions become systems\nAnd consistent actions grow\n\n[Bridge]\nGrateful for the ground beneath me\nReady for the work that's mine\nI can hold a bigger vision\nOne clear action at a time\n\n[Final Chorus]\nI'm open to more\nMore ways to build, more ways to give\nI'm open to more\nMore life inside the life I live\nI notice, choose, create, receive\nI act on what I say I believe\nI'm open to more\nAnd I move when the door appears\n\n[Outro]\nOpen to more\nSteady and awake\nOpen to more\nOne clear move I make",
+      "type": "song"
     },
     {
       "id": "this-is-my-normal",
       "title": "This Is My Normal",
-      "world": "quiet-atlas",
+      "subtitle": "Wealth identity · future self",
+      "description": "Expansive identity rehearsal about thinking in decades, building at scale, creating useful value, and becoming capable of holding a bigger life.",
+      "goals": [
+        "abundance",
+        "future-self",
+        "confidence"
+      ],
+      "genres": [
+        "Neo-soul",
+        "R&B"
+      ],
       "artist": "Frequency Originals",
-      "image": "artwork/this-is-my-normal.jpg",
+      "world": "future-signal",
+      "worlds": [
+        "future-signal"
+      ],
       "audio": "audio/this-is-my-normal.m4a",
-      "duration": 230,
-      "subtitle": "Stillness · reflection · deep focus",
-      "description": "Thinking in decades, building at scale, and becoming capable of holding a bigger life."
+      "image": "artwork/this-is-my-normal.jpg",
+      "duration": 230.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Verse 1]\nI wake up in the life I chose to live\nSunlight on the plans I chose to build\nThe room feels calm, the numbers make more sense\nI think in systems, patterns, and leverage\nMy vision is expansive, clear, and vast\nI grow the hands that know how to make it last\n\n[Pre-Chorus]\nMore responsibility, more capacity\nMore value moving through me naturally\n\n[Chorus]\nThis is my normal\nClear mind, full table, work that matters\nThis is my normal\nI can hold more because I became larger\nI think in decades, I build at scale\nI make the call, I learn, I prevail\nThis is my normal\nA bigger life feels natural now\n\n[Verse 2]\nI think in billions, I build for millions\nI look for leverage, service, and precision\nI know the difference between noise and signal\nI make the simple move that changes the picture\nI receive with gratitude, confidence, and care\nI keep my standards high and my vision clear\n\n[Bridge]\nI can see the room\nI can hear the yes\nI can feel the calm\nOf being at my best\nI live from who I am with every move\nI make one move and let the next one land\n\n[Final Chorus]\nThis is my normal\nClear mind, full table, work that matters\nThis is my normal\nI can hold more because I became larger\nI think in decades, I build at scale\nI create real value and let it compound well\nThis is my normal\nA bigger life feels natural now\n\n[Outro]\nNatural now\nBuilt to hold more\nNatural now\nI open the next door",
+      "type": "song"
     },
     {
-      "id": "momentum-is-mine",
-      "title": "Momentum Is Mine",
-      "world": "electric-bloom",
+      "id": "i-decide",
+      "title": "I Decide",
+      "subtitle": "Power · leadership · R&B",
+      "description": "Confident affirmation music about setting the standard, making clear decisions, leading under pressure, and moving before perfect certainty arrives.",
+      "goals": [
+        "confidence",
+        "focus",
+        "energy"
+      ],
+      "genres": [
+        "R&B",
+        "Neo-soul"
+      ],
       "artist": "Frequency Originals",
-      "image": "artwork/momentum-is-mine.jpg",
-      "audio": "audio/momentum-is-mine.m4a",
-      "duration": 150,
-      "subtitle": "Rhythm · energy · celebration",
-      "description": "Short aggressive power track with heavier sub, compact structure and faster social-first pacing."
+      "world": "sovereign-groove",
+      "worlds": [
+        "sovereign-groove"
+      ],
+      "audio": "audio/i-decide.m4a",
+      "image": "artwork/i-decide.jpg",
+      "duration": 215.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Verse 1]\nI move first and the room can feel the shift\nMy choices make the proof visible\nI choose the standard, I choose the pace\nI look at the moment and I take my place\nMy voice gets clearer every time I use it\nMy power gets stronger every time I choose it\n\n[Pre-Chorus]\nThe signal is already clear\nI am the one who draws the line\n\n[Chorus]\nI decide\nWhat I build, what I keep, what I leave behind\nI decide\nWhere my focus goes and how I use my time\nI speak it clear, I move on cue\nI trust the work I know to do\nI decide\nAnd the day begins to move with me\n\n[Verse 2]\nI hold a bigger room with full presence\nMy call stays clear and steady in my body\nI read the moment and keep my direction\nI make the adjustment, then I take the shot\nI lead with vision, I listen, I learn\nI know when to move and I know when to turn\n\n[Bridge]\nCalm in my body\nFire in my plan\nEyes on the future\nFeet where I stand\nClarity is enough\nI see the next move\nI make the decision\nThen I make it true\n\n[Final Chorus]\nI decide\nWhat I build, what I keep, what I leave behind\nI decide\nWhere my focus goes and how I use my time\nI speak it clear, I move on cue\nI trust the work I know to do\nI decide\nAnd the day begins to move with me\n\n[Outro]\nI decide\nI move\nI decide\nI build",
+      "type": "song"
+    },
+    {
+      "id": "future-in-the-room",
+      "title": "Future in the Room",
+      "subtitle": "Visualization · dreamy neo-soul",
+      "description": "Visualization music built around making a specific future scene sensory, familiar, and close enough to influence the next decision.",
+      "goals": [
+        "visualize",
+        "future-self",
+        "meditate"
+      ],
+      "genres": [
+        "Neo-soul",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "quiet-atlas",
+      "worlds": [
+        "quiet-atlas"
+      ],
+      "audio": "audio/future-in-the-room.m4a",
+      "image": "artwork/future-in-the-room.jpg",
+      "duration": 225.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Verse 1]\nI can see the morning from the other side\nThe keys on the table, the view outside\nI hear the voices of the people I love\nNothing feels rushed, nothing feels forced\nI know the work because I chose it before\nI know the feeling when I walk through the door\n\n[Pre-Chorus]\nI make it vivid, I make it near\nI let tomorrow feel familiar here\n\n[Chorus]\nThe future is in the room\nI can see it, I can feel it\nThe future is in the room\nAnd my body learns to believe it\nI stand in the scene, I breathe it in\nThen I come back and begin again\nThe future is in the room\nAnd I move like I belong there\n\n[Verse 2]\nI feel the handshake, I hear my name\nI know the quiet that comes after the change\nThe life I imagined has texture and light\nA calendar open, a mind that is bright\nThe scene feels vivid, grounded, and real\nI use the picture to choose what I build\n\n[Bridge]\nSee the scene\nFeel the floor\nHear the room\nOpen the door\nOne clear image\nOne clear move\nThe future gets closer\nWith what I choose\n\n[Final Chorus]\nThe future is in the room\nI can see it, I can feel it\nThe future is in the room\nAnd my body learns to believe it\nI stand in the scene, I breathe it in\nThen I come back and begin again\nThe future is in the room\nAnd I move like I belong there\n\n[Outro]\nI belong there\nSo I move from here\nI belong there\nThe next step is clear",
+      "type": "song"
+    },
+    {
+      "id": "quiet-empire",
+      "title": "Quiet Empire",
+      "subtitle": "Night wealth · calm soul",
+      "description": "Slow nighttime affirmation music about patient wealth, long-term building, stewardship, margin, and letting ambition coexist with deep rest.",
+      "goals": [
+        "sleep",
+        "calm",
+        "abundance"
+      ],
+      "genres": [
+        "Neo-soul",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "quiet-atlas",
+      "worlds": [
+        "quiet-atlas"
+      ],
+      "audio": "audio/quiet-empire.m4a",
+      "image": "artwork/quiet-empire.jpg",
+      "duration": 250.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Verse 1]\nEverything good can breathe tonight\nThe work can rest and still be mine\nThe plans are written, the path feels clear\nCreation moves easily through me\nMy life gets stronger in quiet ways\nGood decisions gathering into days\n\n[Chorus]\nI build a quiet empire\nSteady hands, a steady mind\nI build a quiet empire\nOne good choice at a time\nWhat I keep grows roots\nWhat I build has room\nI can sleep without losing the future\nI build a quiet empire\nAnd I let tomorrow come\n\n[Verse 2]\nI know that wealth can feel like peace\nEnough margin to think, enough room to breathe\nI receive with care, I keep what serves\nI give from overflow, grounded and clear\nI feel the quiet proof that I am moving\nThe strongest things can grow without proving\n\n[Bridge]\nSafe enough to rest\nClear enough to see\nPatient enough to build\nWise enough to keep\nThe vision is alive\nEven when I sleep\n\n[Final Chorus]\nI build a quiet empire\nSteady hands, a steady mind\nI build a quiet empire\nOne good choice at a time\nWhat I keep grows roots\nWhat I build has room\nI can sleep without losing the future\nI build a quiet empire\nAnd I let tomorrow come\n\n[Outro]\nLet tomorrow come\nThe vision stays with me\nLet tomorrow come\nQuietly",
+      "type": "song"
     },
     {
       "id": "money-meets-motion",
       "title": "Money Meets Motion",
-      "world": "electric-bloom",
+      "subtitle": "Market-informed · Afro-house soul",
+      "description": "A shorter, hook-forward abundance track built around value creation, movement, gratitude, and useful action.",
+      "goals": [
+        "abundance",
+        "energy",
+        "focus"
+      ],
+      "genres": [
+        "Afro-house",
+        "Soul"
+      ],
       "artist": "Frequency Originals",
-      "image": "artwork/money-meets-motion.jpg",
+      "world": "electric-bloom",
+      "worlds": [
+        "electric-bloom"
+      ],
       "audio": "audio/money-meets-motion.m4a",
-      "duration": 185,
-      "subtitle": "Rhythm · energy · celebration",
-      "description": "Our first song generated from aggregate niche research: shorter discovery format, early hook, abundance framed through value creation and action."
-    },
-    {
-      "id": "run-with-the-light",
-      "title": "Run With The Light",
-      "world": "electric-bloom",
-      "artist": "Frequency Originals",
-      "image": "artwork/run-with-the-light.jpg",
-      "audio": "audio/run-with-the-light.m4a",
-      "duration": 202,
-      "subtitle": "Rhythm · energy · celebration",
-      "description": "Movement for the life you're making."
-    },
-    {
-      "id": "golden-hour",
-      "title": "Golden Hour",
-      "world": "electric-bloom",
-      "artist": "Frequency Originals",
-      "image": "artwork/golden-hour.jpg",
-      "audio": "audio/golden-hour.m4a",
-      "duration": 184,
-      "subtitle": "Rhythm · energy · celebration",
-      "description": "Bright female-led dance lane with four-on-the-floor pulse, faster rhythmic density and a larger final lift."
-    },
-    {
-      "id": "move-like-money",
-      "title": "Move Like Money",
-      "world": "electric-bloom",
-      "artist": "Frequency Originals",
-      "image": "artwork/move-like-money.jpg",
-      "audio": "audio/move-like-money.m4a",
-      "duration": 166,
-      "subtitle": "Rhythm · energy · celebration",
-      "description": "Movement for the life you're making."
-    },
-    {
-      "id": "luck-follows-action",
-      "title": "Luck Follows Action",
-      "world": "electric-bloom",
-      "artist": "Frequency Originals",
-      "image": "artwork/luck-follows-action.jpg",
-      "audio": "audio/luck-follows-action.m4a",
-      "duration": 146,
-      "subtitle": "Rhythm · energy · celebration",
-      "description": "Movement for the life you're making."
+      "image": "artwork/money-meets-motion.jpg",
+      "duration": 185.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nGood morning\nFeet on the floor\nEyes on the day\nI know what I'm here for\n\n[Verse 1]\nI notice the room that is opening\nI notice the work I can do\nI bring something useful and honest\nThen I let the value come through\nI move with earned conviction\nThe next useful signal is mine\nI move with a clear intention\nAnd opportunity meets my stride\n\n[Pre-Chorus]\nI give what matters\nI keep it moving\nI make the call\nI choose the doing\n\n[Chorus]\nMoney meets motion\nValue meets value\nI make the move\nI build the way through\nMoney meets motion\nI stay awake\nI see the opening\nAnd take my place\n\n[Verse 2]\nI'm grateful for what I can build with\nI'm ready for more I can hold\nI learn from the wins and the misses\nI turn what I know into gold\nClear vision, useful action, and rhythm\nA vision with hands and a plan\nI welcome the doors that are opening\nThen walk through as soon as I can\n\n[Pre-Chorus]\nI give what matters\nI keep it moving\nI make the call\nI choose the doing\n\n[Chorus]\nMoney meets motion\nValue meets value\nI make the move\nI build the way through\nMoney meets motion\nI stay awake\nI see the opening\nAnd take my place\n\n[Breakdown]\nCalm in my body\nClear in my mind\nGrateful for plenty\nReady on time\nI can receive it\nI can steward it well\nI can build something useful\nAnd let the results tell\n\n[Final Chorus]\nMoney meets motion\nValue meets value\nI make the move\nI build the way through\nMoney meets motion\nI stay awake\nI see the opening\nAnd take my place\n\n[Outro]\nOne clear move\nOne clear day\nValue in motion\nI build the way",
+      "type": "song"
     },
     {
       "id": "built-for-this",
       "title": "Built for This",
-      "world": "electric-bloom",
+      "subtitle": "Afrobeat · male melodic pop-rap",
+      "description": "A lower male vocal lane with rhythmic delivery, sparse verses, confident momentum, and a chantable hook.",
+      "goals": [
+        "confidence",
+        "energy",
+        "focus"
+      ],
+      "genres": [
+        "Afrobeat",
+        "Pop-rap"
+      ],
       "artist": "Frequency Originals",
-      "image": "artwork/built-for-this.jpg",
+      "world": "apex-rhythm",
+      "worlds": [
+        "apex-rhythm"
+      ],
       "audio": "audio/built-for-this.m4a",
-      "duration": 168,
-      "subtitle": "Rhythm · energy · celebration",
-      "description": "Lower male vocal lane with rhythmic sung-spoken delivery, sparse verses and chantable hook."
+      "image": "artwork/built-for-this.jpg",
+      "duration": 168.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nYeah\nFeet down\nEyes up\n\n[Verse 1]\nMy direction is clear and I move with purpose\nI read the room and I make my move\nMy calm is deep and steady in my body\nEvery moment gives my strength a place to move\nI keep my word when nobody's watching\nI keep my pace when the crowd gets loud\nI know the value I bring to the table\nI name my value clearly and out loud\n\n[Chorus]\nI was built for this\nClear head, strong hands\nBuilt for this\nMake the move, make the plan\nBuilt for this\nNo rush, no drift\nI see what matters\nI was built for this\n\n[Verse 2]\nEvery result gives me useful information\nI turn one contact into a bridge\nI turn one hour into an advantage\nSmall things stack and become something big\nMoney is useful when purpose can hold it\nPower is useful when discipline leads\nI picture the life and I live from it now\nI am the person who carries the vision\n\n[Chorus]\nI was built for this\nClear head, strong hands\nBuilt for this\nMake the move, make the plan\nBuilt for this\nNo rush, no drift\nI see what matters\nI was built for this\n\n[Bridge]\nBreathe\nChoose\nMove\nRepeat\nBreathe\nChoose\nMove\nRepeat\n\n[Final Chorus]\nI was built for this\nClear head, strong hands\nBuilt for this\nMake the move, make the plan\nBuilt for this\nNo rush, no drift\nI see what matters\nI was built for this",
+      "type": "song"
+    },
+    {
+      "id": "momentum-is-mine",
+      "title": "Momentum Is Mine",
+      "subtitle": "Dark phonk · trap",
+      "description": "A compact power track with heavier sub, sharper rhythmic energy, short phrases, and a gym-ready edge.",
+      "goals": [
+        "energy",
+        "confidence",
+        "focus"
+      ],
+      "genres": [
+        "Phonk",
+        "Trap"
+      ],
+      "artist": "Frequency Originals",
+      "world": "electric-bloom",
+      "worlds": [
+        "electric-bloom"
+      ],
+      "audio": "audio/momentum-is-mine.m4a",
+      "image": "artwork/momentum-is-mine.jpg",
+      "duration": 150.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nMove\nAgain\nMove\n\n[Hook]\nMomentum is mine\nStep after step\nMomentum is mine\nNo second guess\nMomentum is mine\nI finish the set\nI came here to move\nI came here to get\n\n[Verse]\nThe moment is ready\nThe signal is clear\nI work with the hour\nI sharpen the mind\nOne rep becomes ten\nOne call becomes five\nI stack what is real\nAnd I watch it compound\n\n[Hook]\nMomentum is mine\nStep after step\nMomentum is mine\nNo second guess\nMomentum is mine\nI finish the set\nI came here to move\nI came here to get\n\n[Breakdown]\nQuiet\nFocused\nReady\nGo\n\n[Verse 2]\nMy standard leads me\nMy vision speaks loud\nThe standard is mine\nI say it out loud\nWhat I can control\nI handle today\nThe rest can arrive\nWhen it gets in my way\n\n[Final Hook]\nMomentum is mine\nStep after step\nMomentum is mine\nNo second guess\nMomentum is mine\nI finish the set\nI came here to move\nI came here to get",
+      "type": "song"
+    },
+    {
+      "id": "storm-in-my-blood",
+      "title": "Storm in My Blood",
+      "subtitle": "Cinematic warrior · folk-pop",
+      "description": "A grounded courage anthem with low male lead, soaring counter-vocal, frame drums, low strings, and a large identity hook built for feeling strong under pressure.",
+      "goals": [
+        "confidence",
+        "energy",
+        "focus"
+      ],
+      "genres": [
+        "Cinematic",
+        "Folk-pop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "iron-horizon",
+      "worlds": [
+        "iron-horizon"
+      ],
+      "audio": "audio/storm-in-my-blood.m4a",
+      "image": "artwork/storm-in-my-blood.jpg",
+      "duration": 190.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nStand up\nFeel the ground\nI am here\n\n[Verse 1]\nCold air in my lungs, clear fire in my chest\nI do not run from the weight of the test\nI know who I am when the room gets loud\nFeet in the earth and my head unbowed\nI have been through nights that taught me my name\nI learned how to breathe while I walked through flame\nNo borrowed courage, no mask, no show\nWhen the hard wind rises, I already know\n\n[Hook]\nThere is a storm in my blood\nAnd a mountain in my bones\nI was not made to disappear\nI was made to stand my ground\nStorm in my blood\nFire steady, heart awake\nI do not wait to become strong\nI choose it with every step I take\n\n[Verse 2]\nI move with purpose, I speak when it counts\nI turn fear into focus and doubt into ground\nI carry the lesson, I leave the scar\nEvery hard mile showed me how strong we are\nNo need for thunder to prove I am real\nPower is quiet when power is sealed\nI face what is coming, I look it in the eye\nNot because I cannot fall, because I always rise\n\n[Hook]\nThere is a storm in my blood\nAnd a mountain in my bones\nI was not made to disappear\nI was made to stand my ground\nStorm in my blood\nFire steady, heart awake\nI do not wait to become strong\nI choose it with every step I take\n\n[Bridge]\nOne breath\nOne step\nOne choice\nAgain\nI am here\nI am ready\nI begin\n\n[Final Hook]\nThere is a storm in my blood\nAnd a mountain in my bones\nI was not made to disappear\nI was made to stand my ground\nStorm in my blood\nFire steady, heart awake\nI do not wait to become strong\nI choose it with every step I take",
+      "type": "song"
+    },
+    {
+      "id": "i-do-not-break",
+      "title": "I Do Not Break",
+      "subtitle": "Warrior focus · tribal trap",
+      "description": "A darker resilience track with chant-led vocals, heavy drums, heartbeat space, and a vow-like hook centered on breathing, finishing, and realigning under pressure.",
+      "goals": [
+        "focus",
+        "confidence",
+        "energy"
+      ],
+      "genres": [
+        "Cinematic",
+        "Tribal trap"
+      ],
+      "artist": "Frequency Originals",
+      "world": "iron-horizon",
+      "worlds": [
+        "iron-horizon"
+      ],
+      "audio": "audio/i-do-not-break.m4a",
+      "image": "artwork/i-do-not-break.jpg",
+      "duration": 184.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nI bend\nI learn\nI rise\nI do not break\n\n[Verse 1]\nPressure does not get the final word\nNoise does not decide what I deserve\nI slow my breath and sharpen my sight\nI choose my direction before I choose speed\nEvery hard day adds weight to the frame\nEvery closed door teaches another way\nI do not need easy to know I can move\nI need one clear reason and something to prove\n\n[Hook]\nI do not break\nI breathe and become\nI do not break\nI finish what I start\nWhen the world gets heavy\nI get quiet inside\nI do not break\nI realign\n\n[Verse 2]\nI can lose ground without losing myself\nI can change plans without changing the goal\nDiscipline lives in the smallest repeat\nOne honest action, then one more after me\nI am not waiting for courage to land\nCourage is built every time that I stand\nI do not worship the fear in my head\nI hear it, I thank it, I move on instead\n\n[Hook]\nI do not break\nI breathe and become\nI do not break\nI finish what I start\nWhen the world gets heavy\nI get quiet inside\nI do not break\nI realign\n\n[Bridge]\nHeart steady\nEyes forward\nJaw loose\nHands open\nNo panic\nNo drift\nChoose again\n\n[Final Hook]\nI do not break\nI breathe and become\nI do not break\nI finish what I start\nWhen the world gets heavy\nI get quiet inside\nI do not break\nI realign",
+      "type": "song"
+    },
+    {
+      "id": "crowned-by-fire",
+      "title": "Crown by Fire",
+      "subtitle": "Victory · cinematic folk",
+      "description": "A triumphant future-self duet about leadership, earned confidence, and becoming the person you kept imagining, rising into a choir-backed final hook.",
+      "goals": [
+        "confidence",
+        "future-self",
+        "energy"
+      ],
+      "genres": [
+        "Cinematic",
+        "Epic pop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "iron-horizon",
+      "worlds": [
+        "iron-horizon"
+      ],
+      "audio": "audio/crowned-by-fire.m4a",
+      "image": "artwork/crowned-by-fire.jpg",
+      "duration": 192.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nI came back stronger\nI came back clear\n\n[Verse 1]\nI have met the version of me who waits\nI have met the version who blames the gates\nI thank them both and I walk ahead\nThere is a brighter command in my chest\nLeadership moves naturally through me\nI lead by the promises I keep\nMy vision stands clear inside of me\nI know the life I am here to build\n\n[Hook]\nCrowned by fire\nBy my purpose\nBuilt in silence\nRaised by days\nI became the one I kept imagining\nCrowned by fire\nHere I stand\nFuture in my eyes\nPower in my hands\n\n[Verse 2]\nI see the room before I enter the door\nI see the work and I ask for more\nFrom purpose burning steady and bright\nFrom knowing the mission is alive in my head\nI carry wealth with wisdom and purpose\nI carry strength so the people I love feel home\nI carry vision with both feet down\nThat is how a life becomes a crown\n\n[Hook]\nCrowned by fire\nBy my purpose\nBuilt in silence\nRaised by days\nI became the one I kept imagining\nCrowned by fire\nHere I stand\nFuture in my eyes\nPower in my hands\n\n[Bridge]\nI saw it first\nThen I became it\nI spoke it clear\nThen I sustained it\nThe moment is mine\nI carry my name\nI walk into the life I came to claim\n\n[Final Hook]\nCrowned by fire\nBy my purpose\nBuilt in silence\nRaised by days\nI became the one I kept imagining\nCrowned by fire\nHere I stand\nFuture in my eyes\nPower in my hands",
+      "type": "song"
+    },
+    {
+      "id": "already-grateful",
+      "title": "Already Grateful",
+      "subtitle": "Gospel-house · choir uplift",
+      "description": "Piano, house pulse, choir lift, and a celebratory chorus centered on gratitude while continuing to grow.",
+      "goals": [
+        "gratitude",
+        "abundance",
+        "energy"
+      ],
+      "genres": [
+        "Gospel-house",
+        "House"
+      ],
+      "artist": "Frequency Originals",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
+      "audio": "audio/already-grateful.m4a",
+      "image": "artwork/already-grateful.jpg",
+      "duration": 195.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nThank you for this morning\nThank you for this breath\n\n[Verse 1]\nI wake up grateful for this life\nI notice what is good\nThere is strength inside the ordinary\nThere is more here than I understood\nEvery person who believed in me\nEvery lesson that became a light\nI can want a bigger tomorrow\nAnd still be grateful here tonight\n\n[Pre-Chorus]\nOpen hands\nOpen heart\nLet the next good chapter start\n\n[Chorus]\nI'm already grateful\nBefore the answer comes\nAlready grateful\nFor who I am becoming\nI can celebrate the road\nWhile I keep on moving\nI'm already grateful\nAnd I'm ready for what's next\n\n[Verse 2]\nI can build without becoming empty\nI can rise without forgetting love\nI can carry both ambition and peace\nI can know when enough is enough\nWhat arrives, I'll meet with wisdom\nWhat departs, I'll let it go\nI can thank the ground beneath me\nWhile I reach for room to grow\n\n[Chorus]\nI'm already grateful\nBefore the answer comes\nAlready grateful\nFor who I am becoming\nI can celebrate the road\nWhile I keep on moving\nI'm already grateful\nAnd I'm ready for what's next\n\n[Choir Breakdown]\nThank you\nFor the strength\nThank you\nFor the way\nThank you\nFor the people\nThank you\nFor today\n\n[Final Chorus]\nI'm already grateful\nBefore the answer comes\nAlready grateful\nFor who I am becoming\nI can celebrate the road\nWhile I keep on moving\nI'm already grateful\nAnd I'm ready for what's next",
+      "type": "song"
+    },
+    {
+      "id": "soft-life-strong-mind",
+      "title": "Soft Life, Strong Mind",
+      "subtitle": "Dreamy alt-pop · duet",
+      "description": "An intimate male/female duet about calm ambition, clear boundaries, joy, and building without losing yourself.",
+      "goals": [
+        "calm",
+        "confidence",
+        "gratitude"
+      ],
+      "genres": [
+        "Alt-pop",
+        "Dream-pop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "quiet-atlas",
+      "worlds": [
+        "quiet-atlas"
+      ],
+      "audio": "audio/soft-life-strong-mind.m4a",
+      "image": "artwork/soft-life-strong-mind.jpg",
+      "duration": 188.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nSoft life\nStrong mind\n\n[Verse 1 - Female]\nPeace makes my whole life feel alive\nI can want more and still move light\nI can be gentle and still decide\nI can protect what keeps me bright\n\n[Verse 1 - Male]\nI know the pace that keeps me clear\nI know the work that's mine today\nMy mind feels spacious, open, and clear\nI can let the noise fall away\n\n[Chorus - Together]\nSoft life, strong mind\nPeace in my body, fire in my eyes\nSoft life, strong mind\nI build what matters and honor my design\nSoft life, strong mind\nCalm is a power I carry with pride\nSoft life, strong mind\nThis is how I rise\n\n[Verse 2 - Male]\nI can earn more without losing sleep\nI can lead well without losing me\nI can hold love and ambition deep\nI can make room for both to breathe\n\n[Verse 2 - Female]\nI can choose joy before the finish line\nI can be proud while I still evolve\nI can move slowly and still arrive\nI can stay soft and still be strong\n\n[Bridge - Together]\nBreathe in\nLet go\nChoose well\nMove slow\nStand tall\nStay kind\nSoft life\nStrong mind\n\n[Final Chorus - Together]\nSoft life, strong mind\nPeace in my body, fire in my eyes\nSoft life, strong mind\nI build what matters and honor my design\nSoft life, strong mind\nCalm is a power I carry with pride\nSoft life, strong mind\nThis is how I rise",
+      "type": "song"
+    },
+    {
+      "id": "watch-me-build",
+      "title": "Watch Me Build",
+      "subtitle": "Melodic rap · pop-trap",
+      "description": "A short male-led power track with a cold vocal opening, sparse verses, punchy low end, and a compact repeatable hook.",
+      "goals": [
+        "focus",
+        "confidence",
+        "energy"
+      ],
+      "genres": [
+        "Pop-trap",
+        "Rap"
+      ],
+      "artist": "Frequency Originals",
+      "world": "apex-rhythm",
+      "worlds": [
+        "apex-rhythm"
+      ],
+      "audio": "audio/watch-me-build.m4a",
+      "image": "artwork/watch-me-build.jpg",
+      "duration": 154.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nWatch me build\nI act\nBuild\n\n[Verse 1]\nI said I'd do it, so I did it\nI kept the promise when it got quiet\nNo crowd, no hype, no borrowed image\nJust one more move and then another beside it\nI learn fast, I cut what wastes time\nI keep the signal, I lose the noise\nI move forward with what I know\nI make the call, I make the choice\n\n[Hook]\nWatch me build\nBrick by brick\nWatch me build\nDay by day\nWatch me build\nNo fake flex\nReal work\nReal way\n\n[Verse 2]\nMy focus is sharp and precise\nMy plan is clear in a checklist\nI turn a maybe into a decision\nEvery resource becomes leverage\nI choose what fits the mission\nI adapt when timing shifts\nMy capability expands with every move\nThat's the real wealth in this\n\n[Hook]\nWatch me build\nBrick by brick\nWatch me build\nDay by day\nWatch me build\nNo fake flex\nReal work\nReal way\n\n[Bridge]\nNo drums\nJust breath\nOne plan\nNext step\n\n[Final Hook]\nWatch me build\nBrick by brick\nWatch me build\nDay by day\nWatch me build\nNo fake flex\nReal work\nReal way",
+      "type": "song"
+    },
+    {
+      "id": "golden-hour",
+      "title": "Golden Hour",
+      "subtitle": "Disco-house · dance-pop",
+      "description": "Bright female-led dance affirmation music with a four-on-the-floor pulse, faster rhythmic density, and a larger final lift.",
+      "goals": [
+        "energy",
+        "gratitude",
+        "abundance"
+      ],
+      "genres": [
+        "Disco-house",
+        "Dance-pop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "electric-bloom",
+      "worlds": [
+        "electric-bloom"
+      ],
+      "audio": "audio/golden-hour.m4a",
+      "image": "artwork/golden-hour.jpg",
+      "duration": 184.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nThis is my golden hour\nI can feel it now\n\n[Verse 1]\nI came in clear with the windows open\nSun on my face and a plan in motion\nI know what matters, I know what's mine\nMy values and vision keep me aligned\nI bring good energy into the room\nI make good choices and give them room\nI trust the work and I trust my pace\nI let the good life meet me halfway\n\n[Pre-Chorus]\nHands up\nHeart open\nIn motion\nKeep going\n\n[Chorus]\nThis is my golden hour\nI light up what I touch\nThis is my golden hour\nI know when enough is enough\nI give more, I grow more\nI move with love and power\nRight here, right now\nThis is my golden hour\n\n[Verse 2]\nI celebrate before the finish\nI keep the joy inside the business\nI know success can still feel light\nI know ambition can still feel right\nI make some room for what is coming\nI stay awake, I keep becoming\nEvery day I learn my way\nAnd every way I learn to stay\n\n[Pre-Chorus]\nHands up\nHeart open\nIn motion\nKeep going\n\n[Chorus]\nThis is my golden hour\nI light up what I touch\nThis is my golden hour\nI know when enough is enough\nI give more, I grow more\nI move with love and power\nRight here, right now\nThis is my golden hour\n\n[Breakdown]\nPiano and voice\nI am here\nI am ready\nI am clear\n\n[Final Chorus]\nThis is my golden hour\nI light up what I touch\nThis is my golden hour\nI know when enough is enough\nI give more, I grow more\nI move with love and power\nRight here, right now\nThis is my golden hour",
+      "type": "song"
     },
     {
       "id": "the-room-changes",
       "title": "The Room Changes",
-      "world": "electric-bloom",
+      "subtitle": "Leadership · cinematic folk",
+      "description": "A leadership anthem with frame drums, cellos, hammered strings, and a rising duet hook built around clear presence and purposeful action.",
+      "goals": [
+        "confidence",
+        "future-self",
+        "energy"
+      ],
+      "genres": [
+        "Cinematic",
+        "Epic pop"
+      ],
       "artist": "Frequency Originals",
-      "image": "artwork/the-room-changes.jpg",
+      "world": "iron-horizon",
+      "worlds": [
+        "iron-horizon"
+      ],
       "audio": "audio/the-room-changes.m4a",
-      "duration": 188,
-      "subtitle": "Rhythm · energy · celebration",
-      "description": "Movement for the life you're making."
+      "image": "artwork/the-room-changes.jpg",
+      "duration": 188.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nI walk in clear\nThe room changes\n\n[Verse 1]\nI carry vision in the way I stand\nEvery choice becomes a steady hand\nPurpose moves through every word I speak\nStrength and kindness rise together in me\nI see the path and I step into place\nCalm in my body, light on my face\nThe work feels worthy, the mission feels near\nI bring my whole self and the way becomes clear\n\n[Hook]\nThe room changes when I enter\nThe air rises with my name\nI bring purpose, I bring presence\nI bring focus to the flame\nThe room changes when I enter\nEvery step becomes a sign\nI am living what I pictured\nAnd the moment meets me right on time\n\n[Verse 2]\nI build the table wide enough to grow\nI make decisions from the life I know\nEvery promise adds another stone\nEvery action makes the vision home\nI carry wealth with wisdom in my hands\nI carry people with me as I expand\nThe future feels familiar in my chest\nI lead with clarity and give my best\n\n[Hook]\nThe room changes when I enter\nThe air rises with my name\nI bring purpose, I bring presence\nI bring focus to the flame\nThe room changes when I enter\nEvery step becomes a sign\nI am living what I pictured\nAnd the moment meets me right on time\n\n[Bridge]\nEyes forward\nHeart steady\nHands ready\nHere I am\n\n[Final Hook]\nThe room changes when I enter\nThe air rises with my name\nI bring purpose, I bring presence\nI bring focus to the flame\nThe room changes when I enter\nEvery step becomes a sign\nI am living what I pictured\nAnd the moment meets me right on time",
+      "type": "song"
+    },
+    {
+      "id": "made-of-mountains",
+      "title": "Made of Mountains",
+      "subtitle": "Courage · Nordic cinematic",
+      "description": "Deep grounded courage with bowed strings, massive drums, modern sub bass, and a physical chantable hook.",
+      "goals": [
+        "confidence",
+        "energy",
+        "focus"
+      ],
+      "genres": [
+        "Cinematic",
+        "Hip-hop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "iron-horizon",
+      "worlds": [
+        "iron-horizon"
+      ],
+      "audio": "audio/made-of-mountains.m4a",
+      "image": "artwork/made-of-mountains.jpg",
+      "duration": 184.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nFeet down\nChest open\n\n[Verse 1]\nStone in my step and the sky in my sight\nBreath moving deep and my direction bright\nI carry the ground wherever I go\nMy strength has roots and my purpose can grow\nThe road feels solid beneath every stride\nPower moves quietly, steady inside\nI meet the hour with both hands awake\nI know what I carry and what I create\n\n[Hook]\nI am made of mountains\nMade of earth and open sky\nMade of every steady heartbeat\nMade to stand and made to rise\nI am made of mountains\nEvery step becomes my ground\nI can feel the strength beneath me\nI can hear it in the sound\n\n[Verse 2]\nI move with patience, I move with command\nVision in front of me, strength in my hands\nEvery mile adds weight to my name\nEvery decision keeps feeding the flame\nMy people feel safe in the life that I build\nMy values run deep and my purpose is filled\nThe horizon gets wider the farther I go\nThe mountain inside me continues to grow\n\n[Hook]\nI am made of mountains\nMade of earth and open sky\nMade of every steady heartbeat\nMade to stand and made to rise\nI am made of mountains\nEvery step becomes my ground\nI can feel the strength beneath me\nI can hear it in the sound\n\n[Bridge]\nOne breath\nOne pulse\nOne road\nOne life\n\n[Final Hook]\nI am made of mountains\nMade of earth and open sky\nMade of every steady heartbeat\nMade to stand and made to rise\nI am made of mountains\nEvery step becomes my ground\nI can feel the strength beneath me\nI can hear it in the sound",
+      "type": "song"
+    },
+    {
+      "id": "move-like-money",
+      "title": "Move Like Money",
+      "subtitle": "Afrobeat · melodic pop-rap",
+      "description": "A sleek value-and-momentum track with highlife guitar, syncopated drums, deep clean bass, and a fast hook.",
+      "goals": [
+        "abundance",
+        "energy",
+        "confidence"
+      ],
+      "genres": [
+        "Afrobeat",
+        "Pop-rap"
+      ],
+      "artist": "Frequency Originals",
+      "world": "sovereign-groove",
+      "worlds": [
+        "sovereign-groove"
+      ],
+      "audio": "audio/move-like-money.m4a",
+      "image": "artwork/move-like-money.jpg",
+      "duration": 166.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nGood energy\nGood timing\n\n[Verse 1]\nI bring the value when I walk in\nClear conversation, clean intention\nI see the opening and move with it\nSmall good choices build momentum quick\nMy time has purpose, my work has weight\nI know the number, I name the rate\nI make the call and I keep it light\nThe right door opens at the right time\n\n[Chorus]\nI move like money\nClean and in motion\nI move like money\nValue in motion\nGood work, good timing\nRight place, right mind\nI move like money\nAnd opportunity moves with mine\n\n[Verse 2]\nOne useful idea becomes a bridge\nOne good meeting becomes something big\nMy name means quality, my word means done\nI make the move and enjoy the run\nI build with people who build with me\nI keep it simple, I keep it free\nI see abundance in useful exchange\nI create the value and welcome the change\n\n[Chorus]\nI move like money\nClean and in motion\nI move like money\nValue in motion\nGood work, good timing\nRight place, right mind\nI move like money\nAnd opportunity moves with mine\n\n[Bridge]\nMove\nBuild\nGive\nGrow\n\n[Final Chorus]\nI move like money\nClean and in motion\nI move like money\nValue in motion\nGood work, good timing\nRight place, right mind\nI move like money\nAnd opportunity moves with mine",
+      "type": "song"
+    },
+    {
+      "id": "light-finds-me",
+      "title": "Light Finds Me",
+      "subtitle": "Gospel-house · cinematic soul",
+      "description": "Joyful female lead, choir, piano, organ, and strings rising into a celebratory morning-and-gratitude chorus.",
+      "goals": [
+        "gratitude",
+        "energy",
+        "morning"
+      ],
+      "genres": [
+        "Gospel-house",
+        "Soul"
+      ],
+      "artist": "Frequency Originals",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
+      "audio": "audio/light-finds-me.m4a",
+      "image": "artwork/light-finds-me.jpg",
+      "duration": 190.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nHere comes the morning\nHere comes the light\n\n[Verse 1]\nI open my eyes and receive this day\nLove in my body and room in my way\nGood people around me, good work in my hands\nI feel life opening wider than planned\nGratitude moves like a river in me\nEvery small blessing becomes something I see\nI carry joy with intention and grace\nI let it become how I move through this place\n\n[Pre-Chorus]\nOpen heart\nOpen hands\nI can feel the future land\n\n[Chorus]\nThe light finds me\nEverywhere I go\nThe light finds me\nAnd everything can grow\nI bring love into the room\nI bring purpose into view\nThe light finds me\nAnd I carry that light through\n\n[Verse 2]\nI build with laughter, I build with care\nI make more room for the people I share\nEvery new chapter can open with joy\nEvery new resource becomes something employed\nI celebrate progress, I celebrate love\nI feel what is here and the room still expands\nMy life feels generous, grounded and bright\nI wake up grateful and walk in the light\n\n[Chorus]\nThe light finds me\nEverywhere I go\nThe light finds me\nAnd everything can grow\nI bring love into the room\nI bring purpose into view\nThe light finds me\nAnd I carry that light through\n\n[Choir Breakdown]\nLight in my hands\nLight in my voice\nLight in my work\nLight in my choice\n\n[Final Chorus]\nThe light finds me\nEverywhere I go\nThe light finds me\nAnd everything can grow\nI bring love into the room\nI bring purpose into view\nThe light finds me\nAnd I carry that light through",
+      "type": "song"
+    },
+    {
+      "id": "pressure-into-power",
+      "title": "Pressure Into Power",
+      "subtitle": "Dark trap · phonk",
+      "description": "Compact high-energy production with hard 808s, clipped melodic vocals, cinematic low strings, and a disciplined power hook.",
+      "goals": [
+        "energy",
+        "confidence",
+        "focus"
+      ],
+      "genres": [
+        "Trap",
+        "Phonk"
+      ],
+      "artist": "Frequency Originals",
+      "world": "apex-rhythm",
+      "worlds": [
+        "apex-rhythm"
+      ],
+      "audio": "audio/pressure-into-power.m4a",
+      "image": "artwork/pressure-into-power.jpg",
+      "duration": 148.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nPower in motion\nHere we go\n\n[Hook]\nPressure into power\nMinute into hour\nI move with intention\nI build what I picture\nPressure into power\nFocus getting louder\nMy hands stay steady\nMy whole life gets bigger\n\n[Verse 1]\nEyes on the target, feet on the floor\nEnergy ready and I ask for more\nEvery repetition sharpens the skill\nEvery small action strengthens the will\nI know the rhythm, I know the pace\nI bring full presence into this space\nSignal is clean and the move is clear\nI put my attention exactly right here\n\n[Hook]\nPressure into power\nMinute into hour\nI move with intention\nI build what I picture\nPressure into power\nFocus getting louder\nMy hands stay steady\nMy whole life gets bigger\n\n[Breakdown]\nLock in\nMove clean\nStay sharp\nFull speed\n\n[Verse 2]\nMy standard rises with every set\nMy vision feels closer with every rep\nI build the body, I build the mind\nI carry momentum one move at a time\nEverything useful becomes part of me\nI turn clear effort into velocity\nThe room feels charged and the path feels wide\nPower in motion, steady inside\n\n[Final Hook]\nPressure into power\nMinute into hour\nI move with intention\nI build what I picture\nPressure into power\nFocus getting louder\nMy hands stay steady\nMy whole life gets bigger",
+      "type": "song"
+    },
+    {
+      "id": "already-arrived",
+      "title": "Already Arrived",
+      "subtitle": "Future self · cinematic synth-pop",
+      "description": "Expansive future-self pop with analog synths, live-style drums, guitar accents, and a wide emotional chorus.",
+      "goals": [
+        "future-self",
+        "visualize",
+        "confidence"
+      ],
+      "genres": [
+        "Synth-pop",
+        "Alt-pop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "future-signal",
+      "worlds": [
+        "future-signal"
+      ],
+      "audio": "audio/already-arrived.m4a",
+      "image": "artwork/already-arrived.jpg",
+      "duration": 182.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nLook around\nI know this place\n\n[Verse 1]\nThe life in my mind has a shape I can touch\nMorning feels open, the room feels enough\nThe plans on the table are moving with me\nThe person I pictured is easy to see\nI speak with calm and I move with intent\nEvery resource becomes well spent\nThe future feels close because I live from it now\nI carry the answer in how I show up\n\n[Chorus]\nI already arrived\nIn the way that I live\nI already arrived\nIn the value I give\nThe future is present\nThe vision is mine\nI already arrived\nAnd I keep moving forward in time\n\n[Verse 2]\nMy work has meaning, my circle feels strong\nI know what I carry, I know where I belong\nI make space for beauty, I make space for scale\nI learn from the signal and follow the trail\nThe room gets bigger as I grow within\nEvery new level feels natural again\nI hold what arrives with a grounded mind\nI live from the person I chose to become\n\n[Chorus]\nI already arrived\nIn the way that I live\nI already arrived\nIn the value I give\nThe future is present\nThe vision is mine\nI already arrived\nAnd I keep moving forward in time\n\n[Bridge]\nHere in my body\nHere in my name\nHere in the vision\nHere in the frame\n\n[Final Chorus]\nI already arrived\nIn the way that I live\nI already arrived\nIn the value I give\nThe future is present\nThe vision is mine\nI already arrived\nAnd I keep moving forward in time",
+      "type": "song"
+    },
+    {
+      "id": "gold-on-my-mind",
+      "title": "Gold on My Mind",
+      "subtitle": "Afro-house · amapiano pop",
+      "description": "Warm rhythmic abundance music with log-drum bass, shakers, piano stabs, and an easy repeatable hook.",
+      "goals": [
+        "abundance",
+        "energy",
+        "gratitude"
+      ],
+      "genres": [
+        "Afro-house",
+        "Amapiano"
+      ],
+      "artist": "Frequency Originals",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
+      "audio": "audio/gold-on-my-mind.m4a",
+      "image": "artwork/gold-on-my-mind.jpg",
+      "duration": 174.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nMorning on me\nGold on my mind\n\n[Verse 1]\nGood ideas move when I move with them\nOne clear message becomes ten friends\nMy work feels useful, my timing feels clean\nI see the whole picture and build what I mean\nEasy in my shoulders, bright in my eyes\nI welcome the moment and use what arrives\nEvery connection can carry a seed\nI bring good value and follow the lead\n\n[Chorus]\nGold on my mind\nGood in my hands\nI see the opening\nI make the plan\nGold on my mind\nJoy in the ride\nI build what I picture\nAnd life opens wide\n\n[Verse 2]\nI like how abundance can feel in the room\nSpace for the people I love and their dreams too\nI keep the rhythm, I keep the flow\nI learn what works and I help it grow\nMoney is movement, time is a gift\nPurpose gets stronger whenever I lift\nI move with gratitude, focus and style\nI make something useful and enjoy every mile\n\n[Chorus]\nGold on my mind\nGood in my hands\nI see the opening\nI make the plan\nGold on my mind\nJoy in the ride\nI build what I picture\nAnd life opens wide\n\n[Bridge]\nGood energy\nGood people\nGood work\nGood timing\n\n[Final Chorus]\nGold on my mind\nGood in my hands\nI see the opening\nI make the plan\nGold on my mind\nJoy in the ride\nI build what I picture\nAnd life opens wide",
+      "type": "song"
+    },
+    {
+      "id": "command-the-day",
+      "title": "Command the Day",
+      "subtitle": "Morning · cinematic hip-hop",
+      "description": "A percussion-forward motivational duet with stomps, toms, clean sub bass, chopped strings, and crowd-style hook responses.",
+      "goals": [
+        "morning",
+        "focus",
+        "energy"
+      ],
+      "genres": [
+        "Cinematic",
+        "Hip-hop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "apex-rhythm",
+      "worlds": [
+        "apex-rhythm"
+      ],
+      "audio": "audio/command-the-day.m4a",
+      "image": "artwork/command-the-day.jpg",
+      "duration": 160.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nUp\nEyes forward\n\n[Verse 1]\nMorning is open, the hour is mine\nI know the priority, I know the design\nI put my best energy into the move\nI build the rhythm and settle the groove\nOne clear decision becomes forward speed\nOne useful action becomes what I need\nMy calendar serves me, my focus feels strong\nI give every important thing where it belongs\n\n[Hook]\nI command the day\nI choose the pace\nI bring the focus\nI hold the space\nI command the day\nClear mind, clear way\nI know what matters\nI command the day\n\n[Verse 2]\nMy body feels ready, my mind feels awake\nI use every resource and build what I make\nI speak to the people who move things ahead\nI turn clear vision into something I can spread\nThe work gets lighter when purpose is clear\nThe next right action is already here\nI finish with energy left in the tank\nI close out the day with a full heart of thanks\n\n[Hook]\nI command the day\nI choose the pace\nI bring the focus\nI hold the space\nI command the day\nClear mind, clear way\nI know what matters\nI command the day\n\n[Bridge]\nChoose it\nMove it\nBuild it\nLive it\n\n[Final Hook]\nI command the day\nI choose the pace\nI bring the focus\nI hold the space\nI command the day\nClear mind, clear way\nI know what matters\nI command the day",
+      "type": "song"
+    },
+    {
+      "id": "everything-opens",
+      "title": "Everything Opens",
+      "subtitle": "Amapiano · Afro-soul",
+      "description": "Bright female-led affirmation music with a warm log-drum groove, airy keys, and an open-handed abundance hook.",
+      "goals": [
+        "abundance",
+        "morning",
+        "gratitude"
+      ],
+      "genres": [
+        "Amapiano",
+        "Afro-soul"
+      ],
+      "artist": "Frequency Originals",
+      "world": "sovereign-groove",
+      "worlds": [
+        "sovereign-groove"
+      ],
+      "audio": "audio/everything-opens.m4a",
+      "image": "artwork/everything-opens.jpg",
+      "duration": 186.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nMorning light\nOpen hands\nI meet the day\nI know who I am\n\n[Verse 1]\nI see the road unfolding\nI choose the next clear step\nI bring value to the moment\nI carry calm in every breath\nI move with steady purpose\nI honor what I plan\nI show up full and present\nI grow into what I command\n\n[Pre-Chorus]\nOpen eyes\nOpen hands\nOpen heart\nClear plans\n\n[Chorus]\nEverything opens\nAs I keep moving\nEverything opens\nAs I stay true\nI see the doorway\nI bring something useful\nEverything opens\nAnd I walk through\n\n[Verse 2]\nOpportunity feels familiar\nGood timing meets my pace\nI recognize alignment\nI move with wisdom and with grace\nI build a life with rhythm\nRest supports my progress\nI hold a bigger vision\nAnd I choose what serves me best\n\n[Chorus]\nEverything opens\nAs I keep moving\nEverything opens\nAs I stay true\nI see the doorway\nI bring something useful\nEverything opens\nAnd I walk through\n\n[Bridge]\nBreathe in\nLook up\nStay ready\nShow up\nGive well\nReceive well\nKeep moving\nKeep moving\n\n[Final Chorus]\nEverything opens\nAs I keep moving\nEverything opens\nAs I stay true\nI see the doorway\nI bring something useful\nEverything opens\nAnd I walk through",
+      "type": "song"
+    },
+    {
+      "id": "i-give-the-signal",
+      "title": "I Give the Signal",
+      "subtitle": "Cinematic alt-rock · electronic",
+      "description": "A strong male-led anthem with live drums, wide guitars, pulsing synth bass, and a decisive chorus about turning intention into movement.",
+      "goals": [
+        "confidence",
+        "focus",
+        "energy"
+      ],
+      "genres": [
+        "Alt-rock",
+        "Electronic"
+      ],
+      "artist": "Frequency Originals",
+      "world": "future-signal",
+      "worlds": [
+        "future-signal"
+      ],
+      "audio": "audio/i-give-the-signal.m4a",
+      "image": "artwork/i-give-the-signal.jpg",
+      "duration": 198.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nI give the signal\nI move\n\n[Verse 1]\nI know the line I am crossing\nI know the choice in my hand\nI trust the strength in my body\nI turn intention into plans\nI move with clear direction\nI learn as I advance\nMy courage has a rhythm\nMy vision has a stance\n\n[Pre-Chorus]\nRight here\nRight now\nI choose\nI act\n\n[Chorus]\nI give the signal\nI start right now\nI give the signal\nI work it out\nMy voice is steady\nMy direction is clear\nI give the signal\nAnd I move from here\n\n[Verse 2]\nI own every decision\nI shape the road I take\nI bring a higher standard\nTo every move I make\nCourage lives inside me\nLeadership feels true\nMy actions match my values\nMy power follows through\n\n[Pre-Chorus]\nRight here\nRight now\nI choose\nI act\n\n[Chorus]\nI give the signal\nI start right now\nI give the signal\nI work it out\nMy voice is steady\nMy direction is clear\nI give the signal\nAnd I move from here\n\n[Bridge]\nOne breath\nOne choice\nOne step\nMy voice\n\n[Final Chorus]\nI give the signal\nI start right now\nI give the signal\nI work it out\nMy voice is steady\nMy direction is clear\nI give the signal\nAnd I move from here",
+      "type": "song"
+    },
+    {
+      "id": "luck-follows-action",
+      "title": "Luck Follows Action",
+      "subtitle": "UK garage · electro-pop",
+      "description": "Playful fast-moving affirmation pop with shuffled two-step drums, bright sub bass, glassy plucks, and a compact action-first hook.",
+      "goals": [
+        "energy",
+        "confidence",
+        "abundance"
+      ],
+      "genres": [
+        "UK garage",
+        "Electro-pop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "future-signal",
+      "worlds": [
+        "future-signal"
+      ],
+      "audio": "audio/luck-follows-action.m4a",
+      "image": "artwork/luck-follows-action.jpg",
+      "duration": 146.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nLuck follows action\nWatch me go\n\n[Chorus]\nLuck follows action\nI move, I know\nLuck follows action\nI plant, I grow\nI meet the moment\nI move on track\nLuck follows action\nAnd I like it like that\n\n[Verse 1]\nOne clear choice\nTurns into a change\nOne good message\nExpands my range\nOne honest answer\nOpens a route\nI trust my judgment\nI figure it out\n\n[Pre]\nLook up\nMove fast\nLearn quick\nStay sharp\n\n[Chorus]\nLuck follows action\nI move, I know\nLuck follows action\nI plant, I grow\nI meet the moment\nI move on track\nLuck follows action\nAnd I like it like that\n\n[Verse 2]\nGood fortune feels familiar\nI pair it with the work\nI stay ready\nI know what I am worth\nI choose the yes\nI choose the pause\nI keep what fits me\nI honor my cause\n\n[Bridge]\nRight place\nClear mind\nGood work\nGood time\n\n[Final Chorus]\nLuck follows action\nI move, I know\nLuck follows action\nI plant, I grow\nI meet the moment\nI move on track\nLuck follows action\nAnd I like it like that",
+      "type": "song"
+    },
+    {
+      "id": "built-in-silence",
+      "title": "Built in Silence",
+      "subtitle": "Cinematic piano · orchestral",
+      "description": "A low intimate male vocal over felt piano, cello, distant strings, and a patient orchestral rise for quiet future-self work.",
+      "goals": [
+        "calm",
+        "future-self",
+        "focus"
+      ],
+      "genres": [
+        "Cinematic",
+        "Orchestral"
+      ],
+      "artist": "Frequency Originals",
+      "world": "quiet-atlas",
+      "worlds": [
+        "quiet-atlas"
+      ],
+      "audio": "audio/built-in-silence.m4a",
+      "image": "artwork/built-in-silence.jpg",
+      "duration": 224.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nSome things are built\nIn quiet rooms\n\n[Verse 1]\nI trust the quiet process\nMy vision holds its shape\nMy plan grows strong with practice\nMy patience gives it space\nI carry calm conviction\nI honor daily time\nI build the thing in silence\nAnd let the work become the sign\n\n[Chorus]\nBuilt in silence\nMade with care\nBuilt in silence\nStrength is everywhere\nWhat I practice\nWhat I choose\nWhat I protect\nBecomes what I can use\n\n[Verse 2]\nDeep roots support my progress\nStrong systems hold my pace\nI move with clear intention\nI give each season space\nI honor slow construction\nI stay with what is real\nMy future grows through habits\nThat already match what I feel\n\n[Bridge - Spoken]\nQuiet focus\nSteady hands\nClear standards\nLiving plans\n\n[Final Chorus]\nBuilt in silence\nMade with care\nBuilt in silence\nStrength is everywhere\nWhat I practice\nWhat I choose\nWhat I protect\nBecomes what I can use\n\n[Outro]\nSome things are built\nIn quiet rooms",
+      "type": "song"
+    },
+    {
+      "id": "run-with-the-light",
+      "title": "Run With the Light",
+      "subtitle": "Liquid DnB · atmospheric pop",
+      "description": "Euphoric female-led drum-and-bass with luminous pads, piano arpeggio, rolling sub bass, and a large forward-motion chorus.",
+      "goals": [
+        "energy",
+        "morning",
+        "confidence"
+      ],
+      "genres": [
+        "Drum-and-bass",
+        "Atmospheric pop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "electric-bloom",
+      "worlds": [
+        "electric-bloom"
+      ],
+      "audio": "audio/run-with-the-light.m4a",
+      "image": "artwork/run-with-the-light.jpg",
+      "duration": 202.0,
+      "source": "Frequency Beta44",
+      "lyrics": "[Intro]\nI see the morning\nI move toward it\n\n[Verse 1]\nThe answer lives in motion\nA spark becomes a start\nEach step creates momentum\nEach choice engages heart\nI carry what I have learned here\nInto one more honest day\nMy compass stays within me\nMy direction feels awake\n\n[Pre-Chorus]\nHead up\nBreathe deep\nKeep what matters\nMove with ease\n\n[Chorus]\nI run with the light\nI move when it moves\nI run with the light\nI choose what I choose\nMy world feels open\nMy vision burns bright\nI know where I am going\nI run with the light\n\n[Verse 2]\nI shape the pace I am keeping\nI reset with confidence\nI create a better system\nI choose aligned influence\nEvery morning brings a canvas\nEvery season carries signs\nI keep a steady compass\nAnd make the next direction mine\n\n[Chorus]\nI run with the light\nI move when it moves\nI run with the light\nI choose what I choose\nMy world feels open\nMy vision burns bright\nI know where I am going\nI run with the light\n\n[Bridge]\nQuiet now\nOne breath\nOne sky\nOne step\n\n[Final Chorus]\nI run with the light\nI move when it moves\nI run with the light\nI choose what I choose\nMy world feels open\nMy vision burns bright\nI know where I am going\nI run with the light",
+      "type": "song"
+    },
+    {
+      "id": "timekeeper-audio-cozy-coffee-lo-fi-vinyl",
+      "title": "Cozy Coffee & Lo-Fi Vinyl",
+      "subtitle": "Cozy · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Cozy soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "morning"
+      ],
+      "genres": [
+        "Lo-fi",
+        "Neo-soul"
+      ],
+      "artist": "Frequency Originals",
+      "world": "quiet-atlas",
+      "worlds": [
+        "quiet-atlas"
+      ],
+      "audio": "audio/timekeeper-audio-cozy-coffee-lo-fi-vinyl.mp3",
+      "image": "artwork/timekeeper-audio-cozy-coffee-lo-fi-vinyl.jpg",
+      "duration": 68.07,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-electric-fortune-rising",
+      "title": "Electric Fortune Rising",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "electric-bloom",
+      "worlds": [
+        "electric-bloom"
+      ],
+      "audio": "audio/timekeeper-audio-electric-fortune-rising.mp3",
+      "image": "artwork/timekeeper-audio-electric-fortune-rising.jpg",
+      "duration": 116.35,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-endless-fortune-dawn",
+      "title": "Endless Fortune Dawn",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
+      "audio": "audio/timekeeper-audio-endless-fortune-dawn.mp3",
+      "image": "artwork/timekeeper-audio-endless-fortune-dawn.jpg",
+      "duration": 176.7,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-golden-alignment-wake",
+      "title": "Golden Alignment Wake",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
+      "audio": "audio/timekeeper-audio-golden-alignment-wake.mp3",
+      "image": "artwork/timekeeper-audio-golden-alignment-wake.jpg",
+      "duration": 162.11,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-gravitate-to-me",
+      "title": "Gravitate to Me",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
+      "audio": "audio/timekeeper-audio-gravitate-to-me.mp3",
+      "image": "artwork/timekeeper-audio-gravitate-to-me.jpg",
+      "duration": 180.59,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-lucky-magnetic-morning",
+      "title": "Lucky & Magnetic Morning",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "infinite-gold",
+      "worlds": [
+        "infinite-gold"
+      ],
+      "audio": "audio/timekeeper-audio-lucky-magnetic-morning.mp3",
+      "image": "artwork/timekeeper-audio-lucky-magnetic-morning.jpg",
+      "duration": 111.36,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-lucky-day-bloom",
+      "title": "Lucky Day Bloom",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "electric-bloom",
+      "worlds": [
+        "electric-bloom"
+      ],
+      "audio": "audio/timekeeper-audio-lucky-day-bloom.mp3",
+      "image": "artwork/timekeeper-audio-lucky-day-bloom.jpg",
+      "duration": 131.46,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-magnet-to-the-good",
+      "title": "Magnet to the Good",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "electric-bloom",
+      "worlds": [
+        "electric-bloom"
+      ],
+      "audio": "audio/timekeeper-audio-magnet-to-the-good.mp3",
+      "image": "artwork/timekeeper-audio-magnet-to-the-good.jpg",
+      "duration": 182.29,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-morning-miracle-breeze",
+      "title": "Morning Miracle Breeze",
+      "subtitle": "Gentle · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Gentle soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "morning",
+        "sleep"
+      ],
+      "genres": [
+        "Ambient",
+        "Orchestral"
+      ],
+      "artist": "Frequency Originals",
+      "world": "quiet-atlas",
+      "worlds": [
+        "quiet-atlas"
+      ],
+      "audio": "audio/timekeeper-audio-morning-miracle-breeze.mp3",
+      "image": "artwork/timekeeper-audio-morning-miracle-breeze.jpg",
+      "duration": 109.1,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-platinum-gold-flow",
+      "title": "Platinum & Gold Flow",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "infinite-gold",
+      "worlds": [
+        "infinite-gold"
+      ],
+      "audio": "audio/timekeeper-audio-platinum-gold-flow.mp3",
+      "image": "artwork/timekeeper-audio-platinum-gold-flow.jpg",
+      "duration": 100.1,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-raindrop-grace-peace",
+      "title": "Raindrop Grace & Peace",
+      "subtitle": "Gentle · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Gentle soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "morning",
+        "sleep"
+      ],
+      "genres": [
+        "Ambient",
+        "Orchestral"
+      ],
+      "artist": "Frequency Originals",
+      "world": "quiet-atlas",
+      "worlds": [
+        "quiet-atlas"
+      ],
+      "audio": "audio/timekeeper-audio-raindrop-grace-peace.mp3",
+      "image": "artwork/timekeeper-audio-raindrop-grace-peace.jpg",
+      "duration": 161.0,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-sacred-abundance-stream",
+      "title": "Sacred Abundance Stream",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "infinite-gold",
+      "worlds": [
+        "infinite-gold"
+      ],
+      "audio": "audio/timekeeper-audio-sacred-abundance-stream.mp3",
+      "image": "artwork/timekeeper-audio-sacred-abundance-stream.jpg",
+      "duration": 77.74,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-wealth-grace-rising",
+      "title": "Wealth & Grace Rising",
+      "subtitle": "Abundance · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Abundance soundscape; no medical claims.",
+      "goals": [
+        "abundance",
+        "gratitude",
+        "morning"
+      ],
+      "genres": [
+        "Cinematic",
+        "Ambient"
+      ],
+      "artist": "Frequency Originals",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
+      "audio": "audio/timekeeper-audio-wealth-grace-rising.mp3",
+      "image": "artwork/timekeeper-audio-wealth-grace-rising.jpg",
+      "duration": 123.26,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-396-hz-grounded-foundation",
+      "title": "396 Hz Grounded Foundation",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "ether-codes",
+      "worlds": [
+        "ether-codes"
+      ],
+      "audio": "audio/timekeeper-audio-396-hz-grounded-foundation.mp3",
+      "image": "artwork/timekeeper-audio-396-hz-grounded-foundation.jpg",
+      "duration": 66.58,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-417-hz-radiant-renewal",
+      "title": "417 Hz Radiant Renewal",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "golden-current",
+      "worlds": [
+        "golden-current"
+      ],
+      "audio": "audio/timekeeper-audio-417-hz-radiant-renewal.mp3",
+      "image": "artwork/timekeeper-audio-417-hz-radiant-renewal.jpg",
+      "duration": 175.42,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-432-hz-crystal-abundance",
+      "title": "432 Hz Crystal Abundance",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "golden-current",
+      "worlds": [
+        "golden-current"
+      ],
+      "audio": "audio/timekeeper-audio-432-hz-crystal-abundance.mp3",
+      "image": "artwork/timekeeper-audio-432-hz-crystal-abundance.jpg",
+      "duration": 65.47,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-528-hz-miracle-awakening",
+      "title": "528 Hz Miracle Awakening",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "ether-codes",
+      "worlds": [
+        "ether-codes"
+      ],
+      "audio": "audio/timekeeper-audio-528-hz-miracle-awakening.mp3",
+      "image": "artwork/timekeeper-audio-528-hz-miracle-awakening.jpg",
+      "duration": 159.85,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-528-hz-sacred-grace",
+      "title": "528 Hz Sacred Grace",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "golden-current",
+      "worlds": [
+        "golden-current"
+      ],
+      "audio": "audio/timekeeper-audio-528-hz-sacred-grace.mp3",
+      "image": "artwork/timekeeper-audio-528-hz-sacred-grace.jpg",
+      "duration": 164.07,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-639-hz-golden-harmonic-dawn",
+      "title": "639 Hz Golden Harmonic Dawn",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "golden-current",
+      "worlds": [
+        "golden-current"
+      ],
+      "audio": "audio/timekeeper-audio-639-hz-golden-harmonic-dawn.mp3",
+      "image": "artwork/timekeeper-audio-639-hz-golden-harmonic-dawn.jpg",
+      "duration": 177.75,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-741-hz-intuitive-vision",
+      "title": "741 Hz Intuitive Vision",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "ether-codes",
+      "worlds": [
+        "ether-codes"
+      ],
+      "audio": "audio/timekeeper-audio-741-hz-intuitive-vision.mp3",
+      "image": "artwork/timekeeper-audio-741-hz-intuitive-vision.jpg",
+      "duration": 153.47,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-852-hz-spiritual-oneness",
+      "title": "852 Hz Spiritual Oneness",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "ether-codes",
+      "worlds": [
+        "ether-codes"
+      ],
+      "audio": "audio/timekeeper-audio-852-hz-spiritual-oneness.mp3",
+      "image": "artwork/timekeeper-audio-852-hz-spiritual-oneness.jpg",
+      "duration": 64.7,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-963-hz-celestial-horizon",
+      "title": "963 Hz Celestial Horizon",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "golden-current",
+      "worlds": [
+        "golden-current"
+      ],
+      "audio": "audio/timekeeper-audio-963-hz-celestial-horizon.mp3",
+      "image": "artwork/timekeeper-audio-963-hz-celestial-horizon.jpg",
+      "duration": 178.43,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-balearic-gold-horizon",
+      "title": "Balearic Gold Horizon",
+      "subtitle": "Cozy · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Cozy soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "morning"
+      ],
+      "genres": [
+        "Lo-fi",
+        "Neo-soul"
+      ],
+      "artist": "Frequency Originals",
+      "world": "infinite-gold",
+      "worlds": [
+        "infinite-gold"
+      ],
+      "audio": "audio/timekeeper-audio-balearic-gold-horizon.mp3",
+      "image": "artwork/timekeeper-audio-balearic-gold-horizon.jpg",
+      "duration": 60.76,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-morning-velvet-bliss",
+      "title": "Morning Velvet Bliss",
+      "subtitle": "Gentle · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Gentle soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "morning",
+        "sleep"
+      ],
+      "genres": [
+        "Ambient",
+        "Orchestral"
+      ],
+      "artist": "Frequency Originals",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
+      "audio": "audio/timekeeper-audio-morning-velvet-bliss.mp3",
+      "image": "artwork/timekeeper-audio-morning-velvet-bliss.jpg",
+      "duration": 69.72,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-unstoppable-golden-rise",
+      "title": "Unstoppable Golden Rise",
+      "subtitle": "Energizing · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Energizing soundscape; no medical claims.",
+      "goals": [
+        "energy",
+        "morning",
+        "confidence"
+      ],
+      "genres": [
+        "Electronic",
+        "Dance-pop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "iron-horizon",
+      "worlds": [
+        "iron-horizon"
+      ],
+      "audio": "audio/timekeeper-audio-unstoppable-golden-rise.mp3",
+      "image": "artwork/timekeeper-audio-unstoppable-golden-rise.jpg",
+      "duration": 62.68,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-111-hz-cellular-rejuvenation",
+      "title": "111 Hz Ambient Renewal",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "ether-codes",
+      "worlds": [
+        "ether-codes"
+      ],
+      "audio": "audio/timekeeper-audio-111-hz-cellular-rejuvenation.mp3",
+      "image": "artwork/timekeeper-audio-111-hz-cellular-rejuvenation.jpg",
+      "duration": 182.02,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-7-83-hz-schumann-earth-pulse",
+      "title": "7.83 Hz Schumann Earth Pulse",
+      "subtitle": "Frequency-themed · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Frequency-themed soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "focus",
+        "meditate"
+      ],
+      "genres": [
+        "Ambient",
+        "Soundscape"
+      ],
+      "artist": "Frequency Originals",
+      "world": "golden-current",
+      "worlds": [
+        "golden-current"
+      ],
+      "audio": "audio/timekeeper-audio-7-83-hz-schumann-earth-pulse.mp3",
+      "image": "artwork/timekeeper-audio-7-83-hz-schumann-earth-pulse.jpg",
+      "duration": 176.79,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-emerald-forest-vitality",
+      "title": "Emerald Forest Vitality",
+      "subtitle": "Gentle · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Gentle soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "morning",
+        "sleep"
+      ],
+      "genres": [
+        "Ambient",
+        "Orchestral"
+      ],
+      "artist": "Frequency Originals",
+      "world": "quiet-atlas",
+      "worlds": [
+        "quiet-atlas"
+      ],
+      "audio": "audio/timekeeper-audio-emerald-forest-vitality.mp3",
+      "image": "artwork/timekeeper-audio-emerald-forest-vitality.jpg",
+      "duration": 178.58,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-golden-ratio-harmonic-bloom",
+      "title": "Golden Ratio Harmonic Bloom",
+      "subtitle": "Gentle · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Gentle soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "morning",
+        "sleep"
+      ],
+      "genres": [
+        "Ambient",
+        "Orchestral"
+      ],
+      "artist": "Frequency Originals",
+      "world": "golden-current",
+      "worlds": [
+        "golden-current"
+      ],
+      "audio": "audio/timekeeper-audio-golden-ratio-harmonic-bloom.mp3",
+      "image": "artwork/timekeeper-audio-golden-ratio-harmonic-bloom.jpg",
+      "duration": 114.58,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-mountain-dawn-serenity",
+      "title": "Mountain Dawn Serenity",
+      "subtitle": "Gentle · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Gentle soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "morning",
+        "sleep"
+      ],
+      "genres": [
+        "Ambient",
+        "Orchestral"
+      ],
+      "artist": "Frequency Originals",
+      "world": "quiet-atlas",
+      "worlds": [
+        "quiet-atlas"
+      ],
+      "audio": "audio/timekeeper-audio-mountain-dawn-serenity.mp3",
+      "image": "artwork/timekeeper-audio-mountain-dawn-serenity.jpg",
+      "duration": 176.62,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-sacred-morning-bridge",
+      "title": "Sacred Morning Bridge",
+      "subtitle": "Gentle · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Gentle soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "morning",
+        "sleep"
+      ],
+      "genres": [
+        "Ambient",
+        "Orchestral"
+      ],
+      "artist": "Frequency Originals",
+      "world": "velvet-sun",
+      "worlds": [
+        "velvet-sun"
+      ],
+      "audio": "audio/timekeeper-audio-sacred-morning-bridge.mp3",
+      "image": "artwork/timekeeper-audio-sacred-morning-bridge.jpg",
+      "duration": 174.78,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-solar-plexus-golden-fire",
+      "title": "Solar Plexus Golden Fire",
+      "subtitle": "Energizing · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Energizing soundscape; no medical claims.",
+      "goals": [
+        "energy",
+        "morning",
+        "confidence"
+      ],
+      "genres": [
+        "Electronic",
+        "Dance-pop"
+      ],
+      "artist": "Frequency Originals",
+      "world": "iron-horizon",
+      "worlds": [
+        "iron-horizon"
+      ],
+      "audio": "audio/timekeeper-audio-solar-plexus-golden-fire.mp3",
+      "image": "artwork/timekeeper-audio-solar-plexus-golden-fire.jpg",
+      "duration": 159.79,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
+    },
+    {
+      "id": "timekeeper-audio-turquoise-truth-awakening",
+      "title": "Turquoise Truth Awakening",
+      "subtitle": "Gentle · soundscape",
+      "description": "Original Timekeeper listening audio, now available in Frequency. Gentle soundscape; no medical claims.",
+      "goals": [
+        "calm",
+        "morning",
+        "sleep"
+      ],
+      "genres": [
+        "Ambient",
+        "Orchestral"
+      ],
+      "artist": "Frequency Originals",
+      "world": "ether-codes",
+      "worlds": [
+        "ether-codes"
+      ],
+      "audio": "audio/timekeeper-audio-turquoise-truth-awakening.mp3",
+      "image": "artwork/timekeeper-audio-turquoise-truth-awakening.jpg",
+      "duration": 68.67,
+      "source": "Frequency Beta44",
+      "lyrics": "",
+      "type": "soundscape"
     }
-  ]
+  ],
+  "new_count": 0
 }

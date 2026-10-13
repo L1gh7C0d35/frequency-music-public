@@ -1,54 +1,75 @@
 #!/usr/bin/env python3
-"""Build public listening catalog only from audio and approved-to-be-public existing artwork.
-Uses files that were already in the public music Pages repository. Never scans private label catalog.
+"""Build public Frequency preview from explicitly published web assets.
+
+The app-track-export.json is a snapshot from the shipped Frequency app, not
+a live connection to the developer Mac. New songs only enter from audio/new/
+(a deliberately public upload folder). This runs on GitHub Actions.
 """
-import json,re,subprocess
+import json, subprocess,re
 from pathlib import Path
-from html import unescape
+from datetime import datetime,timezone
 ROOT=Path(__file__).resolve().parents[1]
-WORLD={
- "velvet-sun":dict(name="Velvet Sun",short="Soul & light",subtitle="Warm soul · possibility · gratitude",description="Warmth, gratitude, and the feeling of something good arriving.",image="artwork/already-grateful.jpg",track_ids=["already-arrived","already-grateful","gold-on-my-mind","light-finds-me","open-to-more","everything-opens","i-give-the-signal"]),
- "iron-horizon":dict(name="Iron Horizon",short="Courage & rise",subtitle="Cinematic · courage · conviction",description="For the moments you choose to keep going.",image="artwork/crowned-by-fire.jpg",track_ids=["crowned-by-fire","storm-in-my-blood","i-do-not-break","made-of-mountains","pressure-into-power","watch-me-build","command-the-day","i-decide"]),
- "quiet-atlas":dict(name="Quiet Atlas",short="Calm & depth",subtitle="Stillness · reflection · deep focus",description="A quieter world with more room to breathe.",image="artwork/quiet-empire.jpg",track_ids=["quiet-empire","built-in-silence","future-in-the-room","soft-life-strong-mind","this-is-my-normal"]),
- "electric-bloom":dict(name="Electric Bloom",short="Energy & motion",subtitle="Rhythm · energy · celebration",description="Movement for the life you're making.",image="artwork/golden-hour.jpg",track_ids=["momentum-is-mine","money-meets-motion","run-with-the-light","golden-hour","move-like-money","luck-follows-action","built-for-this","the-room-changes"]),
-}
-# Sound worlds are editorial clusters, not claimed individual artist credits.
-LEGACY=(ROOT/"legacy-library.html").read_text()
-METADATA={}
-for article in re.findall(r'<article class="song".*?</article>',LEGACY,re.S):
-    slug=re.search(r'data-slug="([^"]+)"',article)
-    if not slug: continue
-    duration=re.search(r'<div class="sub">([^<]+)</div>',article)
-    description=re.search(r'<p class="desc">([^<]+)</p>',article)
-    title=re.search(r'data-title="([^"]+)"',article)
-    METADATA[slug.group(1)]={
-       "subtitle":unescape(duration.group(1).strip()) if duration else "",
-       "description":unescape(description.group(1).strip()) if description else "",
-       "title":unescape(title.group(1).strip()) if title else ""
-    }
+SOURCE=ROOT/'app-track-export.json'
+PREVIEW=ROOT/'audio'/'new'
+VALID={'.m4a','.mp3','.wav','.ogg','.aac','.flac'}
 def duration(path):
+    # ffprobe is optional; browser will load real duration for new tracks.
+    if not __import__('shutil').which('ffprobe'):return None
     try:
-        r=subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","default=noprint_wrappers=1:nokey=1",str(path)],capture_output=True,text=True,timeout=4)
-        return int(round(float(r.stdout.strip())))
+        p=subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1:nokey=1',str(path)],capture_output=True,text=True,timeout=6)
+        return round(float(p.stdout.strip()),2)
     except Exception:return None
-seen=set()
-tracks=[]
-for world_id,world in WORLD.items():
- for slug in world["track_ids"]:
-  audio=ROOT/"audio"/(slug+".m4a")
-  cover=ROOT/"artwork"/(slug+".jpg")
-  if not (audio.is_file() and cover.is_file()):
-   print("SKIP missing public asset",slug);continue
-  if slug in seen: raise ValueError("Duplicate song "+slug)
-  seen.add(slug)
-  old=METADATA.get(slug,{})
-  dur=duration(audio)
-  nice=old.get("title") or " ".join(w.upper() if w=="i" else w.capitalize() for w in slug.split("-"))
-  tracks.append(dict(id=slug,title=nice,world=world_id,artist="Frequency Originals",image="artwork/"+slug+".jpg",
-                     audio="audio/"+slug+".m4a",duration=dur,subtitle=world["subtitle"],
-                     description=old.get("description") or world["description"]))
-result=dict(version=1,collection="Frequency Listening Room",worlds=[
- dict(id=k,**{i:v for i,v in val.items() if i!="track_ids"},count=sum(t["world"]==k for t in tracks)) for k,val in WORLD.items()
-],tracks=tracks)
-(ROOT/"listening-catalog.json").write_text(json.dumps(result,indent=2,ensure_ascii=False)+"\n")
-print("Wrote",len(tracks),"songs across",len(WORLD),"worlds")
+def title_from_name(stem):
+    acronyms={'i':'I','ai':'AI','dj':'DJ'}
+    return ' '.join(acronyms.get(x,x.capitalize()) for x in stem.lower().replace('_','-').split('-'))
+def build():
+    app=json.loads(SOURCE.read_text())
+    worlds=[]
+    for w in app['worlds']:
+        ids=w.get('track_ids',[])
+        # Hero art links to an existing public artwork, not a hypothetical performer.
+        valid=[x for x in ids if (ROOT/'artwork'/(x+'.jpg')).is_file()]
+        world=dict(id=w['id'],name=w['name'],subtitle=w['subtitle'],
+                   description=w['musicalSignature'],visual=w['visualSignature'],
+                   image='artwork/'+valid[0]+'.jpg' if valid else 'artwork/fresh-cuts.svg',
+                   count=0)
+        worlds.append(world)
+    tracks=[]
+    for record in app['tracks']:
+        if not (ROOT/record['audio']).is_file():raise ValueError('Audio missing for app song: '+record['id'])
+        if not (ROOT/record['image']).is_file():raise ValueError('Artwork missing for app song: '+record['id'])
+        tracks.append(record.copy())
+    extras=[]
+    if PREVIEW.is_dir():
+        for p in sorted(PREVIEW.iterdir()):
+            if not p.is_file() or p.suffix.lower() not in VALID:continue
+            stem=p.stem
+            safe=re.fullmatch(r'[a-z0-9][a-z0-9-]{0,90}',stem)
+            if not safe:raise ValueError('Use lowercase hyphenated filenames for public uploads: '+p.name)
+            ident='new-'+stem
+            side=PREVIEW/(stem+'.json')
+            metadata=json.loads(side.read_text()) if side.is_file() else {}
+            world=metadata.get('world','fresh-cuts')
+            if world not in {w['id'] for w in worlds}:world='fresh-cuts'
+            cover=ROOT/'artwork'/'new'/(stem+'.jpg')
+            if not cover.is_file():cover=ROOT/'artwork'/'new'/(stem+'.png')
+            cover_name=str(cover.relative_to(ROOT)) if cover.is_file() else 'artwork/fresh-cuts.svg'
+            extras.append(dict(id=ident,title=metadata.get('title') or title_from_name(stem),
+                subtitle=metadata.get('subtitle') or 'New listening preview',
+                description=metadata.get('description') or 'Fresh music for feedback and testing.',
+                world=world,worlds=[world],artist='Frequency Originals',
+                goals=metadata.get('goals') or [],genres=metadata.get('genres') or ['Preview'],
+                audio=str(p.relative_to(ROOT)),image=cover_name,duration=duration(p),
+                source='Public preview upload',type='song',new=True))
+    if extras:
+        worlds.append(dict(id='fresh-cuts',name='Fresh Cuts',subtitle='Latest uploads · listen & respond',
+             description='New tracks uploaded for listening and feedback.',
+             visual='Artwork pending final review',image='artwork/fresh-cuts.svg',count=0))
+        tracks=extras+tracks
+    for w in worlds:w['count']=sum(1 for t in tracks if w['id'] in t.get('worlds',[t['world']]))
+    # This artifact is plain JSON with no secrets, owner data, private master paths, or lyrics.
+    manifest={'version':3,'collection':'Frequency Originals · Android/iOS web preview',
+              'worlds':worlds,'tracks':tracks,'new_count':len(extras)}
+    (ROOT/'listening-catalog.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
+    print('Published catalog generated:',len(tracks),'songs,',len(worlds),'worlds,',len(extras),'new preview uploads')
+if __name__=='__main__':build()

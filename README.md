@@ -1,41 +1,38 @@
-# Frequency · Listening Room
+# Frequency — Android Music Companion (Beta 44)
 
-Public, mobile-first listening space for the tracks already published at:
+Public test link: https://l1gh7c0d35.github.io/frequency-music-public/
 
-**https://l1gh7c0d35.github.io/frequency-music-public/**
+This is a web listening and testing companion, not the compiled native Frequency iOS app. It supports Android Chrome and iPhone Safari.
 
-This GitHub Pages site is a *music listening and feedback preview*, not the private Music Label release dashboard. Spotify, YouTube distributor submissions, rights review, and Content ID do not happen here.
+## What works
+- Five app-style tabs: Home, Rituals, Sounds, Words and You.
+- Full Beta44 collection of 61 tracks (including Timekeeper soundscapes), 10 editorial artist worlds, with the same cover art and descriptions as Frequency.
+- Mini-player and full-screen player, play, pause, seek, next/previous, shuffle, repeat and queue.
+- Feelings/mood filters, music versus soundscape filters, searchable library.
+- Favorites, Keep/Potential/Pass ratings and listening notes in each phone's own local storage. Export feedback JSON when you want to share it.
+- Text lyrics for 28 songs; word-by-word timing remains pending verification (we do not fake karaoke highlighting).
+- A simplified browser Rituals listening timer (3/5/10/20 minutes), plus modes. It is not an OS alarm.
+- Android Home Screen install manifest. Playback requires a connection; music is not bulk-downloaded offline.
 
-## Experience
-- Responsive dark, cinematic interface inspired by Frequency's sound worlds and Timekeeper's music player
-- Hero feature, four coherent *editorial* worlds (Velvet Sun, Iron Horizon, Quiet Atlas, Electric Bloom)
-- Browse, search, play/pause, seek, next/previous, repeat, shuffle, queue
-- Miniplayer and immersive Now Playing, Media Session controls where supported
-- Favorites and listening notes saved on-device with localStorage
-- Export listening notes using iOS Share Sheet (where supported) or downloaded JSON; **no remote collection server**
-- Deep share links with ?track=slug (never auto-play on opening a link)
-- All audio/artwork references point to files already in this public repository
+## New songs automatically appear after upload
+GitHub Actions builds the public catalog when files are pushed to main. A song intentionally uploaded into the public audio/new folder is included under Fresh Cuts automatically; artwork in artwork/new with the same stem is optional. Add a matching JSON file with title, world and description if desired.
 
-Sound worlds are not verified musician identities or official streaming-artist profiles. Existing music credits read **Frequency Originals**.
+For owner uploads from the Mac:
 
-## Architecture
-- `index.html` — primary responsive listening site
-- `music.html` — compatibility redirect for old share links
-- `listening-room.css` and `listening-room.js` — presentation and player controls
-- `listening-catalog.json` — deterministic catalog of public tracks
-- `scripts/build_listening_catalog.py` — recreates catalog from existing public audio/artwork; parses metadata from `legacy-library.html` after migration
-- `scripts/test_listening_room.py` — source integrity smoke tests
-- `legacy-library.html` / `legacy-music.html` — prior listening homepage versions, retained for reference
-- Standalone `song-*.html` and test lab pages remain in place.
+    cd /Users/darbybeenken/Developer/frequency-music-public
+    python3 scripts/publish_new_song.py --audio "/path/new-song.wav" --title "New Song"
+    python3 scripts/publish_new_song.py --audio "/path/new-song.wav" --title "New Song" --publish
 
-## Update and test
-```sh
-python3 scripts/build_listening_catalog.py
-python3 -m unittest discover -s scripts -p 'test_listening_room.py' -v
-node --check listening-room.js
-python3 -m http.server 8765
-```
-Open http://127.0.0.1:8765 to preview locally. The website itself does not need Node or Python at runtime.
+Without --publish it is only a dry run. Publication is PUBLIC: people on the internet can reach audio files from the repo. Do not upload private/unapproved Flow drafts, credentials or rights paperwork.
 
-## Public / private boundary
-**Do not** upload unreleased Flow outputs, master files, rights documents, private studio database or user feedback exports to this public repo. Publish only music and artwork consciously selected for public listening. Keep approval and rights tracking in `/Users/darbybeenken/Developer/Music-Label`.
+This website runs in GitHub Pages without private servers. It cannot upload songs directly from a visitor's browser. You can add files with GitHub's upload interface, and a push automatically updates the website. The app code and assets are synced manually from Frequency Beta44 with scripts/sync_from_frequency.py when a newer build contains additional music.
+
+## Test locally
+    python3 scripts/build_listening_catalog.py
+    python3 -m unittest discover -s scripts -p 'test_listening_room.py' -v
+    node --check listening-room.js
+    node --check frequency-parity.js
+
+GitHub Actions reruns catalog building and tests for each push.
+
+Private release workflow: /Users/darbybeenken/Developer/Music-Label. This public website does NOT submit to Spotify, YouTube, distributors, Content ID or claim copyright ownership.

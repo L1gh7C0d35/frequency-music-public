@@ -80,8 +80,11 @@
   }
   function currentList() {
     return state.tracks.filter(t=>{
+      if(state.previewType && state.previewType!=='all' && t.type!==state.previewType)return false;
+      if(state.previewGoal && state.previewGoal!=='all' && !(t.goals||[]).includes(state.previewGoal))return false;
+      if(state.previewRecent && !t.new)return false;
       if (state.favoritesOnly && !state.favorites.has(t.id)) return false;
-      if (state.filter!=='all' && t.world!==state.filter) return false;
+      if (state.filter!=='all' && !(t.world===state.filter||(t.worlds||[]).includes(state.filter))) return false;
       const q=state.query.toLowerCase().trim();
       return !q || [t.title,t.subtitle,t.description,world(t.world)?.name].some(s=>String(s||'').toLowerCase().includes(q));
     });
@@ -378,12 +381,15 @@
       if(!response.ok)throw Error('Music library '+response.status);
       const data=await response.json();
       state.tracks=data.tracks||[];state.worlds=data.worlds||[];
+      state.featuredIds=[...state.tracks.filter(x=>x.new).map(x=>x.id).slice(0,2),...state.featuredIds].slice(0,5);
       state.byId=new Map(state.tracks.map(t=>[t.id,t]));
       const feature=state.byId.get('already-arrived')||state.tracks[0];
       if(feature){$('heroCover').src=feature.image;$('heroBack').style.backgroundImage='url("'+feature.image+'")';}
       renderWorlds();renderPicks();renderLibrary();syncModes();syncPlayState();
       const id=new URL(location.href).searchParams.get('track');
       if(id&&state.byId.has(id)){queueFromContext(id);loadTrack(id,false);openNow();}
+      window.FrequencyPreview={state,playTrack,loadTrack,requestPlay,togglePlay,next,nav,chooseWorld,renderLibrary,renderPicks,openNow,closeNow,openReview,exportFeedback,share,trackUrl,world,toggleFavorite,currentList,toast};
+      document.dispatchEvent(new CustomEvent('frequency:ready',{detail:{count:state.tracks.length}}));
     } catch(err) {
       $('trackList').innerHTML='<div class="empty-state" style="display:block"><h3>Unable to load the listening library.</h3><p>Please reload the page or try again with a connection.</p></div>';
       $('worldGrid').textContent='The music library is temporarily unavailable.';
