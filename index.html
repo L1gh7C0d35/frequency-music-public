@@ -14,10 +14,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="listening-room.css?v=20261013flow1">
-  <link rel="stylesheet" href="frequency-parity.css?v=20261013flow1">
-  <script src="listening-room.js?v=20261013flow1" defer></script>
-  <script src="frequency-parity.js?v=20261013flow1" defer></script>
+  <link rel="stylesheet" href="listening-room.css?v=20261013lyrics1">
+  <link rel="stylesheet" href="frequency-parity.css?v=20261013lyrics1">
+  <script src="listening-room.js?v=20261013lyrics1" defer></script>
+  <script src="frequency-parity.js?v=20261013lyrics1" defer></script>
 </head>
 <body>
 <div class="app-shell">
@@ -165,7 +165,12 @@
     </div>
     <div id="shortSoundscapeHint" class="short-soundscape-hint" hidden><span id="shortSoundscapeCopy">Short original recording</span><button type="button" id="shortSoundscapeLoop" aria-pressed="false">↻ Loop continuously</button></div>
     <button id="nowBrowse" class="now-browse" type="button">← Explore all music</button>
-    <div class="now-bottom"><button id="nowReview">✧ Keep / Maybe / Pass</button><span id="playState">YOUR LISTENING MOMENT</span><button id="nowLyrics">❝ Lyrics</button><button id="nowQueue">☷ Up next</button></div>
+    <div class="now-bottom"><button id="nowReview">✧ Keep / Maybe / Pass</button><span id="playState">YOUR LISTENING MOMENT</span><button id="nowLyrics">↓ Lyrics</button><button id="nowQueue">☷ Up next</button></div>
+    <section id="nowLyricsSection" class="now-lyrics-section" aria-label="Song lyrics" hidden>
+      <div class="now-lyrics-heading"><div><span class="section-eyebrow">SING ALONG</span><h3>Lyrics</h3></div><button id="nowLyricFollow" type="button" aria-pressed="false" hidden>◉ Follow words</button></div>
+      <p id="nowLyricsStatus" class="now-lyrics-status">Lyrics provided with this recording</p>
+      <div id="nowLyricsText" class="now-lyrics-text" aria-label="Full song lyrics"></div>
+    </section>
   </div>
 </div>
 <div class="modal-backdrop" id="feedbackModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Your listening notes">

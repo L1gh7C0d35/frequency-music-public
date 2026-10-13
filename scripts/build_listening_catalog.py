@@ -5,12 +5,13 @@ The app-track-export.json is a snapshot from the shipped Frequency app, not
 a live connection to the developer Mac. New songs only enter from audio/new/
 (a deliberately public upload folder). This runs on GitHub Actions.
 """
-import json, subprocess,re
+import json, subprocess,re,hashlib
 from pathlib import Path
 from datetime import datetime,timezone
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'app-track-export.json'
 FLOW_METADATA=ROOT/'flow-song-metadata.json'
+LYRIC_TIMINGS=ROOT/'word-timing'
 PREVIEW=ROOT/'audio'/'new'
 VALID={'.m4a','.mp3','.wav','.ogg','.aac','.flac'}
 def duration(path):
@@ -52,6 +53,18 @@ def build():
         enriched=record.copy()
         if record['id'] in flow_metadata:
             enriched.update(flow_metadata[record['id']])
+        timeline=LYRIC_TIMINGS/(record['id']+'.json')
+        if timeline.is_file() and record.get('lyrics'):
+            data=json.loads(timeline.read_text())
+            current_lyrics=hashlib.sha256(record['lyrics'].encode()).hexdigest()
+            current_audio=hashlib.sha256((ROOT/record['audio']).read_bytes()).hexdigest()
+            if data['lyrics_hash']==current_lyrics and data['audio_sha256']==current_audio:
+                if data.get('match_ratio',0)>=0.60:
+                    enriched['wordTimes']=data['word_times']
+                    enriched['wordTimingQuality']=data['match_ratio']
+                    enriched['wordTimingSource']='offline automatic Whisper alignment · needs human verification'
+            else:
+                print('Stale lyric timing skipped:',record['id'])
         tracks.append(enriched)
     extras=[]
     if PREVIEW.is_dir():
@@ -84,6 +97,16 @@ def build():
              description='New tracks uploaded for listening and feedback.',
              visual='Artwork pending final review',image='artwork/fresh-cuts.svg',count=0))
         tracks=extras+tracks
+    # A creator-confirmed shared voice must never be separated into different
+    # artist worlds by future uploads or by a catalog sync.
+    voices={}
+    for record in tracks:
+        voice=record.get('voice_group')
+        if voice:
+            voices.setdefault(voice,set()).add(record['world'])
+    for voice,world_ids in voices.items():
+        if len(world_ids)!=1:
+            raise ValueError(f'Same singer scattered across artist worlds: {voice}: {world_ids}')
     for w in worlds:w['count']=sum(1 for t in tracks if w['id'] in t.get('worlds',[t['world']]))
     # This artifact is plain JSON with no secrets, owner data, private master paths, or lyrics.
     manifest={'version':3,'collection':'Frequency Originals · Android/iOS web preview',

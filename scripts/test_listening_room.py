@@ -100,6 +100,51 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertNotEqual(covers['golden-current'],covers['future-signal'])
         self.assertIn('this-is-my-normal',covers['future-signal'])
 
+    def test_creator_confirmed_528_singer_pair_is_together(self):
+        ids=('timekeeper-audio-528-hz-sacred-grace',
+             'timekeeper-audio-528-hz-miracle-awakening')
+        songs=[next(x for x in self.data['tracks'] if x['id']==i) for i in ids]
+        self.assertEqual([x['world'] for x in songs],['golden-current']*2)
+        self.assertEqual([x['voice_group'] for x in songs],['golden-current-528-singer']*2)
+        self.assertTrue(all('Creator confirmed' in x['voice_match_provenance'] for x in songs))
+        golden=next(w for w in self.data['worlds'] if w['id']=='golden-current')
+        ether=next(w for w in self.data['worlds'] if w['id']=='ether-codes')
+        self.assertEqual(golden['count'],8)
+        self.assertEqual(ether['count'],5)
+        import json
+        app=json.loads((ROOT/'app-track-export.json').read_text())
+        source={w['id']:w for w in app['worlds']}
+        self.assertTrue(all(i in source['golden-current']['track_ids'] for i in ids))
+        self.assertTrue(all(i not in source['ether-codes']['track_ids'] for i in ids))
+
+    def test_lyrics_match_source_word_counts_without_invented_times(self):
+        from align_word_lyrics import lines_to_words
+        tracks=[t for t in self.data['tracks'] if t.get('lyrics','').strip()]
+        self.assertEqual(len(tracks),28)
+        synced=[t for t in tracks if t.get('wordTimes')]
+        self.assertGreaterEqual(len(synced),25)
+        for t in synced:
+            with self.subTest(title=t['title']):
+                words=lines_to_words(t['lyrics'])
+                stamps=t['wordTimes']
+                self.assertEqual(len(stamps),len(words))
+                self.assertGreaterEqual(t['wordTimingQuality'],0.6)
+                self.assertTrue(all(x is None or
+                    (len(x)==2 and 0<=x[0]<x[1]<=t['duration']+5) for x in stamps))
+                self.assertIn('automatic',t['wordTimingSource'])
+        html=self.html
+        self.assertIn('id="nowLyricsSection"',html)
+        self.assertIn('id="nowLyricsText"',html)
+        self.assertIn('id="nowLyricFollow"',html)
+        source=(ROOT/'listening-room.js').read_text()
+        self.assertIn('function syncNowLyrics()',source)
+        self.assertIn('renderNowLyrics(t);',source)
+        self.assertIn('Automatic lyric timing preview',source)
+        self.assertIn('The original Flow Music page has song details',source)
+        css=(ROOT/'frequency-parity.css').read_text()
+        self.assertIn('max-height:none',css)
+        self.assertIn('.lyric-word.is-current',css)
+
     def test_links_and_controls(self):
         for path in ('listening-room.css','listening-room.js','frequency-parity.js','frequency-parity.css','manifest.webmanifest','sw.js','music.html','studio.html','legacy-library.html'):
             self.assertTrue((ROOT/path).is_file())

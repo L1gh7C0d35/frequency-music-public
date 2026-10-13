@@ -103,3 +103,31 @@ audio/new/slug.json with title, world, sound, source_url, experiences,
 instruments, bpm and description. The automated publish workflow generates
 that new track's share page. Private Flow drafts stay private until approved.
 Editorial sound worlds are not fake verified human performer identities.
+
+
+## Creator-confirmed singer pairing and inline lyric sync (October 2026)
+
+The creator confirmed the same vocal identity performs both 528 Hz Sacred
+Grace and 528 Hz Miracle Awakening. Both tracks belong to Golden Current
+in Frequency's native artist-world catalog and public web snapshot.
+The metadata gives them the same voice_group with creator provenance.
+The website build refuses shared-voice pairs split across artist worlds.
+
+The now-playing page scrolls naturally, displays the entire SOUND
+description, and shows original lyric text underneath its controls
+without navigating away. Automatic word timing is generated offline
+from the exact recorded master and the creator-approved lyric sheet.
+Only exactly matched Whisper-transcribed lyric words receive timestamps;
+unmatched words have no fabricated timing. SHA-256 source hashes in the
+timing files prevent stale data when a master or its lyrics change.
+
+All 28 vocal originals have timing drafts. The 27 with at least 60%
+exact word matching show timed preview highlighting and an optional
+auto-follow reader; a track below threshold displays its lyrics without
+automatic highlighting. These are explicitly identified as unverified
+automatic previews, not professional karaoke masters. Manual scrolling
+turns auto-follow off; no word causes layout reflow.
+
+Flow 528 Hz sound-bath recordings currently lack full lyric sheets in
+the app export, so the player does not invent karaoke for them.
+Sacred Grace instead links to its source Flow Music song page.

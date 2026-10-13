@@ -123,6 +123,8 @@
   }
   let toastTimer;
   let playbackToken=0;
+  let currentLyricIndex=-1;
+  let currentLyricLine=null;
   function toast(message) {
     const el = $('toast');
     el.textContent = message; el.hidden = false;
@@ -285,6 +287,7 @@
       $('nowWorld').textContent=(world(t.world)?.name||'Frequency')+' · '+(world(t.world)?.subtitle||'');
       $('nowArtist').textContent='View '+(world(t.world)?.name||'artist')+' songs ↗';
       $('nowSound').textContent=t.sound||t.description||'Original Frequency music';
+      renderNowLyrics(t);
       syncShortSoundscape(t);
       $('miniCover').src=t.image;$('miniTitle').textContent=t.title;
       $('miniSubtitle').textContent=world(t.world)?.name||t.artist;
@@ -373,6 +376,89 @@
     $('playState').textContent=loading?'CONNECTING TO AUDIO…':state.playing?'NOW PLAYING':'READY TO LISTEN';
     if('mediaSession' in navigator)navigator.mediaSession.playbackState=state.playing?'playing':'paused';
   }
+  function renderNowLyrics(t) {
+    const section=$('nowLyricsSection');
+    const content=$('nowLyricsText');
+    const follow=$('nowLyricFollow');
+    const lines=String(t?.lyrics||'').replace(/\r/g,'').trim().split('\n');
+    const hasLyrics=!!String(t?.lyrics||'').trim();
+    // An original Flow page may have a lyric sheet even when the app's source
+    // export omitted it. Say so visibly, but never manufacture lyric text.
+    const flowSource=String(t?.source_url||'');
+    const pendingLyrics=!hasLyrics && /^https:\/\/(www\.)?flowmusic\.app\/song\//i.test(flowSource);
+    section.hidden=!(hasLyrics||pendingLyrics);
+    $('nowLyrics').hidden=!(hasLyrics||pendingLyrics);
+    if(!hasLyrics){
+      content.innerHTML=pendingLyrics
+        ? '<p class="lyric-line">The original Flow Music page has song details, but the complete lyric sheet has not been imported into Frequency yet. Word-by-word highlighting will appear after that lyric sheet is available and checked against the audio.</p>'+
+          '<p class="lyric-line"><a class="lyric-source" href="'+safeText(flowSource)+'" target="_blank" rel="noopener noreferrer">Open original Flow Music song ↗</a></p>'
+        : '';
+      $('nowLyricsStatus').textContent='Lyrics not yet imported · no invented timing';
+      follow.hidden=true;
+      currentLyricIndex=-1;currentLyricLine=null;
+      return;
+    }
+    let index=0;
+    const aligned=Array.isArray(t.wordTimes)&&t.wordTimes.length>0 &&
+      Number(t.wordTimingQuality||0)>=0.60;
+    const html=lines.map(line=>{
+      const trimmed=line.trim();
+      if(!trimmed)return '<div class="lyric-line lyric-gap" aria-hidden="true"></div>';
+      if(/^\[[^\]]+\]$/.test(trimmed)){
+        return '<p class="lyric-line section-heading">'+safeText(trimmed.slice(1,-1))+'</p>';
+      }
+      const spans=trimmed.split(/\s+/).map(token=>{
+        const i=index++;
+        return '<span class="lyric-word" data-lyric-word="'+i+'">'+safeText(token)+'</span>';
+      });
+      return '<p class="lyric-line">'+spans.join(' ')+'</p>';
+    }).join('');
+    content.innerHTML=html;
+    const usable=aligned&&t.wordTimes.length===index;
+    follow.hidden=!usable;
+    // A synced song follows the current line automatically, unless the user
+    // decides to browse the lyrics manually.
+    follow.setAttribute('aria-pressed',String(usable));
+    follow.textContent=usable?'✓ Following words':'◉ Follow words';
+    $('nowLyricsStatus').textContent=usable
+      ? 'Automatic lyric timing preview · sung words may differ from the lyric sheet'
+      : 'Full lyrics · word timing not available for this recording';
+    currentLyricIndex=-1;currentLyricLine=null;
+    if(usable)syncNowLyrics();
+  }
+  function syncNowLyrics() {
+    const t=selected();
+    if(!t || $('nowLyricsSection').hidden || $('nowLyricFollow').hidden ||
+      !Array.isArray(t.wordTimes))return;
+    const position=Number.isFinite(audio.currentTime)?audio.currentTime:0;
+    // A word turns gold only at its measured Whisper interval. Gaps in the
+    // alignment remain unhighlighted, not guessed or stretched.
+    let index=-1;
+    for(let i=0;i<t.wordTimes.length;i++){
+      const interval=t.wordTimes[i];
+      if(interval && position>=interval[0] && position<interval[1]){index=i;break;}
+    }
+    if(index===currentLyricIndex)return;
+    if(currentLyricIndex>=0){
+      $('nowLyricsText').querySelector('[data-lyric-word="'+currentLyricIndex+'"]')?.classList.remove('is-current');
+    }
+    currentLyricIndex=index;
+    const node=index>=0?$('nowLyricsText').querySelector('[data-lyric-word="'+index+'"]'):null;
+    node?.classList.add('is-current');
+    const line=node?.closest('.lyric-line')||null;
+    if(currentLyricLine && currentLyricLine!==line)currentLyricLine.classList.remove('is-active');
+    if(line)line.classList.add('is-active');
+    if(line && line!==currentLyricLine &&
+       $('nowLyricFollow').getAttribute('aria-pressed')==='true' &&
+       $('nowOverlay').classList.contains('open')){
+      const overlay=$('nowOverlay');
+      const target=line.getBoundingClientRect().top-
+        overlay.getBoundingClientRect().top+overlay.scrollTop-
+        overlay.clientHeight*.40;
+      overlay.scrollTo({top:Math.max(0,target),behavior:'smooth'});
+    }
+    currentLyricLine=line;
+  }
   function updateProgress() {
     const duration=Number.isFinite(audio.duration)?audio.duration:(selected()?.duration||0);
     const current=Number.isFinite(audio.currentTime)?audio.currentTime:0;
@@ -380,6 +466,7 @@
     $('nowSeek').style.background='linear-gradient(to right,#ead1b3 0 '+(duration>0?current/duration*100:0)+'%,#c6c3bc30 0 100%)';
     $('elapsed').textContent=fmt(current);$('remaining').textContent='-'+fmt(Math.max(0,duration-current));
     $('miniBar').style.width=(duration>0?Math.min(100,current/duration*100):0)+'%';
+    syncNowLyrics();
   }
   function openNow(){
     if(!state.current)return;
@@ -501,6 +588,22 @@
     $('nowHeart').onclick=()=>{if(state.current)toggleFavorite(state.current);};
     $('nowArtist').onclick=()=>{if(!state.current)return;closeNow();showWorld(selected().world);};
     $('nowBrowse').onclick=()=>{closeNow();resetLibrary();window.FrequencyWebNavigation?.tab?.('sounds');$('library').scrollIntoView({behavior:'smooth'});};
+    $('nowLyricFollow').onclick=()=>{
+      const button=$('nowLyricFollow');
+      const following=button.getAttribute('aria-pressed')!=='true';
+      button.setAttribute('aria-pressed',String(following));
+      button.textContent=following?'✓ Following words':'◉ Follow words';
+      if(following)syncNowLyrics();
+    };
+    const stopFollowing=()=>{
+      if(!$('nowLyricFollow').hidden){
+        $('nowLyricFollow').setAttribute('aria-pressed','false');
+        $('nowLyricFollow').textContent='◉ Follow words';
+      }
+    };
+    // Preserve the listener's chosen scroll position while reading back.
+    $('nowLyricsText').addEventListener('touchstart',stopFollowing,{passive:true});
+    $('nowLyricsText').addEventListener('wheel',stopFollowing,{passive:true});
     document.querySelectorAll('[data-experience]').forEach(b=>b.onclick=()=>{
       state.previewExperience=b.dataset.experience;
       if(state.previewExperience!=='all'){

@@ -13,6 +13,12 @@
       "sound-bath"
     ],
     "metadata_provenance": "Flow Music song page screenshot supplied by creator, October 13, 2026",
-    "notice": "The word 'healing' is part of the original music-creation description, not a validated medical claim."
+    "notice": "The word 'healing' is part of the original music-creation description, not a validated medical claim.",
+    "voice_group": "golden-current-528-singer",
+    "voice_match_provenance": "Creator confirmed this is the same singer as 528 Hz Miracle Awakening, October 13 2026."
+  },
+  "timekeeper-audio-528-hz-miracle-awakening": {
+    "voice_group": "golden-current-528-singer",
+    "voice_match_provenance": "Creator confirmed this is the same singer as 528 Hz Sacred Grace, October 13 2026."
   }
 }

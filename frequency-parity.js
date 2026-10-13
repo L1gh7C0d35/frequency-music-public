@@ -146,11 +146,13 @@
     });
     $('noteWords').addEventListener('click',()=>{const id=$('wordsSong').value;if(id&&app.state.byId.has(id))app.loadTrack(id,false);app.openReview();});
     $('nowLyrics').addEventListener('click',()=>{
-      const id=app.state.current;
-      app.closeNow();tab('words');
-      if(id&&Array.from($('wordsSong').options).some(o=>o.value===id)){
-        $('wordsSong').value=id;renderLyrics();
-      } else app.toast('This track has no text lyrics; choose another song above.');
+      if($('nowLyricsSection').hidden){
+        app.toast('This recording has no lyrics to display.');
+      } else {
+        // Stay in the player with the music playing, scroll the lyrics below
+        // the controls into view, rather than navigating away to Words.
+        $('nowLyricsSection').scrollIntoView({behavior:'smooth',block:'start'});
+      }
     });
     $('youOpenFavorites').addEventListener('click',()=>shortCut('favorites'));
     $('youOpenFeedback').addEventListener('click',app.openReview);

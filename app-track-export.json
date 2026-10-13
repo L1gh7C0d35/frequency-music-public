@@ -1161,9 +1161,9 @@
         "Soundscape"
       ],
       "artist": "Frequency Originals",
-      "world": "ether-codes",
+      "world": "golden-current",
       "worlds": [
-        "ether-codes"
+        "golden-current"
       ],
       "audio": "audio/timekeeper-audio-528-hz-miracle-awakening.mp3",
       "image": "artwork/timekeeper-audio-528-hz-miracle-awakening.jpg",
@@ -1669,6 +1669,7 @@
         "timekeeper-audio-golden-ratio-harmonic-bloom",
         "timekeeper-audio-432-hz-crystal-abundance",
         "timekeeper-audio-528-hz-sacred-grace",
+        "timekeeper-audio-528-hz-miracle-awakening",
         "timekeeper-audio-639-hz-golden-harmonic-dawn",
         "timekeeper-audio-963-hz-celestial-horizon",
         "timekeeper-audio-417-hz-radiant-renewal",
@@ -1735,7 +1736,6 @@
       "track_ids": [
         "timekeeper-audio-111-hz-cellular-rejuvenation",
         "timekeeper-audio-396-hz-grounded-foundation",
-        "timekeeper-audio-528-hz-miracle-awakening",
         "timekeeper-audio-741-hz-intuitive-vision",
         "timekeeper-audio-852-hz-spiritual-oneness",
         "timekeeper-audio-turquoise-truth-awakening"
