@@ -27,6 +27,10 @@ jobs:
           rsync -a --exclude='.git' --exclude='.github' --exclude='.site' --exclude='_site' --exclude='scripts' --exclude='README.md' --exclude='*.pyc' --exclude='__pycache__' ./ _site/
           test -f _site/index.html
           test -f _site/listening-catalog.json
+      - name: Build individual song share pages with artwork previews
+        run: |
+          python3 scripts/generate_song_pages.py --site-dir _site
+          test -f _site/song/timekeeper-audio-528-hz-sacred-grace/index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static site
