@@ -7,7 +7,7 @@
   const $ = id => document.getElementById(id);
   const audio = $('mainAudio');
   const state = {
-    tracks: [], worlds: [], byId: new Map(), current: null, playing: false,
+    tracks: [], worlds: [], byId: new Map(), current: null, playing: false, buffering: false,
     filter: 'all', query: '', favoritesOnly: false, favorites: new Set(),
     reviews: {}, shuffle: false, repeat: false, queue: [], modal: '',
     featuredIds: ['already-arrived','crowned-by-fire','golden-hour','quiet-empire','momentum-is-mine'],
@@ -118,6 +118,7 @@
     try { localStorage.setItem(STORAGE, JSON.stringify({favorites:Array.from(state.favorites), reviews:state.reviews})); } catch (_) {}
   }
   let toastTimer;
+  let playbackToken=0;
   function toast(message) {
     const el = $('toast');
     el.textContent = message; el.hidden = false;
@@ -245,8 +246,8 @@
   }
   function showTrack(id) {
     if(!state.byId.has(id))return;
-    if(state.current!==id)loadTrack(id,false);
-    openNow();
+    // Song title, cover and play icon should all behave as one-tap playback.
+    playTrack(id,true);
   }
   function queueFromContext(id) {
     const list=currentList().map(t=>t.id);
@@ -256,8 +257,16 @@
   function loadTrack(id,play=false) {
     const t=state.byId.get(id);if(!t)return;
     if(state.current!==id){
-      state.current=id; state.playing=false;
-      audio.pause();audio.src=t.audio;audio.load();
+      // Change audio source first. The playback request must happen within
+      // this same tap, BEFORE rendering 61 tracks and artwork on slow phones.
+      playbackToken++;
+      audio.pause();
+      state.current=id;state.playing=false;state.buffering=!!play;
+      const target=new URL(t.audio,location.href).href;
+      const alreadyWarmed=audio.src===target;
+      audio.preload='auto';
+      if(!alreadyWarmed)audio.src=t.audio;
+      if(play)requestPlay();
       $('nowArt').src=t.image;$('nowArt').alt=t.title+' artwork';
       $('nowBack').style.backgroundImage='url("'+t.image+'")';
       $('nowTitle').textContent=t.title;$('nowSub').textContent=t.artist;
@@ -268,26 +277,60 @@
       $('playState').textContent='READY TO LISTEN';
       setUrlTrack(id);updateMediaSession(t);renderLibrary();renderPicks();syncHearts();syncWorldPlayback();renderQueue();updateProgress();
     }
-    if(play)requestPlay();
+    if(play && !state.buffering && audio.paused)requestPlay();
     else syncPlayState();
   }
   function playTrack(id,expand=true) {
     if(!state.byId.has(id))return;
-    if(state.current===id && state.playing){audio.pause();if(expand)openNow();return;}
+    if(state.current===id && (state.playing||state.buffering)){
+      playbackToken++;state.buffering=false;audio.pause();syncPlayState();
+      if(expand)openNow();return;
+    }
     if(!state.queue.length || !state.queue.includes(id))queueFromContext(id);
     loadTrack(id,true);if(expand)openNow();
   }
-  async function requestPlay() {
+  function requestPlay() {
     if(!state.current) {
       const first=state.byId.get('already-arrived')||state.tracks[0];
-      if(!first)return;queueFromContext(first.id);loadTrack(first.id,false);
+      if(!first)return;
+      queueFromContext(first.id);
+      loadTrack(first.id,true);
+      return;
     }
-    try {await audio.play();}
-    catch(e){state.playing=false;syncPlayState();toast('Playback needs a tap, or this audio is unavailable.');}
+    const id=state.current;
+    const token=++playbackToken;
+    state.buffering=true;
+    document.body.classList.add('audio-buffering');
+    $('playState').textContent='CONNECTING TO AUDIO…';
+    // Must be called synchronously inside the user's touch/click handler.
+    // Delaying until after DOM work can lose gesture activation in browsers.
+    let result;
+    try {result=audio.play();}
+    catch(e){handlePlayError(e,id,token);return;}
+    if(result && typeof result.catch==='function'){
+      result.catch(e=>handlePlayError(e,id,token));
+    }
+    syncPlayState();
+  }
+  function handlePlayError(e,id,token){
+    if(token!==playbackToken || state.current!==id || e?.name==='AbortError')return;
+    state.buffering=false;state.playing=false;
+    syncPlayState();
+    const message=e?.name==='NotAllowedError'
+      ? 'Tap Play again. Your browser requires a direct gesture.'
+      : e?.name==='NotSupportedError'
+      ? 'This phone cannot decode the audio format.'
+      : 'Could not start audio. Check your connection and try Play again.';
+    toast(message);
+    $('playState').textContent='TAP PLAY TO RETRY';
   }
   function togglePlay() {
-    if(!state.current){const first=state.byId.get('already-arrived')||state.tracks[0];if(first)playTrack(first.id,true);}
-    else if(audio.paused)requestPlay();else audio.pause();
+    if(!state.current){
+      const first=state.byId.get('already-arrived')||state.tracks[0];
+      if(first)playTrack(first.id,true);
+    } else if(state.buffering || !audio.paused){
+      playbackToken++;state.buffering=false;audio.pause();syncPlayState();
+    } else requestPlay();
   }
   function next(back=false) {
     if(!state.tracks.length)return;
@@ -303,14 +346,16 @@
   }
   function syncPlayState() {
     state.playing=!!state.current && !audio.paused && !audio.ended;
-    const sym=state.playing?PAUSE:PLAY;
+    const loading=state.buffering && !audio.ended;
+    document.body.classList.toggle('audio-buffering',loading);
+    const sym=state.playing||loading?PAUSE:PLAY;
     document.querySelectorAll('.button-symbol').forEach(svg=>svg.innerHTML=sym);
-    $('miniPlay').setAttribute('aria-label',state.playing?'Pause':'Play');
-    $('nowPlay').setAttribute('aria-label',state.playing?'Pause':'Play');
+    $('miniPlay').setAttribute('aria-label',loading?'Cancel loading':state.playing?'Pause':'Play');
+    $('nowPlay').setAttribute('aria-label',loading?'Cancel loading':state.playing?'Pause':'Play');
     syncWorldPlayback();
     $('miniEq').classList.toggle('playing',state.playing);
     document.querySelector('.hero-art-caption .eq')?.classList.toggle('playing',state.playing);
-    $('playState').textContent=state.playing?'NOW PLAYING':'PAUSED';
+    $('playState').textContent=loading?'CONNECTING TO AUDIO…':state.playing?'NOW PLAYING':'READY TO LISTEN';
     if('mediaSession' in navigator)navigator.mediaSession.playbackState=state.playing?'playing':'paused';
   }
   function updateProgress() {
@@ -407,9 +452,17 @@
   }
   function bind() {
     document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>nav(b.dataset.nav));
-    $('heroPlay').onclick=()=>{queueFromContext('already-arrived');playTrack('already-arrived',true);};
-    $('heroArt').onclick=()=>{queueFromContext('already-arrived');playTrack('already-arrived',true);};
-    $('heroShuffle').onclick=()=>{const id=rand(state.tracks)?.id;if(id){queueFromContext(id);state.shuffle=true;syncModes();playTrack(id,true);}};
+    const startHero=()=>{
+      if(!state.tracks.length){toast('Music library is loading. Please try again.');return;}
+      queueFromContext('already-arrived');playTrack('already-arrived',true);
+    };
+    $('heroPlay').onclick=startHero;
+    $('heroArt').onclick=startHero;
+    $('heroShuffle').onclick=()=>{
+      if(!state.tracks.length){toast('Music library is loading. Please try again.');return;}
+      const id=rand(state.tracks)?.id;
+      if(id){queueFromContext(id);state.shuffle=true;syncModes();playTrack(id,true);}
+    };
     $('shufflePicks').onclick=()=>{
       state.featuredIds=state.tracks.map(t=>t.id).sort(()=>Math.random()-.5).slice(0,5);renderPicks();
     };
@@ -455,13 +508,21 @@
     ['feedbackModal','queueModal'].forEach(id=>$(id).onclick=e=>{if(e.target===$(id))modal(id,false);});
     document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeNow();modal('feedbackModal',false);modal('queueModal',false);}});
     audio.addEventListener('play',syncPlayState);
-    audio.addEventListener('pause',syncPlayState);
-    audio.addEventListener('playing',syncPlayState);
+    audio.addEventListener('pause',()=>{if(audio.paused)state.buffering=false;syncPlayState();});
+    audio.addEventListener('waiting',()=>{if(!audio.paused){state.buffering=true;syncPlayState();}});
+    audio.addEventListener('stalled',()=>{if(!audio.paused){state.buffering=true;syncPlayState();}});
+    audio.addEventListener('playing',()=>{state.buffering=false;syncPlayState();});
     audio.addEventListener('timeupdate',updateProgress);
     audio.addEventListener('loadedmetadata',updateProgress);
     audio.addEventListener('durationchange',updateProgress);
     audio.addEventListener('ended',()=>{if(state.repeat){audio.currentTime=0;requestPlay();}else next();});
-    audio.addEventListener('error',()=>{if(state.current)toast('Could not load this audio. Try another track.');});
+    audio.addEventListener('error',()=>{
+      if(!state.current)return;
+      playbackToken++;state.buffering=false;syncPlayState();
+      const code=audio.error?.code;
+      toast(code===4?'This audio format cannot play on this phone.':'Could not load this song. Check your connection and retry.');
+      $('playState').textContent='TAP PLAY TO RETRY';
+    });
   }
   function syncModes() {
     $('nowShuffle').classList.toggle('on',state.shuffle);
@@ -471,15 +532,33 @@
   }
   async function start() {
     loadLocal();bind();
+    const heroButton=$('heroPlay');
+    const heroLabel=heroButton.querySelector('span:last-child');
+    heroButton.disabled=true;
+    heroButton.setAttribute('aria-busy','true');
+    if(heroLabel)heroLabel.textContent='Loading music…';
     try {
-      const response=await fetch('listening-catalog.json?v=20261012c',{cache:'no-cache'});
+      const response=await fetch('listening-catalog.json?v=20261013play2',{cache:'no-cache'});
       if(!response.ok)throw Error('Music library '+response.status);
       const data=await response.json();
       state.tracks=data.tracks||[];state.worlds=data.worlds||[];
       state.featuredIds=[...state.tracks.filter(x=>x.new).map(x=>x.id).slice(0,2),...state.featuredIds].slice(0,5);
       state.byId=new Map(state.tracks.map(t=>[t.id,t]));
+      if(!state.tracks.length)throw Error('No songs in the listening library');
+      heroButton.disabled=false;
+      heroButton.setAttribute('aria-busy','false');
+      if(heroLabel)heroLabel.textContent='Start listening';
       const feature=state.byId.get('already-arrived')||state.tracks[0];
-      if(feature){$('heroCover').src=feature.image;$('heroBack').style.backgroundImage='url("'+feature.image+'")';}
+      if(feature){
+        $('heroCover').src=feature.image;
+        $('heroBack').style.backgroundImage='url("'+feature.image+'")';
+        // Warm only the prominently featured track (not the entire catalog).
+        // Reuse the prepared element when the visitor presses Start listening.
+        if(!navigator.connection?.saveData && !new URL(location.href).searchParams.has('track')){
+          audio.preload='auto';
+          audio.src=feature.audio;
+        }
+      }
       renderWorlds();renderPicks();renderLibrary();syncModes();syncPlayState();
       const id=new URL(location.href).searchParams.get('track');
       const requestedWorld=new URL(location.href).searchParams.get('world');
@@ -488,6 +567,9 @@
       window.FrequencyPreview={state,playTrack,loadTrack,requestPlay,togglePlay,next,nav,chooseWorld,showWorld,closeWorld,renderLibrary,renderPicks,openNow,closeNow,openReview,exportFeedback,share,trackUrl,world,toggleFavorite,currentList,toast};
       document.dispatchEvent(new CustomEvent('frequency:ready',{detail:{count:state.tracks.length}}));
     } catch(err) {
+      heroButton.disabled=true;
+      heroButton.setAttribute('aria-busy','false');
+      if(heroLabel)heroLabel.textContent='Music unavailable';
       $('trackList').innerHTML='<div class="empty-state" style="display:block"><h3>Unable to load the listening library.</h3><p>Please reload the page or try again with a connection.</p></div>';
       $('worldGrid').textContent='The music library is temporarily unavailable.';
       console.error(err);

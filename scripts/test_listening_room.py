@@ -33,6 +33,28 @@ class ListeningRoomTests(unittest.TestCase):
             self.assertTrue((ROOT/w['image']).is_file())
             self.assertEqual(w['count'],sum(w['id'] in t.get('worlds',[t['world']]) for t in self.data['tracks']))
         self.assertTrue(all(t['world'] in names for t in self.data['tracks']))
+    def test_published_m4a_metadata_is_fast_start(self):
+        from faststart_public_audio import is_slow_start
+        files={ROOT/t['audio'] for t in self.data['tracks'] if t['audio'].endswith('.m4a')}
+        self.assertGreaterEqual(len(files),20)
+        for p in files:
+            with self.subTest(path=p.name):
+                self.assertFalse(is_slow_start(p),
+                    'M4A metadata at the end makes mobile playback request extra bytes')
+
+    def test_one_tap_playback_is_requested_before_rendering(self):
+        source=(ROOT/'listening-room.js').read_text()
+        load=source.split('function loadTrack(id,play=false)',1)[1].split('function playTrack(',1)[0]
+        self.assertLess(load.index('if(play)requestPlay();'),load.index('renderLibrary();'),
+                        'Invoke HTMLMediaElement.play while the tap is still active')
+        show=source.split('function showTrack(id)',1)[1].split('function queueFromContext',1)[0]
+        self.assertIn('playTrack(id,true)',show)
+        self.assertIn("audio.addEventListener('waiting'",source)
+        self.assertIn("audio.addEventListener('playing'",source)
+        self.assertIn('audio-buffering',source)
+        self.assertIn('Loading music…',source)
+        self.assertIn('TAP PLAY TO RETRY',source)
+
     def test_links_and_controls(self):
         for path in ('listening-room.css','listening-room.js','frequency-parity.js','frequency-parity.css','manifest.webmanifest','sw.js','music.html','studio.html','legacy-library.html'):
             self.assertTrue((ROOT/path).is_file())

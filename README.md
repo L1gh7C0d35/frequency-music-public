@@ -36,3 +36,14 @@ This website runs in GitHub Pages without private servers. It cannot upload song
 GitHub Actions reruns catalog building and tests for each push.
 
 Private release workflow: /Users/darbybeenken/Developer/Music-Label. This public website does NOT submit to Spotify, YouTube, distributors, Content ID or claim copyright ownership.
+
+## Mobile playback speed and reliability
+
+The player now requests HTML media playback immediately on a tap, before rerendering track lists, and shows a connecting indicator. Song title taps start playback. The Start Listening button remains disabled during catalog loading.
+
+Mobile-optimized public M4A streams store the MP4 moov metadata before audio samples. They are remuxed losslessly, using AAC stream copy with the faststart flag, to avoid a second end-of-file request. Run these checks before publishing future music:
+
+    python3 scripts/faststart_public_audio.py
+    python3 scripts/faststart_public_audio.py --fix
+
+The iOS music exporter preserves this metadata order when mirroring future music. Data-Saver connections skip optional home-page audio preloading. Playback latency still depends on real device and network conditions.

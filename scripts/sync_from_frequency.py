@@ -40,6 +40,11 @@ def main():
         audio_target=ROOT/'audio'/(id+audio_path.suffix)
         cover_target=ROOT/'artwork'/(id+'.jpg')
         if copy_if_changed(audio_path,audio_target):changed.append(str(audio_target.relative_to(ROOT)))
+        if audio_target.suffix.lower()=='.m4a':
+            # AAC audio samples unchanged; move MP4 metadata ahead of media
+            # so Android/iPhone streaming needs fewer round trips.
+            from faststart_public_audio import process as make_fast_start
+            make_fast_start(audio_target)
         if copy_if_changed(art,cover_target):changed.append(str(cover_target.relative_to(ROOT)))
         assigned=[w['id'] for w in worlds if id in w['track_ids']]
         tracks.append(dict(id=id,title=title,subtitle=subtitle,description=detail,goals=strings(goals),
