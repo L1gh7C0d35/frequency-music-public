@@ -177,7 +177,7 @@
       if (state.filter!=='all' && !(t.world===state.filter||(t.worlds||[]).includes(state.filter))) return false;
       if(state.previewExperience!=='all' && !(t.experiences||[]).includes(state.previewExperience))return false;
       const q=state.query.toLowerCase().trim();
-      return !q || [t.title,t.subtitle,t.description,t.sound, ...(t.instruments||[]), world(t.world)?.name].some(s=>String(s||'').toLowerCase().includes(q));
+      return !q || [t.title,t.artist,t.subtitle,t.description,t.sound, ...(t.instruments||[]), world(t.world)?.name].some(s=>String(s||'').toLowerCase().includes(q));
     });
   }
   function chooseWorld(id) {
@@ -239,7 +239,7 @@
     root.querySelectorAll('[data-play]').forEach(btn=>btn.onclick=()=>playTrack(btn.dataset.play,false));
     root.querySelectorAll('[data-open]').forEach(btn=>btn.onclick=()=>showTrack(btn.dataset.open));
     root.querySelectorAll('[data-heart]').forEach(btn=>btn.onclick=()=>toggleFavorite(btn.dataset.heart));
-    root.querySelectorAll('[data-share]').forEach(btn=>btn.onclick=()=>{const t=state.byId.get(btn.dataset.share);share(t.title+' · Frequency Originals',trackUrl(t.id));});
+    root.querySelectorAll('[data-share]').forEach(btn=>btn.onclick=()=>{const t=state.byId.get(btn.dataset.share);share(t.title+' · '+(t.artist||'Frequency Originals'),trackUrl(t.id));});
   }
   function resetLibrary(){
     state.query='';state.filter='all';state.favoritesOnly=false;
@@ -561,8 +561,18 @@
     $('shufflePicks').onclick=()=>{
       state.featuredIds=state.tracks.map(t=>t.id).sort(()=>Math.random()-.5).slice(0,5);renderPicks();
     };
-    $('searchInput').oninput=e=>{state.query=e.target.value;renderLibrary();};
+    $('searchInput').oninput=e=>{
+      state.query=e.target.value;
+      // Search is global: don't silently exclude soundscapes or retained filters.
+      if(state.query.trim()){
+        state.previewType='all';state.previewGoal='all';state.previewRecent=false;
+        state.previewExperience='all';state.filter='all';state.favoritesOnly=false;
+        window.FrequencyWebNavigation?.syncFilters?.();
+      }
+      renderLibrary();
+    };
     $('topSearch').onclick=()=>{
+      resetLibrary(); // Search every published recording, never just Music.
       if(window.FrequencyWebNavigation)window.FrequencyWebNavigation.tab('sounds');
       else nav('library');
       $('library').scrollIntoView({behavior:'smooth',block:'start'});
@@ -577,7 +587,7 @@
     });
     $('shareRoom').onclick=()=>share('Frequency · Listening Room',location.origin+location.pathname);
     $('miniOpen').onclick=openNow;$('miniPlay').onclick=togglePlay;$('miniNext').onclick=()=>next();
-    $('closeNow').onclick=closeNow;$('nowShare').onclick=()=>{if(selected())share(selected().title+' · Frequency Originals',trackUrl(state.current));};
+    $('closeNow').onclick=closeNow;$('nowShare').onclick=()=>{if(selected())share(selected().title+' · '+(selected().artist||'Frequency Originals'),trackUrl(state.current));};
     $('nowHeart').onclick=()=>{if(state.current)toggleFavorite(state.current);};
     $('nowArtist').onclick=()=>{if(!state.current)return;closeNow();showWorld(selected().world);};
     $('nowBrowse').onclick=()=>{closeNow();resetLibrary();window.FrequencyWebNavigation?.tab?.('sounds');$('library').scrollIntoView({behavior:'smooth'});};

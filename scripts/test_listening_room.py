@@ -102,6 +102,17 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertNotEqual(covers['golden-current'],covers['future-signal'])
         self.assertIn('this-is-my-normal',covers['future-signal'])
 
+    def test_frequency_search_covers_music_and_soundscapes(self):
+        source=(ROOT/'listening-room.js').read_text()
+        self.assertIn("state.previewType='all';state.previewGoal='all';state.previewRecent=false;",source)
+        self.assertIn("state.previewExperience='all';state.filter='all';state.favoritesOnly=false;",source)
+        self.assertIn("[t.title,t.artist,t.subtitle,t.description",source)
+        ids={t['id'] for t in self.data['tracks'] if '528' in t['title']}
+        expected={'timekeeper-audio-528-hz-sacred-grace',
+                  'timekeeper-audio-528-hz-miracle-awakening'}
+        self.assertEqual(ids,expected)
+        self.assertTrue(all(t['artist']=='Golden Current' for t in self.data['tracks'] if t['id'] in ids))
+
     def test_creator_confirmed_528_singer_pair_is_together(self):
         ids=('timekeeper-audio-528-hz-sacred-grace',
              'timekeeper-audio-528-hz-miracle-awakening')

@@ -42,7 +42,7 @@
     <header class="topbar">
       <div class="topbar-left"><span class="mobile-logo">◒ <b>frequency</b></span><div class="breadcrumb"><span>EXPLORE</span><span class="divider-dot">/</span><strong id="crumb">Discover</strong></div></div>
       <div class="topbar-right">
-        <button id="topSearch" class="icon-button top-search" title="Search music" aria-label="Search music"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 4.5 4.5"/></svg></button>
+        <button id="topSearch" class="icon-button top-search" title="Search all recordings" aria-label="Search all recordings"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 4.5 4.5"/></svg></button>
         <button id="openFeedback" class="top-action"><span class="top-action-star">✧</span> Listening notes</button>
         <button id="shareRoom" class="icon-button" title="Share listening room" aria-label="Share listening room"><svg viewBox="0 0 24 24"><path d="M12 16V3m0 0-4.5 4.5M12 3l4.5 4.5M5 14v5.5c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V14"/></svg></button>
       </div>
@@ -97,9 +97,9 @@
         <div class="section-head"><div><div class="section-eyebrow">YOUR NEXT FAVORITE IS HERE</div><h2>Explore the <em>collection.</em></h2></div><div class="head-foot" id="trackCount"></div></div>
         <div class="app-mode-row" id="appModeRow"><button class="app-mode selected" data-mode="music">Music</button><button class="app-mode" data-mode="soundscape">Soundscapes</button><button class="app-mode" data-mode="all">All</button></div>
         <div class="experience-scroll" aria-label="Choose a listening experience"><button data-experience="all" class="experience-chip selected">All experiences</button><button data-experience="sound-bath" class="experience-chip">◌ Sound baths</button></div>
-        <div class="library-controls"><div class="filter-scroll" id="filterBar" aria-label="Filter by sound world"></div><label class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m16 16 4.5 4.5"/></svg><input id="searchInput" placeholder="Search songs" type="search" autocomplete="off" aria-label="Search songs"></label></div>
+        <div class="library-controls"><div class="filter-scroll" id="filterBar" aria-label="Filter by sound world"></div><label class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m16 16 4.5 4.5"/></svg><input id="searchInput" placeholder="Search all music and soundscapes" type="search" autocomplete="off" aria-label="Search all recordings"></label></div>
         <div class="track-list" id="trackList"></div>
-        <div class="empty-state" id="emptyState" hidden><span>✧</span><h3>Nothing in this mix yet.</h3><p>Try another sound world or save a song to favorites.</p><button id="clearFilters" class="outline-action">Explore all music</button></div>
+        <div class="empty-state" id="emptyState" hidden><span>✧</span><h3>No matches found.</h3><p>Try a title, artist, or frequency, or clear your filters.</p><button id="clearFilters" class="outline-action">Explore all music</button></div>
       </section>
       <footer class="footer"><div><span class="footer-logo">◒ frequency</span><span>Original sessions • Made to be felt</span></div><div><button id="footerFeedback">Share your listening notes</button><span>© 2026 Frequency Music</span></div></footer>
     <section id="ritualsScreen" class="app-screen" hidden>

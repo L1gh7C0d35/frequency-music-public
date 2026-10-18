@@ -8,7 +8,7 @@ This is a web listening and testing companion, not the compiled native Frequency
 - Five app-style tabs: Home, Rituals, Sounds, Words and You.
 - Full Beta44 collection of 61 tracks (including Timekeeper soundscapes), 10 editorial artist worlds, with the same cover art and descriptions as Frequency.
 - Mini-player and full-screen player, play, pause, seek, next/previous, shuffle, repeat and queue.
-- Feelings/mood filters, music versus soundscape filters, searchable library.
+- Global search across all published music and soundscapes, including `528` and artist names; category filters remain available for browsing.
 - Favorites, Keep/Potential/Pass ratings and listening notes in each phone's own local storage. Export feedback JSON when you want to share it.
 - Text lyrics for 28 songs; word-by-word timing remains pending verification (we do not fake karaoke highlighting).
 - A simplified browser Rituals listening timer (3/5/10/20 minutes), plus modes. It is not an OS alarm.

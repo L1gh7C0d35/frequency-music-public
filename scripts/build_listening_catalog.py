@@ -61,6 +61,10 @@ def build():
                            'source_duration_seconds','source_created_at'}
             enriched.update({k:v for k,v in flow_metadata[record['id']].items()
                              if k in public_fields})
+        # This creator-confirmed same-singer pair belongs to Golden Current.
+        # No other sound world's performer identity is assumed.
+        if enriched.get('voice_group') == 'golden-current-528-singer':
+            enriched['artist']='Golden Current'
         # Even a future source snapshot must not push a listener offsite.
         enriched.pop('source_url',None)
         enriched.pop('flow_clip_id',None)
