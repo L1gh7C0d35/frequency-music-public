@@ -14,6 +14,20 @@ This is a web listening and testing companion, not the compiled native Frequency
 - A simplified browser Rituals listening timer (3/5/10/20 minutes), plus modes. It is not an OS alarm.
 - Android Home Screen install manifest. Playback requires a connection; music is not bulk-downloaded offline.
 
+## Experiments Listening Lab
+
+The public Experiments page at experiments.html lists all already-public audio
+assets not part of the main listening catalog, alongside curated A/B tests.
+The regular Listening Room and Music Studio remain unchanged.
+To update the existing public experiment index after adding public audio:
+
+    python3 scripts/build_listening_catalog.py
+    python3 scripts/build_experiments_catalog.py
+
+Commit the generated experiments-catalog.json before pushing.
+The existing Pages workflow copies the committed catalog and Experiments page;
+the studio is a listening tool, not a private audio vault.
+
 ## New songs automatically appear after upload
 GitHub Actions builds the public catalog when files are pushed to main. A song intentionally uploaded into the public audio/new folder is included under Fresh Cuts automatically; artwork in artwork/new with the same stem is optional. Add a matching JSON file with title, world and description if desired.
 

@@ -1,0 +1,772 @@
+{
+  "version": 1,
+  "notice": "These are public test versions, not mastered releases. Notes stay in this browser.",
+  "count": 85,
+  "tracks": [
+    {
+      "id": "abundance-it-looks-good-on-me",
+      "title": "Abundance It Looks Good On Me",
+      "group": "abundance-it-looks-good-on-me",
+      "groupTitle": "Abundance It Looks Good On Me",
+      "audio": "audio/abundance-it-looks-good-on-me.m4a",
+      "sizeBytes": 4713742,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "abundance-little-wins-are-loud",
+      "title": "Abundance Little Wins Are Loud",
+      "group": "abundance-little-wins-are-loud",
+      "groupTitle": "Abundance Little Wins Are Loud",
+      "audio": "audio/abundance-little-wins-are-loud.m4a",
+      "sizeBytes": 4478722,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "abundance-soft-life-strong-roots",
+      "title": "Abundance Soft Life Strong Roots",
+      "group": "abundance-soft-life-strong-roots",
+      "groupTitle": "Abundance Soft Life Strong Roots",
+      "audio": "audio/abundance-soft-life-strong-roots.m4a",
+      "sizeBytes": 4828862,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "abundance-the-door-was-never-locked",
+      "title": "Abundance The Door Was Never Locked",
+      "group": "abundance-the-door-was-never-locked",
+      "groupTitle": "Abundance The Door Was Never Locked",
+      "audio": "audio/abundance-the-door-was-never-locked.m4a",
+      "sizeBytes": 4809193,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "abundance-today-is-mine-to-make",
+      "title": "Abundance Today Is Mine To Make",
+      "group": "abundance-today-is-mine-to-make",
+      "groupTitle": "Abundance Today Is Mine To Make",
+      "audio": "audio/abundance-today-is-mine-to-make.m4a",
+      "sizeBytes": 4579982,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "already-grateful-dry",
+      "title": "Already Grateful Dry",
+      "group": "already-grateful",
+      "groupTitle": "Already Grateful",
+      "audio": "audio/already-grateful-dry.m4a",
+      "sizeBytes": 1233216,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "already-grateful-gamma-pulse",
+      "title": "Already Grateful Gamma Pulse",
+      "group": "already-grateful",
+      "groupTitle": "Already Grateful",
+      "audio": "audio/already-grateful-gamma-pulse.m4a",
+      "sizeBytes": 1229745,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "already-grateful-phi-orbit",
+      "title": "Already Grateful Phi Orbit",
+      "group": "already-grateful",
+      "groupTitle": "Already Grateful",
+      "audio": "audio/already-grateful-phi-orbit.m4a",
+      "sizeBytes": 1229779,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "already-grateful-stereo-drift",
+      "title": "Already Grateful Stereo Drift",
+      "group": "already-grateful",
+      "groupTitle": "Already Grateful",
+      "audio": "audio/already-grateful-stereo-drift.m4a",
+      "sizeBytes": 1231962,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "already-grateful-stereo-pulse",
+      "title": "Already Grateful Stereo Pulse",
+      "group": "already-grateful",
+      "groupTitle": "Already Grateful",
+      "audio": "audio/already-grateful-stereo-pulse.m4a",
+      "sizeBytes": 1232794,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "already-grateful-theta-orbit",
+      "title": "Already Grateful Theta Orbit",
+      "group": "already-grateful",
+      "groupTitle": "Already Grateful",
+      "audio": "audio/already-grateful-theta-orbit.m4a",
+      "sizeBytes": 1231642,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "better-than-yesterday",
+      "title": "Better Than Yesterday",
+      "group": "better-than-yesterday",
+      "groupTitle": "Better Than Yesterday",
+      "audio": "audio/better-than-yesterday.m4a",
+      "sizeBytes": 4370549,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "bright-side-of-the-moon",
+      "title": "Bright Side Of The Moon",
+      "group": "bright-side-of-the-moon",
+      "groupTitle": "Bright Side Of The Moon",
+      "audio": "audio/bright-side-of-the-moon.m4a",
+      "sizeBytes": 4458514,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "every-window-open",
+      "title": "Every Window Open",
+      "group": "every-window-open",
+      "groupTitle": "Every Window Open",
+      "audio": "audio/every-window-open.m4a",
+      "sizeBytes": 4462620,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "everything-knows-my-name-hook",
+      "title": "Everything Knows My Name Hook",
+      "group": "everything-knows-my-name",
+      "groupTitle": "Everything Knows My Name",
+      "audio": "audio/everything-knows-my-name-hook.m4a",
+      "sizeBytes": 1144159,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "fast-forward",
+      "title": "Fast Forward",
+      "group": "fast-forward",
+      "groupTitle": "Fast Forward",
+      "audio": "audio/fast-forward.m4a",
+      "sizeBytes": 3548364,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "fire-under-calm-c1",
+      "title": "Fire Under Calm — C1",
+      "group": "fire-under-calm",
+      "groupTitle": "Fire Under Calm",
+      "audio": "audio/fire-under-calm-c1.m4a",
+      "sizeBytes": 4412914,
+      "kind": "Curated listening test"
+    },
+    {
+      "id": "fire-under-calm-c2",
+      "title": "Fire Under Calm — C2",
+      "group": "fire-under-calm",
+      "groupTitle": "Fire Under Calm",
+      "audio": "audio/fire-under-calm-c2.m4a",
+      "sizeBytes": 4541270,
+      "kind": "Curated listening test"
+    },
+    {
+      "id": "fire-under-calm-c3",
+      "title": "Fire Under Calm — C3",
+      "group": "fire-under-calm",
+      "groupTitle": "Fire Under Calm",
+      "audio": "audio/fire-under-calm-c3.m4a",
+      "sizeBytes": 4406029,
+      "kind": "Curated listening test"
+    },
+    {
+      "id": "gold-finds-me-dancing-c1",
+      "title": "Gold Finds Me Dancing C1",
+      "group": "gold-finds-me-dancing",
+      "groupTitle": "Gold Finds Me Dancing",
+      "audio": "audio/gold-finds-me-dancing-c1.m4a",
+      "sizeBytes": 4627299,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "gold-finds-me-dancing-c2",
+      "title": "Gold Finds Me Dancing C2",
+      "group": "gold-finds-me-dancing",
+      "groupTitle": "Gold Finds Me Dancing",
+      "audio": "audio/gold-finds-me-dancing-c2.m4a",
+      "sizeBytes": 4655270,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "gold-finds-me-dancing-c3",
+      "title": "Gold Finds Me Dancing C3",
+      "group": "gold-finds-me-dancing",
+      "groupTitle": "Gold Finds Me Dancing",
+      "audio": "audio/gold-finds-me-dancing-c3.m4a",
+      "sizeBytes": 4626847,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "golden-on-purpose-c1",
+      "title": "Golden On Purpose C1",
+      "group": "golden-on-purpose",
+      "groupTitle": "Golden On Purpose",
+      "audio": "audio/golden-on-purpose-c1.m4a",
+      "sizeBytes": 4268180,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "golden-on-purpose-c2",
+      "title": "Golden On Purpose C2",
+      "group": "golden-on-purpose",
+      "groupTitle": "Golden On Purpose",
+      "audio": "audio/golden-on-purpose-c2.m4a",
+      "sizeBytes": 4302826,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "golden-on-purpose-c3",
+      "title": "Golden On Purpose C3",
+      "group": "golden-on-purpose",
+      "groupTitle": "Golden On Purpose",
+      "audio": "audio/golden-on-purpose-c3.m4a",
+      "sizeBytes": 4306054,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "good-money-energy",
+      "title": "Good Money Energy",
+      "group": "good-money-energy",
+      "groupTitle": "Good Money Energy",
+      "audio": "audio/good-money-energy.m4a",
+      "sizeBytes": 4079623,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "good-news-has-my-number-c1",
+      "title": "Good News Has My Number C1",
+      "group": "good-news-has-my-number",
+      "groupTitle": "Good News Has My Number",
+      "audio": "audio/good-news-has-my-number-c1.m4a",
+      "sizeBytes": 4235408,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "good-news-has-my-number-c2",
+      "title": "Good News Has My Number C2",
+      "group": "good-news-has-my-number",
+      "groupTitle": "Good News Has My Number",
+      "audio": "audio/good-news-has-my-number-c2.m4a",
+      "sizeBytes": 4368690,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "good-news-has-my-number-c3",
+      "title": "Good News Has My Number C3",
+      "group": "good-news-has-my-number",
+      "groupTitle": "Good News Has My Number",
+      "audio": "audio/good-news-has-my-number-c3.m4a",
+      "sizeBytes": 4461904,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "good-news-has-my-number-hook",
+      "title": "Good News Has My Number Hook",
+      "group": "good-news-has-my-number",
+      "groupTitle": "Good News Has My Number",
+      "audio": "audio/good-news-has-my-number-hook.m4a",
+      "sizeBytes": 1109447,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "good-things-find-me",
+      "title": "Good Things Find Me",
+      "group": "good-things-find-me",
+      "groupTitle": "Good Things Find Me",
+      "audio": "audio/good-things-find-me.m4a",
+      "sizeBytes": 4437040,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "i-stand-with-me",
+      "title": "I Stand With Me",
+      "group": "i-stand-with-me",
+      "groupTitle": "I Stand With Me",
+      "audio": "audio/i-stand-with-me.m4a",
+      "sizeBytes": 5224838,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "i-walk-in-like-its-mine-hook",
+      "title": "I Walk In Like Its Mine Hook",
+      "group": "i-walk-in-like-its-mine",
+      "groupTitle": "I Walk In Like Its Mine",
+      "audio": "audio/i-walk-in-like-its-mine-hook.m4a",
+      "sizeBytes": 1123244,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "it-all-clicks",
+      "title": "It All Clicks",
+      "group": "it-all-clicks",
+      "groupTitle": "It All Clicks",
+      "audio": "audio/it-all-clicks.m4a",
+      "sizeBytes": 3545125,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "life-keeps-saying-yes-c1",
+      "title": "Life Keeps Saying Yes C1",
+      "group": "life-keeps-saying-yes",
+      "groupTitle": "Life Keeps Saying Yes",
+      "audio": "audio/life-keeps-saying-yes-c1.m4a",
+      "sizeBytes": 4608772,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "life-keeps-saying-yes-c2",
+      "title": "Life Keeps Saying Yes C2",
+      "group": "life-keeps-saying-yes",
+      "groupTitle": "Life Keeps Saying Yes",
+      "audio": "audio/life-keeps-saying-yes-c2.m4a",
+      "sizeBytes": 4587549,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "life-keeps-saying-yes-c3",
+      "title": "Life Keeps Saying Yes C3",
+      "group": "life-keeps-saying-yes",
+      "groupTitle": "Life Keeps Saying Yes",
+      "audio": "audio/life-keeps-saying-yes-c3.m4a",
+      "sizeBytes": 4612894,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "life-keeps-saying-yes-hook",
+      "title": "Life Keeps Saying Yes Hook",
+      "group": "life-keeps-saying-yes",
+      "groupTitle": "Life Keeps Saying Yes",
+      "audio": "audio/life-keeps-saying-yes-hook.m4a",
+      "sizeBytes": 1127688,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "look-what-found-me-c1",
+      "title": "Look What Found Me C1",
+      "group": "look-what-found-me",
+      "groupTitle": "Look What Found Me",
+      "audio": "audio/look-what-found-me-c1.m4a",
+      "sizeBytes": 4518228,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "look-what-found-me-c2",
+      "title": "Look What Found Me C2",
+      "group": "look-what-found-me",
+      "groupTitle": "Look What Found Me",
+      "audio": "audio/look-what-found-me-c2.m4a",
+      "sizeBytes": 4503466,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "look-what-found-me-c3",
+      "title": "Look What Found Me C3",
+      "group": "look-what-found-me",
+      "groupTitle": "Look What Found Me",
+      "audio": "audio/look-what-found-me-c3.m4a",
+      "sizeBytes": 4502288,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "luck-is-a-verb",
+      "title": "Luck Is A Verb",
+      "group": "luck-is-a",
+      "groupTitle": "Luck Is A",
+      "audio": "audio/luck-is-a-verb.m4a",
+      "sizeBytes": 4502668,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "lucky-looks-good-on-me-hook",
+      "title": "Lucky Looks Good On Me Hook",
+      "group": "lucky-looks-good-on-me",
+      "groupTitle": "Lucky Looks Good On Me",
+      "audio": "audio/lucky-looks-good-on-me-hook.m4a",
+      "sizeBytes": 1102052,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "make-it-a-beautiful-day",
+      "title": "Make It A Beautiful Day",
+      "group": "make-it-a-beautiful-day",
+      "groupTitle": "Make It A Beautiful Day",
+      "audio": "audio/make-it-a-beautiful-day.m4a",
+      "sizeBytes": 4482435,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "more-room-in-the-sky",
+      "title": "More Room In The Sky",
+      "group": "more-room-in-the-sky",
+      "groupTitle": "More Room In The Sky",
+      "audio": "audio/more-room-in-the-sky.m4a",
+      "sizeBytes": 4817742,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "morning-is-mine",
+      "title": "Morning Is Mine",
+      "group": "morning-is-mine",
+      "groupTitle": "Morning Is Mine",
+      "audio": "audio/morning-is-mine.m4a",
+      "sizeBytes": 4996274,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "my-name-is-on-it-c1",
+      "title": "My Name Is On It C1",
+      "group": "my-name-is-on-it",
+      "groupTitle": "My Name Is On It",
+      "audio": "audio/my-name-is-on-it-c1.m4a",
+      "sizeBytes": 4660620,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "my-name-is-on-it-c2",
+      "title": "My Name Is On It C2",
+      "group": "my-name-is-on-it",
+      "groupTitle": "My Name Is On It",
+      "audio": "audio/my-name-is-on-it-c2.m4a",
+      "sizeBytes": 4655775,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "my-name-is-on-it-c3",
+      "title": "My Name Is On It C3",
+      "group": "my-name-is-on-it",
+      "groupTitle": "My Name Is On It",
+      "audio": "audio/my-name-is-on-it-c3.m4a",
+      "sizeBytes": 4647608,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "open-to-more-vB-reconstruction",
+      "title": "Open To More Vb Reconstruction",
+      "group": "open-to-more",
+      "groupTitle": "Open to More",
+      "audio": "audio/open-to-more-vB-reconstruction.m4a",
+      "sizeBytes": 7184566,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "open-to-more-vC-clarity",
+      "title": "Open To More Vc Clarity",
+      "group": "open-to-more",
+      "groupTitle": "Open to More",
+      "audio": "audio/open-to-more-vC-clarity.m4a",
+      "sizeBytes": 7185994,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "open-to-more-vD-precision",
+      "title": "Open To More Vd Precision",
+      "group": "open-to-more",
+      "groupTitle": "Open to More",
+      "audio": "audio/open-to-more-vD-precision.m4a",
+      "sizeBytes": 7185425,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "overflow-mode",
+      "title": "Overflow Mode",
+      "group": "overflow-mode",
+      "groupTitle": "Overflow Mode",
+      "audio": "audio/overflow-mode.m4a",
+      "sizeBytes": 3558781,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "paid-in-peace-c1",
+      "title": "Paid In Peace C1",
+      "group": "paid-in-peace",
+      "groupTitle": "Paid In Peace",
+      "audio": "audio/paid-in-peace-c1.m4a",
+      "sizeBytes": 4727536,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "paid-in-peace-c2",
+      "title": "Paid In Peace C2",
+      "group": "paid-in-peace",
+      "groupTitle": "Paid In Peace",
+      "audio": "audio/paid-in-peace-c2.m4a",
+      "sizeBytes": 4777421,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "paid-in-peace-c3",
+      "title": "Paid In Peace C3",
+      "group": "paid-in-peace",
+      "groupTitle": "Paid In Peace",
+      "audio": "audio/paid-in-peace-c3.m4a",
+      "sizeBytes": 4695873,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "paid-in-peace-hook",
+      "title": "Paid In Peace Hook",
+      "group": "paid-in-peace",
+      "groupTitle": "Paid In Peace",
+      "audio": "audio/paid-in-peace-hook.m4a",
+      "sizeBytes": 1169590,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "power-in-motion",
+      "title": "Power In Motion",
+      "group": "power-in-motion",
+      "groupTitle": "Power In Motion",
+      "audio": "audio/power-in-motion.m4a",
+      "sizeBytes": 4011952,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "room-for-the-good",
+      "title": "Room For The Good",
+      "group": "room-for-the-good",
+      "groupTitle": "Room For The Good",
+      "audio": "audio/room-for-the-good.m4a",
+      "sizeBytes": 4515006,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "say-yes-to-the-road",
+      "title": "Say Yes To The Road",
+      "group": "say-yes-to-the-road",
+      "groupTitle": "Say Yes To The Road",
+      "audio": "audio/say-yes-to-the-road.m4a",
+      "sizeBytes": 4576279,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "storm-in-my-blood-vB-reconstruction",
+      "title": "Storm In My Blood Vb Reconstruction",
+      "group": "storm-in-my-blood",
+      "groupTitle": "Storm in My Blood",
+      "audio": "audio/storm-in-my-blood-vB-reconstruction.m4a",
+      "sizeBytes": 6223982,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "storm-in-my-blood-vC-clarity",
+      "title": "Storm In My Blood Vc Clarity",
+      "group": "storm-in-my-blood",
+      "groupTitle": "Storm in My Blood",
+      "audio": "audio/storm-in-my-blood-vC-clarity.m4a",
+      "sizeBytes": 6224155,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "storm-in-my-blood-vD-ace-vocal",
+      "title": "Storm In My Blood Vd ACE Vocal",
+      "group": "storm-in-my-blood",
+      "groupTitle": "Storm in My Blood",
+      "audio": "audio/storm-in-my-blood-vD-ace-vocal.m4a",
+      "sizeBytes": 6236846,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "the-good-comes-around",
+      "title": "The Good Comes Around",
+      "group": "the-good-comes-around",
+      "groupTitle": "The Good Comes Around",
+      "audio": "audio/the-good-comes-around.m4a",
+      "sizeBytes": 4679655,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "the-room-turns-gold-c1",
+      "title": "The Room Turns Gold C1",
+      "group": "the-room-turns-gold",
+      "groupTitle": "The Room Turns Gold",
+      "audio": "audio/the-room-turns-gold-c1.m4a",
+      "sizeBytes": 4706154,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "the-room-turns-gold-c2",
+      "title": "The Room Turns Gold C2",
+      "group": "the-room-turns-gold",
+      "groupTitle": "The Room Turns Gold",
+      "audio": "audio/the-room-turns-gold-c2.m4a",
+      "sizeBytes": 4786836,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "the-room-turns-gold-c3",
+      "title": "The Room Turns Gold C3",
+      "group": "the-room-turns-gold",
+      "groupTitle": "The Room Turns Gold",
+      "audio": "audio/the-room-turns-gold-c3.m4a",
+      "sizeBytes": 4772687,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "tomorrow-called-early",
+      "title": "Tomorrow Called Early",
+      "group": "tomorrow-called-early",
+      "groupTitle": "Tomorrow Called Early",
+      "audio": "audio/tomorrow-called-early.m4a",
+      "sizeBytes": 4224032,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "too-good-to-be-random-hook",
+      "title": "Too Good To Be Random Hook",
+      "group": "too-good-to-be-random",
+      "groupTitle": "Too Good To Be Random",
+      "audio": "audio/too-good-to-be-random-hook.m4a",
+      "sizeBytes": 1135294,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "viking-keep-the-lantern-high",
+      "title": "Viking Keep The Lantern High",
+      "group": "viking-keep-the-lantern-high",
+      "groupTitle": "Viking Keep The Lantern High",
+      "audio": "audio/viking-keep-the-lantern-high.m4a",
+      "sizeBytes": 5168309,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "viking-no-crown-can-hold-the-wind",
+      "title": "Viking No Crown Can Hold The Wind",
+      "group": "viking-no-crown-can-hold-the-wind",
+      "groupTitle": "Viking No Crown Can Hold The Wind",
+      "audio": "audio/viking-no-crown-can-hold-the-wind.m4a",
+      "sizeBytes": 4945161,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "viking-stone-by-stone",
+      "title": "Viking Stone By Stone",
+      "group": "viking-stone-by-stone",
+      "groupTitle": "Viking Stone By Stone",
+      "audio": "audio/viking-stone-by-stone.m4a",
+      "sizeBytes": 4833092,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "viking-the-mountain-answers",
+      "title": "Viking The Mountain Answers",
+      "group": "viking-the-mountain-answers",
+      "groupTitle": "Viking The Mountain Answers",
+      "audio": "audio/viking-the-mountain-answers.m4a",
+      "sizeBytes": 5047601,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "viking-the-river-keeps-its-name",
+      "title": "Viking The River Keeps Its Name",
+      "group": "viking-the-river-keeps-its-name",
+      "groupTitle": "Viking The River Keeps Its Name",
+      "audio": "audio/viking-the-river-keeps-its-name.m4a",
+      "sizeBytes": 4965353,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "watch-how-easy-this-gets-hook",
+      "title": "Watch How Easy This Gets Hook",
+      "group": "watch-how-easy-this-gets",
+      "groupTitle": "Watch How Easy This Gets",
+      "audio": "audio/watch-how-easy-this-gets-hook.m4a",
+      "sizeBytes": 1078182,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wave1-my-name-is-on-it-c1",
+      "title": "Wave1 My Name Is On It C1",
+      "group": "wave1-my-name-is-on-it",
+      "groupTitle": "Wave1 My Name Is On It",
+      "audio": "audio/wave1-my-name-is-on-it-c1.m4a",
+      "sizeBytes": 3878309,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wave1-my-name-is-on-it-c2",
+      "title": "Wave1 My Name Is On It C2",
+      "group": "wave1-my-name-is-on-it",
+      "groupTitle": "Wave1 My Name Is On It",
+      "audio": "audio/wave1-my-name-is-on-it-c2.m4a",
+      "sizeBytes": 3904464,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wave1-my-name-is-on-it-c3",
+      "title": "Wave1 My Name Is On It C3",
+      "group": "wave1-my-name-is-on-it",
+      "groupTitle": "Wave1 My Name Is On It",
+      "audio": "audio/wave1-my-name-is-on-it-c3.m4a",
+      "sizeBytes": 3901539,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wave2-built-like-morning",
+      "title": "Wave2 Built Like Morning",
+      "group": "wave2-built-like-morning",
+      "groupTitle": "Wave2 Built Like Morning",
+      "audio": "audio/wave2-built-like-morning.m4a",
+      "sizeBytes": 4690121,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wave2-higher-ground-same-feet",
+      "title": "Wave2 Higher Ground Same Feet",
+      "group": "wave2-higher-ground-same-feet",
+      "groupTitle": "Wave2 Higher Ground Same Feet",
+      "audio": "audio/wave2-higher-ground-same-feet.m4a",
+      "sizeBytes": 4637466,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wave2-quiet-electricity",
+      "title": "Wave2 Quiet Electricity",
+      "group": "wave2-quiet-electricity",
+      "groupTitle": "Wave2 Quiet Electricity",
+      "audio": "audio/wave2-quiet-electricity.m4a",
+      "sizeBytes": 4814312,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wave2-signal-is-clear",
+      "title": "Wave2 Signal Is Clear",
+      "group": "wave2-signal-is-clear",
+      "groupTitle": "Wave2 Signal Is Clear",
+      "audio": "audio/wave2-signal-is-clear.m4a",
+      "sizeBytes": 4665685,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wave2-soft-power",
+      "title": "Wave2 Soft Power",
+      "group": "wave2-soft-power",
+      "groupTitle": "Wave2 Soft Power",
+      "audio": "audio/wave2-soft-power.m4a",
+      "sizeBytes": 5002196,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wave2-the-door-was-already-open",
+      "title": "Wave2 The Door Was Already Open",
+      "group": "wave2-the-door-was-already-open",
+      "groupTitle": "Wave2 The Door Was Already Open",
+      "audio": "audio/wave2-the-door-was-already-open.m4a",
+      "sizeBytes": 4526215,
+      "kind": "Existing public test / alternate"
+    },
+    {
+      "id": "wealth-feels-familiar",
+      "title": "Wealth Feels Familiar",
+      "group": "wealth-feels-familiar",
+      "groupTitle": "Wealth Feels Familiar",
+      "audio": "audio/wealth-feels-familiar.m4a",
+      "sizeBytes": 4589651,
+      "kind": "Existing public test / alternate"
+    }
+  ]
+}

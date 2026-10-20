@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1010"><title>Frequency · Experiments</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090d0d;--panel:#151c1b;--line:#2c3634;--text:#f5f4ed;--muted:#aab5b0;--gold:#d4b878;--mint:#93bfa8}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,#23312a,transparent 55%),var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}
+    button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
+    .wrap{max-width:960px;margin:auto;padding:24px 18px 160px}
+    header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .brand{font-weight:850;font-size:19px;letter-spacing:-.8px}.brand span{color:var(--gold)}nav{display:flex;gap:9px;flex-wrap:wrap}
+    nav a{border:1px solid var(--line);padding:9px 13px;border-radius:13px;color:var(--muted);font-size:12px;font-weight:750}
+    nav a.active{border-color:var(--gold);color:var(--gold)}
+    .hero{margin:30px 0 22px}.eyebrow{color:var(--mint);font-size:11px;font-weight:850;letter-spacing:2px}
+    h1{font-size:clamp(34px,7vw,54px);letter-spacing:-2px;line-height:1.04;margin:12px 0}
+    h1 em{font-style:normal;color:var(--gold)}
+    .lead{max-width:680px;color:var(--muted);line-height:1.55;margin:0}
+    .notice{padding:12px 14px;margin-top:17px;border-radius:14px;background:#18241e;border:1px solid #35483b;color:#d5dfd6;font-size:13px;line-height:1.5}
+    .toolbar{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:12px;padding:13px 0;background:linear-gradient(#0c1110 86%,transparent)}
+    input[type=search]{width:100%;min-width:0;color:var(--text);border:1px solid var(--line);background:#1b2522;border-radius:14px;padding:13px 15px;outline:none}
+    input[type=search]:focus{border-color:var(--mint)}#count{color:var(--muted);font-size:12px;white-space:nowrap}
+    .group{margin:23px 0 27px}.group-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:11px}
+    .group h2{font-size:19px;letter-spacing:-.5px;margin:0}.group small{color:var(--muted)}
+    .grid{display:grid;gap:8px}.track{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:17px}
+    .track.active{border-color:var(--gold);background:rgba(212,184,120,.065)}
+    .info{min-width:0}.name{font-weight:740;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.detail{margin-top:4px;color:var(--muted);font-size:12px}
+    .buttons{display:flex;align-items:center;gap:7px}.play,.rate{border:1px solid var(--line);border-radius:11px;height:37px;min-width:37px;padding:0 10px;background:#23302c;color:var(--text);font-size:12px;font-weight:800}
+    .play{background:var(--gold);border-color:var(--gold);color:#17170f;min-width:65px}
+    .rate.on{border-color:var(--mint);background:#2b4939;color:#c9efcf}.empty{color:var(--muted);padding:20px 0}
+    .player{position:fixed;bottom:max(12px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(94vw,720px);padding:14px 16px 12px;z-index:8;background:rgba(25,32,28,.96);border:1px solid #425149;border-radius:21px;box-shadow:0 18px 55px #000a;backdrop-filter:blur(22px);display:none}
+    .player.shown{display:block}.player-top{display:flex;justify-content:space-between;gap:16px;align-items:center}.now{min-width:0}.now span{display:block;font-size:11px;color:var(--mint);margin-bottom:4px}.now strong{display:block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+    .transport{display:flex;gap:9px}.transport button{border:1px solid var(--line);color:var(--text);background:#293630;border-radius:50%;height:39px;width:39px}
+    .transport button.primary{color:#111;background:var(--gold);border-color:var(--gold)}
+    .seek{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:11px;margin-top:11px}.seek input{flex:1;min-width:0;accent-color:var(--gold)}
+    #msg{color:var(--gold);font-size:12px;margin:10px 2px;min-height:14px}
+    @media(max-width:600px){.wrap{padding:19px 13px 160px}.track{padding:11px;gap:8px}.rate{padding:0 7px}.buttons{gap:4px}.play{min-width:53px;padding:0 7px}.detail{font-size:11px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="./">◒ frequency<span>.</span></a>
+    <nav><a href="./">Listening Room</a><a href="studio.html">Rank Songs</a><a class="active" href="experiments.html">Experiments</a></nav>
+  </header>
+  <section class="hero">
+    <div class="eyebrow">FREQUENCY · LISTENING LAB</div>
+    <h1>Every version.<br><em>One place to listen.</em></h1>
+    <p class="lead">The test recordings and alternate mixes already uploaded to your public Frequency library. Compare versions, mark your favorites, and keep exploring without losing the original songs.</p>
+    <div class="notice">These are experimental recordings—not final mastered releases. Listening notes and Keep/Pass selections remain in this browser, and the audio files are publicly reachable.</div>
+  </section>
+  <div class="toolbar">
+    <input type="search" id="search" placeholder="Search songs, versions, moods…" aria-label="Search experiments">
+    <span id="count">Loading…</span>
+  </div>
+  <p id="msg" role="status" aria-live="polite"></p>
+  <main id="groups" aria-label="Experimental music"></main>
+</div>
+<div class="player" id="player" aria-label="Audio player">
+  <div class="player-top">
+    <div class="now"><span>NOW PLAYING · TEST VERSION</span><strong id="nowTitle">Song</strong></div>
+    <div class="transport"><button id="prev" aria-label="Previous experiment">⏮</button><button class="primary" id="toggle" aria-label="Play or pause">▶</button><button id="next" aria-label="Next experiment">⏭</button></div>
+  </div>
+  <div class="seek"><span id="elapsed">0:00</span><input id="progress" type="range" min="0" max="1000" value="0" aria-label="Song position"><span id="duration">0:00</span></div>
+  <audio id="audio" preload="metadata"></audio>
+</div>
+<script>
+(() => {
+  'use strict';
+  const $=id=>document.getElementById(id),audio=$('audio');
+  let tracks=[],visible=[],current=null,notes={};
+  const KEY='frequency-experiments-v1';
+  try{notes=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch{notes={}}
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(notes))}catch{}};
+  const format=t=>{if(!Number.isFinite(t))return '0:00';t=Math.max(0,Math.floor(t));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')};
+  const elem=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e};
+  function message(s){$('msg').textContent=s}
+  function play(t){
+    if(!t)return;
+    if(current?.id!==t.id){current=t;audio.src=t.audio;$('nowTitle').textContent=t.title}
+    $('player').classList.add('shown');
+    document.querySelectorAll('.track').forEach(el=>el.classList.toggle('active',el.dataset.id===t.id));
+    audio.play().catch(()=>message('Tap Play to begin listening. Check your connection if a song will not load.'));
+  }
+  const step=(n)=>{const list=visible.length?visible:tracks;let i=list.findIndex(x=>x.id===current?.id);play(list[(i+n+list.length)%list.length])};
+  const review=(id,value)=>{
+    notes[id]=notes[id]===value?'':value;save();render();
+  };
+  function render(){
+    const term=$('search').value.trim().toLowerCase();
+    visible=tracks.filter(t=>[t.title,t.groupTitle,t.kind].some(s=>s.toLowerCase().includes(term)));
+    $('count').textContent=visible.length+' / '+tracks.length;
+    const root=$('groups');root.replaceChildren();
+    const groups=new Map();
+    for(const t of visible){const k=t.groupTitle; if(!groups.has(k))groups.set(k,[]);groups.get(k).push(t)}
+    for(const [name,items] of groups){
+      const section=elem('section','group');const head=elem('div','group-head');
+      head.append(elem('h2','',name),elem('small','',items.length+' versions'));section.append(head);
+      const grid=elem('div','grid');
+      for(const t of items){
+        const card=elem('article','track'+(current?.id===t.id?' active':''));card.dataset.id=t.id;
+        const info=elem('div','info');info.append(elem('div','name',t.title),elem('div','detail',t.kind));
+        const buttons=elem('div','buttons');
+        const p=elem('button','play','▶ Play');p.setAttribute('aria-label','Play '+t.title);p.onclick=()=>play(t);buttons.append(p);
+        for(const [k,label] of [['keep','Keep'],['pass','Pass']]){
+          const b=elem('button','rate'+(notes[t.id]===k?' on':''),label);
+          b.setAttribute('aria-pressed',notes[t.id]===k?'true':'false');b.setAttribute('aria-label',label+' '+t.title);
+          b.onclick=()=>review(t.id,k);buttons.append(b);
+        }
+        card.append(info,buttons);grid.append(card);
+      }
+      section.append(grid);root.append(section);
+    }
+    if(!groups.size)root.append(elem('p','empty','No experiments match that search.'));
+  }
+  audio.onplay=()=>$('toggle').textContent='Ⅱ';
+  audio.onpause=()=>$('toggle').textContent='▶';
+  audio.onended=()=>step(1);
+  audio.ontimeupdate=()=>{$('elapsed').textContent=format(audio.currentTime);$('duration').textContent=format(audio.duration);$('progress').value=Number.isFinite(audio.duration)&&audio.duration>0?String(Math.floor(audio.currentTime/audio.duration*1000)):'0'};
+  audio.onerror=()=>message('This file could not be loaded. Try again when online.');
+  $('toggle').onclick=()=>{if(!current){play(visible[0]||tracks[0]);return}audio.paused?audio.play().catch(()=>message('Playback unavailable.')):audio.pause()};
+  $('prev').onclick=()=>step(-1);$('next').onclick=()=>step(1);
+  $('progress').oninput=()=>{if(Number.isFinite(audio.duration))audio.currentTime=audio.duration*Number($('progress').value)/1000};
+  $('search').oninput=render;
+  fetch('experiments-catalog.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Catalog unavailable');return r.json()})
+    .then(j=>{tracks=j.tracks||[];render();message(tracks.length+' public experiments available for listening.')})
+    .catch(e=>{$('count').textContent='Unavailable';message('Could not load the experiments catalog. '+e.message)});
+})();
+</script>
+</body>
+</html>
