@@ -91,9 +91,90 @@
       "visual": "Minimal generative geometry, softly glowing spectral light and subtle sound-wave halos.",
       "image": "artwork/timekeeper-audio-111-hz-cellular-rejuvenation.jpg",
       "count": 5
+    },
+    {
+      "id": "fresh-cuts",
+      "name": "Fresh Cuts",
+      "subtitle": "Latest uploads · listen & respond",
+      "description": "New tracks uploaded for listening and feedback.",
+      "visual": "Artwork pending final review",
+      "image": "artwork/fresh-cuts.svg",
+      "count": 3
     }
   ],
   "tracks": [
+    {
+      "id": "fire-under-calm-c1",
+      "title": "Fire Under Calm — C1",
+      "subtitle": "Creator listening test · not a final release",
+      "description": "Candidate 1 of 3. Public listening test for alternate versions, not a mastered release.",
+      "world": "fresh-cuts",
+      "worlds": [
+        "fresh-cuts"
+      ],
+      "artist": "Frequency Originals",
+      "goals": [],
+      "genres": [
+        "Preview"
+      ],
+      "experiences": [],
+      "sound": "",
+      "instruments": [],
+      "audio": "audio/fire-under-calm-c1.m4a",
+      "image": "artwork/fresh-cuts.svg",
+      "duration": 184.0,
+      "source": "Creator-approved public test",
+      "type": "song",
+      "new": true
+    },
+    {
+      "id": "fire-under-calm-c2",
+      "title": "Fire Under Calm — C2",
+      "subtitle": "Creator listening test · not a final release",
+      "description": "Candidate 2 of 3. Public listening test for alternate versions, not a mastered release.",
+      "world": "fresh-cuts",
+      "worlds": [
+        "fresh-cuts"
+      ],
+      "artist": "Frequency Originals",
+      "goals": [],
+      "genres": [
+        "Preview"
+      ],
+      "experiences": [],
+      "sound": "",
+      "instruments": [],
+      "audio": "audio/fire-under-calm-c2.m4a",
+      "image": "artwork/fresh-cuts.svg",
+      "duration": 184.0,
+      "source": "Creator-approved public test",
+      "type": "song",
+      "new": true
+    },
+    {
+      "id": "fire-under-calm-c3",
+      "title": "Fire Under Calm — C3",
+      "subtitle": "Creator listening test · not a final release",
+      "description": "Candidate 3 of 3. Public listening test for alternate versions, not a mastered release.",
+      "world": "fresh-cuts",
+      "worlds": [
+        "fresh-cuts"
+      ],
+      "artist": "Frequency Originals",
+      "goals": [],
+      "genres": [
+        "Preview"
+      ],
+      "experiences": [],
+      "sound": "",
+      "instruments": [],
+      "audio": "audio/fire-under-calm-c3.m4a",
+      "image": "artwork/fresh-cuts.svg",
+      "duration": 184.0,
+      "source": "Creator-approved public test",
+      "type": "song",
+      "new": true
+    },
     {
       "id": "open-to-more",
       "title": "Open to More",
@@ -24363,5 +24444,5 @@
       "type": "soundscape"
     }
   ],
-  "new_count": 0
+  "new_count": 3
 }

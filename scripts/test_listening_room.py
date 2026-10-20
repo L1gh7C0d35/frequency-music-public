@@ -48,7 +48,8 @@ class ListeningRoomTests(unittest.TestCase):
         short=[t for t in soundscapes if t['duration']<90]
         self.assertEqual(len(soundscapes),33)
         self.assertEqual(len(short),9)
-        self.assertEqual(len([t for t in tracks if t.get('type')=='song']),28)
+        self.assertEqual(len([t for t in tracks if t.get('type')=='song']),31)
+        self.assertEqual(len([t for t in tracks if t.get('new')]),3)
         grounded=next(t for t in tracks if t['id']=='timekeeper-audio-396-hz-grounded-foundation')
         self.assertAlmostEqual(grounded['duration'],66.58,places=1)
         for ident in ('shortSoundscapeHint','shortSoundscapeCopy','shortSoundscapeLoop'):
@@ -61,6 +62,23 @@ class ListeningRoomTests(unittest.TestCase):
         # The recording is not extended, time-stretched, or deceptively
         # presented as a full-length mastered song.
         self.assertNotIn('Extended Version',self.html)
+
+    def test_fire_under_calm_public_listening_versions(self):
+        ids={'fire-under-calm-c1','fire-under-calm-c2','fire-under-calm-c3'}
+        featured={t['id']:t for t in self.data['tracks'] if t['id'] in ids}
+        self.assertEqual(set(featured),ids)
+        self.assertEqual(self.data['new_count'],3)
+        fresh=next(w for w in self.data['worlds'] if w['id']=='fresh-cuts')
+        self.assertEqual(fresh['count'],3)
+        for i in (1,2,3):
+            track=featured[f'fire-under-calm-c{i}']
+            self.assertEqual(track['audio'],f'audio/fire-under-calm-c{i}.m4a')
+            self.assertEqual(track['world'],'fresh-cuts')
+            self.assertEqual(track['type'],'song')
+            self.assertTrue(track['new'])
+            self.assertIn('not a final release',track['subtitle'])
+            self.assertTrue((ROOT/track['audio']).is_file())
+        self.assertFalse(any((ROOT/f'audio/new/fire-under-calm-c{i}.m4a').exists() for i in (1,2,3)))
 
     def test_one_tap_playback_is_requested_before_rendering(self):
         source=(ROOT/'listening-room.js').read_text()

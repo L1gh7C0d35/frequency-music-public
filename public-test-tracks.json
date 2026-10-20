@@ -1,0 +1,23 @@
+[
+  {
+    "id": "fire-under-calm-c1",
+    "title": "Fire Under Calm \u2014 C1",
+    "audio": "audio/fire-under-calm-c1.m4a",
+    "duration": 184.0,
+    "description": "Candidate 1 of 3. Public listening test for alternate versions, not a mastered release."
+  },
+  {
+    "id": "fire-under-calm-c2",
+    "title": "Fire Under Calm \u2014 C2",
+    "audio": "audio/fire-under-calm-c2.m4a",
+    "duration": 184.0,
+    "description": "Candidate 2 of 3. Public listening test for alternate versions, not a mastered release."
+  },
+  {
+    "id": "fire-under-calm-c3",
+    "title": "Fire Under Calm \u2014 C3",
+    "audio": "audio/fire-under-calm-c3.m4a",
+    "duration": 184.0,
+    "description": "Candidate 3 of 3. Public listening test for alternate versions, not a mastered release."
+  }
+]

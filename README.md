@@ -148,3 +148,7 @@ not the source URL or source ID. The GitHub Pages packaging step excludes
 `flow-song-metadata.json`; generated source metadata is not part of the
 public website bundle. If other songs lack source URLs, the importer will
 not fabricate them; their verified app metadata remains intact.
+
+## Creator listening tests
+
+Fire Under Calm C1/C2/C3 remain public and are explicitly included in the public-test-tracks.json allow-list so they appear under Fresh Cuts and can be searched by version name. The list points to existing audio/*.m4a files without storing second copies. These are listening candidates, not finished commercial releases. Other unlisted test files are not automatically exposed in the player.

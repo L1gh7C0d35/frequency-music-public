@@ -13,6 +13,7 @@ SOURCE=ROOT/'app-track-export.json'
 FLOW_METADATA=ROOT/'flow-song-metadata.json'
 LYRIC_TIMINGS=ROOT/'word-timing'
 PREVIEW=ROOT/'audio'/'new'
+CURATED_TESTS=ROOT/'public-test-tracks.json'
 VALID={'.m4a','.mp3','.wav','.ogg','.aac','.flac'}
 def duration(path):
     # ffprobe is optional; browser will load real duration for new tracks.
@@ -82,6 +83,29 @@ def build():
                 print('Stale lyric timing skipped:',record['id'])
         tracks.append(enriched)
     extras=[]
+    # Explicitly approved public A/B test tracks, referencing existing audio
+    # with no duplicate files and no automatic inclusion of other drafts.
+    if CURATED_TESTS.is_file():
+        approved=json.loads(CURATED_TESTS.read_text())
+        if not isinstance(approved,list):raise ValueError('Test track list must be an array')
+        for record in approved:
+            ident=record.get('id')
+            filename=record.get('audio')
+            if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,90}',str(ident)):
+                raise ValueError('Invalid curated test track ID')
+            if not re.fullmatch(r'audio/[a-z0-9][a-z0-9-]{0,90}\.m4a',str(filename)):
+                raise ValueError('Curated file must be already-public audio/*.m4a')
+            if ident in known_ids or any(x['id']==ident for x in extras):
+                raise ValueError('Duplicate public test ID')
+            path=ROOT/filename
+            if not path.is_file():raise ValueError('Curated test audio missing: '+str(filename))
+            extras.append(dict(id=ident,title=record['title'],
+                subtitle='Creator listening test · not a final release',
+                description=record.get('description') or 'Compare alternate versions and leave listening feedback.',
+                world='fresh-cuts',worlds=['fresh-cuts'],artist='Frequency Originals',
+                goals=[],genres=['Preview'],experiences=[],sound='',instruments=[],
+                audio=filename,image='artwork/fresh-cuts.svg',duration=record.get('duration'),
+                source='Creator-approved public test',type='song',new=True))
     if PREVIEW.is_dir():
         for p in sorted(PREVIEW.iterdir()):
             if not p.is_file() or p.suffix.lower() not in VALID:continue
