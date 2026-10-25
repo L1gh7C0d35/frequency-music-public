@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Mirror *selected* Frequency Beta music assets and metadata to public Preview site.
+"""Mirror *selected* canonical Frequency music assets and metadata to public Preview site.
 This intentionally reads only shipped-in-app media. Private Creator/Flow output is excluded.
 """
 import json,re,shutil,hashlib,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-APP=Path('/Users/darbybeenken/Developer/Frequency-App-Beta44')
+APP=Path.home()/'Developer/Frequency-App'  # single authoritative Frequency iOS checkout
 WORLD_PATTERN=r'id: "([^"]+)",\s*name: "([^"]+)",\s*subtitle: "([^"]+)",\s*musicalSignature: "([^"]+)",\s*visualSignature: "([^"]+)",\s*referenceTrackIDs: \[([^]]*)\]'
 TRACK_PATTERN=r'FrequencyTrack\(id: "([^"]+)", title: "([^"]+)", subtitle: "([^"]+)", detail: "([^"]+)", resourceName: "([^"]+)", duration: ([\d.]+), symbol: "([^"]+)", goals: \[([^\]]*)\], genres: \[([^\]]*)\]'
 def strings(value):
@@ -50,9 +50,9 @@ def main():
         tracks.append(dict(id=id,title=title,subtitle=subtitle,description=detail,goals=strings(goals),
             genres=strings(genres),artist='Frequency Originals',world=assigned[0] if assigned else 'fresh-cuts',
             worlds=assigned,audio='audio/'+audio_target.name,image='artwork/'+cover_target.name,
-            duration=float(duration),source='Frequency Beta44',lyrics=lyrics.get(id,''),
+            duration=float(duration),source='Frequency iOS',lyrics=lyrics.get(id,''),
             type='soundscape' if id.startswith('timekeeper-audio-') else 'song'))
-    index=dict(schema_version=2,updated_from='Frequency Beta44',tracks=tracks,worlds=worlds)
+    index=dict(schema_version=2,updated_from='Frequency iOS',tracks=tracks,worlds=worlds)
     (ROOT/'app-track-export.json').write_text(json.dumps(index,indent=2,ensure_ascii=False)+'\n')
     print(f'Indexed {len(tracks)} tracks and {len(worlds)} sound worlds; {len(changed)} media files updated.')
     if changed:print('Changed files (first 20):',', '.join(changed[:20]))
