@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090c12">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Frequency · Private Listening</title>
+<style>
+:root{color-scheme:dark;--bg:#090c12;--surface:#141b20;--border:#33403e;--text:#f6f6ef;--muted:#acb9b5;--gold:#dec69a;--mint:#9bd5bd}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font:16px -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;background:radial-gradient(ellipse 72% 38% at 60% 0%,#24332e 0%,transparent 75%),var(--bg);color:var(--text)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.shell{max-width:860px;margin:0 auto;padding:20px 22px 56px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0 30px}
+.brand{font-size:22px;font-weight:850;letter-spacing:-1px}.brand b{color:var(--gold)}
+.back{border:1px solid var(--border);border-radius:100px;padding:11px 15px;color:var(--muted);font-weight:600;font-size:13px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--mint)}
+h1{font-size:clamp(34px,7vw,56px);line-height:1.05;letter-spacing:-2px;margin:14px 0}
+.lede{max-width:670px;color:var(--muted);line-height:1.6;margin:0 0 24px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.pill{border-radius:30px;border:1px solid var(--border);padding:7px 12px;color:#d8e1de;font-size:12px}
+.pill.private{color:var(--mint);border-color:#4e7764;background:#153026}
+main{padding-top:14px}
+.deck{padding:19px;border:1px solid var(--border);border-radius:24px;background:linear-gradient(155deg,#172420,#11181c 65%);box-shadow:0 20px 58px #0005}
+.playerhead{display:flex;align-items:center;gap:15px;margin-bottom:18px}
+.art{flex:none;width:62px;height:62px;border-radius:17px;display:grid;place-items:center;font-size:30px;background:radial-gradient(circle at 40% 25%,#6b8e76 0%,#304d43 48%,#142026 100%);box-shadow:0 5px 22px #0004}
+.song{min-width:0}.song small{color:var(--mint);font-size:10px;font-weight:800;letter-spacing:1.5px}
+.song strong{display:block;margin-top:5px;font-size:clamp(16px,4vw,23px);line-height:1.2;overflow-wrap:anywhere}
+.embed{width:100%;min-height:280px;border:0;border-radius:13px;background:#0a0d0e}
+.actions{display:flex;gap:10px;margin-top:17px;flex-wrap:wrap}
+.cta{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 17px;border-radius:13px;font-weight:750;font-size:14px;background:var(--gold);color:#1c1a15}
+.subtle{border:1px solid var(--border);background:#1b2424;color:#e4eae5}
+.help{font-size:13px;line-height:1.6;color:var(--muted);margin:18px 3px 0}
+.note{margin:25px 0;border-top:1px solid var(--border);padding-top:19px;color:var(--muted);font-size:13px;line-height:1.6}
+#missing{padding:35px 0;font-size:18px}
+[hidden]{display:none!important}
+@media(max-width:500px){.shell{padding:14px 15px 44px}header{padding-bottom:19px}.deck{padding:12px;border-radius:20px}.embed{min-height:300px}.art{width:52px;height:52px}.cta{flex:1 1 auto}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header><a class="brand" href="./" aria-label="Frequency home">◒ frequency<b>.</b></a><a class="back" href="experiments.html">↖ Experiments</a></header>
+<main>
+<div class="eyebrow">FREQUENCY / PRIVATE LISTENING</div>
+<h1 id="headline">An early listen.<br>Just for you.</h1>
+<p class="lede">A creative draft, not a finished or released track. Listen on your phone before deciding whether it belongs in the public Frequency collection.</p>
+<div class="badges"><span class="pill private">◉ Google-account protected</span><span class="pill">Original audio master preserved</span><span class="pill">Private preview</span></div>
+<section class="deck" id="trackPanel" hidden aria-label="Protected song preview">
+<div class="playerhead"><div class="art" aria-hidden="true">♫</div><div class="song"><small>NOW LISTENING · PRIVATE DRAFT</small><strong id="songTitle">Frequency draft</strong></div></div>
+<iframe class="embed" id="previewFrame" title="Protected audio playback" allow="autoplay; fullscreen" referrerpolicy="no-referrer"></iframe>
+<div class="actions"><a class="cta" id="driveLink" href="#" target="_blank" rel="noopener noreferrer">▶ Open protected audio</a><a class="cta subtle" href="./">Explore Frequency</a></div>
+<p class="help">Tap play above. If the embedded player asks you to sign in or doesn't load on iPhone, tap <strong>Open protected audio</strong> and use your Google account. The music remains private rather than being uploaded to the public Frequency website.</p>
+</section>
+<div id="missing" hidden>This private listening link is incomplete. <a href="./">Return to Frequency</a>.</div>
+<p class="note">Frequency's regular listening room and experiments catalog are publicly hosted. Draft audio is not automatically published there. Google account permissions still protect this preview.</p>
+</main>
+</div>
+<script>
+(() => {
+  'use strict';
+  const params=new URLSearchParams(location.hash.slice(1));
+  const id=params.get('id')||'';
+  const title=(params.get('title')||'Private Frequency Draft').trim().slice(0,120);
+  const valid=/^[a-zA-Z0-9_-]{18,90}$/.test(id);
+  if(!valid){document.getElementById('missing').hidden=false;return;}
+  const link='https://drive.google.com/file/d/'+encodeURIComponent(id)+'/view';
+  const preview='https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview';
+  document.getElementById('trackPanel').hidden=false;
+  document.getElementById('songTitle').textContent=title;
+  document.getElementById('headline').textContent=title;
+  document.title=title+' · Frequency Private Listening';
+  document.getElementById('previewFrame').src=preview;
+  document.getElementById('driveLink').href=link;
+})();
+</script>
+</body>
+</html>
