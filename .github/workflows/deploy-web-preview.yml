@@ -51,3 +51,7 @@ jobs:
       - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # Full Frequency catalog contains hundreds of MB of approved audio.
+          # GitHub Pages may legitimately remain syncing_files beyond 10 minutes.
+          timeout: 1800000
