@@ -39,3 +39,16 @@ Six switchable real-audio views: Beat Reactor, Spectral Silk, Harmonic Bloom, So
 **Fast iPhone link:** https://frequency-living-lab.vercel.app/?lab=1&view=silk&v=6
 **Actual visual QA images:** sonic-lab-guide.html and studies/ folder.
 **Truth:** Browser audio analysis displays mixed audio frequency energy and recent timing history, not isolated individual instruments or actual physiological frequencies. Production iOS app untouched.
+
+
+## V7: live controls inside the immersive player
+
+The immersive view now contains its own live adjustment controls: Detail, Impact, and Prism/Aurora/Solar palette. Tapping TUNE opens a compact glass panel beneath the visible artwork, allowing immediate visual feedback. Done hides it without leaving the player.
+
+Reset restores Detail 100%, Impact 100%, Prism. Values stay synchronized with the main Visual Lab sheet and persist while switching between visual modes. Mode arrows and song playback still work. Entering immersive from the settings sheet automatically opens the tuner.
+
+The exact favorite first version is preserved unchanged; tuning controls are disabled with an explanation when The Original is selected.
+
+iPhone full-screen interactive link: https://frequency-living-lab.vercel.app/?lab=1&view=silk&immersive=tune&v=7
+
+Browser tests at 390x844, 375x667, 430x932 phone-sized viewports passed with no overlap, live playback, controls/reset/mode switching and zero JS exceptions. Physical iPhone still needs owner review.

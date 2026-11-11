@@ -310,11 +310,21 @@
   };
   const immersiveHtml=()=>'<div id="sonicImmersive" class="sonic-immersive" hidden aria-hidden="true">'+
     '<div class="sonic-imm-bg" id="sonicImmBg"></div>'+
-    '<div class="sonic-imm-head"><button data-sonic="exitImmersive" class="sonic-imm-close">‹ PLAYER</button><span>FREQUENCY / IMMERSIVE</span><button data-sonic="open" class="sonic-imm-opts">✧ VIEWS</button></div>'+
+    '<div class="sonic-imm-head"><button data-sonic="exitImmersive" class="sonic-imm-close">‹ PLAYER</button><span>FREQUENCY / IMMERSIVE</span><div class="sonic-imm-actions"><button data-sonic="open" class="sonic-imm-opts">✧ VIEWS</button><button id="sonicImmTuneToggle" data-sonic="toggleTuning" aria-expanded="false" aria-controls="sonicImmTuner" class="sonic-imm-opts sonic-imm-tune-trigger">◈ TUNE</button></div></div>'+
     '<div class="sonic-imm-song"><span id="sonicImmWorld">FREQUENCY ORIGINALS</span><strong id="sonicImmTrack">Now playing</strong></div>'+
     '<div class="sonic-imm-stage"><canvas id="sonicImmersiveCanvas"></canvas><div class="sonic-imm-art"><img id="sonicImmArt" src="assets/velvet.jpg" alt="Currently playing artwork"></div></div>'+
     '<div class="sonic-imm-footer"><div class="sonic-imm-mode"><button data-sonic="prevMode" aria-label="Previous view">‹</button><div><small>VISUAL EXPERIENCE</small><strong id="sonicImmMode">Beat Reactor</strong></div><button data-sonic="nextMode" aria-label="Next view">›</button></div>'+
     '<div class="sonic-imm-signal">'+[0,1,2].map((k)=>'<div><span>'+["BASS","MIDS","HIGHS"][k]+'</span><div class="sonic-imm-meter"><i data-imm-meter="'+k+'"></i></div></div>').join("")+'</div>'+
+    '<section id="sonicImmTuner" class="sonic-imm-tuner" hidden aria-label="Live visual tuning">'+
+      '<div class="sonic-tuner-heading"><span><i class="sonic-live-dot"></i>LIVE VISUAL TUNING</span><button data-sonic="resetTuning" class="sonic-reset-tuning" aria-label="Reset visual adjustments">↺ RESET</button></div>'+
+      '<div class="sonic-imm-tuner-sliders">'+
+        '<label class="sonic-imm-tune-field" for="sonicImmDetail"><span>DETAIL <output id="sonicImmDetailValue" for="sonicImmDetail">100%</output></span><input id="sonicImmDetail" type="range" min="35" max="180" step="5" value="100" aria-label="Live visual detail"></label>'+
+        '<label class="sonic-imm-tune-field" for="sonicImmImpact"><span>IMPACT <output id="sonicImmImpactValue" for="sonicImmImpact">100%</output></span><input id="sonicImmImpact" type="range" min="50" max="200" step="5" value="100" aria-label="Live beat reaction intensity"></label>'+
+      '</div>'+
+      '<div class="sonic-tuner-palettes"><span>COLOR</span><div class="sonic-imm-swatches" id="sonicImmPalettes">'+
+      Object.keys(PALETTES).map(key=>'<button type="button" data-sonic-palette="'+key+'" class="sonic-imm-swatch" aria-label="'+({prism:"Prism",aurora:"Aurora",solar:"Solar"}[key])+' colors" aria-pressed="false"><i style="--c1:'+PALETTES[key][0]+';--c2:'+PALETTES[key][1]+';--c3:'+PALETTES[key][2]+'"></i><small>'+({prism:"Prism",aurora:"Aurora",solar:"Solar"}[key])+'</small></button>').join("")+
+      '</div></div><p class="sonic-tuner-original-note" id="sonicTunerOriginalNote" hidden>The Original is preserved exactly. Switch to another view to customize the colors and motion.</p>'+
+    '</section>'+
     '<button data-sonic="playPause" id="sonicImmPause" class="sonic-imm-transport">Ⅱ Pause</button><p>True audio spectrum · original recording</p></div></div>';
   device.insertAdjacentHTML("beforeend",labHtml()+immersiveHtml());
   const renderModes=()=>{
@@ -329,6 +339,53 @@
     $s("#sonicDetailValue").textContent=Math.round(tune.detail*100)+"%";
     $s("#sonicImpactValue").textContent=Math.round(tune.impact*100)+"%";
   };
+  function syncTuningControls(){
+    for(const [key,name] of [["detail","Detail"],["impact","Impact"]]){
+      const value=String(Math.round(tune[key]*100));
+      const panel=$s("#sonic"+name),full=$s("#sonicImm"+name);
+      if(panel&&panel!==document.activeElement)panel.value=value;
+      if(full&&full!==document.activeElement)full.value=value;
+      const a=$s("#sonic"+name+"Value"),b=$s("#sonicImm"+name+"Value");
+      if(a)a.textContent=value+"%";
+      if(b)b.textContent=value+"%";
+    }
+    for(const el of device.querySelectorAll("[data-sonic-palette]")){
+      const selected=el.dataset.sonicPalette===tune.palette;
+      el.classList.toggle("active",selected);
+      el.setAttribute("aria-pressed",String(selected));
+    }
+    const original=state.visualMode==="first";
+    const note=$s("#sonicTunerOriginalNote");
+    if(note)note.hidden=!original;
+    const tuneFields=$s("#sonicImmTuner");
+    if(tuneFields)tuneFields.classList.toggle("baseline-mode",original);
+    for(const id of ["sonicImmDetail","sonicImmImpact"]){
+      const el=$s("#"+id);
+      if(el)el.disabled=original;
+    }
+    for(const el of device.querySelectorAll("#sonicImmPalettes button"))el.disabled=original;
+  }
+  function setTuning(key,value){
+    const min=key==="detail"?.35:.5,max=key==="detail"?1.8:2;
+    tune[key]=safe(Number(value)/100,min,max);
+    syncTuningControls();
+  }
+  function setPalette(key){
+    if(!PALETTES[key])return;
+    tune.palette=key;
+    window.__sonicColors=COLORS();
+    syncTuningControls();
+  }
+  function setImmersiveTuning(open){
+    const overlay=$s("#sonicImmersive"),panel=$s("#sonicImmTuner"),trigger=$s("#sonicImmTuneToggle");
+    const visible=Boolean(open);
+    overlay.classList.toggle("tuning",visible);
+    panel.hidden=!visible;
+    trigger.setAttribute("aria-expanded",String(visible));
+    trigger.classList.toggle("active",visible);
+    trigger.textContent=visible?"✓ DONE":"◈ TUNE";
+    syncTuningControls();
+  }
   const showPanel=()=>{
     renderModes();
     const p=$s("#sonicPanel");
@@ -343,6 +400,7 @@
     if(label)label.textContent=currentMode().name.toUpperCase()+" · TAP TO EXPLORE";
     if($s("#sonicImmMode"))$s("#sonicImmMode").textContent=currentMode().name;
     if(!$s("#sonicPanel").hidden)renderModes();
+    syncTuningControls();
   }
   function chooseMode(mode){
     if(!OPTIONS.some(o=>o.id===mode))return;
@@ -354,6 +412,7 @@
     refreshModeLabels();
   }
   const openImmersive=()=>{
+    const comingFromSettings=!$s("#sonicPanel").hidden;
     closePanel();
     if(state.route!=="player")navigate("player");
     const tr=TRACKS[state.song];
@@ -366,9 +425,13 @@
     im.hidden=false;im.setAttribute("aria-hidden","false");
     window.__frequencyImmersive=true;
     refreshModeLabels();
+    // When entering from the settings sheet, show the controls live by
+    // default; otherwise enter in uncluttered cinematic mode.
+    setImmersiveTuning(comingFromSettings);
   };
   const closeImmersive=()=>{
     window.__frequencyImmersive=false;
+    setImmersiveTuning(false);
     const im=$s("#sonicImmersive");
     im.hidden=true;im.setAttribute("aria-hidden","true");
   };
@@ -402,9 +465,9 @@
     if(!b)return;
     if(b.dataset.sonicMode){chooseMode(b.dataset.sonicMode);closePanel();return}
     if(b.dataset.sonicPalette){
-      tune.palette=b.dataset.sonicPalette;
-      window.__sonicColors=COLORS();
-      renderModes();return;
+      if(state.visualMode==="first" && b.closest("#sonicImmTuner"))return;
+      setPalette(b.dataset.sonicPalette);
+      return;
     }
     if(b.dataset.action==="visuals"){showPanel();return}
     if(b.dataset.action==="immerse"){openImmersive();return}
@@ -413,6 +476,8 @@
       case "open":showPanel();break;
       case "close":closePanel();break;
       case "immerse":openImmersive();break;
+      case "toggleTuning":setImmersiveTuning($s("#sonicImmTuner").hidden);break;
+      case "resetTuning":setTuning("detail",100);setTuning("impact",100);setPalette("prism");break;
       case "exitImmersive":closeImmersive();break;
       case "prevMode":
       case "nextMode":{
@@ -423,11 +488,11 @@
       case "playPause":togglePlay();break;
     }
   });
-  for(const [id,key] of [["sonicDetail","detail"],["sonicImpact","impact"]]){
-    $s("#"+id).addEventListener("input",e=>{
-      tune[key]=Number(e.target.value)/100;
-      $s("#"+(key==="detail"?"sonicDetailValue":"sonicImpactValue")).textContent=e.target.value+"%";
-    });
+  for(const [key,label] of [["detail","Detail"],["impact","Impact"]]){
+    for(const id of ["sonic"+label,"sonicImm"+label]){
+      $s("#"+id).addEventListener("input",e=>setTuning(key,e.target.value));
+      $s("#"+id).addEventListener("change",()=>syncTuningControls());
+    }
   }
   device.addEventListener("keydown",e=>{if(e.key==="Escape"){closePanel();closeImmersive()}});
   // A stable iPhone deep link opens the player directly, with a real song
@@ -438,11 +503,19 @@
     if(OPTIONS.some(o=>o.id===wanted))chooseMode(wanted);
     const song=TRACKS[params.get("song")]?params.get("song"):"already-arrived";
     chooseSong(song,false);
+    // Deep-link directly to the immersive adjustment deck. Audio still needs
+    // a deliberate Play tap under Safari's autoplay restrictions.
+    if(params.get("immersive")==="tune"){
+      openImmersive();
+      setImmersiveTuning(true);
+    }else if(params.get("immersive")==="1"){
+      openImmersive();
+    }
   }
   refreshModeLabels();
   window.__sonicLab={
     modes:OPTIONS.map(({id,name})=>({id,name})),
-    chooseMode,showPanel,closePanel,openImmersive,closeImmersive,
+    chooseMode,showPanel,closePanel,openImmersive,closeImmersive,setImmersiveTuning,setTuning,setPalette,
     getTuning:()=>({...tune}),
     getSignal:()=>reactive.bands.map(b=>({raw:b.raw,envelope:b.envelope,beat:b.beat}))
   };
