@@ -301,3 +301,23 @@ New Music and artist World pages both call `renderSongRows(root, tracks)`.
 The component stacks horizontal song rows vertically, gives each one a direct
 Play control and keeps the player/queue in `listening-room.js`. Home uses its
 separate feature cards, but they play through that same audio element.
+
+## Sonic Studio is now part of the ONE Listening Room (November 11, 2026)
+
+The sonic visualizer is a feature of the existing Listening Room, not another music player or app. The canonical browser link is https://l1gh7c0d35.github.io/frequency-music-public/ .
+
+When a song is playing, tap Explore Live Visuals on its actual Now Playing artwork. Full-screen Sonic Studio uses the SAME mainAudio element, song ID, queue, favorites and lyrics. Entering the Studio does not open a second audio stream; Play, Pause and Previous/Next invoke the existing player. Returning to Now Playing preserves playback.
+
+Six views: Beat Reactor, Spectral Silk, Harmonic Bloom, Sonic Stardust, Spectrum Atlas and the preserved Original geometry. Views and the immersed Detail/Impact/Prism/Aurora/Solar controls remain interactive. Historical Original mode is not modified by tuning.
+
+Direct in-app demo link: https://l1gh7c0d35.github.io/frequency-music-public/?track=already-arrived&sonic=1&visual=silk&tune=1
+
+### Signal honesty and future songs
+
+The approved public catalog has 20fps, 96-bin, real audio measurements in sonic-signals, computed offline from the SAME already-public recordings. The visual engine interpolates these at the current mainAudio playback time, including low/mid/high energy and transients. Seek changes visual position, next loads its own track data. This avoids rerouting audio via Web Audio, which can mute playback for unsupported cross-origin/private sources.
+
+No new/unapproved music or private recordings are exposed. An unanalyzed or private track still plays normally, and the visual UI states analysis is unavailable. A mixed recording's spectrum cannot separately identify its vocal and instrument stems.
+
+For a newly approved public song, run python3 scripts/build_sonic_signals.py --workers 4 and commit the generated files alongside the public audio; the existing, unchanged GitHub Pages pipeline publishes those assets. The one Listening Room remains the authoritative browser experience. The old design-previews/living-worlds prototype stays as a read-only historical A/B reference, not a separate listening app.
+
+The SwiftUI Frequency-App repository remains the ONE native iPhone application; its production source and TestFlight were not changed by this browser integration.

@@ -1,0 +1,579 @@
+{
+  "version": 1,
+  "source": "approved-public-Frequency-catalog",
+  "sampleRateHz": 16000,
+  "fftSize": 2048,
+  "sampleIntervalMs": 50,
+  "channels": 102,
+  "spectrumBins": 96,
+  "tracks": [
+    {
+      "id": "already-arrived",
+      "file": "sonic-signals/already-arrived.json",
+      "durationSeconds": 182.0,
+      "frames": 3638,
+      "bytes": 495028,
+      "audioSha256": "4b41051063c72c10d25080ccceba84fa621ae2f1e3ac537a309d0795f62dc195"
+    },
+    {
+      "id": "already-grateful",
+      "file": "sonic-signals/already-grateful.json",
+      "durationSeconds": 195.0,
+      "frames": 3898,
+      "bytes": 530389,
+      "audioSha256": "5970eb55a47dd3cfe7a43906c113158d90637b7f6180f25c7793b515bbbfac6f"
+    },
+    {
+      "id": "built-for-this",
+      "file": "sonic-signals/built-for-this.json",
+      "durationSeconds": 168.0,
+      "frames": 3358,
+      "bytes": 456947,
+      "audioSha256": "9879fc3b121db160770bb7e9082bb6ebb2a54cb017fdac2483da6f51b5599c9b"
+    },
+    {
+      "id": "built-in-silence",
+      "file": "sonic-signals/built-in-silence.json",
+      "durationSeconds": 224.0,
+      "frames": 4478,
+      "bytes": 609269,
+      "audioSha256": "65bd78c1c5b5ae5eb0060b2aecf30a47dbc328d60bacf280155ca7289b07871a"
+    },
+    {
+      "id": "command-the-day",
+      "file": "sonic-signals/command-the-day.json",
+      "durationSeconds": 160.0,
+      "frames": 3198,
+      "bytes": 435188,
+      "audioSha256": "4a4a9c29f5acaaacffe094ffdc91308b2ec89fca601b3ac810bf752c8f1f4a34"
+    },
+    {
+      "id": "crowned-by-fire",
+      "file": "sonic-signals/crowned-by-fire.json",
+      "durationSeconds": 192.0,
+      "frames": 3838,
+      "bytes": 522228,
+      "audioSha256": "284dae16c17218c915ef8f8a416f57977ef25129a7dce6000ebab25e438aa18a"
+    },
+    {
+      "id": "everything-opens",
+      "file": "sonic-signals/everything-opens.json",
+      "durationSeconds": 186.0,
+      "frames": 3718,
+      "bytes": 505909,
+      "audioSha256": "a33e36b756a7ae35c9e37f5a004b66a6c892e619fb0402cb636ae268c27710f8"
+    },
+    {
+      "id": "fire-under-calm-c1",
+      "file": "sonic-signals/fire-under-calm-c1.json",
+      "durationSeconds": 184.0,
+      "frames": 3678,
+      "bytes": 500471,
+      "audioSha256": "ae8fd7c43b034cc7e5584e695dfff58e60166f2751bbdec6a67923b8f0b3a0d1"
+    },
+    {
+      "id": "fire-under-calm-c2",
+      "file": "sonic-signals/fire-under-calm-c2.json",
+      "durationSeconds": 184.0,
+      "frames": 3678,
+      "bytes": 500471,
+      "audioSha256": "f7a041f0074c34a2c5cdb4267c4ecb637d09690b5cc975982af2b4d013f077a3"
+    },
+    {
+      "id": "fire-under-calm-c3",
+      "file": "sonic-signals/fire-under-calm-c3.json",
+      "durationSeconds": 184.0,
+      "frames": 3678,
+      "bytes": 500471,
+      "audioSha256": "223396fbd680b212375a55b4edaf4f4bc47412f92601312fc8e8f308c415a8d1"
+    },
+    {
+      "id": "future-in-the-room",
+      "file": "sonic-signals/future-in-the-room.json",
+      "durationSeconds": 225.0,
+      "frames": 4498,
+      "bytes": 611991,
+      "audioSha256": "aef9a289ea4db08210391acc676fa8a0562147b23968619d4556a4b8e9f2149b"
+    },
+    {
+      "id": "gold-on-my-mind",
+      "file": "sonic-signals/gold-on-my-mind.json",
+      "durationSeconds": 174.0,
+      "frames": 3478,
+      "bytes": 473268,
+      "audioSha256": "e8ad9c3f4492e3a4b40e0e55fbd6093c8942e9260e6db189359f8ba76ed01ca0"
+    },
+    {
+      "id": "golden-hour",
+      "file": "sonic-signals/golden-hour.json",
+      "durationSeconds": 184.0,
+      "frames": 3678,
+      "bytes": 500464,
+      "audioSha256": "6e0c61a27201a9e04d6e8c052dfb0fca8eed5aca77065c679401566d572267a5"
+    },
+    {
+      "id": "i-decide",
+      "file": "sonic-signals/i-decide.json",
+      "durationSeconds": 215.0,
+      "frames": 4298,
+      "bytes": 584781,
+      "audioSha256": "3457862523fd8cf08402268b390ad46a2b53a191628e2e04cc54cf92790f3eb3"
+    },
+    {
+      "id": "i-do-not-break",
+      "file": "sonic-signals/i-do-not-break.json",
+      "durationSeconds": 184.0,
+      "frames": 3678,
+      "bytes": 500467,
+      "audioSha256": "d86314ef55e868a2304dfd2d4070b51c624d296c0b38b720ccf5af55f1211480"
+    },
+    {
+      "id": "i-give-the-signal",
+      "file": "sonic-signals/i-give-the-signal.json",
+      "durationSeconds": 198.0,
+      "frames": 3958,
+      "bytes": 538550,
+      "audioSha256": "c293441aac7740778f75be577f12a9f877ff99bff23ed141cf4e3211abeaa40e"
+    },
+    {
+      "id": "light-finds-me",
+      "file": "sonic-signals/light-finds-me.json",
+      "durationSeconds": 190.0,
+      "frames": 3798,
+      "bytes": 516787,
+      "audioSha256": "6df1fcc3ace4d291e6e583dcb8a2c033255cf6d14a64ba3bea09d24b1b012be2"
+    },
+    {
+      "id": "luck-follows-action",
+      "file": "sonic-signals/luck-follows-action.json",
+      "durationSeconds": 146.0,
+      "frames": 2918,
+      "bytes": 397112,
+      "audioSha256": "dbaf89d8af143b487e9dfa926618c969c7c6b89ed35bc7723a3fc8f75beef3ff"
+    },
+    {
+      "id": "made-of-mountains",
+      "file": "sonic-signals/made-of-mountains.json",
+      "durationSeconds": 184.0,
+      "frames": 3678,
+      "bytes": 500470,
+      "audioSha256": "b5e6ee5872072cee6a719dd1d383f883f1bd6f9d3a79aa33526c71df9cb14342"
+    },
+    {
+      "id": "momentum-is-mine",
+      "file": "sonic-signals/momentum-is-mine.json",
+      "durationSeconds": 150.0,
+      "frames": 2998,
+      "bytes": 407989,
+      "audioSha256": "a65ca76f32abaf629fb20a494e1a175f7b00ac40edd1c9e2d62709020d266523"
+    },
+    {
+      "id": "money-meets-motion",
+      "file": "sonic-signals/money-meets-motion.json",
+      "durationSeconds": 185.0,
+      "frames": 3698,
+      "bytes": 503191,
+      "audioSha256": "0638c011dc5d0d3ce6a5d3540802a38cfa5a02fc172f5bf9b27741a503e470b2"
+    },
+    {
+      "id": "move-like-money",
+      "file": "sonic-signals/move-like-money.json",
+      "durationSeconds": 166.0,
+      "frames": 3318,
+      "bytes": 451508,
+      "audioSha256": "4c3d8f28115de24606eb1c0b63124a5bc9ef061c55fc9958473a061ccc15bd93"
+    },
+    {
+      "id": "new-disco-on-the-fire-escape",
+      "file": "sonic-signals/new-disco-on-the-fire-escape.json",
+      "durationSeconds": 180.0,
+      "frames": 3598,
+      "bytes": 489601,
+      "audioSha256": "91f5743b07bebcbe9762d2d6f7cd824b99aa7a5bc4ad4f01fd19bf3e38a06430"
+    },
+    {
+      "id": "new-i-know-who-i-am",
+      "file": "sonic-signals/new-i-know-who-i-am.json",
+      "durationSeconds": 192.0,
+      "frames": 3838,
+      "bytes": 522232,
+      "audioSha256": "79b7d9d1d9ce15a956078b739dc33bc5f5ce23656b6d4d4a175950314f481f9e"
+    },
+    {
+      "id": "new-i-live-in-the-overflow",
+      "file": "sonic-signals/new-i-live-in-the-overflow.json",
+      "durationSeconds": 188.0,
+      "frames": 3758,
+      "bytes": 511359,
+      "audioSha256": "7676cb5797202031941641269f10514b880c57c5db57e20b766d1585b99e88da"
+    },
+    {
+      "id": "new-neon-wildfire",
+      "file": "sonic-signals/new-neon-wildfire.json",
+      "durationSeconds": 190.0,
+      "frames": 3798,
+      "bytes": 516790,
+      "audioSha256": "5f59cca903ad2bf6d276821a7f8ff0ff8f8ff9ff4941155aa82a2ec10dc84469"
+    },
+    {
+      "id": "new-out-of-orbit",
+      "file": "sonic-signals/new-out-of-orbit.json",
+      "durationSeconds": 175.0,
+      "frames": 3498,
+      "bytes": 475989,
+      "audioSha256": "3d8d9a87898c0d70c3d93df2d204f04100ad73f50afaba55af310fbcc3475856"
+    },
+    {
+      "id": "new-the-wild-part-of-me",
+      "file": "sonic-signals/new-the-wild-part-of-me.json",
+      "durationSeconds": 200.0,
+      "frames": 3998,
+      "bytes": 543996,
+      "audioSha256": "373a4bc7d9d87cc36522409153da196ac26a347449e38c77b94d8b44e51aebaf"
+    },
+    {
+      "id": "new-what-the-morning-knows",
+      "file": "sonic-signals/new-what-the-morning-knows.json",
+      "durationSeconds": 200.0,
+      "frames": 3998,
+      "bytes": 543999,
+      "audioSha256": "7bfa8063990f11fc4aaf6562da5367a720d8d778360e33b72121f744615c6537"
+    },
+    {
+      "id": "open-to-more",
+      "file": "sonic-signals/open-to-more.json",
+      "durationSeconds": 220.0,
+      "frames": 4398,
+      "bytes": 598385,
+      "audioSha256": "78d4f46d634c538dd0e78de235b9c6e4d492ba545b5cc19062dd06f7afaacce8"
+    },
+    {
+      "id": "pressure-into-power",
+      "file": "sonic-signals/pressure-into-power.json",
+      "durationSeconds": 148.0,
+      "frames": 2958,
+      "bytes": 402552,
+      "audioSha256": "3408dad60f63bacb394735cfb6952468f683158590925411fb905632842d2d77"
+    },
+    {
+      "id": "quiet-empire",
+      "file": "sonic-signals/quiet-empire.json",
+      "durationSeconds": 250.0,
+      "frames": 4998,
+      "bytes": 679985,
+      "audioSha256": "89cae1b105055f47c2c8d4d30b94151b347a665f5a2bc44df975da4c70558147"
+    },
+    {
+      "id": "run-with-the-light",
+      "file": "sonic-signals/run-with-the-light.json",
+      "durationSeconds": 202.0,
+      "frames": 4038,
+      "bytes": 549431,
+      "audioSha256": "c62cd183b1574d8f52559b259d9375675260aadfe1c2fb73b81a2dd8e2fb59a4"
+    },
+    {
+      "id": "soft-life-strong-mind",
+      "file": "sonic-signals/soft-life-strong-mind.json",
+      "durationSeconds": 188.0,
+      "frames": 3758,
+      "bytes": 511354,
+      "audioSha256": "0403f1d7f06549b507a3b68a84da4a7e6e052e73e2d7bd8dcbe3c347d99cd3fb"
+    },
+    {
+      "id": "storm-in-my-blood",
+      "file": "sonic-signals/storm-in-my-blood.json",
+      "durationSeconds": 190.0,
+      "frames": 3798,
+      "bytes": 516790,
+      "audioSha256": "b1697556f795cf0d9b5a6a6d24d1a4421cd004056cdf8f6587f23fb26683ecbe"
+    },
+    {
+      "id": "the-room-changes",
+      "file": "sonic-signals/the-room-changes.json",
+      "durationSeconds": 188.0,
+      "frames": 3758,
+      "bytes": 511349,
+      "audioSha256": "d42a2ce92f910bce6e2f4c1017fba9fd839692898583e890bfaae6cea30e3406"
+    },
+    {
+      "id": "this-is-my-normal",
+      "file": "sonic-signals/this-is-my-normal.json",
+      "durationSeconds": 230.0,
+      "frames": 4598,
+      "bytes": 625590,
+      "audioSha256": "3e50ebac16b2c49c5a1d2bcc707d710863d0110763a89ed9f2a811e028add6f8"
+    },
+    {
+      "id": "timekeeper-audio-111-hz-cellular-rejuvenation",
+      "file": "sonic-signals/timekeeper-audio-111-hz-cellular-rejuvenation.json",
+      "durationSeconds": 182.02,
+      "frames": 3638,
+      "bytes": 495059,
+      "audioSha256": "297aff4614f20b891dc319da078d1a062d8f5de15393d84b5d19eace2771329c"
+    },
+    {
+      "id": "timekeeper-audio-396-hz-grounded-foundation",
+      "file": "sonic-signals/timekeeper-audio-396-hz-grounded-foundation.json",
+      "durationSeconds": 66.58,
+      "frames": 1330,
+      "bytes": 181168,
+      "audioSha256": "890c52e114fdf947d1782632a1428998907fca32ae8674767bc0227b987d9a59"
+    },
+    {
+      "id": "timekeeper-audio-417-hz-radiant-renewal",
+      "file": "sonic-signals/timekeeper-audio-417-hz-radiant-renewal.json",
+      "durationSeconds": 175.42,
+      "frames": 3506,
+      "bytes": 477101,
+      "audioSha256": "f0c2b0f0ef882e392213099c5d7efb22010fe64e3eedd738f2643ceca254a231"
+    },
+    {
+      "id": "timekeeper-audio-432-hz-crystal-abundance",
+      "file": "sonic-signals/timekeeper-audio-432-hz-crystal-abundance.json",
+      "durationSeconds": 65.47,
+      "frames": 1307,
+      "bytes": 178038,
+      "audioSha256": "4253b0d51808225a761b16ad708c3421f4c48bee040d5d79969e90ebae2cf1b8"
+    },
+    {
+      "id": "timekeeper-audio-528-hz-miracle-awakening",
+      "file": "sonic-signals/timekeeper-audio-528-hz-miracle-awakening.json",
+      "durationSeconds": 159.85,
+      "frames": 3195,
+      "bytes": 434807,
+      "audioSha256": "6f58f090e0132a17ca8d2a8215b4a0441781cc2663bb979a6f44c8196521de00"
+    },
+    {
+      "id": "timekeeper-audio-528-hz-sacred-grace",
+      "file": "sonic-signals/timekeeper-audio-528-hz-sacred-grace.json",
+      "durationSeconds": 164.07,
+      "frames": 3279,
+      "bytes": 446226,
+      "audioSha256": "f8d8b22d4894024d12c5038c80bebd01bc0881f57a0840f63a819526e14c9aad"
+    },
+    {
+      "id": "timekeeper-audio-639-hz-golden-harmonic-dawn",
+      "file": "sonic-signals/timekeeper-audio-639-hz-golden-harmonic-dawn.json",
+      "durationSeconds": 177.75,
+      "frames": 3553,
+      "bytes": 483498,
+      "audioSha256": "cc681038efe5390fb257cb473cff527668f6b309d60d018bae05a92439382c2c"
+    },
+    {
+      "id": "timekeeper-audio-7-83-hz-schumann-earth-pulse",
+      "file": "sonic-signals/timekeeper-audio-7-83-hz-schumann-earth-pulse.json",
+      "durationSeconds": 176.79,
+      "frames": 3534,
+      "bytes": 480915,
+      "audioSha256": "64b1931a1025ffa19944dca648e010f34ec290c37808b910a81ff3071720bc94"
+    },
+    {
+      "id": "timekeeper-audio-741-hz-intuitive-vision",
+      "file": "sonic-signals/timekeeper-audio-741-hz-intuitive-vision.json",
+      "durationSeconds": 153.47,
+      "frames": 3067,
+      "bytes": 417398,
+      "audioSha256": "542a2ce3d80a68245da78e5b518218985d72d5f2eba5e6e3a1d9c4d63e84b708"
+    },
+    {
+      "id": "timekeeper-audio-852-hz-spiritual-oneness",
+      "file": "sonic-signals/timekeeper-audio-852-hz-spiritual-oneness.json",
+      "durationSeconds": 64.7,
+      "frames": 1292,
+      "bytes": 175997,
+      "audioSha256": "0b9fbd3146fdedd09a3730bebb0e7d24c326c9b23ba5c32ffb433d267bf9ba45"
+    },
+    {
+      "id": "timekeeper-audio-963-hz-celestial-horizon",
+      "file": "sonic-signals/timekeeper-audio-963-hz-celestial-horizon.json",
+      "durationSeconds": 178.43,
+      "frames": 3567,
+      "bytes": 485399,
+      "audioSha256": "abe322c84d488274b09cdd9ef4b69721afcc3705c76558a07ca330833143a021"
+    },
+    {
+      "id": "timekeeper-audio-balearic-gold-horizon",
+      "file": "sonic-signals/timekeeper-audio-balearic-gold-horizon.json",
+      "durationSeconds": 60.76,
+      "frames": 1213,
+      "bytes": 165251,
+      "audioSha256": "5c8cdea1357095710c341e10b26c91205d145f54d97b71dd7ce71dab59b2c12f"
+    },
+    {
+      "id": "timekeeper-audio-cozy-coffee-lo-fi-vinyl",
+      "file": "sonic-signals/timekeeper-audio-cozy-coffee-lo-fi-vinyl.json",
+      "durationSeconds": 68.07,
+      "frames": 1359,
+      "bytes": 185109,
+      "audioSha256": "1d1d7d2a2c01a1ab9483b738fe5039c6e28f64975b81c0ea21cb3e8f2623c304"
+    },
+    {
+      "id": "timekeeper-audio-electric-fortune-rising",
+      "file": "sonic-signals/timekeeper-audio-electric-fortune-rising.json",
+      "durationSeconds": 116.35,
+      "frames": 2325,
+      "bytes": 316486,
+      "audioSha256": "fbb1bd5405c3cc621e6de5c2e93861cc24cfa18c7bb507cbf833fcd9e297e20c"
+    },
+    {
+      "id": "timekeeper-audio-emerald-forest-vitality",
+      "file": "sonic-signals/timekeeper-audio-emerald-forest-vitality.json",
+      "durationSeconds": 178.58,
+      "frames": 3570,
+      "bytes": 485806,
+      "audioSha256": "3d69ef98071d994f43988ce54b876f343ee4fe7bc14c06f87da89dd651d68d3c"
+    },
+    {
+      "id": "timekeeper-audio-endless-fortune-dawn",
+      "file": "sonic-signals/timekeeper-audio-endless-fortune-dawn.json",
+      "durationSeconds": 176.7,
+      "frames": 3532,
+      "bytes": 480634,
+      "audioSha256": "48598656a8cd7b67e75025e27fe01088055486040772a80db64342c8c532062a"
+    },
+    {
+      "id": "timekeeper-audio-golden-alignment-wake",
+      "file": "sonic-signals/timekeeper-audio-golden-alignment-wake.json",
+      "durationSeconds": 162.11,
+      "frames": 3240,
+      "bytes": 440924,
+      "audioSha256": "bc014489ea54b0fb00b1c3044154ed20168115450e67b45f58e08682717f1e9f"
+    },
+    {
+      "id": "timekeeper-audio-golden-ratio-harmonic-bloom",
+      "file": "sonic-signals/timekeeper-audio-golden-ratio-harmonic-bloom.json",
+      "durationSeconds": 114.58,
+      "frames": 2290,
+      "bytes": 311730,
+      "audioSha256": "388371425e73215ae034297abaf880cdca1b04aa513d51430c2201ebb3d2d8ac"
+    },
+    {
+      "id": "timekeeper-audio-gravitate-to-me",
+      "file": "sonic-signals/timekeeper-audio-gravitate-to-me.json",
+      "durationSeconds": 180.59,
+      "frames": 3610,
+      "bytes": 491238,
+      "audioSha256": "3aa132a895bb78fb24ff2e935100c93e027f781598ace2b5bc62ff9e60e74c9c"
+    },
+    {
+      "id": "timekeeper-audio-lucky-day-bloom",
+      "file": "sonic-signals/timekeeper-audio-lucky-day-bloom.json",
+      "durationSeconds": 131.46,
+      "frames": 2627,
+      "bytes": 357550,
+      "audioSha256": "0d66922c2711242366f29777654596fb7330bb140b267f34bfcc9c3f15531380"
+    },
+    {
+      "id": "timekeeper-audio-lucky-magnetic-morning",
+      "file": "sonic-signals/timekeeper-audio-lucky-magnetic-morning.json",
+      "durationSeconds": 111.36,
+      "frames": 2225,
+      "bytes": 302885,
+      "audioSha256": "7d6100d8b57660c3f29f7c584732ba39baa73c55ce0053669f82e8075c21377b"
+    },
+    {
+      "id": "timekeeper-audio-magnet-to-the-good",
+      "file": "sonic-signals/timekeeper-audio-magnet-to-the-good.json",
+      "durationSeconds": 182.29,
+      "frames": 3644,
+      "bytes": 495865,
+      "audioSha256": "9a2b9014e1c674cc4d1c4f2aaacc7dabe3e10bd2c86c1148990b439b5df1c05a"
+    },
+    {
+      "id": "timekeeper-audio-morning-miracle-breeze",
+      "file": "sonic-signals/timekeeper-audio-morning-miracle-breeze.json",
+      "durationSeconds": 109.1,
+      "frames": 2180,
+      "bytes": 296764,
+      "audioSha256": "3ad77a80f38ade5ae61e00fed876137d531ade83cdc6f97c292704a9890de1c7"
+    },
+    {
+      "id": "timekeeper-audio-morning-velvet-bliss",
+      "file": "sonic-signals/timekeeper-audio-morning-velvet-bliss.json",
+      "durationSeconds": 69.72,
+      "frames": 1392,
+      "bytes": 189594,
+      "audioSha256": "bb5173f19076067d43cdcb58d5f9bbfb7304105b7c11a81ca0b8d6953eb493e2"
+    },
+    {
+      "id": "timekeeper-audio-mountain-dawn-serenity",
+      "file": "sonic-signals/timekeeper-audio-mountain-dawn-serenity.json",
+      "durationSeconds": 176.62,
+      "frames": 3530,
+      "bytes": 480365,
+      "audioSha256": "6b9d6b3ab0704b5bcb8cca9b5932127beb50d1403ceb15cb8b9ede7824975461"
+    },
+    {
+      "id": "timekeeper-audio-platinum-gold-flow",
+      "file": "sonic-signals/timekeeper-audio-platinum-gold-flow.json",
+      "durationSeconds": 100.1,
+      "frames": 2000,
+      "bytes": 272280,
+      "audioSha256": "721675d6f3d0480b35fce7831c18f578d6a4452d8df3344fe16c71e44528bbf4"
+    },
+    {
+      "id": "timekeeper-audio-raindrop-grace-peace",
+      "file": "sonic-signals/timekeeper-audio-raindrop-grace-peace.json",
+      "durationSeconds": 161.0,
+      "frames": 3218,
+      "bytes": 437930,
+      "audioSha256": "28e76b28b3d4ca25807ce9de0360f3b0bba809bcd94fc0bac6559c37d511e48e"
+    },
+    {
+      "id": "timekeeper-audio-sacred-abundance-stream",
+      "file": "sonic-signals/timekeeper-audio-sacred-abundance-stream.json",
+      "durationSeconds": 77.74,
+      "frames": 1553,
+      "bytes": 211493,
+      "audioSha256": "ada6994b0f6d746b51d51269a536860a71de8b904f2cd6c4bde3c8d258f6dbd7"
+    },
+    {
+      "id": "timekeeper-audio-sacred-morning-bridge",
+      "file": "sonic-signals/timekeeper-audio-sacred-morning-bridge.json",
+      "durationSeconds": 174.78,
+      "frames": 3494,
+      "bytes": 475468,
+      "audioSha256": "e5c682195366df9f05864c5d783d1288024e168b144c3e54156c3f14dbb14ab1"
+    },
+    {
+      "id": "timekeeper-audio-solar-plexus-golden-fire",
+      "file": "sonic-signals/timekeeper-audio-solar-plexus-golden-fire.json",
+      "durationSeconds": 159.79,
+      "frames": 3194,
+      "bytes": 434671,
+      "audioSha256": "82b9df803f3696c748eee1256bb900c9ba72355ad4e3a3156bd12b8723e21346"
+    },
+    {
+      "id": "timekeeper-audio-turquoise-truth-awakening",
+      "file": "sonic-signals/timekeeper-audio-turquoise-truth-awakening.json",
+      "durationSeconds": 68.67,
+      "frames": 1371,
+      "bytes": 186743,
+      "audioSha256": "ca964b105559b2b55d2b157f2abe62e4c87e0c2103157de581952c967dbf5719"
+    },
+    {
+      "id": "timekeeper-audio-unstoppable-golden-rise",
+      "file": "sonic-signals/timekeeper-audio-unstoppable-golden-rise.json",
+      "durationSeconds": 62.68,
+      "frames": 1251,
+      "bytes": 170421,
+      "audioSha256": "3b29854ab035bca4fc49d837918334b81ede8051fc862c4be97509e7faa1735e"
+    },
+    {
+      "id": "timekeeper-audio-wealth-grace-rising",
+      "file": "sonic-signals/timekeeper-audio-wealth-grace-rising.json",
+      "durationSeconds": 123.26,
+      "frames": 2463,
+      "bytes": 335250,
+      "audioSha256": "063f627cd81b33c6134d690fbe83bae8ed33d966210fdc1ca34ef6d603f4ff34"
+    },
+    {
+      "id": "watch-me-build",
+      "file": "sonic-signals/watch-me-build.json",
+      "durationSeconds": 154.0,
+      "frames": 3078,
+      "bytes": 418867,
+      "audioSha256": "9af8aa8519c802356f2f44ec9f2dfaf0dad5b5348f5f8293572dce95dbcf77b9"
+    }
+  ]
+}

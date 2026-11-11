@@ -20,10 +20,12 @@
   <link rel="stylesheet" href="frequency-appearance.css?v=20261111forest2">
   <link rel="stylesheet" href="frequency-classic.css?v=20261111a">
   <link rel="stylesheet" href="frequency-current.css?v=20261111albumrows1">
+  <link rel="stylesheet" href="sonic-studio.css?v=20261111unified1">
   <script src="listening-room.js?v=20261111directplay1" defer></script>
   <script src="frequency-parity.js?v=20261111directplay1" defer></script>
   <script src="frequency-appearance.js?v=20261111forest2" defer></script>
   <script src="frequency-classic.js?v=20261111forest2" defer></script>
+  <script src="sonic-studio.js?v=20261111unified1" defer></script>
 </head>
 <body>
 <svg class="navigation-symbol-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +171,7 @@
   <div class="now-back" id="nowBack"></div><div class="now-tint"></div>
   <div class="now-container">
     <div class="now-top"><button id="closeNow" class="now-icon" aria-label="Close now playing"><svg viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></svg></button><span>NOW PLAYING <small>FREQUENCY ORIGINALS</small></span><button id="nowShare" class="now-icon" aria-label="Share current track"><svg viewBox="0 0 24 24"><path d="M12 16V3m0 0-4.5 4.5M12 3l4.5 4.5M5 14v5.5c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V14"/></svg></button></div>
-    <div class="now-art-wrap"><img id="nowArt" alt="Album artwork"><span class="now-art-halo"></span></div>
+    <div class="now-art-wrap"><img id="nowArt" alt="Album artwork"><span class="now-art-halo"></span><button type="button" class="fx-open-visuals" id="nowVisuals" aria-label="Open Sonic Visual Lab for this song">✧ EXPLORE LIVE VISUALS <span>↗</span></button></div>
     <div class="now-song-info"><div><div class="now-kicker" id="nowWorld">ORIGINAL SOUND WORLD</div><h2 id="nowTitle">Now playing</h2><button id="nowArtist" class="artist-link" type="button">View artist songs ↗</button><p id="nowSub">Frequency Originals</p></div><button id="nowHeart" class="now-heart" aria-label="Favorite track"><svg viewBox="0 0 24 24"><path d="M20.7 5.3a5.4 5.4 0 0 0-7.6 0L12 6.4l-1.1-1.1a5.4 5.4 0 0 0-7.6 7.6L12 21l8.7-8.1a5.4 5.4 0 0 0 0-7.6Z"/></svg></button></div>
     <p id="nowSound" class="now-sound"></p>
     <div class="now-seek"><input id="nowSeek" aria-label="Seek audio" type="range" min="0" value="0" max="1000" step="1"><div class="now-times"><span id="elapsed">0:00</span><span id="remaining">-0:00</span></div></div>
@@ -202,6 +204,52 @@
 <div class="modal-backdrop" id="queueModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Up next">
   <div class="feedback-panel queue-panel"><div class="modal-head"><div><span class="section-eyebrow">KEEP THE FEELING GOING</span><h2>Up <em>next.</em></h2></div><button id="closeQueue" class="icon-button" aria-label="Close queue">✕</button></div><div id="queueList"></div></div>
 </div>
+
+<div class="fx-studio" id="fxStudio" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Frequency Sonic Visual Studio">
+  <div class="fx-background" id="fxBackdrop"></div>
+  <header class="fx-header">
+    <button type="button" class="fx-header-back" data-fx="close" aria-label="Return to Frequency Now Playing">‹ PLAYER</button>
+    <span>FREQUENCY <i>/</i> SONIC STUDIO</span>
+    <div class="fx-header-actions">
+      <button type="button" id="fxViewsButton" data-fx="views" aria-expanded="false" aria-controls="fxModes">✧ VIEWS</button>
+      <button type="button" id="fxTuneButton" data-fx="tune" aria-expanded="false" aria-controls="fxTuner">◈ TUNE</button>
+    </div>
+  </header>
+  <div class="fx-track-title"><span id="fxWorld">FREQUENCY ORIGINALS</span><strong id="fxTrack">Already Arrived</strong></div>
+  <div class="fx-stage" aria-label="Music-driven animation">
+    <canvas id="fxCanvas" aria-label="Sound visualization driven by this track's measured audio spectrum"></canvas>
+    <div class="fx-center-art"><img id="fxArt" src="artwork/already-arrived.jpg" alt="Current song artwork"></div>
+  </div>
+  <div class="fx-foot">
+    <div class="fx-mode-nav">
+      <button type="button" data-fx="prevMode" aria-label="Previous sound visualization">‹</button>
+      <div><small>VISUAL EXPERIENCE</small><strong id="fxModeName">Spectral Silk</strong><span id="fxModeTag">FINE MUSICAL THREADS</span></div>
+      <button type="button" data-fx="nextMode" aria-label="Next sound visualization">›</button>
+    </div>
+    <div id="fxModes" class="fx-mode-picker" hidden aria-label="Choose a sound visualization"></div>
+    <section class="fx-signal-row" aria-label="Track frequency levels">
+      <div><span>BASS</span><b><i id="fxSignalBass"></i></b></div>
+      <div><span>MIDS</span><b><i id="fxSignalMid"></i></b></div>
+      <div><span>HIGHS</span><b><i id="fxSignalHigh"></i></b></div>
+    </section>
+    <section class="fx-tuner" id="fxTuner" hidden aria-label="Adjust the live visualization">
+      <div class="fx-tuner-head"><span><i></i> LIVE VISUAL TUNING</span><button type="button" data-fx="reset">↺ RESET</button></div>
+      <div class="fx-tuner-sliders">
+        <label>DETAIL <output id="fxDetailValue" for="fxDetail">100%</output><input id="fxDetail" type="range" min="35" max="180" value="100" step="5" aria-label="Visual detail"></label>
+        <label>IMPACT <output id="fxImpactValue" for="fxImpact">100%</output><input id="fxImpact" type="range" min="50" max="200" value="100" step="5" aria-label="Beat reaction intensity"></label>
+      </div>
+      <div class="fx-palette-row"><span>COLOR</span><div id="fxPaletteButtons"></div></div>
+      <p id="fxOriginalNote" class="fx-original-note" hidden>The Original remains unchanged as your reference. Select another view to customize its motion and colors.</p>
+    </section>
+    <div class="fx-playback-controls">
+      <button type="button" data-fx="prevTrack" aria-label="Previous track">◀◀</button>
+      <button type="button" class="fx-play" id="fxPlay" data-fx="play" aria-label="Play or pause current song">▶ PLAY</button>
+      <button type="button" data-fx="nextTrack" aria-label="Next track">▶▶</button>
+    </div>
+    <div class="fx-playback-meta"><span id="fxPosition">0:00</span><span id="fxActiveSource">REAL AUDIO · TRACK-SYNCED DETAIL</span></div>
+  </div>
+</div>
+
 <audio id="mainAudio" preload="auto" playsinline></audio>
 <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
 </body></html>
