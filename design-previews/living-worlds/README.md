@@ -26,3 +26,9 @@ The page works locally via \`python3 serve_preview.py 8989\` (Python 3). This se
 - \`../../docs/design/FREQUENCY_LIVING_WORLDS_MOCKUP_LAB_20261111.md\`: design rationale, source reconciliation, waves and production guards
 
 For technical correctness, start with the Nov 11 signed Build 48 receipt: it has **three real tabs (Home/Sounds/You)** rather than the older five-tab schematic.
+
+## November 11: compare the original three rings with the new beat reactor
+
+Open the Now Playing screen and **tap the centered RESONANCE title** to switch between FIRST VERSION and BEAT REACTOR while the same original track continues. The first version is retained unmodified as an A/B baseline (including its original sharp edges). Beat Reactor is the new default: cyan tracks bass/kicks, violet tracks midrange, and magenta responds to highs/transients. All of the movement comes from real audio, not a fixed animation.
+
+Visual comparison: reactor-a-b.jpg. Technical details and test evidence are in the Frequency-App design QA folder. No production iOS source has been changed.

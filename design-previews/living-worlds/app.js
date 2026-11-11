@@ -13,10 +13,27 @@ const TRACKS={
 "i-do-not-break":{title:"I Do Not Break",world:"iron",duration:"3:04",src:"audio/i-do-not-break.m4a",art:"assets/iron.jpg"},
 "momentum-is-mine":{title:"Momentum Is Mine",world:"bloom",duration:"2:30",src:"audio/momentum-is-mine.m4a",art:"assets/bloom.jpg"}
 };
-const state={route:"home",worldIndex:0,selectedWorld:"velvet",song:"open-to-more",playing:false,preparing:false,error:"",toneOn:false,toneHz:432,tonePattern:"phi",phase:0,counts:[0,0,0],intention:"",extra:"",soundsMode:"music",started:false};
+const state={visualMode:new URLSearchParams(location.search).get("visual")==="first"?"first":"reactor",route:"home",worldIndex:0,selectedWorld:"velvet",song:"open-to-more",playing:false,preparing:false,error:"",toneOn:false,toneHz:432,tonePattern:"phi",phase:0,counts:[0,0,0],intention:"",extra:"",soundsMode:"music",started:false};
 const $=(s)=>document.querySelector(s);
 const device=$("#device"),host=$("#viewHost"),audio=$("#audio");
 let audioCtx,analyser,mediaSource,fft,osc,gain,frame=0,animationId,toastId;
+const reactive={
+ bands:Array.from({length:3},()=>({raw:0,envelope:0,baseline:0,beat:0})),
+ energy:0,lastFrame:0
+};
+function resetAudioReaction(){
+ for(const b of reactive.bands){b.raw=0;b.envelope=0;b.baseline=0;b.beat=0}
+ reactive.energy=0;reactive.lastFrame=0;
+}
+function configureAudioAnalysis(){
+ if(!analyser)return;
+ const first=state.visualMode==="first";
+ analyser.fftSize=first?512:2048;
+ analyser.smoothingTimeConstant=first?.74:.26;
+ fft=new Uint8Array(analyser.frequencyBinCount);
+ resetAudioReaction();
+}
+
 const world=(id)=>WORLD.find(w=>w.id===id)||WORLD[0];
 function esc(s){return String(s||"").replace(/[&<>\"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
 function fmt(seconds){if(!Number.isFinite(seconds)||seconds<0)return "0:00";return Math.floor(seconds/60)+":"+String(Math.floor(seconds%60)).padStart(2,"0")}
@@ -60,7 +77,7 @@ function viewWorld(){
 function viewPlayer(){
  const t=TRACKS[state.song],w=world(t.world),isCurrent=state.playing && !state.preparing;
  return '<section class="screen player-screen">'+
- '<div class="player-top"><button class="round-btn" data-action="back" aria-label="Close player">⌄</button><strong>RESONANCE · NOW PLAYING</strong><button class="round-btn" data-action="queue" aria-label="Queue">⋯</button></div>'+
+ '<div class="player-top"><button class="round-btn" data-action="back" aria-label="Close player">⌄</button><button class="visual-compare-toggle" data-action="toggleVisual" aria-label="Compare audio visualizers"><strong>RESONANCE · NOW PLAYING</strong><small>'+(state.visualMode==="first"?"FIRST VERSION · TAP TO COMPARE":"BEAT REACTOR · TAP TO COMPARE")+'</small></button><button class="round-btn" data-action="queue" aria-label="Queue">⋯</button></div>'+
  '<div class="resonance-stage" id="resonanceStage"><canvas id="resonanceCanvas"></canvas><div class="album-vessel"><img src="'+t.art+'" alt="Artwork for '+t.title+'"></div><div class="sound-state">'+(isCurrent?"LIVE AUDIO":"IDLE VISUAL")+'</div></div>'+
  '<div class="player-copy"><h1>'+t.title+'</h1><p>'+w.title+' · Frequency Originals</p><div class="real-state" id="playState">'+(state.error?"AUDIO UNAVAILABLE":state.preparing?"PREPARING AUDIO":state.playing?"PLAYING ORIGINAL RECORDING":"PAUSED · READY TO LISTEN")+'</div></div>'+
  '<input class="seek" type="range" min="0" max="1000" value="'+(audio.duration?Math.floor(audio.currentTime/audio.duration*1000):0)+'" data-action="seek" id="seek" aria-label="Seek track"><div class="seek-times"><span id="elapsed">'+fmt(audio.currentTime)+'</span><span id="remaining">−'+(audio.duration?fmt(audio.duration-audio.currentTime):t.duration)+'</span></div>'+
@@ -138,13 +155,13 @@ function updateMini(){
  const t=TRACKS[state.song];mini.innerHTML='<img src="'+t.art+'" alt=""><div class="txt" data-action="player"><b>'+t.title+'</b><span>'+(state.playing?"Now playing":"Paused")+' · '+world(t.world).title+'</span></div><button data-action="togglePlay" aria-label="Play pause">'+(state.playing?'Ⅱ':'▶')+'</button>';
 }
 function switchWorld(delta){state.worldIndex=(state.worldIndex+delta+WORLD.length)%WORLD.length;setupSkin(WORLD[state.worldIndex].id);navigate("home")}
-function chooseSong(id,auto=true){if(!TRACKS[id])return;const changed=state.song!==id;state.song=id;if(changed||!state.started){audio.pause();audio.src=TRACKS[id].src;audio.load();state.started=true}navigate("player");if(auto)playMusic();else updateMini()}
+function chooseSong(id,auto=true){if(!TRACKS[id])return;const changed=state.song!==id;state.song=id;if(changed||!state.started){audio.pause();audio.src=TRACKS[id].src;audio.load();state.started=true;resetAudioReaction()}navigate("player");if(auto)playMusic();else updateMini()}
 function prepareContext(){
  const C=window.AudioContext||window.webkitAudioContext;
  if(!C)return;
  if(!audioCtx)audioCtx=new C();
  if(analyser)return;
- analyser=audioCtx.createAnalyser();analyser.fftSize=512;analyser.smoothingTimeConstant=.74;fft=new Uint8Array(analyser.frequencyBinCount);
+ analyser=audioCtx.createAnalyser();configureAudioAnalysis();
  mediaSource=audioCtx.createMediaElementSource(audio);mediaSource.connect(analyser);analyser.connect(audioCtx.destination);
 }
 async function playMusic(){
@@ -200,6 +217,7 @@ function handleAction(a){
  if(a==="playWorld"){const w=state.route==="world"?state.selectedWorld:WORLD[state.worldIndex].id;chooseSong(world(w).songs[0]);return}
  if(a.startsWith("world:")){state.selectedWorld=a.split(":")[1];navigate("world");return}
  if(a.startsWith("song:")){chooseSong(a.split(":")[1]);return}
+ if(a==="toggleVisual"){state.visualMode=state.visualMode==="reactor"?"first":"reactor";configureAudioAnalysis();if(state.route==="player")navigate("player");toast(state.visualMode==="first"?"Original first version":"Beat Reactor: bass, mids and highs");return}
  if(a==="togglePlay"){togglePlay();return}if(a==="player"){navigate("player");return}
  if(a==="nextTrack"){nextTrack(1);return}if(a==="prevTrack"){nextTrack(-1);return}
  if(a==="shuffle"||a==="repeat"){toast("This concept keeps playback simple. Queue and repeat are preserved in the real player.");return}
@@ -225,111 +243,170 @@ function navigateWithExtra(){const ex=state.extra;host.innerHTML=viewPlayer();st
 document.addEventListener("click",e=>{const a=e.target.closest("[data-action], [data-go], [data-nav]");if(!a)return;const action=a.dataset.action||a.dataset.go||a.dataset.nav;handleAction(action)});
 let swipeStart=null;document.addEventListener("pointerdown",e=>{const el=e.target.closest("#worldOrbit");if(el)swipeStart=e.clientX});document.addEventListener("pointerup",e=>{if(swipeStart===null)return;const dist=e.clientX-swipeStart;swipeStart=null;if(Math.abs(dist)>45)switchWorld(dist<0?1:-1)});
 function canvasSize(canvas){if(!canvas)return null;const dpr=Math.min(2,window.devicePixelRatio||1),rect=canvas.getBoundingClientRect(),w=rect.width,h=rect.height;if(w===0||h===0)return null;const cw=Math.floor(w*dpr),ch=Math.floor(h*dpr);if(canvas.width!==cw||canvas.height!==ch){canvas.width=cw;canvas.height=ch}const ctx=canvas.getContext("2d");ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);return {ctx,w,h}}
-function soundEnergy(){if(state.playing&&analyser&&fft){analyser.getByteFrequencyData(fft);let e=0;for(let i=3;i<115&&i<fft.length;i++)e+=fft[i];return e/(Math.min(115,fft.length)-3)/255}return 0}
-function drawWave(canvas,mode,energy,time){
- // THE ORIGINAL FAVORITE: preserve fine-grained, rapidly changing FFT shapes.
- // The early regression averaged music into only six near-static bands.
- // Fix just its two problems: nonperiodic spectral joins and canvas overflow.
- const cfg=canvasSize(canvas);
- if(!cfg)return;
- const {ctx,w,h}=cfg,cx=w/2,cy=h/2;
- const unit=Math.min(w,h);
+function soundEnergy(){
  const active=Boolean(state.playing&&analyser&&fft&&!audio.paused);
+ if(!active){
+  reactive.energy=0;reactive.lastFrame=0;
+  for(const b of reactive.bands){b.raw=0;b.envelope=0;b.baseline=0;b.beat=0}
+  return 0;
+ }
+ analyser.getByteFrequencyData(fft);
+ if(state.visualMode==="first"){
+  let e=0;for(let i=3;i<115&&i<fft.length;i++)e+=fft[i];
+  return e/Math.max(1,Math.min(115,fft.length)-3)/255;
+ }
+ const hz=audioCtx.sampleRate/analyser.fftSize;
+ const bands=[[45,190],[190,1900],[1900,10000]],gains=[1.1,1.75,2.95];
+ const now=performance.now();
+ const dt=reactive.lastFrame?Math.min(.09,Math.max(.009,(now-reactive.lastFrame)/1000)):.016;
+ reactive.lastFrame=now;
+ for(let k=0;k<3;k++){
+  const b=reactive.bands[k],start=Math.max(1,Math.floor(bands[k][0]/hz));
+  const end=Math.min(fft.length-1,Math.ceil(bands[k][1]/hz));
+  let total=0;
+  for(let i=start;i<=end;i++)total+=fft[i]/255;
+  const raw=total/Math.max(1,end-start+1),old=b.raw,baseline=b.baseline;
+  const norm=Math.min(1,raw*gains[k]);
+  const attack=1-Math.exp(-dt/[.032,.027,.019][k]);
+  const release=1-Math.exp(-dt/[.088,.071,.048][k]);
+  b.envelope+=((norm>b.envelope)?attack:release)*(norm-b.envelope);
+  b.baseline+=(raw-b.baseline)*(1-Math.exp(-dt/.7));
+  const flux=Math.max(0,raw-old);
+  const novel=Math.max(0,raw-baseline-.035);
+  const hit=Math.min(1,flux*[3.3,3.8,5.4][k]+novel*[.6,.75,.93][k]);
+  b.beat=Math.max(hit,b.beat*Math.exp(-dt/[.12,.10,.07][k]));
+  b.raw=raw;
+ }
+ const bs=reactive.bands;
+ reactive.energy=bs[0].envelope*.43+bs[1].envelope*.34+bs[2].envelope*.23;
+ return reactive.energy;
+}
+function drawWaveFirst(canvas,mode,energy,time){
+ const cfg=canvasSize(canvas);if(!cfg)return;const {ctx,w,h}=cfg,cx=w/2,cy=h/2,r=Math.min(w,h)*.407;
  const colors=mode==="player"?["#75f2ff","#b39cff","#f2a5dc"]:["#7eeafa","#baa7fb","#fa9ddf"];
- const count=210,half=unit/2;
- const base=[unit*.334,unit*.379,unit*.421];
- const lower=[unit*.290,unit*.328,unit*.366];
- const upper=[unit*.405,unit*.445,half-12];
- const spectrumSize=fft?.length||256;
- // Preserve original ring phase on pause/resume while using the audio waveform
- // itself (not a clock-driven sine wave) for the dominant movement.
- const phase=state.started?audio.currentTime:time*.0001;
- const activity=active?Math.min(1,Math.sqrt(Math.max(0,energy)*4)):0;
- ctx.save();
- ctx.lineJoin="round";
- ctx.lineCap="round";
  ctx.globalCompositeOperation="lighter";
  for(let layer=0;layer<3;layer++){
-  const values=new Float32Array(count);
-  const raw=new Float32Array(count);
+  let pts=[];const n=210;
+  for(let i=0;i<=n;i++){let a=i/n*Math.PI*2;const si=fft&&state.playing?fft[(i*2+layer*19)%fft.length]/255:0;
+   const wobble=(Math.sin(a*(3+layer*2)+time*.00036+layer)+Math.cos(a*(7-layer)+time*.00052))*(2.4+energy*7);
+   const rad=r+(layer-1)*14+wobble+(mode==="player"?si*(energy>0?.8:0)*46:si*7);
+   pts.push([cx+Math.cos(a)*rad,cy+Math.sin(a)*rad]);
+  }
+  ctx.beginPath();ctx.moveTo(...pts[0]);pts.forEach(p=>ctx.lineTo(...p));ctx.closePath();
+  ctx.strokeStyle=colors[layer];ctx.lineWidth=layer===0?1.9:1.4;
+  ctx.shadowColor=colors[layer];ctx.shadowBlur=18+energy*24;ctx.globalAlpha=.82;ctx.stroke();
+ }
+ for(let i=0;i<43;i++){const a=i/43*Math.PI*2+time*.000035*(i%2?-1:1),rad=r+29+Math.sin(time*.00016+i)*4;
+ ctx.beginPath();ctx.arc(cx+Math.cos(a)*rad,cy+Math.sin(a)*rad,i%7===0?1.5:.65,0,Math.PI*2);
+ ctx.fillStyle=i%2===0?"#afeaff":"#d5b2ff";ctx.globalAlpha=.25+.25*Math.sin(time*.001+i)**2;ctx.fill()}
+ ctx.shadowBlur=0;ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over";
+}
+
+function drawWaveReactor(canvas,mode,energy,time){
+ const cfg=canvasSize(canvas);if(!cfg)return;
+ const {ctx,w,h}=cfg,cx=w/2,cy=h/2,unit=Math.min(w,h);
+ const active=Boolean(state.playing&&analyser&&fft&&!audio.paused);
+ const colors=["#75f2ff","#b39cff","#f2a5dc"];
+ const bases=[unit*.333,unit*.379,unit*.417];
+ const floors=[unit*.281,unit*.305,unit*.337];
+ const ceilings=[unit*.434,unit*.460,unit*.471];
+ const n=216;
+ const phase=state.started?audio.currentTime:0;
+ const spectrumLength=Math.min(256,fft?fft.length:256);
+ ctx.save();
+ ctx.lineCap="round";ctx.lineJoin="round";ctx.globalCompositeOperation="lighter";
+ if(active){
+  // The inner circle physically expands on a real kick onset.
+  const kick=reactive.bands[0].beat;
+  if(kick>.13){
+   ctx.beginPath();ctx.arc(cx,cy,unit*.291+kick*8,0,Math.PI*2);
+   ctx.lineWidth=1.3+kick*1.8;ctx.strokeStyle="#75f2ff";
+   ctx.globalAlpha=.04+kick*.19;ctx.shadowColor="#75f2ff";
+   ctx.shadowBlur=4+kick*7;ctx.stroke();
+  }
+ }
+ for(let layer=0;layer<3;layer++){
+  const data=reactive.bands[layer];
+  const power=active?data.envelope:0;
+  const accent=active?data.beat:0;
+  const transient=active?data.raw:0;
+  const raw=new Float32Array(n),smooth=new Float32Array(n);
+  let mean=0;
   if(active){
-   // Restore *the same 210 fine FFT samples as v1*, rather than 6 bands.
-   for(let i=0;i<count;i++){
-    raw[i]=fft[(i*2+layer*19)%spectrumSize]/255;
+   // Preserve the FIRST VERSION's wild, per-bin spectral identity.
+   // A shared wide-band texture keeps each colored path intensely alive,
+   // while the distinct bass/mids/highs envelopes give each its own pulse.
+   for(let i=0;i<n;i++)raw[i]=fft[(i*2+layer*19)%spectrumLength]/255;
+   for(let i=0;i<n;i++){
+    const at=j=>raw[(j+n)%n];
+    smooth[i]=(at(i)*9+(at(i-1)+at(i+1))*3+
+      (at(i-2)+at(i+2)))/17;
+    mean+=smooth[i];
    }
+   mean/=n;
   }
-  let average=0;
-  for(let i=0;i<count;i++){
-   // A very light cyclic five-point kernel removes the *seam*, not the
-   // fast changes from each original FFT sample that made v1 feel alive.
-   const at=k=>raw[(k+count)%count];
-   const v=(at(i)*6+(at(i-1)+at(i+1))*3+
-            (at(i-2)+at(i+2)))/14;
-   values[i]=v;
-   average+=v;
-  }
-  average/=count;
-  const wobbleMagnitude=2.4+energy*7; // exact original dynamic wobble strength
-  const responseGain=active?90+22*activity:0; // v1 was 46 on unsmoothed FFT
-  const motion=phase*(active?.95:.018);
-  const candidate=new Float32Array(count);
-  let min=Infinity,max=-Infinity;
-  for(let i=0;i<count;i++){
-   const a=i/count*Math.PI*2;
-   const wobble=(Math.sin(a*(3+layer*2)+motion+layer)
-                 +Math.cos(a*(7-layer)-motion*.67)) *wobbleMagnitude;
-   const fineAudio=(values[i]-average)*responseGain;
-   const breath=active?(energy-.1)*10:0;
-   const radius=base[layer]+wobble+fineAudio+breath;
-   candidate[i]=radius;
-   min=Math.min(min,radius);
-   max=Math.max(max,radius);
-  }
-  // Dynamically fit the *whole* wavering ring into the safe canvas area.
-  // Uniformly scaling deviations avoids the flat plateaus of hard clipping.
-  const middle=(max+min)/2;
-  const intended=Math.max(lower[layer]+3,Math.min(upper[layer]-3,middle));
-  const span=Math.max(1,(max-min)/2);
-  const scale=Math.min(1,(upper[layer]-intended)/span,(intended-lower[layer])/span);
-  const pathRadius=i=>intended+(candidate[(i+count)%count]-middle)*scale;
-  // Return to v1's three original light strokes (one per color).
-  // We preserve raw live FFT responsiveness and only smooth curve connections.
+  const freqDetail=[52,59,65][layer],maxIn=bases[layer]-floors[layer],maxOut=ceilings[layer]-bases[layer];
+  const orbitSpeed=(layer===1?-1:1)*phase*(.8+layer*.25);
+  const motifSize=4+layer;
   ctx.beginPath();
-  for(let i=0;i<=count;i++){
-   const angle=i/count*Math.PI*2;
-   const r=pathRadius(i);
-   const x=cx+Math.cos(angle)*r,y=cy+Math.sin(angle)*r;
+  for(let i=0;i<=n;i++){
+   const p=i%n,a=i/n*Math.PI*2;
+   const soundOffset=active?(smooth[p]-mean)*freqDetail:0;
+   const contour=(Math.sin(a*motifSize+orbitSpeed+layer)*(.35+power*.9)
+           +Math.cos(a*(motifSize+4)-orbitSpeed*.8)*(.2+transient*.9))*(7+power*14+accent*7);
+   const attack=active?accent*(14+4*layer)*(.62+.38*Math.sin(a*(2+layer)+orbitSpeed*1.4)):0;
+   const push=active?(power*(layer===0?12:7)+attack):0;
+   const detail=active?soundOffset*(.6+power*.8):0;
+   const displacement=push+contour+detail;
+   // Smooth saturation, not per-frame normalization. Kicks remain visibly
+   // larger and high hats can create fast fine ripples without hard clipping.
+   const normalized=displacement>=0
+     ?maxOut*Math.tanh(displacement/Math.max(1,maxOut))
+     :maxIn*Math.tanh(displacement/Math.max(1,maxIn));
+   const r=bases[layer]+normalized;
+   const x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r;
    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
   }
   ctx.closePath();
-  ctx.strokeStyle=colors[layer];
-  ctx.lineWidth=layer===0?1.9:1.4;
-  ctx.shadowColor=colors[layer];
-  ctx.shadowBlur=18+energy*24;
-  ctx.globalAlpha=.82;
+  ctx.globalAlpha=.93;ctx.lineWidth=layer===0?2.05:1.7;
+  ctx.strokeStyle=colors[layer];ctx.shadowColor=colors[layer];
+  ctx.shadowBlur=12+Math.min(15,power*12+accent*11);
   ctx.stroke();
-
  }
- // The original orbiting particles were already good; simply keep them away
- // from the physical canvas edge and leave them decorative, not fake audio.
- const partR=unit*.463;
- ctx.shadowBlur=0;
- for(let i=0;i<43;i++){
-  const a=i/43*Math.PI*2+phase*.06*(i%2?-1:1);
-  const r=partR+Math.sin(phase*.38+i)*1.7;
-  ctx.beginPath();
-  ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,i%7===0?1.5:.65,0,Math.PI*2);
-  ctx.fillStyle=i%2===0?"#afeaff":"#d5b2ff";
-  ctx.globalAlpha=.25+.25*Math.sin(phase*.8+i)**2;
-  ctx.fill();
+ const sparkle=active?reactive.bands[2].beat:0;
+ if(sparkle>.085){
+  // One batched stroke, not 12 separate shadow-blurred canvas draws.
+  ctx.beginPath();ctx.shadowBlur=0;
+  for(let j=0;j<12;j++){
+   const a=j/12*Math.PI*2+phase*.28,r=unit*.456;
+   const len=1.3+sparkle*4.3;
+   ctx.moveTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);
+   ctx.lineTo(cx+Math.cos(a)*(r+len),cy+Math.sin(a)*(r+len));
+  }
+  ctx.strokeStyle="#f2a5dc";ctx.lineWidth=.65+sparkle*.48;
+  ctx.globalAlpha=.08+sparkle*.42;ctx.stroke();
  }
  ctx.restore();
  canvas.dataset.waveActive=active?"1":"0";
+ canvas.dataset.waveMotionStyle="bass-mid-high-beat-reactor-v5";
+ canvas.dataset.visualMode=state.visualMode;
  canvas.dataset.waveEnergy=energy.toFixed(3);
- canvas.dataset.wavePhase=phase.toFixed(3);
- canvas.dataset.waveMotionStyle="original-fft-preserved-v4";
- canvas.dataset.waveSpectralSamples=active?String(count):"0";
- canvas.dataset.waveResponseGain=active?(90+22*activity).toFixed(1):"0";
+ canvas.dataset.waveBass=reactive.bands[0].envelope.toFixed(3);
+ canvas.dataset.waveMid=reactive.bands[1].envelope.toFixed(3);
+ canvas.dataset.waveHigh=reactive.bands[2].envelope.toFixed(3);
+ canvas.dataset.waveKick=reactive.bands[0].beat.toFixed(3);
+ canvas.dataset.waveSnare=reactive.bands[1].beat.toFixed(3);
+ canvas.dataset.waveHats=reactive.bands[2].beat.toFixed(3);
+ canvas.dataset.waveSpectralSamples=active?String(n):"0";
+}
+function drawWave(canvas,mode,energy,time){
+ if(state.visualMode==="first"){
+  drawWaveFirst(canvas,mode,energy,time);
+  canvas.dataset.visualMode="first";
+  canvas.dataset.waveMotionStyle="exact-first-version";
+  return;
+ }
+ return drawWaveReactor(canvas,mode,energy,time);
 }
 function drawTone(canvas,time){
  const c=canvasSize(canvas);if(!c)return;const {ctx,w,h}=c,cx=w/2,cy=h/2;
