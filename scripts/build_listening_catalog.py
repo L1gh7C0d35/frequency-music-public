@@ -120,6 +120,13 @@ def build():
             cover=ROOT/'artwork'/'new'/(stem+'.jpg')
             if not cover.is_file():cover=ROOT/'artwork'/'new'/(stem+'.png')
             cover_name=str(cover.relative_to(ROOT)) if cover.is_file() else 'artwork/fresh-cuts.svg'
+            published_duration=duration(p)
+            if published_duration is None:
+                # GitHub Actions runners may not have ffprobe installed. Use
+                # only an explicit, verified numeric duration in the sidecar.
+                value=metadata.get('duration')
+                if isinstance(value,(int,float)) and not isinstance(value,bool) and 0<value<86400:
+                    published_duration=round(float(value),2)
             extras.append(dict(id=ident,title=metadata.get('title') or title_from_name(stem),
                 subtitle=metadata.get('subtitle') or 'New listening preview',
                 description=metadata.get('description') or 'Fresh music for feedback and testing.',
@@ -129,7 +136,7 @@ def build():
                 sound=metadata.get('sound') or '',bpm=metadata.get('bpm'),
                 instruments=metadata.get('instruments') or [],
                 # Flow provenance is a publishing input, never a listening exit link.
-                audio=str(p.relative_to(ROOT)),image=cover_name,duration=duration(p),
+                audio=str(p.relative_to(ROOT)),image=cover_name,duration=published_duration,
                 source='Public preview upload',type='song',new=True,
                 published_at=metadata.get('published_at')))
     if extras:
