@@ -32,3 +32,10 @@ For technical correctness, start with the Nov 11 signed Build 48 receipt: it has
 Open the Now Playing screen and **tap the centered RESONANCE title** to switch between FIRST VERSION and BEAT REACTOR while the same original track continues. The first version is retained unmodified as an A/B baseline (including its original sharp edges). Beat Reactor is the new default: cyan tracks bass/kicks, violet tracks midrange, and magenta responds to highs/transients. All of the movement comes from real audio, not a fixed animation.
 
 Visual comparison: reactor-a-b.jpg. Technical details and test evidence are in the Frequency-App design QA folder. No production iOS source has been changed.
+
+## V6 Sonic Visual Lab (November 11)
+Six switchable real-audio views: Beat Reactor, Spectral Silk, Harmonic Bloom, Sonic Stardust, Spectrum Atlas, and preserved Original. Open the SONIC VISUAL LAB heading or the floating VIEWS button in Now Playing to pick modes and change Detail (35-180%), Impact (50-200%), or color atmosphere. Use IMMERSIVE for a large, standalone listening canvas. Live signal meters display low/mid/high spectral energy. Switching views does not interrupt playback.
+
+**Fast iPhone link:** https://frequency-living-lab.vercel.app/?lab=1&view=silk&v=6
+**Actual visual QA images:** sonic-lab-guide.html and studies/ folder.
+**Truth:** Browser audio analysis displays mixed audio frequency energy and recent timing history, not isolated individual instruments or actual physiological frequencies. Production iOS app untouched.

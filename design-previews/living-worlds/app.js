@@ -77,8 +77,8 @@ function viewWorld(){
 function viewPlayer(){
  const t=TRACKS[state.song],w=world(t.world),isCurrent=state.playing && !state.preparing;
  return '<section class="screen player-screen">'+
- '<div class="player-top"><button class="round-btn" data-action="back" aria-label="Close player">⌄</button><button class="visual-compare-toggle" data-action="toggleVisual" aria-label="Compare audio visualizers"><strong>RESONANCE · NOW PLAYING</strong><small>'+(state.visualMode==="first"?"FIRST VERSION · TAP TO COMPARE":"BEAT REACTOR · TAP TO COMPARE")+'</small></button><button class="round-btn" data-action="queue" aria-label="Queue">⋯</button></div>'+
- '<div class="resonance-stage" id="resonanceStage"><canvas id="resonanceCanvas"></canvas><div class="album-vessel"><img src="'+t.art+'" alt="Artwork for '+t.title+'"></div><div class="sound-state">'+(isCurrent?"LIVE AUDIO":"IDLE VISUAL")+'</div></div>'+
+ '<div class="player-top"><button class="round-btn" data-action="back" aria-label="Close player">⌄</button><button class="visual-compare-toggle" data-action="visuals" aria-label="Open visual experiences"><strong>SONIC VISUAL LAB ✧</strong><small id="visualModeLabel">EXPLORE YOUR MUSIC</small></button><button class="round-btn" data-action="queue" aria-label="Queue">⋯</button></div>'+
+ '<div class="resonance-stage" id="resonanceStage"><canvas id="resonanceCanvas"></canvas><div class="album-vessel"><img src="'+t.art+'" alt="Artwork for '+t.title+'"></div><div class="sound-state">'+(isCurrent?"LIVE AUDIO":"IDLE VISUAL")+'</div><div class="sonic-stage-tools"><button data-action="visuals" aria-label="Choose visual experience">✧ VIEWS <span>›</span></button><button data-action="immerse" aria-label="Open immersive visualization">⛶ IMMERSIVE</button></div></div>'+
  '<div class="player-copy"><h1>'+t.title+'</h1><p>'+w.title+' · Frequency Originals</p><div class="real-state" id="playState">'+(state.error?"AUDIO UNAVAILABLE":state.preparing?"PREPARING AUDIO":state.playing?"PLAYING ORIGINAL RECORDING":"PAUSED · READY TO LISTEN")+'</div></div>'+
  '<input class="seek" type="range" min="0" max="1000" value="'+(audio.duration?Math.floor(audio.currentTime/audio.duration*1000):0)+'" data-action="seek" id="seek" aria-label="Seek track"><div class="seek-times"><span id="elapsed">'+fmt(audio.currentTime)+'</span><span id="remaining">−'+(audio.duration?fmt(audio.duration-audio.currentTime):t.duration)+'</span></div>'+
  '<div class="transport"><button data-action="shuffle" aria-label="Shuffle">⤨</button><button data-action="prevTrack" aria-label="Previous">◀◀</button><button class="main-play" data-action="togglePlay" aria-label="Play or pause">'+(state.preparing?'…':state.playing?'Ⅱ':'▶')+'</button><button data-action="nextTrack" aria-label="Next">▶▶</button><button data-action="repeat" aria-label="Repeat">↻</button></div>'+
@@ -306,11 +306,11 @@ function drawWaveReactor(canvas,mode,energy,time){
  const cfg=canvasSize(canvas);if(!cfg)return;
  const {ctx,w,h}=cfg,cx=w/2,cy=h/2,unit=Math.min(w,h);
  const active=Boolean(state.playing&&analyser&&fft&&!audio.paused);
- const colors=["#75f2ff","#b39cff","#f2a5dc"];
+ const colors=window.__sonicColors||["#75f2ff","#b39cff","#f2a5dc"];
  const bases=[unit*.333,unit*.379,unit*.417];
  const floors=[unit*.281,unit*.305,unit*.337];
  const ceilings=[unit*.434,unit*.460,unit*.471];
- const n=216;
+ const n=Math.round(162+54*(window.__sonicTune?.detail||1));
  const phase=state.started?audio.currentTime:0;
  const spectrumLength=Math.min(256,fft?fft.length:256);
  ctx.save();
@@ -357,7 +357,7 @@ function drawWaveReactor(canvas,mode,energy,time){
    const attack=active?accent*(14+4*layer)*(.62+.38*Math.sin(a*(2+layer)+orbitSpeed*1.4)):0;
    const push=active?(power*(layer===0?12:7)+attack):0;
    const detail=active?soundOffset*(.6+power*.8):0;
-   const displacement=push+contour+detail;
+   const displacement=(push+contour+detail)*(window.__sonicTune?.impact||1);
    // Smooth saturation, not per-frame normalization. Kicks remain visibly
    // larger and high hats can create fast fine ripples without hard clipping.
    const normalized=displacement>=0
@@ -437,7 +437,7 @@ function drawRitual(canvas,time){
 function animate(t){
  frame++;
  if(state.route==="home"){const canvas=$("#worldCanvas");if(canvas)drawWave(canvas,"home",soundEnergy(),t)}
- if(state.route==="player"){const canvas=$("#resonanceCanvas");if(canvas)drawWave(canvas,"player",soundEnergy(),t)}
+ if(state.route==="player"&&!window.__frequencyImmersive){const canvas=$("#resonanceCanvas");if(canvas)drawWave(canvas,"player",soundEnergy(),t)}
  if(state.route==="tones"){const canvas=$("#toneCanvas");if(canvas)drawTone(canvas,t)}
  if(state.route==="rituals"){const canvas=$("#ritualCanvas");if(canvas)drawRitual(canvas,t)}
  animationId=requestAnimationFrame(animate);
