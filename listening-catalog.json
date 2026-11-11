@@ -99,7 +99,7 @@
       "description": "New tracks uploaded for listening and feedback.",
       "visual": "Artwork pending final review",
       "image": "artwork/fresh-cuts.svg",
-      "count": 8
+      "count": 10
     }
   ],
   "tracks": [
@@ -202,6 +202,62 @@
       "type": "song",
       "new": true,
       "published_at": "2026-11-11T12:07:16+00:00"
+    },
+    {
+      "id": "new-i-know-who-i-am",
+      "title": "I Know Who I Am",
+      "subtitle": "Already-embodied affirmation · early listening preview",
+      "description": "An intimate, uplifting soul affirmation about knowing who you are and living from peace, strength and belonging. New original English-lyric listening preview.",
+      "world": "fresh-cuts",
+      "worlds": [
+        "fresh-cuts"
+      ],
+      "artist": "Frequency Originals",
+      "goals": [],
+      "genres": [
+        "Cinematic soul",
+        "Affirmation music",
+        "Identity"
+      ],
+      "experiences": [],
+      "sound": "",
+      "bpm": 101,
+      "instruments": [],
+      "audio": "audio/new/i-know-who-i-am.m4a",
+      "image": "artwork/fresh-cuts.svg",
+      "duration": 192.0,
+      "source": "Public preview upload",
+      "type": "song",
+      "new": true,
+      "published_at": "2026-11-11T12:38:51+00:00"
+    },
+    {
+      "id": "new-i-live-in-the-overflow",
+      "title": "I Live in the Overflow",
+      "subtitle": "Already-embodied affirmation · early listening preview",
+      "description": "A joyful, rhythm-led abundance affirmation about gratitude, love, generosity and the feeling of an already-full life. New original English-lyric listening preview.",
+      "world": "fresh-cuts",
+      "worlds": [
+        "fresh-cuts"
+      ],
+      "artist": "Frequency Originals",
+      "goals": [],
+      "genres": [
+        "Afro soul",
+        "R&B",
+        "Abundance"
+      ],
+      "experiences": [],
+      "sound": "",
+      "bpm": 109,
+      "instruments": [],
+      "audio": "audio/new/i-live-in-the-overflow.m4a",
+      "image": "artwork/fresh-cuts.svg",
+      "duration": 188.0,
+      "source": "Public preview upload",
+      "type": "song",
+      "new": true,
+      "published_at": "2026-11-11T12:38:51+00:00"
     },
     {
       "id": "new-neon-wildfire",
@@ -24582,5 +24638,5 @@
       "type": "soundscape"
     }
   ],
-  "new_count": 8
+  "new_count": 10
 }

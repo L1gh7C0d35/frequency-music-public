@@ -30,21 +30,31 @@ the studio is a listening tool, not a private audio vault.
 
 ## New Music — direct GitHub Pages listening previews (November 11, 2026)
 
-Five **original Frequency listening previews** are intentionally available
+Seven **original Frequency listening previews** are intentionally available
 as standard 256 kbps AAC/M4A files from `audio/new/`, using the **same
 public catalog and native audio player** as all established Frequency songs.
 There is **no encryption, special link, browser decryption or alternate
 player**. New Music uses the shared album-style horizontal song rows, with
 the existing bottom mini-player, queue and Next button.
 
-**Newest three originals:** `Disco on the Fire Escape` (dance-funk, 3:00),
+**Latest two Frequency-native originals:** `I Know Who I Am` (cinematic soul,
+3:12) and `I Live in the Overflow` (uplifting Afro-soul/R&B, 3:08) are the
+first listening tests made *after* the owner-established manifestation and
+already-embodied identity creative reset. They feature original English lyric
+sheets and singable present-tense affirmations. Their audio has passed
+technical integrity checks, **not** an owner taste approval. The previous
+five exploratory previews remain in the list and are not automatically liked.
+See `Developer/Music-Maker/docs/FREQUENCY_NORTHSTAR_LISTENING_TAKES_2026-11-11.md`
+for creative request/QA provenance.
+
+**Previous three high-energy originals:** `Disco on the Fire Escape` (dance-funk, 3:00),
 `Neon Wildfire` (cinematic electro-rock, 3:10), and `Out of Orbit`
 (fast drum-and-bass pop, 2:55). Each was made with a new original English
 lyric sheet, a different sound direction and one untouched source WAV.
 Earlier previews `What the Morning Knows` and `The Wild Part of Me` remain
-available, but are no longer the newest entries. The catalog contains 69 tracks.
+available, but are no longer the newest entries. The catalog contains 71 tracks.
 
-**Visibility:** GitHub Pages is a PUBLIC static website. All five preview
+**Visibility:** GitHub Pages is a PUBLIC static website. All seven preview
 copies are publicly accessible and downloadable, although the original WAV
 masters and Music Maker project sources remain outside the web repository.
 They are explicitly labelled early listening previews, not finished releases.

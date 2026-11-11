@@ -213,3 +213,39 @@ Future catalog tests are less tightly coupled to exact counts, and explicitly ve
 
 ## Final verified publication — three energetic previews
 Commit `a9874f4` published the three new 256kbps M4A listening previews (Disco on the Fire Escape, Neon Wildfire, Out of Orbit) and 69-recording catalog. GitHub Actions run `43018139315` reports full **success**. All three public files returned `206 Partial Content`, MIME `audio/mp4`; live catalog reports five public New Music originals, with these three first. A real Chromium browser at 390px tested the deployed Pages URL, verified five horizontal rows, clicked Play on the new Disco recording to an existing `mainAudio` player with `readyState=4` and `paused=false`, then clicked Next to Neon Wildfire, leaving fullscreen Now Playing closed. This is production integration evidence, not an actual physical iPhone test or an aesthetic rating. Source WAVs and lyric sheets remain private in Music Maker; only preview M4A files are public. No new backend/player, no secret link, no existing audio overwritten.
+
+## November 11 — first two Knowledge-Vault-grounded manifestation originals
+
+Following the owner's dissatisfaction with five generic/reflective/dance/rock
+experiments, Music Maker read the owner's actual Limitless Desktop Knowledge
+Vault notes and transcripts and established
+~/Developer/Music-Maker/docs/FREQUENCY_MANIFESTATION_MUSIC_NORTHSTAR_2026-11-11.md.
+The owner then asked for a listening link. Two new originals were written
+with distinct English lyric sheets expressing **already-embodied self-concept,
+gratitude and abundance**, then generated as **single unmodified first takes**:
+
+- I Know Who I Am — cinematic soul/identity affirmation, 3:12,
+  audio/new/i-know-who-i-am.m4a, 101 BPM
+- I Live in the Overflow — joyful Afro-soul/R&B abundance affirmation,
+  3:08, audio/new/i-live-in-the-overflow.m4a, 109 BPM
+
+Source 48k stereo WAVs, exact generation prompts/lyrics and SHA256 sidecars
+are preserved solely in the private Music Maker workspace. Technical QC
+passed and the machine-generated lyric text was detected as English; that
+does **not** certify audible intelligibility or aesthetic quality.
+
+These two compressed 256kbps AAC files are intentionally **PUBLIC** on the
+original GitHub Pages listening site, as early previews, **not** approved
+commercial releases. All earlier music stays intact. The standard web
+catalog is now 71 recordings total, with **seven** public New Music preview
+tracks; the two new identity/abundance songs appear first. The exact same
+horizontal album rows, mini-player and Next queue remain in use. No private
+key, alternate player, changed theme, or extra deployment system.
+
+Local 390px Chrome browser verified seven title rows, first song Play in the
+existing bottom player, decoded readyState=4 and paused=false, and Next
+played the second song. All 25 Python tests, New Music, Classic,
+Appearance/Search checks and JavaScript syntax passed, including a
+CI-mode test without ffprobe. Production Pages release and playback
+must be verified separately before marking live. **Owner review pending**;
+do not describe either song as a hit or change its originals without feedback.
