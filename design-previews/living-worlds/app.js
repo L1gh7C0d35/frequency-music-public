@@ -227,24 +227,74 @@ let swipeStart=null;document.addEventListener("pointerdown",e=>{const el=e.targe
 function canvasSize(canvas){if(!canvas)return null;const dpr=Math.min(2,window.devicePixelRatio||1),rect=canvas.getBoundingClientRect(),w=rect.width,h=rect.height;if(w===0||h===0)return null;const cw=Math.floor(w*dpr),ch=Math.floor(h*dpr);if(canvas.width!==cw||canvas.height!==ch){canvas.width=cw;canvas.height=ch}const ctx=canvas.getContext("2d");ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);return {ctx,w,h}}
 function soundEnergy(){if(state.playing&&analyser&&fft){analyser.getByteFrequencyData(fft);let e=0;for(let i=3;i<115&&i<fft.length;i++)e+=fft[i];return e/(Math.min(115,fft.length)-3)/255}return 0}
 function drawWave(canvas,mode,energy,time){
- const cfg=canvasSize(canvas);if(!cfg)return;const {ctx,w,h}=cfg,cx=w/2,cy=h/2,r=Math.min(w,h)*.407;
- const colors=mode==="player"?["#75f2ff","#b39cff","#f2a5dc"]:["#7eeafa","#baa7fb","#fa9ddf"];
- ctx.globalCompositeOperation="lighter";
- for(let layer=0;layer<3;layer++){
-  let pts=[];const n=210;
-  for(let i=0;i<=n;i++){let a=i/n*Math.PI*2;const si=fft&&state.playing?fft[(i*2+layer*19)%fft.length]/255:0;
-   const wobble=(Math.sin(a*(3+layer*2)+time*.00036+layer)+Math.cos(a*(7-layer)+time*.00052))*(2.4+energy*7);
-   const rad=r+(layer-1)*14+wobble+(mode==="player"?si*(energy>0?.8:0)*46:si*7);
-   pts.push([cx+Math.cos(a)*rad,cy+Math.sin(a)*rad]);
+ const cfg=canvasSize(canvas);
+ if(!cfg)return;
+ const {ctx,w,h}=cfg,cx=w/2,cy=h/2;
+ const unit=Math.min(w,h);
+ const active=Boolean(state.playing&&fft&&analyser);
+ // Six averaged spectral bands: every deformation remains a continuous harmonic.
+ // Never map raw, discontinuous FFT-bin indices directly onto a circular path.
+ const bands=[0,0,0,0,0,0];
+ if(active){
+  const start=4,span=Math.min(156,fft.length-start);
+  for(let k=0;k<bands.length;k++){
+   const from=start+Math.floor(span*k/bands.length);
+   const to=start+Math.floor(span*(k+1)/bands.length);
+   let sum=0;
+   for(let j=from;j<to;j++)sum+=fft[j];
+   bands[k]=sum/Math.max(1,to-from)/255;
   }
-  ctx.beginPath();ctx.moveTo(...pts[0]);pts.forEach(p=>ctx.lineTo(...p));ctx.closePath();
-  ctx.strokeStyle=colors[layer];ctx.lineWidth=layer===0?1.9:1.4;
-  ctx.shadowColor=colors[layer];ctx.shadowBlur=18+energy*24;ctx.globalAlpha=.82;ctx.stroke();
  }
- for(let i=0;i<43;i++){const a=i/43*Math.PI*2+time*.000035*(i%2?-1:1),rad=r+29+Math.sin(time*.00016+i)*4;
- ctx.beginPath();ctx.arc(cx+Math.cos(a)*rad,cy+Math.sin(a)*rad,i%7===0?1.5:.65,0,Math.PI*2);
- ctx.fillStyle=i%2===0?"#afeaff":"#d5b2ff";ctx.globalAlpha=.25+.25*Math.sin(time*.001+i)**2;ctx.fill()}
- ctx.shadowBlur=0;ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over";
+ const colors=["#75f2ff","#b39cff","#f2a5dc"];
+ const motion=time*(active?.00031:.000055);
+ const maxRadius=unit/2-22; // includes glow margin, so no clipped edges
+ for(let layer=0;layer<3;layer++){
+  const radius=unit*(.347+.038*layer);
+  const phase=layer*1.19;
+  const n=240;
+  ctx.beginPath();
+  let minR=999,maxR=0;
+  for(let i=0;i<=n;i++){
+   const a=i/n*Math.PI*2;
+   const ambient=2.8*Math.sin(a*(3+layer)+motion+phase)
+                +2.2*Math.cos(a*(6+layer)+motion*.71-phase)
+                +1.25*Math.sin(a*9-motion*.4+phase);
+   const response=active?
+       10.0*bands[(layer+1)%6]*Math.sin(a*4+motion*1.18+phase)
+      +7.0*bands[(layer+3)%6]*Math.cos(a*7-motion*.9-phase)
+      +4.3*bands[(layer+5)%6]*Math.sin(a*11+motion*.55+phase)
+      :0;
+   const rad=Math.max(unit*.295,Math.min(maxRadius,radius+ambient+response));
+   minR=Math.min(minR,rad);maxR=Math.max(maxR,rad);
+   const x=cx+Math.cos(a)*rad,y=cy+Math.sin(a)*rad;
+   if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+  ctx.lineWidth=layer===1?1.9:1.65;
+  ctx.lineJoin="round";ctx.lineCap="round";
+  ctx.strokeStyle=colors[layer];
+  ctx.shadowColor=colors[layer];
+  ctx.shadowBlur=8+(active?Math.min(1,energy)*11:3);
+  ctx.globalAlpha=.87;
+  ctx.stroke();
+  ctx.globalAlpha=.24;
+  ctx.lineWidth=3.1;
+  ctx.shadowBlur=17;
+  ctx.stroke();
+ }
+ // Contained shimmer points — atmosphere, never a discontinuous waveform.
+ ctx.shadowBlur=0;ctx.globalAlpha=1;
+ const partR=unit*.45;
+ for(let i=0;i<40;i++){
+  const a=i/40*Math.PI*2+motion*.1;
+  const r=partR+Math.sin(i*6+motion)*1.5;
+  ctx.beginPath();
+  ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,i%6===0?1.1:.55,0,Math.PI*2);
+  ctx.fillStyle=i%2===0?"#b6eeff":"#e4bcff";
+  ctx.globalAlpha=.19+.2*(.5+.5*Math.sin(i+motion));
+  ctx.fill();
+ }
+ ctx.globalAlpha=1;
 }
 function drawTone(canvas,time){
  const c=canvasSize(canvas);if(!c)return;const {ctx,w,h}=c,cx=w/2,cy=h/2;
