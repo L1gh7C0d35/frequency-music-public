@@ -5,8 +5,8 @@ Public test link: https://l1gh7c0d35.github.io/frequency-music-public/
 This is a web listening and testing companion, not the compiled native Frequency iOS app. It supports Android Chrome and iPhone Safari.
 
 ## What works
-- Five focused tabs: **Home, Worlds, New Music, Music, You** (on desktop and phone).
-- Current public catalog: **64 recordings** (31 songs and 33 soundscapes). Worlds shows 10 curated artist-and-style groups; the 11th catalog group, Fresh Cuts, belongs under New Music.
+- Four focused tabs: **Home, New Music, Music, You** (on desktop and phone). Artist/music worlds are already on Home.
+- Current public catalog: **64 recordings** (31 songs and 33 soundscapes). Home shows 10 curated artist-and-style worlds; the 11th catalog grouping, Fresh Cuts, is not a performer and does not appear in the Home worlds shelf.
 - Mini-player and full-screen player, play, pause, seek, next/previous, shuffle, repeat and queue.
 - Global search across all published music and soundscapes, including `528` and artist names; category filters remain available for browsing.
 - Favorites, Keep/Potential/Pass ratings and listening notes in each phone's own local storage. Export feedback JSON when you want to share it.
@@ -28,8 +28,10 @@ Commit the generated experiments-catalog.json before pushing.
 The existing Pages workflow copies the committed catalog and Experiments page;
 the studio is a listening tool, not a private audio vault.
 
-## New Music — approved public listening only
-GitHub Actions rebuilds the **New Music** tab from explicitly public `new` tracks when a release is pushed to main. Current examples are three already-public Fire Under Calm listening tests. A song intentionally published to `audio/new/` appears as a new track automatically; its `published_at` timestamp sorts fresh approvals ahead of older test versions. Optional artwork in `artwork/new/` and matching JSON can supply its title, world and description. **Making a track in Music Maker does not publish it.**
+## New Music — private originals and approved public releases
+New Music uses the **same Home track cards and bottom player**; there is no separate playback screen or duplicate audio player. The first two English-take originals are delivered only to the owner as AES-256-GCM ciphertext via an owner-only browser link (key in URL fragment, never in the GitHub repository). Once opened, the key is remembered locally on the device. The public GitHub server and repo cannot serve their unencrypted audio. The **You → Private listening** section can forget that device access.
+
+Only expressly approved `audio/new/` uploads appear publicly in New Music. The three already-public **Fire Under Calm C1/C2/C3** trial recordings remain searchable and in the Experiments listening lab, but they are **not** New Music releases or Home editorial recommendations. A deliberately published song appears automatically, ordered by its `published_at` UTC timestamp. **Making a track in Music Maker does not publish it.**
 
 For owner uploads from the Mac:
 
@@ -167,11 +169,46 @@ not fabricate them; their verified app metadata remains intact.
 
 Fire Under Calm C1/C2/C3 remain public and are explicitly included in the public-test-tracks.json allow-list so they appear under Fresh Cuts and can be searched by version name. The list points to existing audio/*.m4a files without storing second copies. These are listening candidates, not finished commercial releases. Other unlisted test files are not automatically exposed in the player.
 
+## Updated current Frequency direction — November 11, later creator review
+
+The owner prefers the original richer green Forest palette again and asked
+for familiar, recognizable tab icons instead of tiny dot/grid symbols.
+Forest is the default; Midnight is now an optional **You → Appearance**
+choice. Four navigation tabs remain **Home / New Music / Music / You**.
+The separate Worlds tab was removed because all curated worlds already live on
+Home. Rituals and Words remain absent as standalone tabs; inline lyrics still
+work in Now Playing. Historic Classic remains accessible only by explicit link.
+
+New Music uses the literal **same `renderTrackCards` function** as Home;
+tapping artwork or song title calls the same `playTrack(id,false)` path,
+opening the bottom mini-player without automatically opening the full-screen
+Now Playing overlay. The C1/C2/C3 experimental tracks are omitted from Home
+picks, shuffle recommendations and New Music. They remain in public Music and
+Experiments without deleting approved source assets.
+
+The player's `audio.play()` stays synchronous on tap; full list, queue and
+picks rerenders are deferred into the next animation frame for responsiveness.
+A second tap on the same track during buffering no longer cancels loading.
+The prominently featured track preloads only metadata to avoid competing with
+other playback on slow phone connections. These fixes still need a normal
+physical-phone listening check; a code test is not proof of network quality.
+
+**Private music security:** `private-media/*.bin` includes only AES-256-GCM
+encrypted AAC listening copies and an encrypted manifest (not the source WAVs).
+The unique decryption key stays outside Git, only provided in the owner's
+private Frequency URL fragment and stored locally on the authorized browser.
+The fragment is removed from the URL by the client after unlocking. Anyone
+with that complete secret link can unlock the recordings, so do not distribute
+it. A compromised same-origin website or browser storage can still undermine
+client-side privacy: this is private-by-key previewing, **not a server-side
+account/access-control system**. No public-release or commercial approval
+should be inferred from a private preview. The two originals can be heard
+within Frequency while the public 64-track catalog remains unchanged.
+
 ## Current appearance and navigation (November 11, 2026)
 
-The owner chose the **current** Frequency app, but rejected its 2026-10-13
-forest-green tint and the Rituals/Words navigation. Frequency now uses the
-original charcoal-blue Midnight palette with warm champagne highlights
+Historical note (superseded by the newer creator review above): the owner
+briefly chose the charcoal-blue Midnight palette with warm champagne highlights
 **throughout the public website** (main player, artist cards, experiments,
 studio and archived song pages). There is no green-theme switch.
 The desktop and iPhone tabs are **Home / Worlds / New Music / Music / You**.

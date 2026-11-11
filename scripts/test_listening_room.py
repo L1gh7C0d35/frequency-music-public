@@ -84,7 +84,7 @@ class ListeningRoomTests(unittest.TestCase):
     def test_one_tap_playback_is_requested_before_rendering(self):
         source=(ROOT/'listening-room.js').read_text()
         load=source.split('function loadTrack(id,play=false)',1)[1].split('function playTrack(',1)[0]
-        self.assertLess(load.index('if(play)requestPlay();'),load.index('renderLibrary();'),
+        self.assertLess(load.index('if(play)requestPlay();'),load.index('schedulePlaybackRefresh();'),
                         'Invoke HTMLMediaElement.play while the tap is still active')
         show=source.split('function showTrack(id)',1)[1].split('function queueFromContext',1)[0]
         self.assertIn('playTrack(id,false)',show)
@@ -230,32 +230,33 @@ class ListeningRoomTests(unittest.TestCase):
         html=self.html
         for ident in ('mainAudio','youScreen','newMusicScreen'):
             self.assertIn('id="'+ident+'"',html)
-        self.assertNotIn('data-appearance="current"',html)
+        self.assertIn('data-appearance="current"',html)
         self.assertNotIn('id="ritualsScreen"',html)
         self.assertNotIn('id="wordsScreen"',html)
-        self.assertIn("document.documentElement.dataset.frequencyAppearance='midnight'",html)
+        self.assertIn("frequency-theme-choice-v2",html)
         css=(ROOT/'frequency-appearance.css').read_text()
         self.assertIn('html[data-frequency-appearance="midnight"]',css)
         self.assertIn('--bg:#090c12',css)
         self.assertNotIn('audio/',css)
         js=(ROOT/'frequency-appearance.js').read_text()
         self.assertIn("dataset.frequencyAppearance='midnight'",js)
-        self.assertNotIn('delete root.dataset.frequencyAppearance',js)
-        self.assertNotIn('forest',js.lower())
+        self.assertIn('delete root.dataset.frequencyAppearance',js)
+        self.assertIn('forest',js.lower())
         palette=(ROOT/'frequency-parity.css').read_text()
-        self.assertIn('--bg:#090c12',palette)
-        self.assertNotIn('#213329',palette)
+        self.assertIn('--bg:#090d0c',palette)
+        self.assertIn('#213329',palette)
         sw=(ROOT/'sw.js').read_text()
         self.assertIn("'./frequency-appearance.css'",sw)
         self.assertIn("'./frequency-appearance.js'",sw)
         self.assertIn("'./frequency-current.css'",sw)
+        self.assertIn("'./frequency-private-music.js'",sw)
         self.assertEqual(json.loads((ROOT/'manifest.webmanifest').read_text())['start_url'],'./?app=1')
 
     def test_current_tabs_and_new_music_are_one_real_catalog(self):
         html=self.html
-        for name in ('home','worlds','new','music','you'):
+        for name in ('home','new','music','you'):
             self.assertEqual(html.count('data-app-tab="'+name+'"'),2,name)
-        for removed in ('rituals','words','sounds'):
+        for removed in ('rituals','words','sounds','worlds'):
             self.assertNotIn('data-app-tab="'+removed+'"',html)
         for ident in ('newMusicScreen','newMusicList','newMusicEmpty','newMusicSummary'):
             self.assertIn('id="'+ident+'"',html)
@@ -267,8 +268,8 @@ class ListeningRoomTests(unittest.TestCase):
         current=(ROOT/'frequency-parity.js').read_text()
         self.assertIn("function renderNewMusic()",current)
         self.assertIn("t.new===true && t.type==='song'",current)
-        self.assertIn("app.playTrack(b.dataset.newPlay,true)",current)
-        self.assertIn("app.toggleFavorite(b.dataset.newFavorite)",current)
+        self.assertIn("app.renderTrackCards($('newMusicList'),tracks)",current)
+        self.assertIn("t.source!=='Creator-approved public test'",current)
         self.assertNotIn('setupRituals',current)
         self.assertNotIn('renderLyrics()',current)
         self.assertIn("w.id!=='fresh-cuts'",(ROOT/'listening-room.js').read_text())
@@ -288,13 +289,38 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertEqual(result.returncode,0,result.stderr)
         self.assertIn('New Music PASS',result.stdout)
 
+    def test_private_originals_are_encrypted_and_not_auto_published(self):
+        private=ROOT/'private-media'
+        expected={'manifest-20261111.bin','p1-20261111.bin','p2-20261111.bin'}
+        self.assertEqual({p.name for p in private.iterdir()},expected)
+        self.assertGreater((private/'p1-20261111.bin').stat().st_size,5_000_000)
+        self.assertGreater((private/'p2-20261111.bin').stat().st_size,5_000_000)
+        for file in private.iterdir():
+            self.assertNotIn(b'ftyp',file.read_bytes()[:100])
+            self.assertFalse(file.name.endswith(('.m4a','.wav','.mp3')))
+        code=(ROOT/'frequency-private-music.js').read_text()
+        self.assertIn("name:'AES-GCM'",code)
+        self.assertIn("window.location.hash",code)
+        self.assertIn("document.body.dataset.appTab==='new'",code)
+        self.assertIn("KEY_STORE='frequency-private-key-v1'",code)
+        self.assertIn("private-media/manifest-20261111.bin",code)
+        self.assertIn("'./frequency-private-music.js'",(ROOT/'sw.js').read_text())
+        for source in (ROOT/'index.html',ROOT/'frequency-parity.js',ROOT/'listening-catalog.json'):
+            self.assertNotIn('what-the-morning-knows-english-take',source.read_text())
+        play=(ROOT/'listening-room.js').read_text()
+        self.assertIn('function renderTrackCards(root,tracks)',play)
+        self.assertIn("playTrack(btn.dataset.play,false)",play)
+        self.assertIn("state.current===id && state.buffering",play)
+        self.assertIn('schedulePlaybackRefresh();',play)
+        self.assertNotIn('state.tracks.filter(x=>x.new).map(x=>x.id)',play)
+
     def test_classic_navigation_preserves_current_catalog(self):
         html=self.html
         for name in ('discover','worlds','music','favorites'):
             self.assertIn('data-classic-tab="'+name+'"',html)
         self.assertIn('frequency-classic.css',html)
         self.assertIn('frequency-classic.js',html)
-        self.assertIn("get('view')==='classic'",html)
+        self.assertIn("if(q==='classic')",html)
         self.assertNotIn('data-view-choice="classic"',html)
         css=(ROOT/'frequency-classic.css').read_text()
         self.assertIn('data-frequency-view="classic"',css)
@@ -324,7 +350,7 @@ class ListeningRoomTests(unittest.TestCase):
             with self.subTest(page=page.name):
                 text=page.read_text()
                 self.assertEqual(text.count('frequency-legacy-appearance.css?v='),1)
-                self.assertIn("document.documentElement.dataset.frequencyAppearance='midnight'",text)
+                self.assertIn("frequency-theme-choice-v2",text)
                 self.assertIn('data-frequency-appearance="midnight"',css)
                 self.assertIn('data-frequency-page="'+page.name+'"',css)
         for selector in ('.world-song.active','.world-song','.track-row.active',
@@ -333,7 +359,7 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn("'./frequency-legacy-appearance.css'",(ROOT/'sw.js').read_text())
         from generate_song_pages import page
         generated=page(self.data['tracks'][0])
-        self.assertIn('frequency-web-view-v1',generated)
+        self.assertIn('frequency-theme-choice-v2',generated)
         self.assertIn('#090c12',generated)
 
     def test_appearance_preference_behavior(self):
@@ -342,13 +368,13 @@ class ListeningRoomTests(unittest.TestCase):
         result=subprocess.run([runner,str(ROOT/'scripts/test_appearance_preference.js')],
                               capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stderr)
-        self.assertIn('Midnight-only appearance',result.stdout)
+        self.assertIn('Appearance PASS',result.stdout)
 
     def test_javascript_syntax(self):
         checker=shutil.which('node') or shutil.which('deno')
         self.assertIsNotNone(checker,'Node or Deno is needed to validate browser JavaScript')
         command=[checker,'--check'] if Path(checker).name=='node' else [checker,'check']
-        for name in ('listening-room.js','frequency-parity.js','frequency-appearance.js','frequency-classic.js','sw.js'):
+        for name in ('listening-room.js','frequency-parity.js','frequency-appearance.js','frequency-classic.js','frequency-private-music.js','sw.js'):
             result=subprocess.run([*command,str(ROOT/name)],capture_output=True,text=True)
             self.assertEqual(result.returncode,0,f'{name}: {result.stderr}')
 

@@ -1,69 +1,66 @@
-/* Exercise the actual New Music renderer against published catalog fixtures. */
+/* Verify New Music reuses Home's actual card/player action and never features C1/C2. */
 const fs=require('node:fs');
 const vm=require('node:vm');
 const assert=require('node:assert/strict');
 const path=require('node:path');
 const root=path.join(__dirname,'..');
 const source=fs.readFileSync(path.join(root,'frequency-parity.js'),'utf8');
+const main=fs.readFileSync(path.join(root,'listening-room.js'),'utf8');
 const data=JSON.parse(fs.readFileSync(path.join(root,'listening-catalog.json'),'utf8'));
 const start=source.indexOf('  function newTracks() {');
 const end=source.indexOf('  function renderYou()',start);
-assert(start!==-1&&end>start,'New Music functions must exist in current navigation code');
-const rendered=source.slice(start,end);
-const actions={played:[],favorites:[]};
-const list={
-  innerHTML:'',hidden:false,controls:[],
-  querySelectorAll(selector){
-    const key=selector==='[data-new-play]'?'newPlay':'newFavorite';
-    const attr=key==='newPlay'?'data-new-play':'data-new-favorite';
-    const regex=new RegExp(attr+'="([^"]+)"','g');
-    const buttons=Array.from(this.innerHTML.matchAll(regex),m=>{
-      const btn={dataset:{[key]:m[1]},onClick:null,
-        addEventListener(name,fn){assert.equal(name,'click');this.onClick=fn}};
-      this.controls.push(btn);return btn;
-    });
-    return buttons;
-  },
-};
+assert(start!==-1&&end>start);
+const privateTracks=[
+  {id:'private-wild',title:'The Wild Part of Me',type:'song',new:true,private:true,
+    created_at:'2026-11-10',source:'Encrypted owner-only listening'},
+  {id:'private-morning',title:'What the Morning Knows',type:'song',new:true,private:true,
+    created_at:'2026-11-10',source:'Encrypted owner-only listening'},
+];
 const elements={
   newMusicSummary:{textContent:''},
-  newMusicEmpty:{hidden:true},
-  newMusicList:list,
+  newMusicEmpty:{hidden:true,querySelector(selector){
+    if(selector==='h3')return this.h3||(this.h3={textContent:''});
+    if(selector==='p')return this.p||(this.p={textContent:''});
+    throw Error('unexpected selector');
+  }},
+  newMusicList:{hidden:false,innerHTML:''},
 };
+const calls=[];
 const app={
-  state:{tracks:data.tracks,favorites:new Set()},
-  playTrack(id,expand){actions.played.push([id,expand])},
-  toggleFavorite(id){
-    if(this.state.favorites.has(id))this.state.favorites.delete(id);
-    else this.state.favorites.add(id);
-    actions.favorites.push(id);
+  state:{tracks:[...data.tracks,...privateTracks],favorites:new Set()},
+  renderTrackCards(root,tracks){
+    assert.strictEqual(root,elements.newMusicList);
+    calls.push(tracks.map(t=>t.id));
+    root.innerHTML=tracks.map(t=>t.title).join('|');
   },
 };
-const $=id=>{assert(elements[id],'Unexpected element '+id);return elements[id]};
-const ESC=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const context=vm.createContext({app,$,ESC,Date});
-vm.runInContext(rendered,context);
-const newIds=Array.from(vm.runInContext('newTracks().map(x=>x.id)',context));
-assert.deepEqual(newIds,['fire-under-calm-c1','fire-under-calm-c2','fire-under-calm-c3']);
+const context=vm.createContext({
+  app,Date,window:{FrequencyPrivateMusic:{status:'ready'}},
+  $:id=>{assert(elements[id]);return elements[id]},
+});
+vm.runInContext(source.slice(start,end),context);
+const newIds=Array.from(vm.runInContext('newTracks().map(t=>t.id)',context));
+assert.deepEqual(newIds,['private-wild','private-morning']);
 vm.runInContext('renderNewMusic()',context);
-assert(list.innerHTML.includes('Fire Under Calm'));
-assert(list.innerHTML.includes('EARLY LISTEN · NOT A FINAL RELEASE'));
-assert(list.innerHTML.includes('data-new-play="fire-under-calm-c1"'));
-assert(list.innerHTML.includes('data-new-favorite="fire-under-calm-c3"'));
 assert.equal(elements.newMusicEmpty.hidden,true);
-const play=list.controls.find(c=>c.dataset.newPlay==='fire-under-calm-c2');
-assert(play,'Second track play button exists');play.onClick();
-assert.deepEqual(actions.played,[['fire-under-calm-c2',true]]);
-const save=list.controls.find(c=>c.dataset.newFavorite==='fire-under-calm-c1');
-assert(save,'Save button exists');save.onClick();
-assert(app.state.favorites.has('fire-under-calm-c1'));
-assert(list.innerHTML.includes('♥ Saved'));
-const extra={...data.tracks.find(t=>t.id==='already-arrived'),id:'new-approved-test',new:true,published_at:'2099-01-01T00:00:00Z'};
-app.state.tracks=[...data.tracks,extra];
-assert.equal(vm.runInContext('newTracks()[0].id',context),'new-approved-test');
-app.state.tracks=data.tracks.filter(t=>!t.new);
+assert.equal(elements.newMusicSummary.textContent,'2 PRIVATE ORIGINALS');
+assert.equal(elements.newMusicList.innerHTML,'The Wild Part of Me|What the Morning Knows');
+assert.deepEqual(calls[0],['private-wild','private-morning']);
+assert(source.includes('app.renderTrackCards($(\'newMusicList\'),tracks)'));
+assert(main.includes('function renderTrackCards(root,tracks)'));
+assert(main.includes("root.querySelectorAll('[data-play]').forEach(btn=>btn.onclick=()=>playTrack(btn.dataset.play,false))"));
+assert(!main.includes('state.tracks.filter(x=>x.new).map(x=>x.id)'));
+assert(main.includes("state.tracks.filter(eligibleForHome)"));
+const released={...privateTracks[0],id:'public-approved',private:false,source:'Public preview upload',published_at:'2099-01-01T00:00:00Z'};
+app.state.tracks=[...data.tracks,...privateTracks,released];
+assert.equal(vm.runInContext('newTracks()[0].id',context),'public-approved');
+app.state.tracks=data.tracks;
 vm.runInContext('renderNewMusic()',context);
 assert.equal(elements.newMusicEmpty.hidden,false);
 assert.equal(elements.newMusicList.hidden,true);
-assert.equal(list.innerHTML,'');
-console.log('New Music PASS: 3 approved previews, playback, favorites, date order, empty state, no private sources.');
+assert.equal(elements.newMusicList.innerHTML,'');
+context.window.FrequencyPrivateMusic.status='loading';
+vm.runInContext('renderNewMusic()',context);
+assert.equal(elements.newMusicEmpty.hidden,true);
+assert(elements.newMusicSummary.textContent.includes('PREPARING'));
+console.log('New Music PASS: private originals, same Home card/mini-player, test variants excluded, loading/empty states.');

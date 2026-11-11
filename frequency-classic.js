@@ -3,7 +3,7 @@
 (() => {
   'use strict';
   const KEY='frequency-web-view-v1';
-  const THEME='frequency-web-appearance-v1';
+  const THEME='frequency-theme-choice-v2';
   const root=document.documentElement;
   const $=id=>document.getElementById(id);
   const originalHero={};
@@ -37,7 +37,7 @@
       ? 'Classic is selected. All current songs and soundscapes are still here.'
       : 'Current five-tab navigation is selected.';
     const switchButton=$('switchToModern');
-    if(switchButton)switchButton.textContent='5-tab view';
+    if(switchButton)switchButton.textContent='Current view';
   }
   function applyHero(classic) {
     const kicker=document.querySelector('.hero-kicker');

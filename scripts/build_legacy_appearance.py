@@ -137,7 +137,7 @@ def install_links(included: list[str]) -> list[str]:
             '<script>(function(){try{'
             "const q=new URLSearchParams(location.search).get('view');"
             "const saved=localStorage.getItem('frequency-web-view-v1');"
-            "const color=localStorage.getItem('frequency-web-appearance-v1');"
+            "const color=localStorage.getItem('frequency-theme-choice-v2');"
             "if(q==='classic'||(q!=='modern'&&saved==='classic')||color==='midnight')"
             "document.documentElement.dataset.frequencyAppearance='midnight';"
             "document.documentElement.dataset.frequencyPage='" + safe_name + "';"

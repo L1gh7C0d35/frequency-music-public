@@ -4,8 +4,8 @@
   const $=id=>document.getElementById(id);
   const ESC=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const INTENTS=[['all','For you'],['abundance','Abundance'],['confidence','Confidence'],['visualize','Visualize'],['focus','Focus'],['calm','Calm'],['sleep','Sleep'],['energy','Energy'],['gratitude','Gratitude'],['morning','Morning'],['future-self','Future self']];
-  const PAGES=new Set(['home','worlds','new','music','you']);
-  const LABELS={home:'Home',worlds:'Worlds',new:'New Music',music:'Music',you:'You'};
+  const PAGES=new Set(['home','new','music','you']);
+  const LABELS={home:'Home',new:'New Music',music:'Music',you:'You'};
   let app,installPrompt=null;
 
   function tab(value) {
@@ -31,7 +31,7 @@
     $('intentFilters').querySelectorAll('[data-intent]').forEach(b=>b.addEventListener('click',()=>{
       const goal=b.dataset.intent;app.state.previewGoal=goal;
       document.querySelectorAll('[data-intent]').forEach(btn=>btn.classList.toggle('selected',btn.dataset.intent===goal));
-      const matches=app.state.tracks.filter(t=>goal==='all'||(t.goals||[]).includes(goal));
+      const matches=app.state.tracks.filter(t=>t.world!=='fresh-cuts' && !t.private && (goal==='all'||(t.goals||[]).includes(goal)));
       app.state.featuredIds=matches.slice(0,5).map(t=>t.id);
       app.renderPicks();app.renderLibrary();
       $('picks').scrollIntoView({block:'start',behavior:'smooth'});
@@ -64,7 +64,7 @@
     $('library').scrollIntoView({behavior:'smooth',block:'start'});
   }
   function newTracks() {
-    return app.state.tracks.filter(t=>t.new===true && t.type==='song')
+    return app.state.tracks.filter(t=>t.new===true && t.type==='song' && t.source!=='Creator-approved public test')
       .map((track,index)=>({track,index}))
       .sort((a,b)=>{
         const left=Date.parse(a.track.published_at||a.track.publishedAt||'')||0;
@@ -74,28 +74,29 @@
   }
   function renderNewMusic() {
     const tracks=newTracks();
-    $('newMusicSummary').textContent=tracks.length
-      ? tracks.length+' PUBLIC LISTENING '+(tracks.length===1?'PREVIEW':'PREVIEWS')+' · FRESH CUTS'
-      : 'NO NEW MUSIC SHARED YET';
-    $('newMusicEmpty').hidden=tracks.length!==0;
+    const privateCount=tracks.filter(t=>t.private).length;
+    const publicCount=tracks.length-privateCount;
+    const unlocking=window.FrequencyPrivateMusic?.status==='loading';
+    const failed=window.FrequencyPrivateMusic?.status==='error';
+    $('newMusicSummary').textContent=unlocking
+      ? 'PREPARING YOUR PRIVATE LISTENING TAKES…'
+      : tracks.length
+      ? (privateCount?privateCount+' PRIVATE ORIGINAL'+(privateCount===1?'':'S'):'')+
+        (publicCount?(privateCount?' · ':'')+publicCount+' PUBLIC RELEASE'+(publicCount===1?'':'S'):'')
+      : failed?'UNABLE TO OPEN PRIVATE LISTENING FILES':'YOUR NEW ORIGINALS';
+    $('newMusicEmpty').hidden=tracks.length!==0||unlocking;
     $('newMusicList').hidden=tracks.length===0;
-    $('newMusicList').innerHTML=tracks.map(t=>{
-      const saved=app.state.favorites.has(t.id);
-      const stage=String(t.subtitle||'').toLowerCase().includes('not a final release')
-        ? 'EARLY LISTEN · NOT A FINAL RELEASE':'NEW PUBLIC MUSIC';
-      const description=t.description||t.subtitle||'Original Frequency music';
-      return '<article class="new-track">'+
-        '<button class="new-track-art" data-new-play="'+ESC(t.id)+'" aria-label="Play '+ESC(t.title)+'"><img src="'+ESC(t.image)+'" alt="" loading="lazy"></button>'+
-        '<div class="new-track-details"><span class="new-track-label">'+stage+'</span>'+
-        '<h3>'+ESC(t.title)+'</h3><p>'+ESC(description)+'</p>'+
-        '<div class="new-track-actions"><button class="new-track-play" data-new-play="'+ESC(t.id)+'">▶ Listen</button>'+
-        '<button class="new-track-save" data-new-favorite="'+ESC(t.id)+'" aria-pressed="'+saved+'" aria-label="'+(saved?'Remove ':'Save ')+ESC(t.title)+' '+(saved?'from':'to')+' favorites">'+(saved?'♥ Saved':'♡ Save')+'</button></div></div></article>';
-    }).join('');
-    $('newMusicList').querySelectorAll('[data-new-play]').forEach(b=>b.addEventListener('click',()=>app.playTrack(b.dataset.newPlay,true)));
-    $('newMusicList').querySelectorAll('[data-new-favorite]').forEach(b=>b.addEventListener('click',()=>{
-      app.toggleFavorite(b.dataset.newFavorite);
-      renderNewMusic();
-    }));
+    // One source of truth: the exact same track cards, tap-to-play action,
+    // mini player and favorites handler used on the Home screen.
+    app.renderTrackCards($('newMusicList'),tracks);
+    const empty=$('newMusicEmpty');
+    if(!tracks.length && failed){
+      empty.querySelector('h3').textContent='Private listening unavailable.';
+      empty.querySelector('p').textContent='Reopen your personal Frequency listening link, or try again online.';
+    } else if(!tracks.length){
+      empty.querySelector('h3').textContent='Your next originals belong here.';
+      empty.querySelector('p').textContent='Open the private Frequency listening link on this phone to hear new takes, or explore the public music library.';
+    }
   }
   function renderYou() {
     $('youFavorites').textContent=app.state.favorites.size;
@@ -129,8 +130,8 @@
     const url=new URL(window.location.href);
     if(!app.state.activeWorld)tab(url.searchParams.get('tab')||'home');
     else {
-      document.body.dataset.appTab='worlds';
-      document.querySelectorAll('button[data-app-tab]').forEach(b=>b.classList.toggle('selected',b.dataset.appTab==='worlds'));
+      document.body.dataset.appTab='home';
+      document.querySelectorAll('button[data-app-tab]').forEach(b=>b.classList.toggle('selected',b.dataset.appTab==='home'));
     }
     if(url.searchParams.has('track'))app.openNow();
     if('serviceWorker' in navigator && location.protocol==='https:'){

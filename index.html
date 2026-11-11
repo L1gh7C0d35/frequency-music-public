@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#090c12">
+  <meta name="theme-color" content="#090d0c">
   <meta name="description" content="An immersive listening room for original music: discover cinematic, soulful, reflective and uplifting sound worlds.">
   <meta property="og:title" content="Frequency · The Listening Room">
   <meta property="og:description" content="Find the sound for the moment you’re in. Listen to original music.">
@@ -15,27 +15,34 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="listening-room.css?v=20261013lyrics1">
-  <link rel="stylesheet" href="frequency-parity.css?v=20261020experiments1">
-  <script>(function(){document.documentElement.dataset.frequencyAppearance='midnight';try{if(new URLSearchParams(location.search).get('view')==='classic')document.documentElement.dataset.frequencyView='classic'}catch(_){}})();</script>
-  <link rel="stylesheet" href="frequency-appearance.css?v=20261111c">
+  <link rel="stylesheet" href="frequency-parity.css?v=20261111forest2">
+  <script>(function(){try{const q=new URLSearchParams(location.search).get('view');if(q==='classic')document.documentElement.dataset.frequencyView='classic';if(q==='classic'||localStorage.getItem('frequency-theme-choice-v2')==='midnight')document.documentElement.dataset.frequencyAppearance='midnight'}catch(_){}})();</script>
+  <link rel="stylesheet" href="frequency-appearance.css?v=20261111forest2">
   <link rel="stylesheet" href="frequency-classic.css?v=20261111a">
-  <link rel="stylesheet" href="frequency-current.css?v=20261111a">
+  <link rel="stylesheet" href="frequency-current.css?v=20261111forest2">
   <script src="listening-room.js?v=20261013lyrics1" defer></script>
-  <script src="frequency-parity.js?v=20261111newmusic1" defer></script>
-  <script src="frequency-appearance.js?v=20261111current1" defer></script>
-  <script src="frequency-classic.js?v=20261111current1" defer></script>
+  <script src="frequency-parity.js?v=20261111playfix2" defer></script>
+  <script src="frequency-appearance.js?v=20261111forest2" defer></script>
+  <script src="frequency-classic.js?v=20261111forest2" defer></script>
+  <script src="frequency-private-music.js?v=20261111secure1" defer></script>
 </head>
 <body>
+<svg class="navigation-symbol-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="frequency-icon-home" viewBox="0 0 24 24"><path d="m3.5 10.5 8.5-7 8.5 7v9a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5v-9Z"/><path d="M9 21v-7h6v7"/></symbol>
+  <symbol id="frequency-icon-new" viewBox="0 0 24 24"><path d="M10.5 19V6.5L20 4v12"/><ellipse cx="7.2" cy="19" rx="3.3" ry="2.1"/><ellipse cx="16.7" cy="16" rx="3.3" ry="2.1"/><path d="m4 3 .7 1.9L6.7 5.6l-2 .8L4 8.4l-.7-2-2-.8 2-.7L4 3Z"/></symbol>
+  <symbol id="frequency-icon-music" viewBox="0 0 24 24"><path d="M4 6h11M4 11h9M4 16h7"/><path d="M15 18V7l6-1.5V16"/><ellipse cx="12.5" cy="19.3" rx="2.5" ry="1.5"/><ellipse cx="18.5" cy="17.3" rx="2.5" ry="1.5"/></symbol>
+  <symbol id="frequency-icon-you" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M4.7 20c.3-4.1 2.9-6.4 7.3-6.4s7 2.3 7.3 6.4"/></symbol>
+</svg>
+
 <div class="app-shell">
   <aside class="sidebar" aria-label="Main navigation">
     <a class="brand" href="./" aria-label="Listening Room home"><span class="brand-mark"><span>◒</span></span><span class="brand-words"><b>frequency</b><small>LISTENING ROOM</small></span></a>
     <span class="nav-caption">FREQUENCY</span>
     <nav class="side-links" aria-label="Browse">
-      <button class="side-link selected" data-app-tab="home"><span class="nav-icon">⌂</span><span>Home</span></button>
-      <button class="side-link" data-app-tab="worlds"><span class="nav-icon">▦</span><span>Worlds</span></button>
-      <button class="side-link" data-app-tab="new"><span class="nav-icon">✦</span><span>New Music</span></button>
-      <button class="side-link" data-app-tab="music"><span class="nav-icon">♫</span><span>Music</span></button>
-      <button class="side-link" data-app-tab="you"><span class="nav-icon">◯</span><span>You</span></button>
+      <button class="side-link selected" data-app-tab="home"><svg class="nav-icon" aria-hidden="true"><use href="#frequency-icon-home"/></svg><span>Home</span></button>
+      <button class="side-link" data-app-tab="new"><svg class="nav-icon" aria-hidden="true"><use href="#frequency-icon-new"/></svg><span>New Music</span></button>
+      <button class="side-link" data-app-tab="music"><svg class="nav-icon" aria-hidden="true"><use href="#frequency-icon-music"/></svg><span>Music</span></button>
+      <button class="side-link" data-app-tab="you"><svg class="nav-icon" aria-hidden="true"><use href="#frequency-icon-you"/></svg><span>You</span></button>
     </nav>
     <nav class="side-links classic-side-links" aria-label="Classic Frequency navigation">
       <button class="side-link selected" data-classic-tab="discover"><span class="nav-icon">✧</span><span>Discover</span></button>
@@ -55,7 +62,7 @@
     <header class="topbar">
       <div class="topbar-left"><span class="mobile-logo">◒ <b>frequency</b></span><div class="breadcrumb"><span>EXPLORE</span><span class="divider-dot">/</span><strong id="crumb">Discover</strong></div></div>
       <div class="topbar-right">
-        <button id="switchToModern" class="classic-switch" type="button" aria-label="Switch to current five-tab Frequency view">5-tab view</button>
+        <button id="switchToModern" class="classic-switch" type="button" aria-label="Switch to current Frequency view">Current view</button>
         <button id="topSearch" class="icon-button top-search" title="Search all recordings" aria-label="Search all recordings"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 4.5 4.5"/></svg></button>
         <button id="openFeedback" class="top-action"><span class="top-action-star">✧</span> Listening notes</button>
         <button id="shareRoom" class="icon-button" title="Share listening room" aria-label="Share listening room"><svg viewBox="0 0 24 24"><path d="M12 16V3m0 0-4.5 4.5M12 3l4.5 4.5M5 14v5.5c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V14"/></svg></button>
@@ -118,16 +125,24 @@
       </section>
       <footer class="footer"><div><span class="footer-logo">◒ frequency</span><span>Original sessions • Made to be felt</span></div><div><button id="footerFeedback">Share your listening notes</button><span>© 2026 Frequency Music</span></div></footer>
     <section id="newMusicScreen" class="app-screen new-music-screen" hidden aria-label="New Music">
-      <div class="app-screen-top"><span class="section-eyebrow">FRESH FROM FREQUENCY</span><h2>New <em>music.</em></h2><p>Discover the latest recordings shared for listening. Early versions are clearly marked; private drafts never appear here.</p></div>
+      <div class="app-screen-top"><span class="section-eyebrow">FRESH FROM FREQUENCY</span><h2>New <em>music.</em></h2><p>Listen to the newest Frequency originals using the same player as Home. Private listening takes stay protected.</p></div>
       <div class="new-music-summary" id="newMusicSummary" role="status" aria-live="polite">Loading the latest music…</div>
       <div class="new-music-list" id="newMusicList" aria-label="New recordings"></div>
-      <div class="new-music-empty" id="newMusicEmpty" hidden><span aria-hidden="true">♫</span><h3>New music is on its way.</h3><p>Once a song is approved for public listening, it will appear here automatically.</p><button type="button" id="newBrowseAll">Explore all music</button></div>
-      <p class="app-fine">Public listening previews are not necessarily finished releases. Your working drafts and audio masters remain private.</p>
+      <div class="new-music-empty" id="newMusicEmpty" hidden><span aria-hidden="true">♫</span><h3>New music is on its way.</h3><p>New private listening takes appear from your personal Frequency link. Approved releases appear here, too.</p><button type="button" id="newBrowseAll">Explore all music</button></div>
+      <p class="app-fine">Listening takes are not necessarily finished releases. Private drafts stay encrypted and require your personal listening link.</p>
     </section>
     <section id="youScreen" class="app-screen" hidden>
       <div class="app-screen-top"><span class="section-eyebrow">YOU</span><h2>Your listening <em>space.</em></h2><p>Favorites and music ratings stay private on this device until you export them.</p></div>
       <div class="you-metrics"><div><strong id="youFavorites">0</strong><small>Favorites</small></div><div><strong id="youNotes">0</strong><small>Rated tracks</small></div><div><strong id="youSongs">0</strong><small>Songs to explore</small></div></div>
       <div class="you-card"><h3>My collection</h3><button id="youOpenFavorites">♡ Saved favorites <span>›</span></button><button id="youOpenFeedback">✎ Listening notes <span>›</span></button><button id="youExport">⇧ Export feedback <span>›</span></button><button id="youShare">↗ Share Frequency <span>›</span></button></div>
+      <section class="you-card appearance-settings" aria-labelledby="appearanceHeading">
+        <h3 id="appearanceHeading">Appearance</h3><p>Switch the atmosphere without changing your music or player.</p>
+        <div class="appearance-grid" role="radiogroup" aria-label="Frequency theme">
+          <button type="button" class="appearance-choice is-selected" data-appearance="current" role="radio" aria-checked="true"><span class="appearance-swatch appearance-swatch-forest" aria-hidden="true"><span>◒ frequency</span></span><strong>Forest</strong><small>Rich green · default</small></button>
+          <button type="button" class="appearance-choice" data-appearance="midnight" role="radio" aria-checked="false"><span class="appearance-swatch appearance-swatch-midnight" aria-hidden="true"><span>◒ frequency</span></span><strong>Midnight</strong><small>Charcoal blue</small></button>
+        </div><p class="appearance-hint" id="appearanceHint" role="status" aria-live="polite"></p>
+      </section>
+      <section id="privateListeningSettings" class="you-card" hidden><h3>Private listening</h3><p>Your personal listening link unlocks your unpublished music only in this browser. Access is saved on this device.</p><button id="forgetPrivateMusic" type="button">Forget private music access on this device <span>›</span></button></section>
       <div class="you-card"><h3>Use Frequency on Android</h3><p>Open this link in Chrome. You can add it to your home screen for an app-like shortcut; audio plays through the browser.</p><button id="installHelp">＋ Add to home screen <span>›</span></button></div>
       <div class="app-fine">Listening companion · Artist worlds organize music by style and mood, not always verified performer identities.</div>
     </section>
@@ -135,11 +150,10 @@
   </div>
 </div>
 <nav class="mobile-nav" aria-label="Frequency tabs">
-  <button data-app-tab="home" class="selected" aria-label="Home"><span>⌂</span><small>Home</small></button>
-  <button data-app-tab="worlds" aria-label="Worlds"><span>▦</span><small>Worlds</small></button>
-  <button data-app-tab="new" aria-label="New Music"><span>✦</span><small>New</small></button>
-  <button data-app-tab="music" aria-label="Music"><span>♫</span><small>Music</small></button>
-  <button data-app-tab="you" aria-label="You"><span>◯</span><small>You</small></button>
+  <button data-app-tab="home" class="selected" aria-label="Home"><svg class="nav-icon" aria-hidden="true"><use href="#frequency-icon-home"/></svg><small>Home</small></button>
+  <button data-app-tab="new" aria-label="New Music"><svg class="nav-icon" aria-hidden="true"><use href="#frequency-icon-new"/></svg><small>New</small></button>
+  <button data-app-tab="music" aria-label="Music"><svg class="nav-icon" aria-hidden="true"><use href="#frequency-icon-music"/></svg><small>Music</small></button>
+  <button data-app-tab="you" aria-label="You"><svg class="nav-icon" aria-hidden="true"><use href="#frequency-icon-you"/></svg><small>You</small></button>
 </nav>
 <nav class="mobile-nav classic-mobile-nav" aria-label="Classic Frequency tabs">
   <button data-classic-tab="discover" class="selected" aria-label="Discover"><span>✧</span><small>Discover</small></button>

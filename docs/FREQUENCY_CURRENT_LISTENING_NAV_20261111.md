@@ -1,3 +1,5 @@
+# READ LATEST OWNER CORRECTION AT BOTTOM OF THIS DOCUMENT FIRST
+
 # Frequency web — current listening-room product decision
 Date: November 11, 2026. Repository: `L1gh7C0d35/frequency-music-public`.
 
@@ -77,3 +79,13 @@ See `scripts/test_listening_room.py`,
 `scripts/test_classic_view.js` and `scripts/test_appearance_preference.js`.
 Browser appearance still needs creator's normal-phone visual judgment.
 The fact that source tests pass is not a claim of perfect design.
+
+## November 11, afternoon — LATEST owner correction (supersedes earlier five-tab / Midnight plan)
+
+- Current Frequency site and original player are retained. Forest (richer green) is again the default. Midnight stays an optional **You → Appearance** preference.
+- Four current desktop and phone tabs: **Home · New Music · Music · You**. The Worlds tab is removed as redundant; Home already shows the curated musical worlds. Previously removed Rituals/Words tabs remain absent, while song lyrics stay in Now Playing. One shared inline SVG symbol set provides recognizable navigation icons instead of small dotted/grid symbols.
+- Home recommendations must exclude unfinished tests. The publicly approved Fire Under Calm C1/C2/C3 audio still exists in Experiments and Music for comparison, but no longer appears in handpicked Home picks, Home moods, Home shuffle, or New Music.
+- **One player and renderer:** both Home and New Music call the same `renderTrackCards` function. Play artwork/title uses the existing `playTrack(id,false)` path to show the bottom mini-player; only deliberate mini-player taps open the full Now Playing overlay.
+- **New Music means newly created original songs**, not the C1/C2 experiments. The two corrected Music Maker English takes have encrypted AAC listening copies in `private-media/*.bin`, and a separately encrypted manifest. AES-256-GCM key is stored privately outside Git, supplied in the owner's URL fragment and remembered on that phone. No raw WAV or plaintext private audio, key, or private manifest has been published. Do not interpret encryption as commercial release approval or full server-side account control. Possession of the full secret link grants access.
+- Playback reliability improvements: synchronously request audio before heavy DOM work; defer large library/picks/queue rerenders to the next animation frame; only preload featured metadata, not the whole song; don't cancel the same song with a second tap while buffering. Code and desktop audio tests are not a substitute for real iPhone network listening.
+- History: Classic remains accessible only by explicitly opening `?view=classic`; don't add a separate substitute player or external hosting. This latest section is authoritative if older dated sections conflict.

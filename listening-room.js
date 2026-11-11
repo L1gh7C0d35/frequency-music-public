@@ -195,16 +195,20 @@
       </button>`).join('');
     $('worldGrid').querySelectorAll('[data-world]').forEach(b=>b.addEventListener('click',()=>chooseWorld(b.dataset.world)));
   }
+  const eligibleForHome = t => !!t && t.world!=='fresh-cuts' && t.source!=='Creator-approved public test' && !t.private;
   function renderPicks() {
-    const picks=state.featuredIds.map(id=>state.byId.get(id)).filter(Boolean);
-    $('featuredGrid').innerHTML=picks.map(t=>`
+    const picks=state.featuredIds.map(id=>state.byId.get(id)).filter(eligibleForHome);
+    renderTrackCards($('featuredGrid'),picks);
+  }
+  function renderTrackCards(root,tracks) {
+    root.innerHTML=tracks.map(t=>`
       <article class="pick"><button data-play="${t.id}" class="pick-cover" aria-label="Play ${safeText(t.title)}">
         <img src="${safeText(t.image)}" alt="${safeText(t.title)} cover artwork" loading="lazy">
         <span class="pick-play"><svg viewBox="0 0 24 24">${PLAY}</svg></span></button>
         <div class="pick-meta"><div style="min-width:0"><button data-play="${t.id}" class="pick-title">${safeText(t.title)}</button>
-          <div class="pick-world">${safeText(shortSoundscape(t) ? listeningLabel(t) : world(t.world)?.name || 'Frequency Originals')}</div></div>
+          <div class="pick-world">${safeText(t.private?'PRIVATE LISTENING · UNRELEASED':shortSoundscape(t) ? listeningLabel(t) : world(t.world)?.name || 'Frequency Originals')}</div></div>
           <button class="heart-small ${state.favorites.has(t.id)?'active':''}" data-heart="${t.id}" aria-label="${state.favorites.has(t.id)?'Remove from':'Add to'} favorites" aria-pressed="${state.favorites.has(t.id)}"><svg viewBox="0 0 24 24">${HEART}</svg></button></div></article>`).join('');
-    wireInteractive($('featuredGrid'));
+    wireInteractive(root);
   }
   function renderFilters() {
     const allText=state.previewType==='song'?'All songs':state.previewType==='soundscape'?'All soundscapes':'All tracks';
@@ -239,7 +243,7 @@
     root.querySelectorAll('[data-play]').forEach(btn=>btn.onclick=()=>playTrack(btn.dataset.play,false));
     root.querySelectorAll('[data-open]').forEach(btn=>btn.onclick=()=>showTrack(btn.dataset.open));
     root.querySelectorAll('[data-heart]').forEach(btn=>btn.onclick=()=>toggleFavorite(btn.dataset.heart));
-    root.querySelectorAll('[data-share]').forEach(btn=>btn.onclick=()=>{const t=state.byId.get(btn.dataset.share);share(t.title+' · '+(t.artist||'Frequency Originals'),trackUrl(t.id));});
+    root.querySelectorAll('[data-share]').forEach(btn=>btn.onclick=()=>{const t=state.byId.get(btn.dataset.share);if(t.private){toast('Private listening take · no public sharing link');return;}share(t.title+' · '+(t.artist||'Frequency Originals'),trackUrl(t.id));});
   }
   function resetLibrary(){
     state.query='';state.filter='all';state.favoritesOnly=false;
@@ -268,6 +272,17 @@
     const possible=list.length?list:state.tracks.map(t=>t.id);
     state.queue=possible.includes(id)?possible:[id,...possible];
   }
+  let playbackRefreshPending=false;
+  function schedulePlaybackRefresh() {
+    if(playbackRefreshPending)return;
+    playbackRefreshPending=true;
+    requestAnimationFrame(()=>{
+      playbackRefreshPending=false;
+      // Rebuilding a long library synchronously delays first visual feedback
+      // even though audio.play() already started. Keep it off the tap path.
+      renderLibrary();renderPicks();renderQueue();
+    });
+  }
   function loadTrack(id,play=false) {
     const t=state.byId.get(id);if(!t)return;
     if(state.current!==id){
@@ -285,7 +300,7 @@
       $('nowBack').style.backgroundImage='url("'+t.image+'")';
       $('nowTitle').textContent=t.title;$('nowSub').textContent=t.artist;
       $('nowWorld').textContent=(world(t.world)?.name||'Frequency')+' · '+(world(t.world)?.subtitle||'');
-      $('nowArtist').textContent='Explore '+(world(t.world)?.name||'this world')+' music ↗';
+      $('nowArtist').textContent=t.private?'← Back to new originals':'Explore '+(world(t.world)?.name||'this world')+' music ↗';
       $('nowSound').textContent=t.sound||t.description||'Original Frequency music';
       renderNowLyrics(t);
       syncShortSoundscape(t);
@@ -293,14 +308,19 @@
       $('miniSubtitle').textContent=world(t.world)?.name||t.artist;
       $('miniPlayer').hidden=false;
       $('playState').textContent='READY TO LISTEN';
-      setUrlTrack(id);updateMediaSession(t);renderLibrary();renderPicks();syncHearts();syncWorldPlayback();renderQueue();updateProgress();
+      setUrlTrack(id);updateMediaSession(t);syncHearts();syncWorldPlayback();updateProgress();schedulePlaybackRefresh();
     }
     if(play && !state.buffering && audio.paused)requestPlay();
     else syncPlayState();
   }
   function playTrack(id,expand=true) {
     if(!state.byId.has(id))return;
-    if(state.current===id && (state.playing||state.buffering)){
+    if(state.current===id && state.buffering){
+      // A second tap while connecting must not silently cancel the first.
+      if(expand)openNow();else toast('Still connecting to your music…');
+      return;
+    }
+    if(state.current===id && state.playing){
       playbackToken++;state.buffering=false;audio.pause();syncPlayState();
       if(expand)openNow();return;
     }
@@ -555,11 +575,11 @@
     $('heroArt').onclick=startHero;
     $('heroShuffle').onclick=()=>{
       if(!state.tracks.length){toast('Music library is loading. Please try again.');return;}
-      const id=rand(state.tracks)?.id;
+      const id=rand(state.tracks.filter(eligibleForHome))?.id;
       if(id){queueFromContext(id);state.shuffle=true;syncModes();playTrack(id,false);}
     };
     $('shufflePicks').onclick=()=>{
-      state.featuredIds=state.tracks.map(t=>t.id).sort(()=>Math.random()-.5).slice(0,5);renderPicks();
+      state.featuredIds=state.tracks.filter(eligibleForHome).map(t=>t.id).sort(()=>Math.random()-.5).slice(0,5);renderPicks();
     };
     $('searchInput').oninput=e=>{
       state.query=e.target.value;
@@ -587,10 +607,10 @@
     });
     $('shareRoom').onclick=()=>share('Frequency · Listening Room',location.origin+location.pathname);
     $('miniOpen').onclick=openNow;$('miniPlay').onclick=togglePlay;$('miniNext').onclick=()=>next();
-    $('closeNow').onclick=closeNow;$('nowShare').onclick=()=>{if(selected())share(selected().title+' · '+(selected().artist||'Frequency Originals'),trackUrl(state.current));};
+    $('closeNow').onclick=closeNow;$('nowShare').onclick=()=>{const t=selected();if(!t)return;if(t.private){toast('Private listening take · not publicly shareable');return;}share(t.title+' · '+(t.artist||'Frequency Originals'),trackUrl(state.current));};
     $('nowHeart').onclick=()=>{if(state.current)toggleFavorite(state.current);};
-    $('nowArtist').onclick=()=>{if(!state.current)return;closeNow();showWorld(selected().world);};
-    $('nowBrowse').onclick=()=>{closeNow();resetLibrary();window.FrequencyWebNavigation?.tab?.('sounds');$('library').scrollIntoView({behavior:'smooth'});};
+    $('nowArtist').onclick=()=>{if(!state.current)return;const t=selected();closeNow();if(t?.private){window.FrequencyWebNavigation?.tab?.('new');return;}showWorld(t.world);};
+    $('nowBrowse').onclick=()=>{const returningToNew=!!selected()?.private;closeNow();if(returningToNew){window.FrequencyWebNavigation?.tab?.('new');return;}resetLibrary();window.FrequencyWebNavigation?.tab?.('music');$('library').scrollIntoView({behavior:'smooth'});};
     $('nowLyricFollow').onclick=()=>{
       const button=$('nowLyricFollow');
       const following=button.getAttribute('aria-pressed')!=='true';
@@ -691,7 +711,7 @@
       if(!response.ok)throw Error('Music library '+response.status);
       const data=await response.json();
       state.tracks=data.tracks||[];state.worlds=data.worlds||[];
-      state.featuredIds=[...state.tracks.filter(x=>x.new).map(x=>x.id).slice(0,2),...state.featuredIds].slice(0,5);
+      // Experimental C1/C2/C3 takes are not editorial recommendations.
       state.byId=new Map(state.tracks.map(t=>[t.id,t]));
       if(!state.tracks.length)throw Error('No songs in the listening library');
       heroButton.disabled=false;
@@ -704,7 +724,9 @@
         // Warm only the prominently featured track (not the entire catalog).
         // Reuse the prepared element when the visitor presses Start listening.
         if(!navigator.connection?.saveData && !new URL(location.href).searchParams.has('track')){
-          audio.preload='auto';
+          // Metadata only: loading a whole featured song can starve a different
+          // track the listener chooses on a slower mobile connection.
+          audio.preload='metadata';
           audio.src=feature.audio;
         }
       }
@@ -713,7 +735,7 @@
       const requestedWorld=new URL(location.href).searchParams.get('world');
       if(requestedWorld&&world(requestedWorld))showWorld(requestedWorld,{push:false});
       if(id&&state.byId.has(id)){queueFromContext(id);loadTrack(id,false);openNow();}
-      window.FrequencyPreview={state,playTrack,loadTrack,requestPlay,togglePlay,next,nav,chooseWorld,showWorld,closeWorld,renderLibrary,renderPicks,resetLibrary,openNow,closeNow,openReview,exportFeedback,share,trackUrl,world,toggleFavorite,currentList,toast};
+      window.FrequencyPreview={state,playTrack,loadTrack,requestPlay,togglePlay,next,nav,chooseWorld,showWorld,closeWorld,renderLibrary,renderPicks,renderTrackCards,resetLibrary,openNow,closeNow,openReview,exportFeedback,share,trackUrl,world,toggleFavorite,currentList,toast};
       document.dispatchEvent(new CustomEvent('frequency:ready',{detail:{count:state.tracks.length}}));
     } catch(err) {
       heroButton.disabled=true;
