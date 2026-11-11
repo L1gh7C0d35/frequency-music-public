@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#060713"><title>Frequency — Living Worlds / Creative Lab</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="studio">
+  <aside class="lab-note">
+    <div class="lab-overline">FREQUENCY / CREATIVE LAB 01</div>
+    <h1>Music you can<br><em>step inside.</em></h1>
+    <p>Eight individually composed app states, one connected listening experience. Every world uses genuine Frequency artwork. Play an original song to make the visual sculpture respond to real audio.</p>
+    <div class="lab-menu" id="labMenu"></div>
+    <div class="lab-footnote">Design prototype only. Your real Frequency app and TestFlight remain unchanged. The 369 practice and tone demonstrations show example local state, not personal records.</div>
+  </aside>
+  <div class="device" id="device">
+    <div class="ambient-backdrop"><div id="backdropArt"></div><div class="backdrop-shade"></div><div class="backdrop-grid"></div></div>
+    <div class="status-bar"><span>9:41</span><span class="island"></span><span class="signal">▮▮▮ ᯤ ▰</span></div>
+    <div class="view-host" id="viewHost"></div>
+    <div id="miniPlayer" class="mini-player hidden"></div>
+    <nav class="bottom-nav" id="bottomNav"><button data-nav="home" class="active"><span class="nav-icon">⌂</span><small>Home</small></button><button data-nav="sounds"><span class="nav-icon">≋</span><small>Sounds</small></button><button data-nav="you"><span class="nav-icon">◉</span><small>You</small></button></nav>
+    <div class="home-indicator"></div>
+    <div class="overlay-toasts" id="toast" aria-live="polite"></div>
+  </div>
+</div>
+<div class="desktop-foot"><span>FREQUENCY · LIVING WORLDS / V1</span><span>Interactive sound-driven concept · iPhone preview</span><a href="screen-map.html">Design map ↗</a></div>
+<audio id="audio" preload="metadata"></audio>
+<script src="app.js"></script>
+</body></html>
