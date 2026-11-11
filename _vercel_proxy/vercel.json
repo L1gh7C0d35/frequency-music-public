@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "https://l1gh7c0d35.github.io/frequency-music-public/"
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://l1gh7c0d35.github.io/frequency-music-public/:path*"
+    }
+  ]
+}
