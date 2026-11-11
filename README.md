@@ -174,9 +174,11 @@ The original October 12 listening-room design (`02e33ec`) used a charcoal-blue
 The October 13 Beta44 parity update (`727f75e`) applied a separate
 forest-green `frequency-parity.css` skin (`#090d0c`, radial `#213329`),
 introduced five tabs (Home, Rituals, Sounds, Words, You), and added
-PWA/Home Screen app icon assets. The **on-page wordmark and ◒ glyph did not
-change**; their surrounding color treatment did. October 20 added an
-Experiments shortcut. Do not conflate these historical changes with the
+PWA/Home Screen app icon assets. The ◒ glyph and main wordmark stayed, but
+the mobile header later acquired a trailing period (`frequency.`) and the
+desktop subtitle became a track count instead of `LISTENING ROOM`.
+Original Midnight restores the older punctuation and subtitle. October 20
+added an Experiments shortcut. Do not conflate these historical changes with the
 removed November 10 temporary preview player.
 
 In the existing web companion, open **You → Appearance** and choose **Forest**

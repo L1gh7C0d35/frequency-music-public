@@ -34,8 +34,9 @@
     }));
     const counts=app.state.tracks.length;
     $('worldCount').textContent=app.state.worlds.length+' ARTIST WORLDS';
-    document.querySelector('.brand-words small').textContent=counts+' TRACKS · WEB COMPANION';
-    const header=document.querySelector('.mobile-logo b');if(header)header.textContent='frequency.';
+    const originalBrand=document.documentElement.dataset.frequencyAppearance==='midnight';
+    document.querySelector('.brand-words small').textContent=originalBrand?'LISTENING ROOM':counts+' TRACKS · WEB COMPANION';
+    const header=document.querySelector('.mobile-logo b');if(header)header.textContent=originalBrand?'frequency':'frequency.';
     const songCount=document.querySelector('.hero-kicker');
     if(songCount)songCount.setAttribute('title',counts+' tracks included from Frequency Beta44');
   }

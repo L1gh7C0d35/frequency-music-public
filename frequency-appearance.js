@@ -10,6 +10,14 @@
     const next=valid(value);
     if(next==='midnight')root.dataset.frequencyAppearance='midnight';
     else delete root.dataset.frequencyAppearance;
+    const mobileWordmark=document.querySelector('.mobile-logo b');
+    if(mobileWordmark)mobileWordmark.textContent=next==='midnight'?'frequency':'frequency.';
+    const sidebarSubtitle=document.querySelector('.brand-words small');
+    if(sidebarSubtitle) {
+      const count=window.FrequencyPreview?.state?.tracks?.length;
+      if(next==='midnight')sidebarSubtitle.textContent='LISTENING ROOM';
+      else if(Number.isFinite(count))sidebarSubtitle.textContent=count+' TRACKS · WEB COMPANION';
+    }
     document.querySelectorAll('.appearance-choice[data-appearance]').forEach(button=>{
       const active=button.dataset.appearance===next;
       button.classList.toggle('is-selected',active);

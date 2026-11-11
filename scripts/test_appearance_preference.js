@@ -18,25 +18,34 @@ function load(initialAppearance) {
   const root={dataset:{}};
   if(initialAppearance==='midnight')root.dataset.frequencyAppearance='midnight';
   const hint={textContent:''};
+  const mobileLogo={textContent:'frequency.'};
+  const subtitle={textContent:'64 TRACKS · WEB COMPANION'};
   const handlers={};
   const document={
     documentElement:root,readyState:'complete',
     querySelectorAll(selector){assert(selector.includes('appearance-choice'));return buttons},
+    querySelector(selector){
+      if(selector==='.mobile-logo b')return mobileLogo;
+      if(selector==='.brand-words small')return subtitle;
+      return null;
+    },
     getElementById(){return hint},
   };
-  const window={addEventListener:(type,fn)=>{handlers[type]=fn}};
+  const window={FrequencyPreview:{state:{tracks:new Array(64)}},addEventListener:(type,fn)=>{handlers[type]=fn}};
   const localStorage={
     getItem:key=>saved.get(key)||null,
     setItem:(key,value)=>saved.set(key,value),
   };
   vm.runInNewContext(source,{window,document,localStorage});
-  return {buttons,root,hint,handlers};
+  return {buttons,root,hint,handlers,mobileLogo,subtitle};
 }
 let page=load();
 assert.equal(page.root.dataset.frequencyAppearance,undefined);
 assert.equal(page.buttons[0].attrs['aria-checked'],'true');
 page.buttons[1].handlers.click();
 assert.equal(page.root.dataset.frequencyAppearance,'midnight');
+assert.equal(page.mobileLogo.textContent,'frequency');
+assert.equal(page.subtitle.textContent,'LISTENING ROOM');
 assert.equal(saved.get('frequency-web-appearance-v1'),'midnight');
 assert.equal(page.buttons[1].attrs['aria-checked'],'true');
 assert(page.hint.textContent.includes('Original Midnight'));
@@ -46,6 +55,8 @@ let prevented=false;
 page.buttons[1].handlers.keydown({key:'ArrowRight',preventDefault(){prevented=true}});
 assert(prevented);
 assert.equal(page.root.dataset.frequencyAppearance,undefined);
+assert.equal(page.mobileLogo.textContent,'frequency.');
+assert.equal(page.subtitle.textContent,'64 TRACKS · WEB COMPANION');
 assert.equal(saved.get('frequency-web-appearance-v1'),'current');
 assert.equal(page.buttons[0].focused,true);
 page.handlers.storage({key:'frequency-web-appearance-v1',newValue:'midnight'});
