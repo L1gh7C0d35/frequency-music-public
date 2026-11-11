@@ -1,74 +1,57 @@
-/* Verify New Music reuses Home's actual card/player action and never features C1/C2. */
+/* New Music uses exactly the public Frequency catalog and existing album rows/player. */
 const fs=require('node:fs');
 const vm=require('node:vm');
 const assert=require('node:assert/strict');
 const path=require('node:path');
 const root=path.join(__dirname,'..');
 const source=fs.readFileSync(path.join(root,'frequency-parity.js'),'utf8');
-const main=fs.readFileSync(path.join(root,'listening-room.js'),'utf8');
-const data=JSON.parse(fs.readFileSync(path.join(root,'listening-catalog.json'),'utf8'));
+const player=fs.readFileSync(path.join(root,'listening-room.js'),'utf8');
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const catalog=JSON.parse(fs.readFileSync(path.join(root,'listening-catalog.json'),'utf8'));
 const start=source.indexOf('  function newTracks() {');
 const end=source.indexOf('  function renderYou()',start);
-assert(start!==-1&&end>start);
-const privateTracks=[
-  {id:'private-wild',title:'The Wild Part of Me',type:'song',new:true,private:true,
-    created_at:'2026-11-10',source:'Encrypted owner-only listening'},
-  {id:'private-morning',title:'What the Morning Knows',type:'song',new:true,private:true,
-    created_at:'2026-11-10',source:'Encrypted owner-only listening'},
-];
+assert(start>=0 && end>start);
 const elements={
-  privateListeningAlert:{hidden:true},
-  privateListeningError:{textContent:''},
   newMusicSummary:{textContent:''},
-  newMusicEmpty:{hidden:true,querySelector(selector){
-    if(selector==='h3')return this.h3||(this.h3={textContent:''});
-    if(selector==='p')return this.p||(this.p={textContent:''});
-    throw Error('unexpected selector');
-  }},
+  newMusicEmpty:{hidden:true},
   newMusicList:{hidden:false,innerHTML:''},
 };
 const calls=[];
 const app={
-  state:{tracks:[...data.tracks,...privateTracks],favorites:new Set()},
+  state:{tracks:catalog.tracks},
   renderSongRows(root,tracks){
     assert.strictEqual(root,elements.newMusicList);
     calls.push(tracks.map(t=>t.id));
     root.innerHTML=tracks.map(t=>t.title).join('|');
   },
 };
-const context=vm.createContext({
-  app,Date,window:{FrequencyPrivateMusic:{status:'ready'}},
-  $:id=>{assert(elements[id]);return elements[id]},
-});
+const context=vm.createContext({app,Date,$:id=>elements[id],window:{}});
 vm.runInContext(source.slice(start,end),context);
-const newIds=Array.from(vm.runInContext('newTracks().map(t=>t.id)',context));
-assert.deepEqual(newIds,['private-wild','private-morning']);
+const result=Array.from(vm.runInContext('newTracks().map(t=>t.id)',context));
+assert.deepEqual(result,['new-the-wild-part-of-me','new-what-the-morning-knows']);
 vm.runInContext('renderNewMusic()',context);
 assert.equal(elements.newMusicEmpty.hidden,true);
-assert.equal(elements.newMusicSummary.textContent,'2 PRIVATE ORIGINALS');
+assert.equal(elements.newMusicList.hidden,false);
+assert.equal(elements.newMusicSummary.textContent,'2 NEW ORIGINALS · EARLY LISTENING PREVIEWS');
 assert.equal(elements.newMusicList.innerHTML,'The Wild Part of Me|What the Morning Knows');
-assert.deepEqual(calls[0],['private-wild','private-morning']);
-assert(source.includes('app.renderSongRows($(\'newMusicList\'),tracks)'));
-assert(main.includes('function renderSongRows(root,tracks)'));
-assert(main.includes("state.queue=tracks.filter(t=>!t.privateLoading).map(t=>t.id)"));
-assert(main.includes("root.querySelectorAll('[data-play]').forEach(btn=>btn.onclick=()=>playTrack(btn.dataset.play,false))"));
-assert(!main.includes('state.tracks.filter(x=>x.new).map(x=>x.id)'));
-assert(main.includes("state.tracks.filter(eligibleForHome)"));
-const released={...privateTracks[0],id:'public-approved',private:false,source:'Public preview upload',published_at:'2099-01-01T00:00:00Z'};
-app.state.tracks=[...data.tracks,...privateTracks,released];
-assert.equal(vm.runInContext('newTracks()[0].id',context),'public-approved');
-app.state.tracks=data.tracks;
+assert.deepEqual(calls[0],result);
+assert(source.includes("app.renderSongRows($('newMusicList'),tracks)"));
+assert(source.includes("t.source==='Public preview upload'"));
+assert(!source.includes('FrequencyPrivateMusic'));
+assert(!html.includes('frequency-private-music.js'));
+assert(!html.includes('retryPrivateMusic'));
+assert(player.includes('function renderSongRows(root,tracks)'));
+assert(player.includes('state.queue=tracks.filter(t=>!t.privateLoading).map(t=>t.id)'));
+assert(player.includes('playTrack(id,false)'));
+for(const id of result){
+  const t=catalog.tracks.find(t=>t.id===id);
+  assert(t && t.audio.startsWith('audio/new/') && t.audio.endsWith('.m4a'));
+  assert(!t.private);
+  assert(fs.statSync(path.join(root,t.audio)).size>1e6);
+}
+app.state.tracks=catalog.tracks.filter(t=>t.source!=='Public preview upload');
 vm.runInContext('renderNewMusic()',context);
 assert.equal(elements.newMusicEmpty.hidden,false);
 assert.equal(elements.newMusicList.hidden,true);
 assert.equal(elements.newMusicList.innerHTML,'');
-context.window.FrequencyPrivateMusic.status='loading';
-vm.runInContext('renderNewMusic()',context);
-assert.equal(elements.newMusicEmpty.hidden,true);
-assert(elements.newMusicSummary.textContent.includes('OPENING'));
-context.window.FrequencyPrivateMusic={status:'error',error:'A connection interruption'};
-vm.runInContext('renderNewMusic()',context);
-assert.equal(elements.privateListeningAlert.hidden,false);
-assert.equal(elements.privateListeningError.textContent,'A connection interruption');
-assert.equal(elements.newMusicEmpty.hidden,true);
-console.log('New Music PASS: private originals, shared mini-player, tests excluded, loading/empty/error retry states.');
+console.log('New Music PASS: 2 publicly hosted English preview songs, album rows, native shared player, no encryption dependency.');

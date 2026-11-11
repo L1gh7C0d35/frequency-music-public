@@ -1,4 +1,4 @@
-# READ LATEST OWNER CORRECTION AT BOTTOM OF THIS DOCUMENT FIRST
+# READ THE FINAL NOVEMBER 11 DIRECT-AUDIO DECISION AT BOTTOM FIRST
 
 # Frequency web — current listening-room product decision
 Date: November 11, 2026. Repository: `L1gh7C0d35/frequency-music-public`.
@@ -159,3 +159,40 @@ second original, and both songs reappearing after browser reload without the
 fragment. This was a real headless Chrome test at 390px phone viewport, not
 verification on the owner's physical iPhone. Master WAVs and the public
 64-track catalog are unchanged; the two listening copies remain encrypted.
+
+## FINAL November 11 correction — eliminate the overcomplicated private player
+
+The owner correctly observed that Frequency already hosts playable music on
+GitHub Pages and the new recordings should use that same proven mechanism.
+The former AES-GCM encrypted private preview process added a key-fragment URL,
+browser crypto, full-song downloads, memory copies, and timeout failures,
+instead of using the normal streaming audio element. **This was an unnecessary
+technical detour for the listening experience.**
+
+The owner requested that **What the Morning Knows** and **The Wild Part of Me**
+actually be hosted in New Music. Exactly these two corrected English-take
+songs were transcoded from protected Music Maker WAV originals into standard
+256 kbps AAC/M4A (48 kHz stereo, fast-start, 200 seconds each) and added to
+`audio/new/` with publishing metadata. They are public listening previews,
+**not** finished releases, and the original WAVs remain untouched.
+GitHub Pages publicly exposes these preview audio files; anyone can listen or
+download them. Clearly state that tradeoff to the owner.
+
+The active web app now uses **one** source of truth: `listening-catalog.json`
+is built by `scripts/build_listening_catalog.py` from the deliberately public
+`audio/new/` files. `frequency-parity.js` New tab filters exactly the public
+preview source, excluding old C1/C2/C3 experiment tests. Its horizontal album
+rows call the existing `renderSongRows`/`playTrack(id,false)` mini-player.
+**No** `frequency-private-music.js`, key fragment, private-login UI, or custom
+AES runtime is loaded by the current app. The old encrypted experiment files
+remain archived in the repository and may still be served as static files,
+but are not referenced by Frequency's current player. The decryption key is
+never part of the public site. New catalog = **66 tracks**, 11
+catalog worlds, 5 `new:true` entries including 3 older C1-C3 test versions,
+but New Music tab shows only the two new public listening previews.
+
+Going forward: creator-picked new songs can use the same dry-run-first
+`scripts/publish_new_song.py --publish` tool. Do not automatically publish every
+Music Maker experiment; do not create another player or separate hosting site.
+Tests must verify browser audio playback and Next navigation from the *deployed*
+GitHub Pages website, not merely inspect HTML or test decryption.

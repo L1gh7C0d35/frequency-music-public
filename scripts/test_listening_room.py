@@ -49,8 +49,8 @@ class ListeningRoomTests(unittest.TestCase):
         short=[t for t in soundscapes if t['duration']<90]
         self.assertEqual(len(soundscapes),33)
         self.assertEqual(len(short),9)
-        self.assertEqual(len([t for t in tracks if t.get('type')=='song']),31)
-        self.assertEqual(len([t for t in tracks if t.get('new')]),3)
+        self.assertEqual(len([t for t in tracks if t.get('type')=='song']),33)
+        self.assertEqual(len([t for t in tracks if t.get('new')]),5)
         grounded=next(t for t in tracks if t['id']=='timekeeper-audio-396-hz-grounded-foundation')
         self.assertAlmostEqual(grounded['duration'],66.58,places=1)
         for ident in ('shortSoundscapeHint','shortSoundscapeCopy','shortSoundscapeLoop'):
@@ -68,9 +68,9 @@ class ListeningRoomTests(unittest.TestCase):
         ids={'fire-under-calm-c1','fire-under-calm-c2','fire-under-calm-c3'}
         featured={t['id']:t for t in self.data['tracks'] if t['id'] in ids}
         self.assertEqual(set(featured),ids)
-        self.assertEqual(self.data['new_count'],3)
+        self.assertEqual(self.data['new_count'],5)
         fresh=next(w for w in self.data['worlds'] if w['id']=='fresh-cuts')
-        self.assertEqual(fresh['count'],3)
+        self.assertEqual(fresh['count'],5)
         for i in (1,2,3):
             track=featured[f'fire-under-calm-c{i}']
             self.assertEqual(track['audio'],f'audio/fire-under-calm-c{i}.m4a')
@@ -249,7 +249,7 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn("'./frequency-appearance.css'",sw)
         self.assertIn("'./frequency-appearance.js'",sw)
         self.assertIn("'./frequency-current.css'",sw)
-        self.assertIn("'./frequency-private-music.js'",sw)
+        self.assertNotIn("'./frequency-private-music.js'",sw)
         self.assertEqual(json.loads((ROOT/'manifest.webmanifest').read_text())['start_url'],'./?app=1')
 
     def test_current_tabs_and_new_music_are_one_real_catalog(self):
@@ -270,12 +270,12 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn("t.new===true && t.type==='song'",current)
         self.assertIn("app.renderSongRows($('newMusicList'),tracks)",current)
         self.assertIn('class="world-detail-tracks new-music-list"',html)
-        self.assertIn("t.source!=='Creator-approved public test'",current)
+        self.assertIn("t.source==='Public preview upload'",current)
         self.assertNotIn('setupRituals',current)
         self.assertNotIn('renderLyrics()',current)
         self.assertIn("w.id!=='fresh-cuts'",(ROOT/'listening-room.js').read_text())
-        self.assertEqual(len(self.data['tracks']),64)
-        self.assertEqual(len([t for t in self.data['tracks'] if t.get('new')]),3)
+        self.assertEqual(len(self.data['tracks']),66)
+        self.assertEqual(len([t for t in self.data['tracks'] if t.get('new')]),5)
         self.assertEqual(len([w for w in self.data['worlds'] if w['id']!='fresh-cuts']),10)
         release=(ROOT/'scripts/publish_new_song.py').read_text()
         self.assertIn("a.publish",release)
@@ -311,9 +311,9 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn('if(!track.privateLoading)continue;',code)
         self.assertIn('privateLoading:true',code)
         self.assertIn('updateUI();',code)
-        self.assertIn('id="retryPrivateMusic"',(ROOT/'index.html').read_text())
-        self.assertIn("$('retryPrivateMusic').addEventListener",(ROOT/'frequency-parity.js').read_text())
-        self.assertIn("'./frequency-private-music.js'",(ROOT/'sw.js').read_text())
+        self.assertNotIn('id="retryPrivateMusic"',(ROOT/'index.html').read_text())
+        self.assertNotIn("$('retryPrivateMusic').addEventListener",(ROOT/'frequency-parity.js').read_text())
+        self.assertNotIn("'./frequency-private-music.js'",(ROOT/'sw.js').read_text())
         for source in (ROOT/'index.html',ROOT/'frequency-parity.js',ROOT/'listening-catalog.json'):
             self.assertNotIn('what-the-morning-knows-english-take',source.read_text())
         play=(ROOT/'listening-room.js').read_text()
@@ -325,6 +325,28 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn('schedulePlaybackRefresh();',play)
         self.assertIn('if(requested.privateLoading)',play)
         self.assertNotIn('state.tracks.filter(x=>x.new).map(x=>x.id)',play)
+
+    def test_new_english_songs_use_public_audio_and_original_player(self):
+        fresh={t['id']:t for t in self.data['tracks'] if t.get('source')=='Public preview upload'}
+        self.assertEqual(set(fresh),{'new-what-the-morning-knows','new-the-wild-part-of-me'})
+        for ident,title in [('new-what-the-morning-knows','What the Morning Knows'),
+                            ('new-the-wild-part-of-me','The Wild Part of Me')]:
+            t=fresh[ident]
+            self.assertEqual(t['title'],title)
+            self.assertTrue(t['audio'].startswith('audio/new/'))
+            self.assertTrue(t['audio'].endswith('.m4a'))
+            self.assertTrue((ROOT/t['audio']).is_file())
+            self.assertGreater((ROOT/t['audio']).stat().st_size,5_000_000)
+            self.assertAlmostEqual(t['duration'],200,places=0)
+            self.assertIn('early listening preview',t['subtitle'])
+            self.assertNotIn('private',t)
+        self.assertNotIn('frequency-private-music.js',self.html)
+        self.assertNotIn('privateListeningSettings',self.html)
+        self.assertNotIn('retryPrivateMusic',self.html)
+        self.assertIn("app.renderSongRows($('newMusicList'),tracks)",(ROOT/'frequency-parity.js').read_text())
+        self.assertNotIn('FrequencyPrivateMusic',(ROOT/'frequency-parity.js').read_text())
+        self.assertNotIn('frequency-private-music.js',self.html)
+        self.assertNotIn("'./frequency-private-music.js'",(ROOT/'sw.js').read_text())
 
     def test_classic_navigation_preserves_current_catalog(self):
         html=self.html
@@ -342,7 +364,7 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn("app.state.favoritesOnly=next==='favorites'",script)
         self.assertIn("window.FrequencyWebNavigation?.tab",script)
         self.assertNotIn("new Audio",script)
-        self.assertEqual(len(self.data['tracks']),64)
+        self.assertEqual(len(self.data['tracks']),66)
         self.assertEqual(len(self.data['worlds']),11)
         runner=shutil.which('node') or shutil.which('bun')
         self.assertIsNotNone(runner)

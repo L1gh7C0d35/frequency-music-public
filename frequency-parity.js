@@ -64,7 +64,7 @@
     $('library').scrollIntoView({behavior:'smooth',block:'start'});
   }
   function newTracks() {
-    return app.state.tracks.filter(t=>t.new===true && t.type==='song' && t.source!=='Creator-approved public test')
+    return app.state.tracks.filter(t=>t.new===true && t.type==='song' && t.source==='Public preview upload')
       .map((track,index)=>({track,index}))
       .sort((a,b)=>{
         const left=Date.parse(a.track.published_at||a.track.publishedAt||'')||0;
@@ -74,32 +74,14 @@
   }
   function renderNewMusic() {
     const tracks=newTracks();
-    const privateCount=tracks.filter(t=>t.private).length;
-    const publicCount=tracks.length-privateCount;
-    const unlocking=window.FrequencyPrivateMusic?.status==='loading';
-    const failed=window.FrequencyPrivateMusic?.status==='error';
-    $('newMusicSummary').textContent=unlocking
-      ? (tracks.length ? tracks.length+' NEW ORIGINAL'+(tracks.length===1?'':'S')+' · PREPARING AUDIO…':'OPENING YOUR PRIVATE MUSIC…')
-      : tracks.length
-      ? (privateCount?privateCount+' PRIVATE ORIGINAL'+(privateCount===1?'':'S'):'')+
-        (publicCount?(privateCount?' · ':'')+publicCount+' PUBLIC RELEASE'+(publicCount===1?'':'S'):'')
-      : failed?'UNABLE TO OPEN PRIVATE LISTENING FILES':'YOUR NEW ORIGINALS';
-    const alert=$('privateListeningAlert');
-    alert.hidden=!failed;
-    if(failed)$('privateListeningError').textContent=window.FrequencyPrivateMusic.error;
-    $('newMusicEmpty').hidden=tracks.length!==0||unlocking||failed;
+    $('newMusicSummary').textContent=tracks.length
+      ? tracks.length+' NEW ORIGINAL'+(tracks.length===1?'':'S')+' · EARLY LISTENING PREVIEWS'
+      : 'NO NEW SONGS PUBLISHED YET';
+    $('newMusicEmpty').hidden=tracks.length!==0;
     $('newMusicList').hidden=tracks.length===0;
-    // One source of truth: the existing album-row component from artist Worlds.
-    // Playback stays on the same bottom mini-player as every other page.
+    // One source of truth: identical album rows, queue and native HTML audio
+    // playback used by artist-world albums. No separate audio host/decryption.
     app.renderSongRows($('newMusicList'),tracks);
-    const empty=$('newMusicEmpty');
-    if(!tracks.length && failed){
-      empty.querySelector('h3').textContent='Private listening unavailable.';
-      empty.querySelector('p').textContent='Reopen your personal Frequency listening link, or try again online.';
-    } else if(!tracks.length){
-      empty.querySelector('h3').textContent='Your next originals belong here.';
-      empty.querySelector('p').textContent='Open the private Frequency listening link on this phone to hear new takes, or explore the public music library.';
-    }
   }
   function renderYou() {
     $('youFavorites').textContent=app.state.favorites.size;
@@ -111,7 +93,6 @@
     document.querySelectorAll('[data-shortcut]').forEach(b=>b.addEventListener('click',()=>shortcut(b.dataset.shortcut)));
     document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>filterType(b.dataset.mode)));
     $('newBrowseAll').addEventListener('click',()=>{tab('music');filterType('all');});
-    $('retryPrivateMusic').addEventListener('click',()=>window.FrequencyPrivateMusic?.retry?.());
     $('nowLyrics').addEventListener('click',()=>{
       if($('nowLyricsSection').hidden){app.toast('This recording has no lyrics to display.');}
       else $('nowLyricsSection').scrollIntoView({behavior:'smooth',block:'start'});

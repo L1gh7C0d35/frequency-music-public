@@ -99,7 +99,7 @@
       "description": "New tracks uploaded for listening and feedback.",
       "visual": "Artwork pending final review",
       "image": "artwork/fresh-cuts.svg",
-      "count": 3
+      "count": 5
     }
   ],
   "tracks": [
@@ -174,6 +174,60 @@
       "source": "Creator-approved public test",
       "type": "song",
       "new": true
+    },
+    {
+      "id": "new-the-wild-part-of-me",
+      "title": "The Wild Part of Me",
+      "subtitle": "English-language original · early listening preview",
+      "description": "An original Frequency song. Preview for listening and feedback, not a finished or commercially released master.",
+      "world": "fresh-cuts",
+      "worlds": [
+        "fresh-cuts"
+      ],
+      "artist": "Frequency Originals",
+      "goals": [],
+      "genres": [
+        "Original",
+        "Preview"
+      ],
+      "experiences": [],
+      "sound": "",
+      "bpm": null,
+      "instruments": [],
+      "audio": "audio/new/the-wild-part-of-me.m4a",
+      "image": "artwork/fresh-cuts.svg",
+      "duration": 200.0,
+      "source": "Public preview upload",
+      "type": "song",
+      "new": true,
+      "published_at": "2026-11-11T08:33:51+00:00"
+    },
+    {
+      "id": "new-what-the-morning-knows",
+      "title": "What the Morning Knows",
+      "subtitle": "English-language original · early listening preview",
+      "description": "An original Frequency song. Preview for listening and feedback, not a finished or commercially released master.",
+      "world": "fresh-cuts",
+      "worlds": [
+        "fresh-cuts"
+      ],
+      "artist": "Frequency Originals",
+      "goals": [],
+      "genres": [
+        "Original",
+        "Preview"
+      ],
+      "experiences": [],
+      "sound": "",
+      "bpm": null,
+      "instruments": [],
+      "audio": "audio/new/what-the-morning-knows.m4a",
+      "image": "artwork/fresh-cuts.svg",
+      "duration": 200.0,
+      "source": "Public preview upload",
+      "type": "song",
+      "new": true,
+      "published_at": "2026-11-11T08:33:51+00:00"
     },
     {
       "id": "open-to-more",
@@ -24444,5 +24498,5 @@
       "type": "soundscape"
     }
   ],
-  "new_count": 3
+  "new_count": 5
 }

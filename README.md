@@ -28,8 +28,22 @@ Commit the generated experiments-catalog.json before pushing.
 The existing Pages workflow copies the committed catalog and Experiments page;
 the studio is a listening tool, not a private audio vault.
 
-## New Music — private originals and approved public releases
-New Music uses the **same horizontal album song rows as artist-world pages**, and the **same bottom player as Home**; there is no separate playback screen or duplicate audio player. The first two English-take originals are delivered only to the owner as AES-256-GCM ciphertext via an owner-only browser link (key in URL fragment, never in the GitHub repository). Once opened, the key is remembered locally on the device. The public GitHub server and repo cannot serve their unencrypted audio. The **You → Private listening** section can forget that device access.
+## New Music — direct GitHub Pages listening previews (November 11, 2026)
+
+The two **English-take Frequency originals** — **What the Morning Knows**
+and **The Wild Part of Me** — now live as ordinary 256 kbps AAC/M4A preview
+files in `audio/new/`, using the **same public catalog and native audio player**
+as every existing Frequency recording. **No encryption, secret URL fragment,
+custom player, browser decryption, or multi-megabyte blob is required.**
+New Music uses the original album-style horizontal song rows, with a bottom
+mini-player and an existing Next button. The entire catalog has 66 tracks.
+
+**Visibility:** GitHub Pages is a PUBLIC static website. These two preview
+copies are publicly accessible and downloadable, although the original WAV
+masters and Music Maker project sources remain outside the web repository.
+They are explicitly labelled early listening previews, not finished releases.
+Future creations should only be added here intentionally with the publishing
+script; generating a song does not automatically make it public.
 
 Only expressly approved `audio/new/` uploads appear publicly in New Music. The three already-public **Fire Under Calm C1/C2/C3** trial recordings remain searchable and in the Experiments listening lab, but they are **not** New Music releases or Home editorial recommendations. A deliberately published song appears automatically, ordered by its `published_at` UTC timestamp. **Making a track in Music Maker does not publish it.**
 
@@ -193,17 +207,15 @@ The prominently featured track preloads only metadata to avoid competing with
 other playback on slow phone connections. These fixes still need a normal
 physical-phone listening check; a code test is not proof of network quality.
 
-**Private music security:** `private-media/*.bin` includes only AES-256-GCM
-encrypted AAC listening copies and an encrypted manifest (not the source WAVs).
-The unique decryption key stays outside Git, only provided in the owner's
-private Frequency URL fragment and stored locally on the authorized browser.
-The fragment is removed from the URL by the client after unlocking. Anyone
-with that complete secret link can unlock the recordings, so do not distribute
-it. A compromised same-origin website or browser storage can still undermine
-client-side privacy: this is private-by-key previewing, **not a server-side
-account/access-control system**. No public-release or commercial approval
-should be inferred from a private preview. The two originals can be heard
-within Frequency while the public 64-track catalog remains unchanged.
+**Archived private-listening experiment (superseded):** The earlier
+`private-media/*.bin` ciphertext, manifest and `frequency-private-music.js`
+were a trial to keep previews inaccessible from the public website, but they
+made iOS playback unreliable. The current website no longer loads the
+private playback mechanism, though encrypted historical files may remain
+accessible in the repository or prior Pages deployments. The decryption key
+is not published. Earlier special-key links are unnecessary; use the normal
+New Music tab instead. Current New Music streams the explicitly shared AAC files
+through the existing `mainAudio` player like every other song.
 
 ## Current appearance and navigation (November 11, 2026)
 
@@ -253,36 +265,23 @@ or regenerating static subpages.
 only 28 tracks, while the current catalog has 64 and additional
 listening/search fixes. Do not add a new temporary player or hosting setup.
 
-### Private New Music on iPhone
+### New Music on iPhone — no special private link
 
-Open the owner's complete **personal Frequency link**, including its URL
-fragment. The link unlocks the two corrected English takes directly in the
-existing **New Music** tab. The first authenticated download may take a moment.
-If an in-app browser temporarily interrupts the download, tap **Try loading
-again**. The site now preserves the private key until success and retries
-transient downloads. If the in-app browser cannot use WebCrypto, open the
-same personal link in Safari. The key is not part of this repository or
-public catalog. Do not paste a complete personal link into a public document.
+Open **https://l1gh7c0d35.github.io/frequency-music-public/?tab=new**
+in Safari or any normal browser. Both newly shared originals appear as album
+song rows immediately, without a password or cryptographic unlock. Tap Play
+on a song row to use the normal bottom mini-player, tap Next to hear the other.
+Audio files stream as standard GitHub Pages AAC/M4A and support HTTP Range.
 
-The encrypted bundle is a **private listening preview only**, not a
-commercial release. Future Music Maker recordings should be imported using
-the same protected Frequency player workflow instead of a separate preview
-site. The current workflow still requires preparation of the new encrypted
-listening copy; music generation does not silently release unapproved masters.
+The audio is publicly shareable, while the 48-kHz source WAV masters stay
+untouched in Music Maker. Please treat these as **listening previews**, not
+approved commercial releases. To add more songs, use the deliberate
+`--publish` workflow after choosing the right take. Do not reintroduce
+browser-side encryption as a prerequisite for public listening.
 
-### New Music album-row layout and progressive private loading
+### Album-row layout (shared component)
 
-New Music uses the same **horizontal album song rows** as the existing artist
-World pages, stacked vertically on phones and desktop. The shared
-`renderSongRows(root,tracks)` component owns the markup and mini-player
-interactions in both places; the `Next` control advances through the songs
-in the selected list. No square cover cards or alternate player are used.
-
-For keyed private recordings, the authenticated encrypted manifest displays
-the actual song rows first. Each row says **Preparing private audio…** until
-that recording finishes decrypting, then its Play button becomes usable.
-This keeps both song titles visible during large mobile downloads. The
-cryptographic key and unencrypted audio are never published to the static
-website. A successfully authenticated private listening link persists its
-access on the listener's browser; encrypted audio retries and an in-page
-recovery button remain available if a mobile browser interrupts the load.
+New Music and artist World pages both call `renderSongRows(root, tracks)`.
+The component stacks horizontal song rows vertically, gives each one a direct
+Play control and keeps the player/queue in `listening-room.js`. Home uses its
+separate feature cards, but they play through that same audio element.
