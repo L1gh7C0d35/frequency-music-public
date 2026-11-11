@@ -29,7 +29,7 @@ The existing Pages workflow copies the committed catalog and Experiments page;
 the studio is a listening tool, not a private audio vault.
 
 ## New Music — private originals and approved public releases
-New Music uses the **same Home track cards and bottom player**; there is no separate playback screen or duplicate audio player. The first two English-take originals are delivered only to the owner as AES-256-GCM ciphertext via an owner-only browser link (key in URL fragment, never in the GitHub repository). Once opened, the key is remembered locally on the device. The public GitHub server and repo cannot serve their unencrypted audio. The **You → Private listening** section can forget that device access.
+New Music uses the **same horizontal album song rows as artist-world pages**, and the **same bottom player as Home**; there is no separate playback screen or duplicate audio player. The first two English-take originals are delivered only to the owner as AES-256-GCM ciphertext via an owner-only browser link (key in URL fragment, never in the GitHub repository). Once opened, the key is remembered locally on the device. The public GitHub server and repo cannot serve their unencrypted audio. The **You → Private listening** section can forget that device access.
 
 Only expressly approved `audio/new/` uploads appear publicly in New Music. The three already-public **Fire Under Calm C1/C2/C3** trial recordings remain searchable and in the Experiments listening lab, but they are **not** New Music releases or Home editorial recommendations. A deliberately published song appears automatically, ordered by its `published_at` UTC timestamp. **Making a track in Music Maker does not publish it.**
 
@@ -179,10 +179,10 @@ The separate Worlds tab was removed because all curated worlds already live on
 Home. Rituals and Words remain absent as standalone tabs; inline lyrics still
 work in Now Playing. Historic Classic remains accessible only by explicit link.
 
-New Music uses the literal **same `renderTrackCards` function** as Home;
-tapping artwork or song title calls the same `playTrack(id,false)` path,
-opening the bottom mini-player without automatically opening the full-screen
-Now Playing overlay. The C1/C2/C3 experimental tracks are omitted from Home
+New Music and artist-world album pages share the exact **`renderSongRows`**
+component; Home retains its larger square recommendation cards. In all three,
+tapping Play uses the same **`playTrack(id,false)`** path, opening the bottom
+mini-player without automatically opening full-screen Now Playing. The C1/C2/C3 experimental tracks are omitted from Home
 picks, shuffle recommendations and New Music. They remain in public Music and
 Experiments without deleting approved source assets.
 
