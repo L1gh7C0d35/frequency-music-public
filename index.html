@@ -19,9 +19,9 @@
   <script>(function(){try{const q=new URLSearchParams(location.search).get('view');if(q==='classic')document.documentElement.dataset.frequencyView='classic';if(q==='classic'||localStorage.getItem('frequency-theme-choice-v2')==='midnight')document.documentElement.dataset.frequencyAppearance='midnight'}catch(_){}})();</script>
   <link rel="stylesheet" href="frequency-appearance.css?v=20261111forest2">
   <link rel="stylesheet" href="frequency-classic.css?v=20261111a">
-  <link rel="stylesheet" href="frequency-current.css?v=20261111iosretry1">
-  <script src="listening-room.js?v=20261013lyrics1" defer></script>
-  <script src="frequency-parity.js?v=20261111iosretry1" defer></script>
+  <link rel="stylesheet" href="frequency-current.css?v=20261111albumrows1">
+  <script src="listening-room.js?v=20261111albumrows1" defer></script>
+  <script src="frequency-parity.js?v=20261111albumrows1" defer></script>
   <script src="frequency-appearance.js?v=20261111forest2" defer></script>
   <script src="frequency-classic.js?v=20261111forest2" defer></script>
   <script src="frequency-private-music.js?v=20261111iosretry1" defer></script>
@@ -128,7 +128,7 @@
       <div class="app-screen-top"><span class="section-eyebrow">FRESH FROM FREQUENCY</span><h2>New <em>music.</em></h2><p>Listen to the newest Frequency originals using the same player as Home. Private listening takes stay protected.</p></div>
       <div class="new-music-summary" id="newMusicSummary" role="status" aria-live="polite">Loading the latest music…</div>
       <div class="private-listening-alert" id="privateListeningAlert" role="alert" hidden><p id="privateListeningError">Unable to finish loading your private music.</p><button id="retryPrivateMusic" type="button">Try loading again</button><small>If this keeps happening in the in-app browser, open the same link in Safari.</small></div>
-      <div class="new-music-list" id="newMusicList" aria-label="New recordings"></div>
+      <div class="world-detail-tracks new-music-list" id="newMusicList" aria-label="New recordings"></div>
       <div class="new-music-empty" id="newMusicEmpty" hidden><span aria-hidden="true">♫</span><h3>New music is on its way.</h3><p>New private listening takes appear from your personal Frequency link. Approved releases appear here, too.</p><button type="button" id="newBrowseAll">Explore all music</button></div>
       <p class="app-fine">Listening takes are not necessarily finished releases. Private drafts stay encrypted and require your personal listening link.</p>
     </section>

@@ -100,23 +100,41 @@
         if(manifest.version!==1||manifest.purpose!=='owner-private-frequency-listening'||
           !Array.isArray(manifest.tracks)||manifest.tracks.length>8)
           throw Error('Invalid private preview manifest');
+        // This key has now authenticated the private manifest. Remember it
+        // before slow audio downloads, so reopening New on an iPhone does not
+        // make the real songs disappear while it reconnects.
+        if(access.fromLink){try{localStorage.setItem(KEY_STORE,access.hex)}catch(_){}}
         const ids=new Set();
         for(const item of manifest.tracks){
           if(!item?.private||item.type!=='song'||!validPath(item.audio)||
              !/^private-[a-z0-9-]+$/.test(item.id)||ids.has(item.id))
             throw Error('Invalid private track manifest');
           ids.add(item.id);
-          if(app.state.byId.has(item.id))continue;
-          stage='audio';
-          provider.stage=stage;
-          // Sequential downloads/decryption keep peak memory lower on iPhones
-          // and make the first playable song visible while the next is loading.
-          const audio=await decrypt(item.audio,key);
-          const url=URL.createObjectURL(new Blob([audio],{type:'audio/mp4'}));
-          const track={...item,audio:url,private:true,new:true,source:'Encrypted owner-only listening'};
+          const existing=app.state.byId.get(item.id);
+          if(existing){
+            if(!existing.private)throw Error('Private track ID conflict');
+            continue;
+          }
+          // The encrypted manifest is tiny. Show BOTH real song titles and
+          // album-style rows immediately instead of waiting for two downloads.
+          const track={...item,audio:'',private:true,privateLoading:true,
+            new:true,source:'Encrypted owner-only listening'};
           app.state.tracks.push(track);
           app.state.byId.set(track.id,track);
-          provider.count=app.state.tracks.filter(t=>t.private).length;
+        }
+        updateUI();
+        for(const item of manifest.tracks){
+          const track=app.state.byId.get(item.id);
+          if(!track.privateLoading)continue;
+          stage='audio';
+          provider.stage=stage;
+          // Sequential decryption keeps memory lower on iPhones. The song
+          // row turns playable as soon as its own download completes.
+          const audio=await decrypt(item.audio,key);
+          const url=URL.createObjectURL(new Blob([audio],{type:'audio/mp4'}));
+          track.audio=url;
+          track.privateLoading=false;
+          provider.count=app.state.tracks.filter(t=>t.private&&!t.privateLoading).length;
           updateUI();
         }
         provider.stage='';
@@ -125,7 +143,6 @@
         // Persist and scrub only AFTER authenticated decryption, so users
         // can retry the same private link when Safari briefly suspends a load.
         if(access.fromLink){
-          try{localStorage.setItem(KEY_STORE,access.hex)}catch(_){}
           try{
             window.history.replaceState(window.history.state,'',
               window.location.pathname+window.location.search);

@@ -269,3 +269,20 @@ commercial release. Future Music Maker recordings should be imported using
 the same protected Frequency player workflow instead of a separate preview
 site. The current workflow still requires preparation of the new encrypted
 listening copy; music generation does not silently release unapproved masters.
+
+### New Music album-row layout and progressive private loading
+
+New Music uses the same **horizontal album song rows** as the existing artist
+World pages, stacked vertically on phones and desktop. The shared
+`renderSongRows(root,tracks)` component owns the markup and mini-player
+interactions in both places; the `Next` control advances through the songs
+in the selected list. No square cover cards or alternate player are used.
+
+For keyed private recordings, the authenticated encrypted manifest displays
+the actual song rows first. Each row says **Preparing private audio…** until
+that recording finishes decrypting, then its Play button becomes usable.
+This keeps both song titles visible during large mobile downloads. The
+cryptographic key and unencrypted audio are never published to the static
+website. A successfully authenticated private listening link persists its
+access on the listener's browser; encrypted audio retries and an in-page
+recovery button remain available if a mobile browser interrupts the load.

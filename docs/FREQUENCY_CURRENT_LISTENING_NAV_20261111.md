@@ -123,3 +123,39 @@ the browser removed the successful key fragment, and the normal mini-player
 played *What the Morning Knows* without opening the full-screen overlay.
 This is strong end-to-end coverage but is **not a physical iPhone WebKit
 test**; user listening on their phone remains the final confirmation.
+
+## November 11 — New Music uses the existing album song rows
+
+The owner rejected square cards in New Music and explicitly requested the
+same horizontal song rows already present inside artist-world album pages:
+vertically stacked entries, small square artwork on the left, song title and
+details in the middle, and a distinct Play button on the right.
+
+This is implemented through **one source of truth**:
+`listening-room.js` `renderSongRows(root, tracks)`, now called by both
+`renderWorldDetail()` and `frequency-parity.js` `renderNewMusic()`.
+Both contexts use the identical `playTrack(id,false)` mini-player action,
+queue the songs within the chosen album, and keep the active row's Play/Pause
+artwork synchronized. No separate new audio player, custom square-card UI, or
+full-screen navigation was added.
+
+The earlier private unlock implementation showed zero titles until both
+encrypted audio files finished downloading/decrypting. On mobile webviews that
+failed or paused while decoding, this looked like songs never existed.
+`frequency-private-music.js` now authenticates the tiny encrypted manifest
+first, inserts both title/album rows immediately as `privateLoading`, then
+decrypts each recording sequentially. Each row changes from "Preparing private
+audio…" to playable as its own file completes; retries reuse existing rows
+instead of duplicating songs. A valid key is saved after authenticating the
+manifest, before potentially slow audio fetches, so reopening Frequency can
+re-establish access. The URL fragment is still removed only after successful
+audio load. Unprepared rows are guarded against accidental HTML audio
+playback from New Music **and** Music.
+
+Mac mobile-sized browser integration successfully observed both actual song
+titles during the loading state, full-width rows stacked vertically, playback
+in the existing bottom mini-player (not full-screen), Next advancing to the
+second original, and both songs reappearing after browser reload without the
+fragment. This was a real headless Chrome test at 390px phone viewport, not
+verification on the owner's physical iPhone. Master WAVs and the public
+64-track catalog are unchanged; the two listening copies remain encrypted.

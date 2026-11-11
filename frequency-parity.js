@@ -79,7 +79,7 @@
     const unlocking=window.FrequencyPrivateMusic?.status==='loading';
     const failed=window.FrequencyPrivateMusic?.status==='error';
     $('newMusicSummary').textContent=unlocking
-      ? 'PREPARING YOUR PRIVATE LISTENING TAKES…'
+      ? (tracks.length ? tracks.length+' NEW ORIGINAL'+(tracks.length===1?'':'S')+' · PREPARING AUDIO…':'OPENING YOUR PRIVATE MUSIC…')
       : tracks.length
       ? (privateCount?privateCount+' PRIVATE ORIGINAL'+(privateCount===1?'':'S'):'')+
         (publicCount?(privateCount?' · ':'')+publicCount+' PUBLIC RELEASE'+(publicCount===1?'':'S'):'')
@@ -89,9 +89,9 @@
     if(failed)$('privateListeningError').textContent=window.FrequencyPrivateMusic.error;
     $('newMusicEmpty').hidden=tracks.length!==0||unlocking||failed;
     $('newMusicList').hidden=tracks.length===0;
-    // One source of truth: the exact same track cards, tap-to-play action,
-    // mini player and favorites handler used on the Home screen.
-    app.renderTrackCards($('newMusicList'),tracks);
+    // One source of truth: the existing album-row component from artist Worlds.
+    // Playback stays on the same bottom mini-player as every other page.
+    app.renderSongRows($('newMusicList'),tracks);
     const empty=$('newMusicEmpty');
     if(!tracks.length && failed){
       empty.querySelector('h3').textContent='Private listening unavailable.';

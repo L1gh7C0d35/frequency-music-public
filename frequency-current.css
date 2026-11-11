@@ -59,9 +59,14 @@ body[data-app-tab="you"] #youScreen{display:block!important}
 body[data-app-tab="you"] .footer{display:none!important}
 html[data-frequency-view="classic"] body #newMusicScreen{display:none!important}
 html .new-music-summary{padding-bottom:15px;border-bottom:1px solid var(--stroke);color:var(--accent);font-size:10px;letter-spacing:1.5px;font-weight:800}
-html .new-music-list{margin-top:22px}
-html .new-music-list .pick{min-width:0}
-html .new-music-list .pick-world{color:var(--muted)}
+html .new-music-list{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:20px;overflow:visible}
+html .new-music-list .world-song{width:100%;max-width:none;min-width:0}
+html .new-music-list .world-song-main{min-width:0;min-height:58px}
+html .new-music-list .world-song-main b{overflow-wrap:anywhere}
+html .new-music-list .world-song-play{touch-action:manipulation}
+html .new-music-list .world-song.preparing{opacity:.82}
+html .new-music-list .world-song.preparing .world-song-play{background:#a8b9ab;color:#17271d}
+html .new-music-list .world-song.preparing .world-song-play svg{opacity:.55}
 html .new-music-empty{margin-top:20px;padding:28px 20px;text-align:center;border:1px dashed #68789160;border-radius:20px;background:#161d2b}
 html .new-music-empty span{font-size:29px;color:#d7bd98}
 html .new-music-empty h3{margin:12px 0 8px}
@@ -70,13 +75,16 @@ html .new-music-empty button{min-height:44px;padding:10px 16px;background:#ebe3d
 @media(max-width:650px){
   html .new-music-screen{padding-top:13px}
   html .new-music-list{margin-top:16px}
-  html .new-music-list .pick{flex:0 0 42vw;max-width:190px}
+  html .new-music-list .world-song{padding:11px}
+  html .new-music-list .world-song-main img{width:58px;height:58px;flex-basis:58px}
+  html .new-music-list .world-song-main b{font-size:15px}
+  html .new-music-list .world-song-play{width:46px;height:46px;flex:0 0 46px}
   html .worlds-explainer{font-size:12px}
   html .mobile-nav button{min-height:58px}
   html .mobile-nav button small{font-size:11px}
 }
 @media(max-width:375px){html .mobile-nav button small{font-size:10px}}
-@media(prefers-reduced-motion:reduce){html .new-music-list .pick-cover img{transition:none}}
+@media(prefers-reduced-motion:reduce){html .new-music-list .world-song-play{transition:none}}
 /* Historic Midnight remains optional; its explicit scoped rules win over Forest. */
 html[data-frequency-appearance="midnight"] .new-music-empty{background:#161d2b}
 

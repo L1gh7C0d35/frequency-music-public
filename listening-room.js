@@ -36,6 +36,39 @@
     u.hash='';
     return u.pathname+u.search;
   }
+  // One album-style song-row component for artist worlds and New Music.
+  // Shared buttons use the existing playTrack(id,false) mini-player path.
+  function renderSongRows(root,tracks) {
+    root.innerHTML=tracks.map(t=>{
+      const preparing=!!t.privateLoading;
+      const subtitle=preparing?'Preparing private audio…'
+        :t.private?'Private listening · Original English take'
+        :listeningLabel(t);
+      return `
+      <article class="world-song ${state.current===t.id?'active':''} ${preparing?'preparing':''}" data-world-row="${safeText(t.id)}">
+        <button class="world-song-main" data-world-open="${safeText(t.id)}" aria-label="${preparing?'Preparing':'Play'} ${safeText(t.title)}">
+          <img src="${safeText(t.image)}" alt="" loading="lazy">
+          <span><b>${safeText(t.title)}</b><small>${safeText(subtitle)}</small></span>
+        </button>
+        <button class="world-song-play" data-world-play="${safeText(t.id)}" aria-label="${preparing?'Preparing':'Play'} ${safeText(t.title)}" ${preparing?'aria-busy="true"':''}>
+          <svg viewBox="0 0 24 24">${state.current===t.id&&state.playing?PAUSE:PLAY}</svg>
+        </button>
+      </article>`;
+    }).join('');
+    const listen=id=>{
+      const chosen=state.byId.get(id);
+      if(!chosen)return;
+      if(chosen.privateLoading){
+        toast('Preparing your private recording. Try Play again shortly.');
+        return;
+      }
+      // Keep Next / Previous inside the chosen album/list and use one player.
+      state.queue=tracks.filter(t=>!t.privateLoading).map(t=>t.id);
+      playTrack(id,false);
+    };
+    root.querySelectorAll('[data-world-open]').forEach(b=>b.onclick=()=>listen(b.dataset.worldOpen));
+    root.querySelectorAll('[data-world-play]').forEach(b=>b.onclick=()=>listen(b.dataset.worldPlay));
+  }
   function renderWorldDetail(id) {
     const w=world(id);
     if(!w) return;
@@ -46,22 +79,7 @@
     $('worldDetailTitle').textContent=w.name;
     $('worldDetailSubtitle').textContent=w.subtitle||'Original Frequency music';
     $('worldDetailCount').textContent=tracks.length+' track'+(tracks.length===1?'':'s');
-    $('worldDetailTracks').innerHTML=tracks.map(t=>`
-      <article class="world-song ${state.current===t.id?'active':''}" data-world-row="${safeText(t.id)}">
-        <button class="world-song-main" data-world-open="${safeText(t.id)}" aria-label="Open ${safeText(t.title)}">
-          <img src="${safeText(t.image)}" alt="" loading="lazy">
-          <span><b>${safeText(t.title)}</b><small>${safeText(listeningLabel(t))}</small></span>
-        </button>
-        <button class="world-song-play" data-world-play="${safeText(t.id)}" aria-label="Play ${safeText(t.title)}">
-          <svg viewBox="0 0 24 24">${state.current===t.id&&state.playing?PAUSE:PLAY}</svg>
-        </button>
-      </article>`).join('');
-    $('worldDetailTracks').querySelectorAll('[data-world-open]').forEach(b=>b.onclick=()=>{
-      const id=b.dataset.worldOpen;state.queue=tracks.map(t=>t.id);showTrack(id);
-    });
-    $('worldDetailTracks').querySelectorAll('[data-world-play]').forEach(b=>b.onclick=()=>{
-      const id=b.dataset.worldPlay;state.queue=tracks.map(t=>t.id);playTrack(id,false);
-    });
+    renderSongRows($('worldDetailTracks'),tracks);
     $('worldDetailPlay').disabled=!tracks.length;
     $('worldDetailPlay').onclick=()=>{
       if(!tracks.length)return;
@@ -71,8 +89,7 @@
     $('worldDetailShare').onclick=()=>share(w.name+' · Frequency Artist World',new URL(worldUrl(id),location.origin).href);
   }
   function syncWorldPlayback() {
-    if(!openWorldId) return;
-    $('worldDetailTracks').querySelectorAll('[data-world-row]').forEach(row=>{
+    [$('worldDetailTracks'),$('newMusicList')].forEach(root=>root.querySelectorAll('[data-world-row]').forEach(row=>{
       const active=row.dataset.worldRow===state.current;
       row.classList.toggle('active',active);
       const control=row.querySelector('[data-world-play]');
@@ -80,7 +97,7 @@
         control.setAttribute('aria-label',active&&state.playing?'Pause '+(state.byId.get(state.current)?.title||'song'):'Play '+(state.byId.get(row.dataset.worldRow)?.title||'song'));
         control.querySelector('svg').innerHTML=active&&state.playing?PAUSE:PLAY;
       }
-    });
+    }));
   }
   function showWorld(id,{push=true,scroll=true}={}) {
     if(!world(id))return false;
@@ -314,7 +331,12 @@
     else syncPlayState();
   }
   function playTrack(id,expand=true) {
-    if(!state.byId.has(id))return;
+    const requested=state.byId.get(id);
+    if(!requested)return;
+    if(requested.privateLoading){
+      toast('Preparing this private recording. It will be ready shortly.');
+      return;
+    }
     if(state.current===id && state.buffering){
       // A second tap while connecting must not silently cancel the first.
       if(expand)openNow();else toast('Still connecting to your music…');
@@ -735,7 +757,7 @@
       const requestedWorld=new URL(location.href).searchParams.get('world');
       if(requestedWorld&&world(requestedWorld))showWorld(requestedWorld,{push:false});
       if(id&&state.byId.has(id)){queueFromContext(id);loadTrack(id,false);openNow();}
-      window.FrequencyPreview={state,playTrack,loadTrack,requestPlay,togglePlay,next,nav,chooseWorld,showWorld,closeWorld,renderLibrary,renderPicks,renderTrackCards,resetLibrary,openNow,closeNow,openReview,exportFeedback,share,trackUrl,world,toggleFavorite,currentList,toast};
+      window.FrequencyPreview={state,playTrack,loadTrack,requestPlay,togglePlay,next,nav,chooseWorld,showWorld,closeWorld,renderLibrary,renderPicks,renderTrackCards,renderSongRows,resetLibrary,openNow,closeNow,openReview,exportFeedback,share,trackUrl,world,toggleFavorite,currentList,toast};
       document.dispatchEvent(new CustomEvent('frequency:ready',{detail:{count:state.tracks.length}}));
     } catch(err) {
       heroButton.disabled=true;

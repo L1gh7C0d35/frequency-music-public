@@ -30,7 +30,7 @@ const elements={
 const calls=[];
 const app={
   state:{tracks:[...data.tracks,...privateTracks],favorites:new Set()},
-  renderTrackCards(root,tracks){
+  renderSongRows(root,tracks){
     assert.strictEqual(root,elements.newMusicList);
     calls.push(tracks.map(t=>t.id));
     root.innerHTML=tracks.map(t=>t.title).join('|');
@@ -48,8 +48,9 @@ assert.equal(elements.newMusicEmpty.hidden,true);
 assert.equal(elements.newMusicSummary.textContent,'2 PRIVATE ORIGINALS');
 assert.equal(elements.newMusicList.innerHTML,'The Wild Part of Me|What the Morning Knows');
 assert.deepEqual(calls[0],['private-wild','private-morning']);
-assert(source.includes('app.renderTrackCards($(\'newMusicList\'),tracks)'));
-assert(main.includes('function renderTrackCards(root,tracks)'));
+assert(source.includes('app.renderSongRows($(\'newMusicList\'),tracks)'));
+assert(main.includes('function renderSongRows(root,tracks)'));
+assert(main.includes("state.queue=tracks.filter(t=>!t.privateLoading).map(t=>t.id)"));
 assert(main.includes("root.querySelectorAll('[data-play]').forEach(btn=>btn.onclick=()=>playTrack(btn.dataset.play,false))"));
 assert(!main.includes('state.tracks.filter(x=>x.new).map(x=>x.id)'));
 assert(main.includes("state.tracks.filter(eligibleForHome)"));
@@ -64,7 +65,7 @@ assert.equal(elements.newMusicList.innerHTML,'');
 context.window.FrequencyPrivateMusic.status='loading';
 vm.runInContext('renderNewMusic()',context);
 assert.equal(elements.newMusicEmpty.hidden,true);
-assert(elements.newMusicSummary.textContent.includes('PREPARING'));
+assert(elements.newMusicSummary.textContent.includes('OPENING'));
 context.window.FrequencyPrivateMusic={status:'error',error:'A connection interruption'};
 vm.runInContext('renderNewMusic()',context);
 assert.equal(elements.privateListeningAlert.hidden,false);
