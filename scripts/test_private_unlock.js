@@ -27,6 +27,8 @@ const win={
   },
   FrequencyWebNavigation:{renderNewMusic(){renderCount++}},
   location:href,
+  crypto,
+  isSecureContext:true,
   history:{state:null,replaceState(_state,_title,url){
     assert.equal(url,href.pathname+href.search);
     href.hash='';
@@ -50,12 +52,13 @@ const localStorage={
   setItem:(key,value)=>{privateKeys.set(key,value);storedKey.push(key)},
   removeItem:key=>privateKeys.delete(key),
 };
-const context=vm.createContext({window:win,document,fetch,crypto,TextDecoder,Blob,URL,localStorage,console});
+const context=vm.createContext({window:win,document,fetch,crypto,TextDecoder,Blob,URL,URLSearchParams,localStorage,console});
 vm.runInContext(code,context);
 for(let i=0;i<200 && win.FrequencyPrivateMusic.status==='loading';i++){
   await new Promise(resolve=>setTimeout(resolve,25));
 }
 assert.equal(win.FrequencyPrivateMusic.status,'ready',win.FrequencyPrivateMusic.error);
+assert.equal(typeof win.FrequencyPrivateMusic.retry,'function');
 assert.equal(win.FrequencyPrivateMusic.count,2);
 assert.equal(tracks.length,2);
 assert.deepEqual(tracks.map(t=>t.title),['What the Morning Knows','The Wild Part of Me']);

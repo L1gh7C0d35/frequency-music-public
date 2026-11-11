@@ -84,7 +84,10 @@
       ? (privateCount?privateCount+' PRIVATE ORIGINAL'+(privateCount===1?'':'S'):'')+
         (publicCount?(privateCount?' · ':'')+publicCount+' PUBLIC RELEASE'+(publicCount===1?'':'S'):'')
       : failed?'UNABLE TO OPEN PRIVATE LISTENING FILES':'YOUR NEW ORIGINALS';
-    $('newMusicEmpty').hidden=tracks.length!==0||unlocking;
+    const alert=$('privateListeningAlert');
+    alert.hidden=!failed;
+    if(failed)$('privateListeningError').textContent=window.FrequencyPrivateMusic.error;
+    $('newMusicEmpty').hidden=tracks.length!==0||unlocking||failed;
     $('newMusicList').hidden=tracks.length===0;
     // One source of truth: the exact same track cards, tap-to-play action,
     // mini player and favorites handler used on the Home screen.
@@ -108,6 +111,7 @@
     document.querySelectorAll('[data-shortcut]').forEach(b=>b.addEventListener('click',()=>shortcut(b.dataset.shortcut)));
     document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>filterType(b.dataset.mode)));
     $('newBrowseAll').addEventListener('click',()=>{tab('music');filterType('all');});
+    $('retryPrivateMusic').addEventListener('click',()=>window.FrequencyPrivateMusic?.retry?.());
     $('nowLyrics').addEventListener('click',()=>{
       if($('nowLyricsSection').hidden){app.toast('This recording has no lyrics to display.');}
       else $('nowLyricsSection').scrollIntoView({behavior:'smooth',block:'start'});

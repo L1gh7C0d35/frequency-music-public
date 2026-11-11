@@ -89,3 +89,37 @@ The fact that source tests pass is not a claim of perfect design.
 - **New Music means newly created original songs**, not the C1/C2 experiments. The two corrected Music Maker English takes have encrypted AAC listening copies in `private-media/*.bin`, and a separately encrypted manifest. AES-256-GCM key is stored privately outside Git, supplied in the owner's URL fragment and remembered on that phone. No raw WAV or plaintext private audio, key, or private manifest has been published. Do not interpret encryption as commercial release approval or full server-side account control. Possession of the full secret link grants access.
 - Playback reliability improvements: synchronously request audio before heavy DOM work; defer large library/picks/queue rerenders to the next animation frame; only preload featured metadata, not the whole song; don't cancel the same song with a second tap while buffering. Code and desktop audio tests are not a substitute for real iPhone network listening.
 - History: Classic remains accessible only by explicitly opening `?view=classic`; don't add a separate substitute player or external hosting. This latest section is authoritative if older dated sections conflict.
+
+## November 11 — iPhone private listening failure and recovery
+
+The owner showed the real iPhone in-app browser on **New Music** with "Unable to
+open private listening files" and zero visible songs. This is a private unlock
+failure, not an absence of generated songs. The two corrected English takes
+exist as encrypted M4A sources and were independently verified in a real
+Chromium phone-sized browser with working playback in the **existing** mini-player.
+The exact exception that occurred in iOS WebKit wasn't available from the
+screenshot; don't assert a single unverified root cause.
+
+Reliability fixes:
+- Preserve the private URL fragment until a manifest and both authenticated
+  recordings have been successfully decrypted. Previously it was removed at
+  the start, so interrupted iOS browser sessions lost the retry key.
+- Download/decrypt one recording at a time, showing available songs as they
+  finish. This reduces peak browser memory usage.
+- Retry once after failed or potentially stale ciphertext downloads using a
+  fresh cache request; use plain ArrayBuffers for WebCrypto for WebKit
+  compatibility rather than offset typed-array views.
+- Display a **Try loading again** control inside the existing New Music UI.
+  If retries fail, explain that opening the same link in Safari may help.
+- Preserve already playable recordings if a later download fails; a retry
+  skips tracks already in the shared music state without duplicating playback.
+- Do not print, send, or commit the private key; no plaintext M4A/WAV is added.
+
+Validation: 24 Python site tests, encrypted manifest/audio authentication,
+browser-crypto unlock, failure-then-retry integration test, and a **real
+headless Chrome mobile-sized browser** simulation where the manifest download
+was intentionally aborted twice. After tapping Retry, the two songs appeared,
+the browser removed the successful key fragment, and the normal mini-player
+played *What the Morning Knows* without opening the full-screen overlay.
+This is strong end-to-end coverage but is **not a physical iPhone WebKit
+test**; user listening on their phone remains the final confirmation.

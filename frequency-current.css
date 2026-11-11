@@ -79,3 +79,11 @@ html .new-music-empty button{min-height:44px;padding:10px 16px;background:#ebe3d
 @media(prefers-reduced-motion:reduce){html .new-music-list .pick-cover img{transition:none}}
 /* Historic Midnight remains optional; its explicit scoped rules win over Forest. */
 html[data-frequency-appearance="midnight"] .new-music-empty{background:#161d2b}
+
+/* Private listening failures are recoverable without leaving Frequency. */
+html .private-listening-alert{margin:16px 0 12px;border:1px solid #d7bd9860;border-radius:15px;background:#d7bd980d;padding:17px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+html .private-listening-alert[hidden]{display:none!important}
+html .private-listening-alert p{margin:0;flex:1 1 220px;font-size:13px;line-height:1.55;color:var(--text)}
+html .private-listening-alert button{height:44px;padding:10px 15px;border-radius:12px;border:0;color:#18221b;background:#f0e3d1;font-size:13px;font-weight:740}
+html .private-listening-alert button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+html .private-listening-alert small{display:block;flex-basis:100%;font-size:11px;line-height:1.6;color:var(--muted)}

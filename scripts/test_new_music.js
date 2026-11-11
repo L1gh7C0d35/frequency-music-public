@@ -17,6 +17,8 @@ const privateTracks=[
     created_at:'2026-11-10',source:'Encrypted owner-only listening'},
 ];
 const elements={
+  privateListeningAlert:{hidden:true},
+  privateListeningError:{textContent:''},
   newMusicSummary:{textContent:''},
   newMusicEmpty:{hidden:true,querySelector(selector){
     if(selector==='h3')return this.h3||(this.h3={textContent:''});
@@ -63,4 +65,9 @@ context.window.FrequencyPrivateMusic.status='loading';
 vm.runInContext('renderNewMusic()',context);
 assert.equal(elements.newMusicEmpty.hidden,true);
 assert(elements.newMusicSummary.textContent.includes('PREPARING'));
-console.log('New Music PASS: private originals, same Home card/mini-player, test variants excluded, loading/empty states.');
+context.window.FrequencyPrivateMusic={status:'error',error:'A connection interruption'};
+vm.runInContext('renderNewMusic()',context);
+assert.equal(elements.privateListeningAlert.hidden,false);
+assert.equal(elements.privateListeningError.textContent,'A connection interruption');
+assert.equal(elements.newMusicEmpty.hidden,true);
+console.log('New Music PASS: private originals, shared mini-player, tests excluded, loading/empty/error retry states.');

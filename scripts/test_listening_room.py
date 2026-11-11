@@ -304,6 +304,12 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn("document.body.dataset.appTab==='new'",code)
         self.assertIn("KEY_STORE='frequency-private-key-v1'",code)
         self.assertIn("private-media/manifest-20261111.bin",code)
+        self.assertIn('provider.retry=unlock',code)
+        self.assertIn('provider.errorCode',code)
+        self.assertIn("cache:attempt?'reload':'no-cache'",code)
+        self.assertIn('if(app.state.byId.has(item.id))continue;',code)
+        self.assertIn('id="retryPrivateMusic"',(ROOT/'index.html').read_text())
+        self.assertIn("$('retryPrivateMusic').addEventListener",(ROOT/'frequency-parity.js').read_text())
         self.assertIn("'./frequency-private-music.js'",(ROOT/'sw.js').read_text())
         for source in (ROOT/'index.html',ROOT/'frequency-parity.js',ROOT/'listening-catalog.json'):
             self.assertNotIn('what-the-morning-knows-english-take',source.read_text())

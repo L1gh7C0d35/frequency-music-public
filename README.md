@@ -252,3 +252,20 @@ or regenerating static subpages.
 **Do not blindly check out or publish the old October 12 tree:** it had
 only 28 tracks, while the current catalog has 64 and additional
 listening/search fixes. Do not add a new temporary player or hosting setup.
+
+### Private New Music on iPhone
+
+Open the owner's complete **personal Frequency link**, including its URL
+fragment. The link unlocks the two corrected English takes directly in the
+existing **New Music** tab. The first authenticated download may take a moment.
+If an in-app browser temporarily interrupts the download, tap **Try loading
+again**. The site now preserves the private key until success and retries
+transient downloads. If the in-app browser cannot use WebCrypto, open the
+same personal link in Safari. The key is not part of this repository or
+public catalog. Do not paste a complete personal link into a public document.
+
+The encrypted bundle is a **private listening preview only**, not a
+commercial release. Future Music Maker recordings should be imported using
+the same protected Frequency player workflow instead of a separate preview
+site. The current workflow still requires preparation of the new encrypted
+listening copy; music generation does not silently release unapproved masters.
