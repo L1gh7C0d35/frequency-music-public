@@ -16,8 +16,11 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="listening-room.css?v=20261013lyrics1">
   <link rel="stylesheet" href="frequency-parity.css?v=20261020experiments1">
+  <script>try{if(localStorage.getItem('frequency-web-appearance-v1')==='midnight')document.documentElement.dataset.frequencyAppearance='midnight'}catch(_){}</script>
+  <link rel="stylesheet" href="frequency-appearance.css?v=20261111a">
   <script src="listening-room.js?v=20261013lyrics1" defer></script>
   <script src="frequency-parity.js?v=20261013lyrics1" defer></script>
+  <script src="frequency-appearance.js?v=20261111a" defer></script>
 </head>
 <body>
 <div class="app-shell">
@@ -131,6 +134,21 @@
       <div class="app-screen-top"><span class="section-eyebrow">YOU</span><h2>Your listening <em>space.</em></h2><p>Favorites and music ratings stay private on this device until you export them.</p></div>
       <div class="you-metrics"><div><strong id="youFavorites">0</strong><small>Favorites</small></div><div><strong id="youNotes">0</strong><small>Rated tracks</small></div><div><strong id="youSongs">0</strong><small>Songs to explore</small></div></div>
       <div class="you-card"><h3>My collection</h3><button id="youOpenFavorites">♡ Saved favorites <span>›</span></button><button id="youOpenFeedback">✎ Listening notes <span>›</span></button><button id="youExport">⇧ Export feedback <span>›</span></button><button id="youShare">↗ Share Frequency <span>›</span></button></div>
+      <section class="you-card appearance-settings" aria-labelledby="appearanceHeading">
+        <h3 id="appearanceHeading">Appearance</h3>
+        <p>Try an earlier Frequency look. Your music, tabs, and playback stay exactly the same.</p>
+        <div class="appearance-grid" role="radiogroup" aria-label="Frequency color theme">
+          <button type="button" class="appearance-choice is-selected" data-appearance="current" role="radio" aria-checked="true">
+            <span class="appearance-swatch appearance-swatch-forest" aria-hidden="true"><span>◒ frequency</span></span>
+            <strong>Forest</strong><small>Current · green</small>
+          </button>
+          <button type="button" class="appearance-choice" data-appearance="midnight" role="radio" aria-checked="false">
+            <span class="appearance-swatch appearance-swatch-midnight" aria-hidden="true"><span>◒ frequency</span></span>
+            <strong>Original Midnight</strong><small>October 12 · charcoal-blue</small>
+          </button>
+        </div>
+        <p class="appearance-hint" id="appearanceHint" role="status" aria-live="polite">Forest is selected. This choice stays on this device.</p>
+      </section>
       <div class="you-card"><h3>Use Frequency on Android</h3><p>Open this link in Chrome. You can add it to your home screen for an app-like shortcut; audio plays through the browser.</p><button id="installHelp">＋ Add to home screen <span>›</span></button></div>
       <div class="app-fine">Web test build · Android & iPhone · Original sound worlds aren't separate verified performer credits.</div>
     </section>

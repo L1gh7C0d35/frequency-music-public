@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate the static Listening Room before publishing GitHub Pages."""
 import json
+import shutil
 import subprocess
 import unittest
 from pathlib import Path
@@ -225,11 +226,42 @@ class ListeningRoomTests(unittest.TestCase):
         # to it made every artist/track click silently navigate Home.
         self.assertIn('document.body.dataset.appTab=id',source)
 
+    def test_appearance_options_are_opt_in_and_keep_existing_player(self):
+        html=self.html
+        for ident in ('appearanceHeading','appearanceHint','mainAudio','youScreen'):
+            self.assertIn('id="'+ident+'"',html)
+        self.assertIn('data-appearance="current"',html)
+        self.assertIn('data-appearance="midnight"',html)
+        self.assertIn('frequency-appearance.css',html)
+        self.assertIn('frequency-appearance.js',html)
+        self.assertIn("frequency-web-appearance-v1",html)
+        css=(ROOT/'frequency-appearance.css').read_text()
+        self.assertIn('html[data-frequency-appearance="midnight"]',css)
+        self.assertIn('--bg:#090c12',css)
+        self.assertNotIn('audio/',css)
+        js=(ROOT/'frequency-appearance.js').read_text()
+        self.assertIn("localStorage.setItem(KEY,next)",js)
+        self.assertIn("event.key===KEY",js)
+        self.assertIn("choose(selected(),false)",js)
+        sw=(ROOT/'sw.js').read_text()
+        self.assertIn("'./frequency-appearance.css'",sw)
+        self.assertIn("'./frequency-appearance.js'",sw)
+        self.assertEqual(json.loads((ROOT/'manifest.webmanifest').read_text())['start_url'],'./?app=1')
+
+    def test_appearance_preference_behavior(self):
+        runner=shutil.which('node') or shutil.which('bun')
+        self.assertIsNotNone(runner,'Node or Bun is needed for preference interactions')
+        result=subprocess.run([runner,str(ROOT/'scripts/test_appearance_preference.js')],
+                              capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertIn('persistence, sync PASS',result.stdout)
+
     def test_javascript_syntax(self):
-        p=subprocess.run(['node','--check',str(ROOT/'listening-room.js')],capture_output=True,text=True)
-        self.assertEqual(p.returncode,0,p.stderr)
-        for name in ('frequency-parity.js','sw.js'):
-            result=subprocess.run(['node','--check',str(ROOT/name)],capture_output=True,text=True)
-            self.assertEqual(result.returncode,0,result.stderr)
+        checker=shutil.which('node') or shutil.which('deno')
+        self.assertIsNotNone(checker,'Node or Deno is needed to validate browser JavaScript')
+        command=[checker,'--check'] if Path(checker).name=='node' else [checker,'check']
+        for name in ('listening-room.js','frequency-parity.js','frequency-appearance.js','sw.js'):
+            result=subprocess.run([*command,str(ROOT/name)],capture_output=True,text=True)
+            self.assertEqual(result.returncode,0,f'{name}: {result.stderr}')
 
 if __name__=='__main__':unittest.main()

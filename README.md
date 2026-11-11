@@ -166,3 +166,29 @@ not fabricate them; their verified app metadata remains intact.
 ## Creator listening tests
 
 Fire Under Calm C1/C2/C3 remain public and are explicitly included in the public-test-tracks.json allow-list so they appear under Fresh Cuts and can be searched by version name. The list points to existing audio/*.m4a files without storing second copies. These are listening candidates, not finished commercial releases. Other unlisted test files are not automatically exposed in the player.
+
+## Appearance history and reversible settings (November 11, 2026)
+
+The original October 12 listening-room design (`02e33ec`) used a charcoal-blue
+`#090c12` background, cool slate surfaces and the ◒ `frequency` wordmark.
+The October 13 Beta44 parity update (`727f75e`) applied a separate
+forest-green `frequency-parity.css` skin (`#090d0c`, radial `#213329`),
+introduced five tabs (Home, Rituals, Sounds, Words, You), and added
+PWA/Home Screen app icon assets. The **on-page wordmark and ◒ glyph did not
+change**; their surrounding color treatment did. October 20 added an
+Experiments shortcut. Do not conflate these historical changes with the
+removed November 10 temporary preview player.
+
+In the existing web companion, open **You → Appearance** and choose **Forest**
+(current default) or **Original Midnight** (October 12 colors and brand-mark
+treatment on the *current* layout). The preference is local to each browser
+(`frequency-web-appearance-v1`), applies without interrupting music and can
+be reversed. It does **not** restore the original four-tab layout, change the
+published music library, replace the PWA Home Screen icon, or update native
+iOS Frequency settings. Users already installed on the Home Screen retain the
+installed icon. Do not silently redesign the app or substitute a new player.
+
+Technical files: `frequency-appearance.css`, `frequency-appearance.js`,
+`scripts/test_appearance_preference.js`; the service worker caches both
+appearance assets. The original `listening-room.css` and
+`frequency-parity.css` remain unchanged for the default theme.
