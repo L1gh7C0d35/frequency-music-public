@@ -130,7 +130,8 @@ def build():
                 instruments=metadata.get('instruments') or [],
                 # Flow provenance is a publishing input, never a listening exit link.
                 audio=str(p.relative_to(ROOT)),image=cover_name,duration=duration(p),
-                source='Public preview upload',type='song',new=True))
+                source='Public preview upload',type='song',new=True,
+                published_at=metadata.get('published_at')))
     if extras:
         worlds.append(dict(id='fresh-cuts',name='Fresh Cuts',subtitle='Latest uploads · listen & respond',
              description='New tracks uploaded for listening and feedback.',

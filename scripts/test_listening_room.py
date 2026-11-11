@@ -191,7 +191,7 @@ class ListeningRoomTests(unittest.TestCase):
     def test_links_and_controls(self):
         for path in ('listening-room.css','listening-room.js','frequency-parity.js','frequency-parity.css','manifest.webmanifest','sw.js','music.html','studio.html','legacy-library.html'):
             self.assertTrue((ROOT/path).is_file())
-        for ident in ('mainAudio','worldGrid','trackList','nowOverlay','nowPlay','miniPlay','feedbackModal','exportFeedback','ritualsScreen','wordsScreen','youScreen','nowLyrics','appModeRow','intentFilters'):
+        for ident in ('mainAudio','worldGrid','trackList','nowOverlay','nowPlay','miniPlay','feedbackModal','exportFeedback','newMusicScreen','newMusicList','newMusicEmpty','youScreen','nowLyrics','appModeRow','intentFilters'):
             self.assertIn('id="'+ident+'"',self.html)
         self.assertIn('listening-catalog.json',(ROOT/'listening-room.js').read_text())
         self.assertIn('location.replace',(ROOT/'music.html').read_text())
@@ -220,7 +220,7 @@ class ListeningRoomTests(unittest.TestCase):
     def test_tabs_never_bind_to_entire_body(self):
         source=(ROOT/'frequency-parity.js').read_text()
         self.assertNotIn("querySelectorAll('[data-app-tab]')",source)
-        self.assertEqual(source.count("querySelectorAll('button[data-app-tab]')"),2)
+        self.assertGreaterEqual(source.count("querySelectorAll('button[data-app-tab]')"),2)
         self.assertIn("app.closeWorld({restoreScroll:false})",source)
         # Body itself carries data-app-tab for CSS. Attaching a click handler
         # to it made every artist/track click silently navigate Home.
@@ -228,35 +228,74 @@ class ListeningRoomTests(unittest.TestCase):
 
     def test_appearance_options_are_opt_in_and_keep_existing_player(self):
         html=self.html
-        for ident in ('appearanceHeading','appearanceHint','mainAudio','youScreen'):
+        for ident in ('mainAudio','youScreen','newMusicScreen'):
             self.assertIn('id="'+ident+'"',html)
-        self.assertIn('data-appearance="current"',html)
-        self.assertIn('data-appearance="midnight"',html)
-        self.assertIn('frequency-appearance.css',html)
-        self.assertIn('frequency-appearance.js',html)
-        self.assertIn("frequency-web-appearance-v1",html)
+        self.assertNotIn('data-appearance="current"',html)
+        self.assertNotIn('id="ritualsScreen"',html)
+        self.assertNotIn('id="wordsScreen"',html)
+        self.assertIn("document.documentElement.dataset.frequencyAppearance='midnight'",html)
         css=(ROOT/'frequency-appearance.css').read_text()
         self.assertIn('html[data-frequency-appearance="midnight"]',css)
         self.assertIn('--bg:#090c12',css)
         self.assertNotIn('audio/',css)
         js=(ROOT/'frequency-appearance.js').read_text()
-        self.assertIn("localStorage.setItem(KEY,next)",js)
-        self.assertIn("event.key===KEY",js)
-        self.assertIn("choose(selected(),false)",js)
+        self.assertIn("dataset.frequencyAppearance='midnight'",js)
+        self.assertNotIn('delete root.dataset.frequencyAppearance',js)
+        self.assertNotIn('forest',js.lower())
+        palette=(ROOT/'frequency-parity.css').read_text()
+        self.assertIn('--bg:#090c12',palette)
+        self.assertNotIn('#213329',palette)
         sw=(ROOT/'sw.js').read_text()
         self.assertIn("'./frequency-appearance.css'",sw)
         self.assertIn("'./frequency-appearance.js'",sw)
+        self.assertIn("'./frequency-current.css'",sw)
         self.assertEqual(json.loads((ROOT/'manifest.webmanifest').read_text())['start_url'],'./?app=1')
+
+    def test_current_tabs_and_new_music_are_one_real_catalog(self):
+        html=self.html
+        for name in ('home','worlds','new','music','you'):
+            self.assertEqual(html.count('data-app-tab="'+name+'"'),2,name)
+        for removed in ('rituals','words','sounds'):
+            self.assertNotIn('data-app-tab="'+removed+'"',html)
+        for ident in ('newMusicScreen','newMusicList','newMusicEmpty','newMusicSummary'):
+            self.assertIn('id="'+ident+'"',html)
+        self.assertNotIn('id="ritualsScreen"',html)
+        self.assertNotIn('id="wordsScreen"',html)
+        self.assertIn('data-shortcut="recent"',html)
+        self.assertIn('Worlds',html)
+        self.assertIn('newMusicScreen',(ROOT/'frequency-current.css').read_text())
+        current=(ROOT/'frequency-parity.js').read_text()
+        self.assertIn("function renderNewMusic()",current)
+        self.assertIn("t.new===true && t.type==='song'",current)
+        self.assertIn("app.playTrack(b.dataset.newPlay,true)",current)
+        self.assertIn("app.toggleFavorite(b.dataset.newFavorite)",current)
+        self.assertNotIn('setupRituals',current)
+        self.assertNotIn('renderLyrics()',current)
+        self.assertIn("w.id!=='fresh-cuts'",(ROOT/'listening-room.js').read_text())
+        self.assertEqual(len(self.data['tracks']),64)
+        self.assertEqual(len([t for t in self.data['tracks'] if t.get('new')]),3)
+        self.assertEqual(len([w for w in self.data['worlds'] if w['id']!='fresh-cuts']),10)
+        release=(ROOT/'scripts/publish_new_song.py').read_text()
+        self.assertIn("a.publish",release)
+        self.assertIn("'--publish'",release)
+        self.assertIn('published_at',release)
+        builder=(ROOT/'scripts/build_listening_catalog.py').read_text()
+        self.assertIn("published_at=metadata.get('published_at')",builder)
+        runner=shutil.which('node') or shutil.which('bun')
+        self.assertIsNotNone(runner)
+        result=subprocess.run([runner,str(ROOT/'scripts/test_new_music.js')],
+                              capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertIn('New Music PASS',result.stdout)
 
     def test_classic_navigation_preserves_current_catalog(self):
         html=self.html
         for name in ('discover','worlds','music','favorites'):
             self.assertIn('data-classic-tab="'+name+'"',html)
-        self.assertIn('data-view-choice="classic"',html)
-        self.assertIn('data-view-choice="modern"',html)
         self.assertIn('frequency-classic.css',html)
         self.assertIn('frequency-classic.js',html)
-        self.assertIn('frequency-web-view-v1',html)
+        self.assertIn("get('view')==='classic'",html)
+        self.assertNotIn('data-view-choice="classic"',html)
         css=(ROOT/'frequency-classic.css').read_text()
         self.assertIn('data-frequency-view="classic"',css)
         self.assertIn('repeat(4,minmax(0,1fr))',css)
@@ -285,8 +324,7 @@ class ListeningRoomTests(unittest.TestCase):
             with self.subTest(page=page.name):
                 text=page.read_text()
                 self.assertEqual(text.count('frequency-legacy-appearance.css?v='),1)
-                self.assertIn('frequency-web-view-v1',text)
-                self.assertIn('frequency-web-appearance-v1',text)
+                self.assertIn("document.documentElement.dataset.frequencyAppearance='midnight'",text)
                 self.assertIn('data-frequency-appearance="midnight"',css)
                 self.assertIn('data-frequency-page="'+page.name+'"',css)
         for selector in ('.world-song.active','.world-song','.track-row.active',
@@ -304,7 +342,7 @@ class ListeningRoomTests(unittest.TestCase):
         result=subprocess.run([runner,str(ROOT/'scripts/test_appearance_preference.js')],
                               capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stderr)
-        self.assertIn('persistence, sync PASS',result.stdout)
+        self.assertIn('Midnight-only appearance',result.stdout)
 
     def test_javascript_syntax(self):
         checker=shutil.which('node') or shutil.which('deno')

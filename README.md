@@ -1,17 +1,17 @@
-# Frequency — Android Music Companion (Beta 44)
+# Frequency — Public Music Listening Room
 
 Public test link: https://l1gh7c0d35.github.io/frequency-music-public/
 
 This is a web listening and testing companion, not the compiled native Frequency iOS app. It supports Android Chrome and iPhone Safari.
 
 ## What works
-- Five app-style tabs: Home, Rituals, Sounds, Words and You.
-- Full Beta44 collection of 61 tracks (including Timekeeper soundscapes), 10 editorial artist worlds, with the same cover art and descriptions as Frequency.
+- Five focused tabs: **Home, Worlds, New Music, Music, You** (on desktop and phone).
+- Current public catalog: **64 recordings** (31 songs and 33 soundscapes). Worlds shows 10 curated artist-and-style groups; the 11th catalog group, Fresh Cuts, belongs under New Music.
 - Mini-player and full-screen player, play, pause, seek, next/previous, shuffle, repeat and queue.
 - Global search across all published music and soundscapes, including `528` and artist names; category filters remain available for browsing.
 - Favorites, Keep/Potential/Pass ratings and listening notes in each phone's own local storage. Export feedback JSON when you want to share it.
-- Text lyrics for 28 songs; word-by-word timing remains pending verification (we do not fake karaoke highlighting).
-- A simplified browser Rituals listening timer (3/5/10/20 minutes), plus modes. It is not an OS alarm.
+- Lyrics stay inside **Now Playing**, with existing automatically aligned timing where supported; there is no separate Words tab.
+- No Rituals tab or browser session timer. The focus is listening, worlds, and new music.
 - Android Home Screen install manifest. Playback requires a connection; music is not bulk-downloaded offline.
 
 ## Experiments Listening Lab
@@ -28,8 +28,8 @@ Commit the generated experiments-catalog.json before pushing.
 The existing Pages workflow copies the committed catalog and Experiments page;
 the studio is a listening tool, not a private audio vault.
 
-## New songs automatically appear after upload
-GitHub Actions builds the public catalog when files are pushed to main. A song intentionally uploaded into the public audio/new folder is included under Fresh Cuts automatically; artwork in artwork/new with the same stem is optional. Add a matching JSON file with title, world and description if desired.
+## New Music — approved public listening only
+GitHub Actions rebuilds the **New Music** tab from explicitly public `new` tracks when a release is pushed to main. Current examples are three already-public Fire Under Calm listening tests. A song intentionally published to `audio/new/` appears as a new track automatically; its `published_at` timestamp sorts fresh approvals ahead of older test versions. Optional artwork in `artwork/new/` and matching JSON can supply its title, world and description. **Making a track in Music Maker does not publish it.**
 
 For owner uploads from the Mac:
 
@@ -167,51 +167,48 @@ not fabricate them; their verified app metadata remains intact.
 
 Fire Under Calm C1/C2/C3 remain public and are explicitly included in the public-test-tracks.json allow-list so they appear under Fresh Cuts and can be searched by version name. The list points to existing audio/*.m4a files without storing second copies. These are listening candidates, not finished commercial releases. Other unlisted test files are not automatically exposed in the player.
 
-## Appearance history and reversible settings (November 11, 2026)
+## Current appearance and navigation (November 11, 2026)
 
-The original October 12 listening-room design (`02e33ec`) used a charcoal-blue
-`#090c12` background, cool slate surfaces and the ◒ `frequency` wordmark.
-The October 13 Beta44 parity update (`727f75e`) applied a separate
-forest-green `frequency-parity.css` skin (`#090d0c`, radial `#213329`),
-introduced five tabs (Home, Rituals, Sounds, Words, You), and added
-PWA/Home Screen app icon assets. The ◒ glyph and main wordmark stayed, but
-the mobile header later acquired a trailing period (`frequency.`) and the
-desktop subtitle became a track count instead of `LISTENING ROOM`.
-Original Midnight restores the older punctuation and subtitle. October 20
-added an Experiments shortcut. Do not conflate these historical changes with the
-removed November 10 temporary preview player.
+The owner chose the **current** Frequency app, but rejected its 2026-10-13
+forest-green tint and the Rituals/Words navigation. Frequency now uses the
+original charcoal-blue Midnight palette with warm champagne highlights
+**throughout the public website** (main player, artist cards, experiments,
+studio and archived song pages). There is no green-theme switch.
+The desktop and iPhone tabs are **Home / Worlds / New Music / Music / You**.
+Worlds groups artist-inspired styles and moods; it does not claim that every
+world is a verified human performer. Fresh Cuts is reserved for approved new
+music rather than masquerading as a separate artist.
 
-In the existing web companion, open **You → Appearance** and choose **Forest**
-(current default) or **Original Midnight** (October 12 colors and brand-mark
-treatment on the *current* layout). The preference is local to each browser
-(`frequency-web-appearance-v1`), applies without interrupting music and can
-be reversed. It does **not** restore the original four-tab layout, change the
-published music library, replace the PWA Home Screen icon, or update native
-iOS Frequency settings. Users already installed on the Home Screen retain the
-installed icon. Do not silently redesign the app or substitute a new player.
+A historical four-tab comparison remains available **only through the explicit
+`?view=classic` link**; it retains the larger catalog and can be exited via
+**5-tab view**. No in-app navigation-style switch clutters the current UI.
+The current app is the default even on browsers that previously saved Classic.
+The old wordmark and mobile icon assets were not overwritten. The canonical
+colors and new music layout are defined in `frequency-current.css` and the
+historical Midnight coverage in `frequency-appearance.css`.
 
-Technical files: `frequency-appearance.css`, `frequency-appearance.js`,
-`scripts/test_appearance_preference.js`; the service worker caches both
-appearance assets. The original `listening-room.css` and
-`frequency-parity.css` remain unchanged for the default theme.
+### Publishing gate
 
-## Reversible four-tab Classic comparison (November 11, 2026)
+Only approved-to-share audio is placed on the public GitHub Pages server. The
+existing `scripts/publish_new_song.py` remains **dry run by default** and
+requires the deliberate `--publish` flag to upload/commit a selected track.
+The published metadata records `published_at` for newest-first sorting. New
+Music previews are explicitly labelled as previews, not finished releases.
+Private Music Maker WAVs, rejects, alternate experiments, and originals are
+never auto-published by running the music generator.
 
-Open **<https://l1gh7c0d35.github.io/frequency-music-public/?view=classic>**
-to compare the 2026-10-12-inspired **Discover · Worlds · Music · Favorites**
-navigation, original charcoal-blue look, and historic hero copy against the
-current 5-tab Frequency experience. This is **not another hosted site or
-another music player**. It reuses the current 64-track/11-world catalog,
-playback engine, locally saved ratings/favorites, and performance fixes.
-The button **5-tab view** switches back instantly; in the current version
-**You → Navigation style** also controls the layout. The selection is
-saved on that browser under `frequency-web-view-v1`.
+## Historical Classic comparison reference
+
+Open <https://l1gh7c0d35.github.io/frequency-music-public/?view=classic>
+only when intentionally reviewing the 2026-10-12 four-tab Discover, Worlds,
+Music, Favorites layout. This keeps the modern player and the entire 64-track
+catalog, but it is not the default. Use **5-tab view** to return.
 
 A full audit of historical differences, remaining visual leaks, song
 metadata changes, and the 17 original audio files rewritten for streaming
-is in `docs/FREQUENCY_WEB_CLASSIC_AUDIT_20261111.md`. For Midnight,
-a generated opt-in stylesheet extends the original blue palette to the
-35 separate public HTML pages, plus the song-sharing redirect. Run
+is in `docs/FREQUENCY_WEB_CLASSIC_AUDIT_20261111.md`. The Midnight
+stylesheet covers the 35 secondary HTML pages by default, plus the
+song-sharing redirect. Run
 `python3 scripts/build_legacy_appearance.py --install` after adding
 or regenerating static subpages.
 

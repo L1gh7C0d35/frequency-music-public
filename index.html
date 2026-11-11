@@ -16,14 +16,14 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="listening-room.css?v=20261013lyrics1">
   <link rel="stylesheet" href="frequency-parity.css?v=20261020experiments1">
-  <script>(function(){try{const q=new URLSearchParams(location.search).get('view');const saved=localStorage.getItem('frequency-web-view-v1');if(q==='classic'||(q!=='modern'&&saved==='classic')){document.documentElement.dataset.frequencyView='classic';document.documentElement.dataset.frequencyAppearance='midnight'}}catch(_){}})();</script>
-  <script>try{if(localStorage.getItem('frequency-web-appearance-v1')==='midnight')document.documentElement.dataset.frequencyAppearance='midnight'}catch(_){}</script>
+  <script>(function(){document.documentElement.dataset.frequencyAppearance='midnight';try{if(new URLSearchParams(location.search).get('view')==='classic')document.documentElement.dataset.frequencyView='classic'}catch(_){}})();</script>
   <link rel="stylesheet" href="frequency-appearance.css?v=20261111c">
   <link rel="stylesheet" href="frequency-classic.css?v=20261111a">
+  <link rel="stylesheet" href="frequency-current.css?v=20261111a">
   <script src="listening-room.js?v=20261013lyrics1" defer></script>
-  <script src="frequency-parity.js?v=20261111appearance1" defer></script>
-  <script src="frequency-appearance.js?v=20261111b" defer></script>
-  <script src="frequency-classic.js?v=20261111a" defer></script>
+  <script src="frequency-parity.js?v=20261111newmusic1" defer></script>
+  <script src="frequency-appearance.js?v=20261111current1" defer></script>
+  <script src="frequency-classic.js?v=20261111current1" defer></script>
 </head>
 <body>
 <div class="app-shell">
@@ -32,9 +32,9 @@
     <span class="nav-caption">FREQUENCY</span>
     <nav class="side-links" aria-label="Browse">
       <button class="side-link selected" data-app-tab="home"><span class="nav-icon">⌂</span><span>Home</span></button>
-      <button class="side-link" data-app-tab="rituals"><span class="nav-icon">◉</span><span>Rituals</span></button>
-      <button class="side-link" data-app-tab="sounds"><span class="nav-icon">♫</span><span>Sounds</span></button>
-      <button class="side-link" data-app-tab="words"><span class="nav-icon">❝</span><span>Words</span></button>
+      <button class="side-link" data-app-tab="worlds"><span class="nav-icon">▦</span><span>Worlds</span></button>
+      <button class="side-link" data-app-tab="new"><span class="nav-icon">✦</span><span>New Music</span></button>
+      <button class="side-link" data-app-tab="music"><span class="nav-icon">♫</span><span>Music</span></button>
       <button class="side-link" data-app-tab="you"><span class="nav-icon">◯</span><span>You</span></button>
     </nav>
     <nav class="side-links classic-side-links" aria-label="Classic Frequency navigation">
@@ -83,14 +83,15 @@
       <section class="app-shortcuts section">
     <div class="section-eyebrow">QUICK ACCESS</div>
     <div class="app-shortcut-row">
-      <button data-shortcut="all">♫ All music</button><a href="experiments.html">◈ Experiments</a><button data-shortcut="recent">◷ Recently added</button>
+      <button data-shortcut="all">♫ All music</button><a href="experiments.html">◈ Experiments</a><button data-shortcut="recent">✦ New music</button>
       <button data-shortcut="favorites">♡ Favorites</button><button data-shortcut="sleep">☾ Sleep</button>
     </div>
     <div class="section-eyebrow intent-label">LISTEN FOR A FEELING</div>
     <div id="intentFilters" class="intent-filters"></div>
   </section>
   <section id="worlds" class="section worlds-section">
-        <div class="section-head"><div><div class="section-eyebrow">ARTIST WORLDS</div><h2>Find your sound <em>world.</em></h2></div><div class="head-foot" id="worldCount">ORIGINAL SOUND WORLDS</div></div>
+        <div class="section-head"><div><div class="section-eyebrow">MUSIC BY ARTIST & STYLE</div><h2>Explore the <em>worlds.</em></h2></div><div class="head-foot" id="worldCount">ORIGINAL SOUND WORLDS</div></div>
+        <p class="worlds-explainer">Explore curated artist-inspired sounds, moods, and genres. Each world brings related music together.</p>
         <div class="world-grid" id="worldGrid" aria-label="Sound worlds"></div>
       </section>
       <section id="worldDetail" class="world-detail" hidden aria-label="Artist World">
@@ -116,69 +117,28 @@
         <div class="empty-state" id="emptyState" hidden><span>✧</span><h3>No matches found.</h3><p>Try a title, artist, or frequency, or clear your filters.</p><button id="clearFilters" class="outline-action">Explore all music</button></div>
       </section>
       <footer class="footer"><div><span class="footer-logo">◒ frequency</span><span>Original sessions • Made to be felt</span></div><div><button id="footerFeedback">Share your listening notes</button><span>© 2026 Frequency Music</span></div></footer>
-    <section id="ritualsScreen" class="app-screen" hidden>
-    <div class="app-screen-top"><span class="section-eyebrow">RITUALS</span><h2>Find your <em>moment.</em></h2><p>Pick a sound and create a small listening ritual.</p></div>
-    <div class="ritual-modes" aria-label="Listening mode">
-      <button class="selected" data-ritual-mode="pure">♫ <b>Pure</b><small>Just the music</small></button>
-      <button data-ritual-mode="immersive">◌ <b>Immersive</b><small>Music + motion</small></button>
-      <button data-ritual-mode="guided">❝ <b>Guided</b><small>Music + a prompt</small></button>
-    </div>
-    <div class="ritual-panel">
-      <div id="ritualArtwork" class="ritual-artwork"></div>
-      <label for="ritualTrack">SOUND FOR YOUR SESSION</label><select id="ritualTrack"></select>
-      <label for="ritualMinutes">LISTENING LENGTH</label><select id="ritualMinutes"><option value="3">3 minutes</option><option value="5" selected>5 minutes</option><option value="10">10 minutes</option><option value="20">20 minutes</option></select>
-      <div class="ritual-focus" id="ritualFocus">Give yourself a few minutes to listen.</div>
-      <div class="ritual-clock" id="ritualClock">05:00</div>
-      <div class="ritual-actions"><button id="startRitual" class="primary-action">▶ Start listening</button><button id="resetRitual" class="outline-action">Reset</button></div>
-      <p class="app-fine">This is an in-browser listening session. It won't replace a phone alarm or guarantee playback with the browser closed.</p>
-    </div></section>
-    <section id="wordsScreen" class="app-screen" hidden>
-      <div class="app-screen-top"><span class="section-eyebrow">WORDS</span><h2>Words worth <em>keeping.</em></h2><p>Read the lyrics from your favorite Frequency songs.</p></div>
-      <div class="words-panel"><label for="wordsSong">SONG LYRICS</label><select id="wordsSong"></select>
-        <div class="lyrics-body" id="lyricsBody"></div>
-        <p class="app-fine">Lyrics text is supplied from the Frequency app. This web preview doesn't yet provide verified word-by-word timing.</p>
-        <div class="words-actions"><button id="playWords" class="primary-action">▶ Play song</button><button id="noteWords" class="outline-action">Add listening note</button></div>
-      </div>
+    <section id="newMusicScreen" class="app-screen new-music-screen" hidden aria-label="New Music">
+      <div class="app-screen-top"><span class="section-eyebrow">FRESH FROM FREQUENCY</span><h2>New <em>music.</em></h2><p>Discover the latest recordings shared for listening. Early versions are clearly marked; private drafts never appear here.</p></div>
+      <div class="new-music-summary" id="newMusicSummary" role="status" aria-live="polite">Loading the latest music…</div>
+      <div class="new-music-list" id="newMusicList" aria-label="New recordings"></div>
+      <div class="new-music-empty" id="newMusicEmpty" hidden><span aria-hidden="true">♫</span><h3>New music is on its way.</h3><p>Once a song is approved for public listening, it will appear here automatically.</p><button type="button" id="newBrowseAll">Explore all music</button></div>
+      <p class="app-fine">Public listening previews are not necessarily finished releases. Your working drafts and audio masters remain private.</p>
     </section>
     <section id="youScreen" class="app-screen" hidden>
       <div class="app-screen-top"><span class="section-eyebrow">YOU</span><h2>Your listening <em>space.</em></h2><p>Favorites and music ratings stay private on this device until you export them.</p></div>
       <div class="you-metrics"><div><strong id="youFavorites">0</strong><small>Favorites</small></div><div><strong id="youNotes">0</strong><small>Rated tracks</small></div><div><strong id="youSongs">0</strong><small>Songs to explore</small></div></div>
       <div class="you-card"><h3>My collection</h3><button id="youOpenFavorites">♡ Saved favorites <span>›</span></button><button id="youOpenFeedback">✎ Listening notes <span>›</span></button><button id="youExport">⇧ Export feedback <span>›</span></button><button id="youShare">↗ Share Frequency <span>›</span></button></div>
-      <section class="you-card appearance-settings" aria-labelledby="appearanceHeading">
-        <h3 id="appearanceHeading">Appearance</h3>
-        <p>Try an earlier Frequency look. Your music, tabs, and playback stay exactly the same.</p>
-        <div class="appearance-grid" role="radiogroup" aria-label="Frequency color theme">
-          <button type="button" class="appearance-choice is-selected" data-appearance="current" role="radio" aria-checked="true">
-            <span class="appearance-swatch appearance-swatch-forest" aria-hidden="true"><span>◒ frequency</span></span>
-            <strong>Forest</strong><small>Current · green</small>
-          </button>
-          <button type="button" class="appearance-choice" data-appearance="midnight" role="radio" aria-checked="false">
-            <span class="appearance-swatch appearance-swatch-midnight" aria-hidden="true"><span>◒ frequency</span></span>
-            <strong>Original Midnight</strong><small>October 12 · charcoal-blue</small>
-          </button>
-        </div>
-        <p class="appearance-hint" id="appearanceHint" role="status" aria-live="polite">Forest is selected. This choice stays on this device.</p>
-      </section>
-      <section class="you-card frequency-view-settings" aria-labelledby="frequencyViewHeading">
-        <h3 id="frequencyViewHeading">Navigation style</h3>
-        <p>Compare the original four-section listening room with today's five-tab app. Both use the same music catalog and player.</p>
-        <div class="frequency-view-options" role="radiogroup" aria-label="Frequency navigation style">
-          <button class="frequency-view-choice" type="button" role="radio" data-view-choice="classic" aria-checked="false"><strong>✧ Classic</strong><small>Discover · Worlds · Music · Favorites</small></button>
-          <button class="frequency-view-choice" type="button" role="radio" data-view-choice="modern" aria-checked="true"><strong>◉ Current</strong><small>Home · Rituals · Sounds · Words · You</small></button>
-        </div>
-        <p class="frequency-view-hint" id="frequencyViewHint" role="status" aria-live="polite">Current navigation is selected.</p>
-      </section>
       <div class="you-card"><h3>Use Frequency on Android</h3><p>Open this link in Chrome. You can add it to your home screen for an app-like shortcut; audio plays through the browser.</p><button id="installHelp">＋ Add to home screen <span>›</span></button></div>
-      <div class="app-fine">Web test build · Android & iPhone · Original sound worlds aren't separate verified performer credits.</div>
+      <div class="app-fine">Listening companion · Artist worlds organize music by style and mood, not always verified performer identities.</div>
     </section>
 </main>
   </div>
 </div>
 <nav class="mobile-nav" aria-label="Frequency tabs">
   <button data-app-tab="home" class="selected" aria-label="Home"><span>⌂</span><small>Home</small></button>
-  <button data-app-tab="rituals" aria-label="Rituals"><span>◉</span><small>Rituals</small></button>
-  <button data-app-tab="sounds" aria-label="Sounds"><span>♫</span><small>Sounds</small></button>
-  <button data-app-tab="words" aria-label="Words"><span>❝</span><small>Words</small></button>
+  <button data-app-tab="worlds" aria-label="Worlds"><span>▦</span><small>Worlds</small></button>
+  <button data-app-tab="new" aria-label="New Music"><span>✦</span><small>New</small></button>
+  <button data-app-tab="music" aria-label="Music"><span>♫</span><small>Music</small></button>
   <button data-app-tab="you" aria-label="You"><span>◯</span><small>You</small></button>
 </nav>
 <nav class="mobile-nav classic-mobile-nav" aria-label="Classic Frequency tabs">

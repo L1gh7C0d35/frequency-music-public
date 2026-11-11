@@ -7,6 +7,7 @@ review remains the owner's responsibility. The Github Actions workflow rebuilds
 the site automatically after an ordinary GitHub push.
 """
 from pathlib import Path
+from datetime import datetime, timezone
 import argparse,json,subprocess,re,shutil,sys
 ROOT=Path(__file__).resolve().parents[1]
 WORLD_IDS=set()
@@ -65,7 +66,8 @@ def main():
     if cover:
         cover_dest.parent.mkdir(parents=True,exist_ok=True)
         shutil.copyfile(cover,cover_dest);paths.append(str(cover_dest.relative_to(ROOT)))
-    fields=dict(title=a.title,subtitle=a.subtitle,description=a.description,world=a.world)
+    fields=dict(title=a.title,subtitle=a.subtitle,description=a.description,world=a.world,
+                published_at=datetime.now(timezone.utc).isoformat(timespec='seconds'))
     meta.write_text(json.dumps(fields,indent=2,ensure_ascii=False)+'\n')
     paths.append(str(meta.relative_to(ROOT)))
     run([sys.executable,'scripts/build_listening_catalog.py'])

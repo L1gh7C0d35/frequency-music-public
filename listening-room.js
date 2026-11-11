@@ -45,7 +45,7 @@
     $('worldDetailCategory').textContent='ORIGINAL SOUND WORLD · '+tracks.length+' TRACKS';
     $('worldDetailTitle').textContent=w.name;
     $('worldDetailSubtitle').textContent=w.subtitle||'Original Frequency music';
-    $('worldDetailCount').textContent=tracks.length+' song'+(tracks.length===1?'':'s');
+    $('worldDetailCount').textContent=tracks.length+' track'+(tracks.length===1?'':'s');
     $('worldDetailTracks').innerHTML=tracks.map(t=>`
       <article class="world-song ${state.current===t.id?'active':''}" data-world-row="${safeText(t.id)}">
         <button class="world-song-main" data-world-open="${safeText(t.id)}" aria-label="Open ${safeText(t.title)}">
@@ -186,7 +186,7 @@
     showWorld(id);
   }
   function renderWorlds() {
-    $('worldGrid').innerHTML=state.worlds.map((w,i)=>`
+    $('worldGrid').innerHTML=state.worlds.filter(w=>w.id!=='fresh-cuts').map((w,i)=>`
       <button class="world-card" data-world="${safeText(w.id)}" aria-label="Explore ${safeText(w.name)}">
         <img src="${safeText(w.image)}" alt="" loading="lazy">
         <span class="world-arrow">↗</span>
@@ -285,7 +285,7 @@
       $('nowBack').style.backgroundImage='url("'+t.image+'")';
       $('nowTitle').textContent=t.title;$('nowSub').textContent=t.artist;
       $('nowWorld').textContent=(world(t.world)?.name||'Frequency')+' · '+(world(t.world)?.subtitle||'');
-      $('nowArtist').textContent='View '+(world(t.world)?.name||'artist')+' songs ↗';
+      $('nowArtist').textContent='Explore '+(world(t.world)?.name||'this world')+' music ↗';
       $('nowSound').textContent=t.sound||t.description||'Original Frequency music';
       renderNowLyrics(t);
       syncShortSoundscape(t);
