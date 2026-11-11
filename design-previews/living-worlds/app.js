@@ -7,11 +7,11 @@ const WORLD=[
 {id:"bloom",title:"Electric Bloom",subtitle:"Movement · energy · celebration",type:"ORIGINAL ARTIST WORLD",count:7,accent:"#e7a4ec",second:"#84edcc",intro:"Movement is a feeling. A world for bright rhythmic moments.",songs:["momentum-is-mine"],signature:"Joyful, rhythm-led original recordings."}
 ];
 const TRACKS={
-"open-to-more":{title:"Open to More",world:"velvet",duration:"3:40",src:"../../audio/open-to-more.m4a",art:"assets/velvet.jpg"},
-"already-arrived":{title:"Already Arrived",world:"future",duration:"3:02",src:"../../audio/already-arrived.m4a",art:"assets/future.jpg"},
-"built-for-this":{title:"Built for This",world:"apex",duration:"2:48",src:"../../audio/built-for-this.m4a",art:"assets/apex.jpg"},
-"i-do-not-break":{title:"I Do Not Break",world:"iron",duration:"3:04",src:"../../audio/i-do-not-break.m4a",art:"assets/iron.jpg"},
-"momentum-is-mine":{title:"Momentum Is Mine",world:"bloom",duration:"2:30",src:"../../audio/momentum-is-mine.m4a",art:"assets/bloom.jpg"}
+"open-to-more":{title:"Open to More",world:"velvet",duration:"3:40",src:"audio/open-to-more.m4a",art:"assets/velvet.jpg"},
+"already-arrived":{title:"Already Arrived",world:"future",duration:"3:02",src:"audio/already-arrived.m4a",art:"assets/future.jpg"},
+"built-for-this":{title:"Built for This",world:"apex",duration:"2:48",src:"audio/built-for-this.m4a",art:"assets/apex.jpg"},
+"i-do-not-break":{title:"I Do Not Break",world:"iron",duration:"3:04",src:"audio/i-do-not-break.m4a",art:"assets/iron.jpg"},
+"momentum-is-mine":{title:"Momentum Is Mine",world:"bloom",duration:"2:30",src:"audio/momentum-is-mine.m4a",art:"assets/bloom.jpg"}
 };
 const state={route:"home",worldIndex:0,selectedWorld:"velvet",song:"open-to-more",playing:false,preparing:false,error:"",toneOn:false,toneHz:432,tonePattern:"phi",phase:0,counts:[0,0,0],intention:"",extra:"",soundsMode:"music",started:false};
 const $=(s)=>document.querySelector(s);
