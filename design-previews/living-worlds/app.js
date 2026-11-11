@@ -227,94 +227,109 @@ let swipeStart=null;document.addEventListener("pointerdown",e=>{const el=e.targe
 function canvasSize(canvas){if(!canvas)return null;const dpr=Math.min(2,window.devicePixelRatio||1),rect=canvas.getBoundingClientRect(),w=rect.width,h=rect.height;if(w===0||h===0)return null;const cw=Math.floor(w*dpr),ch=Math.floor(h*dpr);if(canvas.width!==cw||canvas.height!==ch){canvas.width=cw;canvas.height=ch}const ctx=canvas.getContext("2d");ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);return {ctx,w,h}}
 function soundEnergy(){if(state.playing&&analyser&&fft){analyser.getByteFrequencyData(fft);let e=0;for(let i=3;i<115&&i<fft.length;i++)e+=fft[i];return e/(Math.min(115,fft.length)-3)/255}return 0}
 function drawWave(canvas,mode,energy,time){
+ // THE ORIGINAL FAVORITE: preserve fine-grained, rapidly changing FFT shapes.
+ // The early regression averaged music into only six near-static bands.
+ // Fix just its two problems: nonperiodic spectral joins and canvas overflow.
  const cfg=canvasSize(canvas);
  if(!cfg)return;
- const {ctx,w,h}=cfg,cx=w/2,cy=h/2,unit=Math.min(w,h);
- const active=Boolean(state.playing && analyser && fft && !audio.paused);
- const colors=["#75f2ff","#b39cff","#f2a5dc"];
- const bandPowers=[0,0,0,0,0,0];
- if(active){
-  // Average contiguous FFT frequency ranges. Raw sequential bins at the seam
-  // previously produced discontinuities and hard corners around the circle.
-  const start=4,span=Math.min(156,fft.length-start);
-  for(let k=0;k<6;k++){
-   const from=start+Math.floor(span*k/6);
-   const to=start+Math.floor(span*(k+1)/6);
-   let sum=0;
-   for(let j=from;j<to;j++)sum+=fft[j];
-   bandPowers[k]=Math.sqrt(sum/Math.max(1,to-from)/255);
-  }
- }
- // 2.25 radians of travel per second while music plays vs .31 previously.
- // The paused figure only breathes imperceptibly; it does not fake music input.
- const motion=state.started?audio.currentTime*2.25:time*.000075;
- const overall=active?Math.min(1,Math.sqrt(Math.max(0,energy)*7.0)):0;
- const bases=[unit*.314,unit*.356,unit*.394];
- const maxima=[unit*.048,unit*.058,unit*.067];
- const mix=Math.min(1,Math.max(0,overall));
- const pointCount=240;
+ const {ctx,w,h}=cfg,cx=w/2,cy=h/2;
+ const unit=Math.min(w,h);
+ const active=Boolean(state.playing&&analyser&&fft&&!audio.paused);
+ const colors=mode==="player"?["#75f2ff","#b39cff","#f2a5dc"]:["#7eeafa","#baa7fb","#fa9ddf"];
+ const count=210,half=unit/2;
+ const base=[unit*.334,unit*.379,unit*.421];
+ const lower=[unit*.290,unit*.328,unit*.366];
+ const upper=[unit*.405,unit*.445,half-12];
+ const spectrumSize=fft?.length||256;
+ // Preserve original ring phase on pause/resume while using the audio waveform
+ // itself (not a clock-driven sine wave) for the dominant movement.
+ const phase=state.started?audio.currentTime:time*.0001;
+ const activity=active?Math.min(1,Math.sqrt(Math.max(0,energy)*4)):0;
  ctx.save();
- ctx.globalCompositeOperation="lighter";
  ctx.lineJoin="round";
  ctx.lineCap="round";
+ ctx.globalCompositeOperation="lighter";
  for(let layer=0;layer<3;layer++){
-  const phase=layer*1.47;
-  const direction=layer===1?-1:1;
-  const progress=motion*(.84+layer*.17)*direction;
-  const b0=bandPowers[(layer+1)%6];
-  const b1=bandPowers[(layer+3)%6];
-  const b2=bandPowers[(layer+5)%6];
-  const amp=active?maxima[layer]*(.45+.55*mix):unit*.006;
-  const shape=(angle)=>{
-    // All angular harmonics have integer periods: closed, fluid loops even
-    // when the audio spectrum changes abruptly between frames.
-    const first=Math.sin(angle*(3+layer)+progress+phase)*(0.40+0.15*b0);
-    const second=Math.cos(angle*(6+layer)-progress*.83+phase*.7)*(0.29+0.14*b1);
-    const third=Math.sin(angle*(10-layer*2)+progress*1.37-phase*.43)*(0.17+0.10*b2);
-    const total=first+second+third;
-    return Math.min(unit*.455,Math.max(unit*.27,bases[layer]+amp*total));
-  };
-  function strokeRibbon(offset,alpha,width,blur){
-    ctx.beginPath();
-    for(let i=0;i<=pointCount;i++){
-      const angle=i/pointCount*Math.PI*2;
-      const r=shape(angle)+offset;
-      const x=cx+Math.cos(angle)*r,y=cy+Math.sin(angle)*r;
-      if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-    }
-    ctx.closePath();
-    ctx.globalAlpha=alpha;
-    ctx.lineWidth=width;
-    ctx.shadowColor=colors[layer];
-    ctx.shadowBlur=blur;
-    ctx.strokeStyle=colors[layer];
-    ctx.stroke();
+  const values=new Float32Array(count);
+  const raw=new Float32Array(count);
+  if(active){
+   // Restore *the same 210 fine FFT samples as v1*, rather than 6 bands.
+   for(let i=0;i<count;i++){
+    raw[i]=fft[(i*2+layer*19)%spectrumSize]/255;
+   }
   }
-  // Two delicate luminous fibers give movement dimensionality without
-  // becoming three thick, hard-edged rings or obscuring the artwork.
-  strokeRibbon(-3.4,active?.23:.10,.72,5);
-  strokeRibbon(3.1,active?.20:.09,.7,5);
-  strokeRibbon(0,.94,1.8,12+(active?9*mix:0));
-  strokeRibbon(0,.13,4.3,15);
- }
- // Quiet peripheral starlight, safely within the 350px visualizer canvas.
- ctx.shadowBlur=0;
- const particleR=unit*.465;
- for(let i=0;i<38;i++){
-  const angle=i/38*Math.PI*2+motion*.09;
-  const r=particleR+Math.sin(i*6+motion)*1.2;
+  let average=0;
+  for(let i=0;i<count;i++){
+   // A very light cyclic five-point kernel removes the *seam*, not the
+   // fast changes from each original FFT sample that made v1 feel alive.
+   const at=k=>raw[(k+count)%count];
+   const v=(at(i)*6+(at(i-1)+at(i+1))*3+
+            (at(i-2)+at(i+2)))/14;
+   values[i]=v;
+   average+=v;
+  }
+  average/=count;
+  const wobbleMagnitude=2.4+energy*7; // exact original dynamic wobble strength
+  const responseGain=active?90+22*activity:0; // v1 was 46 on unsmoothed FFT
+  const motion=phase*(active?.95:.018);
+  const candidate=new Float32Array(count);
+  let min=Infinity,max=-Infinity;
+  for(let i=0;i<count;i++){
+   const a=i/count*Math.PI*2;
+   const wobble=(Math.sin(a*(3+layer*2)+motion+layer)
+                 +Math.cos(a*(7-layer)-motion*.67)) *wobbleMagnitude;
+   const fineAudio=(values[i]-average)*responseGain;
+   const breath=active?(energy-.1)*10:0;
+   const radius=base[layer]+wobble+fineAudio+breath;
+   candidate[i]=radius;
+   min=Math.min(min,radius);
+   max=Math.max(max,radius);
+  }
+  // Dynamically fit the *whole* wavering ring into the safe canvas area.
+  // Uniformly scaling deviations avoids the flat plateaus of hard clipping.
+  const middle=(max+min)/2;
+  const intended=Math.max(lower[layer]+3,Math.min(upper[layer]-3,middle));
+  const span=Math.max(1,(max-min)/2);
+  const scale=Math.min(1,(upper[layer]-intended)/span,(intended-lower[layer])/span);
+  const pathRadius=i=>intended+(candidate[(i+count)%count]-middle)*scale;
+  // Return to v1's three original light strokes (one per color).
+  // We preserve raw live FFT responsiveness and only smooth curve connections.
   ctx.beginPath();
-  ctx.arc(cx+Math.cos(angle)*r,cy+Math.sin(angle)*r,i%6===0?1.1:.55,0,Math.PI*2);
-  ctx.fillStyle=i%2===0?"#b6eeff":"#e4bcff";
-  ctx.globalAlpha=.16+.20*(.5+.5*Math.sin(i+motion));
+  for(let i=0;i<=count;i++){
+   const angle=i/count*Math.PI*2;
+   const r=pathRadius(i);
+   const x=cx+Math.cos(angle)*r,y=cy+Math.sin(angle)*r;
+   if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+  ctx.strokeStyle=colors[layer];
+  ctx.lineWidth=layer===0?1.9:1.4;
+  ctx.shadowColor=colors[layer];
+  ctx.shadowBlur=18+energy*24;
+  ctx.globalAlpha=.82;
+  ctx.stroke();
+
+ }
+ // The original orbiting particles were already good; simply keep them away
+ // from the physical canvas edge and leave them decorative, not fake audio.
+ const partR=unit*.463;
+ ctx.shadowBlur=0;
+ for(let i=0;i<43;i++){
+  const a=i/43*Math.PI*2+phase*.06*(i%2?-1:1);
+  const r=partR+Math.sin(phase*.38+i)*1.7;
+  ctx.beginPath();
+  ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,i%7===0?1.5:.65,0,Math.PI*2);
+  ctx.fillStyle=i%2===0?"#afeaff":"#d5b2ff";
+  ctx.globalAlpha=.25+.25*Math.sin(phase*.8+i)**2;
   ctx.fill();
  }
  ctx.restore();
- // Diagnostic metadata supports repeatable live-motion and containment QA.
  canvas.dataset.waveActive=active?"1":"0";
  canvas.dataset.waveEnergy=energy.toFixed(3);
- canvas.dataset.waveAmplitude=(maxima[2]*(.45+.55*mix)).toFixed(1);
- canvas.dataset.wavePhase=motion.toFixed(2);
+ canvas.dataset.wavePhase=phase.toFixed(3);
+ canvas.dataset.waveMotionStyle="original-fft-preserved-v4";
+ canvas.dataset.waveSpectralSamples=active?String(count):"0";
+ canvas.dataset.waveResponseGain=active?(90+22*activity).toFixed(1):"0";
 }
 function drawTone(canvas,time){
  const c=canvasSize(canvas);if(!c)return;const {ctx,w,h}=c,cx=w/2,cy=h/2;
