@@ -196,3 +196,17 @@ Going forward: creator-picked new songs can use the same dry-run-first
 Music Maker experiment; do not create another player or separate hosting site.
 Tests must verify browser audio playback and Next navigation from the *deployed*
 GitHub Pages website, not merely inspect HTML or test decryption.
+
+## November 11 evening — three higher-energy originals in New Music
+
+The owner disliked the previous two reflective/tame originals and requested **more exciting songs**. Music Maker generated three original English-lyric full songs from new, intentionally distinct prompts. These three are **listening previews**, not aesthetically approved finals:
+
+- **Disco on the Fire Escape** — 128 BPM, 3:00, live disco-funk / dance pop, playful horns and bass concept
+- **Neon Wildfire** — 146 BPM, 3:10, cinematic electro-rock with dramatic chorus concept
+- **Out of Orbit** — 164 BPM, 2:55, fast breakbeat / drum-and-bass-pop concept
+
+The frequency-music-public site has three independent 256kbps AAC/M4A assets in audio/new, with JSON metadata including explicit durations to support GitHub Actions (where ffprobe may be unavailable). These are **PUBLIC** and downloadable over HTTPS on GitHub Pages. WAV masters, generation seeds, complete lyric sheets and creative provenance remain exclusively in Music Maker and are not included in the web site. The public catalog now has **69 total recordings / 36 songs + 33 soundscapes**, of which New Music contains five ordinary public originals; the three high-energy takes sort above the previous two. The three Fire Under Calm C1/C2/C3 experiments remain only in the broader Music/Experiments areas, not New Music recommendations.
+
+The same original album-song row component `renderSongRows` and existing mini-player/Next queue are used; no custom player, key or encryption flow. A live music browser test must verify nonzero playback time and audio readyState, not simply show five titles, on the deployed Pages URL before completion. No claim that a technical QC pass equals exciting music or a listener Keep vote. The owner should choose favorites after hearing them.
+
+Future catalog tests are less tightly coupled to exact counts, and explicitly verify these named songs, source paths, duration metadata, direct AAC assets, and New Music rendering. Protect all prior masters and never silently alter an approved song when making another energetic version.

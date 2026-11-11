@@ -49,8 +49,8 @@ class ListeningRoomTests(unittest.TestCase):
         short=[t for t in soundscapes if t['duration']<90]
         self.assertEqual(len(soundscapes),33)
         self.assertEqual(len(short),9)
-        self.assertEqual(len([t for t in tracks if t.get('type')=='song']),33)
-        self.assertEqual(len([t for t in tracks if t.get('new')]),5)
+        self.assertGreaterEqual(len([t for t in tracks if t.get('type')=='song']),36)
+        self.assertGreaterEqual(len([t for t in tracks if t.get('new')]),8)
         grounded=next(t for t in tracks if t['id']=='timekeeper-audio-396-hz-grounded-foundation')
         self.assertAlmostEqual(grounded['duration'],66.58,places=1)
         for ident in ('shortSoundscapeHint','shortSoundscapeCopy','shortSoundscapeLoop'):
@@ -68,9 +68,9 @@ class ListeningRoomTests(unittest.TestCase):
         ids={'fire-under-calm-c1','fire-under-calm-c2','fire-under-calm-c3'}
         featured={t['id']:t for t in self.data['tracks'] if t['id'] in ids}
         self.assertEqual(set(featured),ids)
-        self.assertEqual(self.data['new_count'],5)
+        self.assertGreaterEqual(self.data['new_count'],8)
         fresh=next(w for w in self.data['worlds'] if w['id']=='fresh-cuts')
-        self.assertEqual(fresh['count'],5)
+        self.assertGreaterEqual(fresh['count'],8)
         for i in (1,2,3):
             track=featured[f'fire-under-calm-c{i}']
             self.assertEqual(track['audio'],f'audio/fire-under-calm-c{i}.m4a')
@@ -274,8 +274,8 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertNotIn('setupRituals',current)
         self.assertNotIn('renderLyrics()',current)
         self.assertIn("w.id!=='fresh-cuts'",(ROOT/'listening-room.js').read_text())
-        self.assertEqual(len(self.data['tracks']),66)
-        self.assertEqual(len([t for t in self.data['tracks'] if t.get('new')]),5)
+        self.assertGreaterEqual(len(self.data['tracks']),69)
+        self.assertGreaterEqual(len([t for t in self.data['tracks'] if t.get('new')]),8)
         self.assertEqual(len([w for w in self.data['worlds'] if w['id']!='fresh-cuts']),10)
         release=(ROOT/'scripts/publish_new_song.py').read_text()
         self.assertIn("a.publish",release)
@@ -328,24 +328,30 @@ class ListeningRoomTests(unittest.TestCase):
 
     def test_new_english_songs_use_public_audio_and_original_player(self):
         fresh={t['id']:t for t in self.data['tracks'] if t.get('source')=='Public preview upload'}
-        self.assertEqual(set(fresh),{'new-what-the-morning-knows','new-the-wild-part-of-me'})
-        for ident,title in [('new-what-the-morning-knows','What the Morning Knows'),
-                            ('new-the-wild-part-of-me','The Wild Part of Me')]:
-            t=fresh[ident]
-            self.assertEqual(t['title'],title)
-            self.assertTrue(t['audio'].startswith('audio/new/'))
-            self.assertTrue(t['audio'].endswith('.m4a'))
-            self.assertTrue((ROOT/t['audio']).is_file())
-            self.assertGreater((ROOT/t['audio']).stat().st_size,5_000_000)
-            self.assertAlmostEqual(t['duration'],200,places=0)
-            self.assertIn('early listening preview',t['subtitle'])
-            self.assertNotIn('private',t)
+        expected={
+            'new-what-the-morning-knows':('What the Morning Knows',200),
+            'new-the-wild-part-of-me':('The Wild Part of Me',200),
+            'new-disco-on-the-fire-escape':('Disco on the Fire Escape',180),
+            'new-neon-wildfire':('Neon Wildfire',190),
+            'new-out-of-orbit':('Out of Orbit',175),
+        }
+        self.assertTrue(set(expected).issubset(set(fresh)))
+        for ident,(title,duration) in expected.items():
+            with self.subTest(ident=ident):
+                t=fresh[ident]
+                self.assertEqual(t['title'],title)
+                self.assertTrue(t['audio'].startswith('audio/new/'))
+                self.assertTrue(t['audio'].endswith('.m4a'))
+                self.assertTrue((ROOT/t['audio']).is_file())
+                self.assertGreater((ROOT/t['audio']).stat().st_size,5_000_000)
+                self.assertAlmostEqual(t['duration'],duration,places=0)
+                self.assertIn('early listening preview',t['subtitle'])
+                self.assertNotIn('private',t)
         self.assertNotIn('frequency-private-music.js',self.html)
         self.assertNotIn('privateListeningSettings',self.html)
         self.assertNotIn('retryPrivateMusic',self.html)
         self.assertIn("app.renderSongRows($('newMusicList'),tracks)",(ROOT/'frequency-parity.js').read_text())
         self.assertNotIn('FrequencyPrivateMusic',(ROOT/'frequency-parity.js').read_text())
-        self.assertNotIn('frequency-private-music.js',self.html)
         self.assertNotIn("'./frequency-private-music.js'",(ROOT/'sw.js').read_text())
 
     def test_classic_navigation_preserves_current_catalog(self):
@@ -364,7 +370,7 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn("app.state.favoritesOnly=next==='favorites'",script)
         self.assertIn("window.FrequencyWebNavigation?.tab",script)
         self.assertNotIn("new Audio",script)
-        self.assertEqual(len(self.data['tracks']),66)
+        self.assertGreaterEqual(len(self.data['tracks']),69)
         self.assertEqual(len(self.data['worlds']),11)
         runner=shutil.which('node') or shutil.which('bun')
         self.assertIsNotNone(runner)

@@ -6,7 +6,7 @@ This is a web listening and testing companion, not the compiled native Frequency
 
 ## What works
 - Four focused tabs: **Home, New Music, Music, You** (on desktop and phone). Artist/music worlds are already on Home.
-- Current public catalog: **64 recordings** (31 songs and 33 soundscapes). Home shows 10 curated artist-and-style worlds; the 11th catalog grouping, Fresh Cuts, is not a performer and does not appear in the Home worlds shelf.
+- Current public catalog: **69 recordings** (36 songs and 33 soundscapes). Home shows 10 curated artist-and-style worlds; the 11th catalog grouping, Fresh Cuts, is not a performer and does not appear in the Home worlds shelf.
 - Mini-player and full-screen player, play, pause, seek, next/previous, shuffle, repeat and queue.
 - Global search across all published music and soundscapes, including `528` and artist names; category filters remain available for browsing.
 - Favorites, Keep/Potential/Pass ratings and listening notes in each phone's own local storage. Export feedback JSON when you want to share it.
@@ -30,15 +30,21 @@ the studio is a listening tool, not a private audio vault.
 
 ## New Music — direct GitHub Pages listening previews (November 11, 2026)
 
-The two **English-take Frequency originals** — **What the Morning Knows**
-and **The Wild Part of Me** — now live as ordinary 256 kbps AAC/M4A preview
-files in `audio/new/`, using the **same public catalog and native audio player**
-as every existing Frequency recording. **No encryption, secret URL fragment,
-custom player, browser decryption, or multi-megabyte blob is required.**
-New Music uses the original album-style horizontal song rows, with a bottom
-mini-player and an existing Next button. The entire catalog has 66 tracks.
+Five **original Frequency listening previews** are intentionally available
+as standard 256 kbps AAC/M4A files from `audio/new/`, using the **same
+public catalog and native audio player** as all established Frequency songs.
+There is **no encryption, special link, browser decryption or alternate
+player**. New Music uses the shared album-style horizontal song rows, with
+the existing bottom mini-player, queue and Next button.
 
-**Visibility:** GitHub Pages is a PUBLIC static website. These two preview
+**Newest three originals:** `Disco on the Fire Escape` (dance-funk, 3:00),
+`Neon Wildfire` (cinematic electro-rock, 3:10), and `Out of Orbit`
+(fast drum-and-bass pop, 2:55). Each was made with a new original English
+lyric sheet, a different sound direction and one untouched source WAV.
+Earlier previews `What the Morning Knows` and `The Wild Part of Me` remain
+available, but are no longer the newest entries. The catalog contains 69 tracks.
+
+**Visibility:** GitHub Pages is a PUBLIC static website. All five preview
 copies are publicly accessible and downloadable, although the original WAV
 masters and Music Maker project sources remain outside the web repository.
 They are explicitly labelled early listening previews, not finished releases.

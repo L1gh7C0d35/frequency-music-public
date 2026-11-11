@@ -29,7 +29,7 @@ const document={
   getElementById(){return hint},
 };
 const listeners={};
-const window={FrequencyPreview:{state:{tracks:new Array(66)}},addEventListener:(name,fn)=>{listeners[name]=fn}};
+const window={FrequencyPreview:{state:{tracks:new Array(JSON.parse(fs.readFileSync(__dirname+'/../listening-catalog.json','utf8')).tracks.length)}},addEventListener:(name,fn)=>{listeners[name]=fn}};
 const localStorage={getItem:key=>saved.get(key)||null,setItem:(key,value)=>saved.set(key,value)};
 vm.runInNewContext(source,{window,document,localStorage});
 assert.equal(root.dataset.frequencyAppearance,undefined);
