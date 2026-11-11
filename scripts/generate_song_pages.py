@@ -46,11 +46,14 @@ def page(track):
 <meta name="twitter:image" content="{escaped_cover}">
 <link rel="canonical" href="{escaped_url}">
 <meta http-equiv="refresh" content="1;url={html.escape(homepage,quote=True)}">
+<script>try{{if(localStorage.getItem('frequency-web-view-v1')==='classic'||localStorage.getItem('frequency-web-appearance-v1')==='midnight')document.documentElement.dataset.frequencyAppearance='midnight'}}catch(_){{}}</script>
 <style>html{{color-scheme:dark;font:16px system-ui;background:#0d1711;color:#f3f0e8}}
+html[data-frequency-appearance="midnight"]{{background:#090c12}}
 body{{display:grid;min-height:90vh;place-items:center;text-align:center;padding:1rem}}
 main{{max-width:340px}}img{{width:100%;aspect-ratio:1;object-fit:cover;border-radius:18px}}
 a{{display:inline-block;margin-top:18px;background:#f3f0e8;color:#0d1711;padding:12px 22px;
-border-radius:999px;text-decoration:none;font-weight:700}}</style>
+border-radius:999px;text-decoration:none;font-weight:700}}
+html[data-frequency-appearance="midnight"] a{{color:#151b25}}</style>
 </head><body><main><img src="{escaped_cover}" alt="Song cover artwork">
 <h1>{escaped_title}</h1><p>Opening your song in Frequency Music…</p>
 <a href="{html.escape(homepage,quote=True)}">▶ Listen to this song</a>

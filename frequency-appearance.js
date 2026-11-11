@@ -44,9 +44,10 @@
       });
     });
     window.addEventListener('storage',event=>{
-      if(event.key===KEY)choose(valid(event.newValue),false);
+      if(event.key===KEY)choose(root.dataset.frequencyView==='classic'?'midnight':valid(event.newValue),false);
     });
   }
+  window.FrequencyAppearance={choose};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
   else start();
 })();

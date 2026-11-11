@@ -1,0 +1,72 @@
+/* October 12 four-tab composition on CURRENT Frequency player and catalog.
+   Not a second player, no rollback of audio or user data. */
+.classic-side-links,.classic-mobile-nav{display:none!important}
+.classic-switch{display:none}
+.frequency-view-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.you-card button.frequency-view-choice{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;width:100%;min-height:95px;padding:15px;border:1px solid #ffffff23;border-radius:15px;background:#ffffff08;color:var(--text);text-align:left}
+.you-card button.frequency-view-choice[aria-checked="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:#ffffff12}
+.frequency-view-choice strong{font-size:15px;font-weight:720}
+.frequency-view-choice small{font-size:11px;line-height:1.4;color:var(--muted)}
+.you-card .frequency-view-hint{font-size:11px;color:var(--muted);margin:12px 0 0}
+html[data-frequency-view="classic"] .side-links:not(.classic-side-links){display:none!important}
+html[data-frequency-view="classic"] .classic-side-links{display:grid!important}
+html[data-frequency-view="classic"] .mobile-nav:not(.classic-mobile-nav){display:none!important}
+html[data-frequency-view="classic"] .classic-switch{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 13px;border-radius:99px;border:1px solid var(--stroke);background:#1b222d;color:#f4f2ed;white-space:nowrap;font-size:11px;font-weight:700}
+html[data-frequency-view="classic"] .classic-switch:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+html[data-frequency-view="classic"] .nav-caption{letter-spacing:1.5px}
+html[data-frequency-view="classic"] .side-link.selected{background:linear-gradient(95deg,#282d33,#1e242a);box-shadow:inset 3px 0 #d4bea2}
+html[data-frequency-view="classic"] .hero{background:#1c202a}
+html[data-frequency-view="classic"] .hero h1 i{color:#dfc7a9}
+/* Five-tab rules hide sections. Classic view reuses the same sections
+   and safely overrides visibility, without cloning the playback UI. */
+html[data-frequency-view="classic"] body #ritualsScreen,
+html[data-frequency-view="classic"] body #wordsScreen,
+html[data-frequency-view="classic"] body #youScreen{display:none!important}
+html[data-frequency-view="classic"] body .app-shortcuts{display:none!important}
+html[data-frequency-view="classic"] body #hero,
+html[data-frequency-view="classic"] body #worlds,
+html[data-frequency-view="classic"] body #picks,
+html[data-frequency-view="classic"] body #library{display:none}
+html[data-frequency-view="classic"] body[data-classic-tab="discover"] #hero{display:grid}
+html[data-frequency-view="classic"] body[data-classic-tab="discover"] #worlds,
+html[data-frequency-view="classic"] body[data-classic-tab="discover"] #picks,
+html[data-frequency-view="classic"] body[data-classic-tab="discover"] #library{display:block}
+html[data-frequency-view="classic"] body[data-classic-tab="worlds"] #worlds{display:block}
+html[data-frequency-view="classic"] body[data-classic-tab="music"] #library,
+html[data-frequency-view="classic"] body[data-classic-tab="favorites"] #library{display:block}
+html[data-frequency-view="classic"] body[data-classic-tab="worlds"] #worlds,
+html[data-frequency-view="classic"] body[data-classic-tab="music"] #library,
+html[data-frequency-view="classic"] body[data-classic-tab="favorites"] #library{padding-top:26px}
+html[data-frequency-view="classic"] .world-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+html[data-frequency-view="classic"] .world-card{aspect-ratio:4/4.8}
+html[data-frequency-view="classic"] .world-small{font-size:10px}
+html[data-frequency-view="classic"] .world-title{font-size:clamp(17px,2vw,25px)}
+html[data-frequency-view="classic"] .world-desc{font-size:11px}
+html[data-frequency-view="classic"] .hero{border-radius:26px}
+html[data-frequency-view="classic"] #trackCount{font-variant-numeric:tabular-nums}
+html[data-frequency-view="classic"] .app-mode-row{display:none}
+html[data-frequency-view="classic"] .experience-scroll{display:none}
+html[data-frequency-view="classic"] .section-eyebrow{color:#d1bca0}
+@media(max-width:1190px){
+  html[data-frequency-view="classic"] .world-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  html[data-frequency-view="classic"] .classic-side-links{display:none!important}
+  html[data-frequency-view="classic"] .classic-mobile-nav{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+  html[data-frequency-view="classic"] .classic-mobile-nav button{gap:4px;min-width:0}
+  html[data-frequency-view="classic"] .classic-mobile-nav button span{font-size:20px}
+  html[data-frequency-view="classic"] .classic-mobile-nav button small{font-size:10px}
+}
+@media(max-width:650px){
+  html[data-frequency-view="classic"] body[data-classic-tab="discover"] #hero{display:block}
+  html[data-frequency-view="classic"] .world-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0;padding:0;overflow:visible}
+  html[data-frequency-view="classic"] .world-card{width:auto;max-width:none;min-height:170px;aspect-ratio:4/4.8;scroll-snap-align:none}
+  html[data-frequency-view="classic"] .world-title{font-size:clamp(17px,5vw,22px)}
+  html[data-frequency-view="classic"] .world-desc{font-size:10px}
+  html[data-frequency-view="classic"] .topbar .top-action{display:none}
+  html[data-frequency-view="classic"] .topbar-right{gap:6px}
+  html[data-frequency-view="classic"] .classic-switch{min-height:44px;padding:9px 11px;font-size:10px}
+  html[data-frequency-view="classic"] .hero{border-radius:22px}
+  .frequency-view-options{grid-template-columns:1fr}
+  .you-card button.frequency-view-choice{min-height:71px;padding:12px}
+}

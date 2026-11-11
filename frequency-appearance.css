@@ -60,3 +60,24 @@ html[data-frequency-appearance="midnight"] .world-detail-hero{background:#1c2230
 html[data-frequency-appearance="midnight"] .world-detail-shade{background:linear-gradient(180deg,#0d111b08 8%,#1117263a 44%,#0c111bf1 100%)}
 html[data-frequency-appearance="midnight"] .world-detail-body{background:#141a24}
 @media(max-width:650px){html[data-frequency-appearance="midnight"] .hero-shade{background:linear-gradient(0deg,#0d111dec 0%,#16182191 69%,#1113187a 100%)}html[data-frequency-appearance="midnight"] .world-detail-body{background:none}}
+
+/* Full-panel palette parity: the first pass covered chrome but missed inner
+   artist-track tiles, active song rows, and some player/body text colors. */
+html[data-frequency-appearance="midnight"] .world-song{background:#222936}
+html[data-frequency-appearance="midnight"] .world-song.active{background:#2c3442}
+html[data-frequency-appearance="midnight"] .world-song-play{color:#171d27}
+html[data-frequency-appearance="midnight"] .intent-filters button.selected,
+html[data-frequency-appearance="midnight"] .app-mode.selected{color:#151b25}
+html[data-frequency-appearance="midnight"] .filter-chip.selected{color:#151b25;background:#e8dfd5}
+html[data-frequency-appearance="midnight"] .app-fine{color:#929bac}
+html[data-frequency-appearance="midnight"] .short-soundscape-hint button.active{color:#151b25}
+html[data-frequency-appearance="midnight"] .now-sound{color:#b2b9c5}
+html[data-frequency-appearance="midnight"] .now-lyrics-heading button[aria-pressed="true"]{color:#151b25}
+html[data-frequency-appearance="midnight"] .world-detail-section-head small{color:#b7c0cc}
+html[data-frequency-appearance="midnight"] .ritual-panel label,
+html[data-frequency-appearance="midnight"] .words-panel label{color:#bac2d0}
+html[data-frequency-appearance="midnight"] .ritual-focus{color:#b8c1cd}
+html[data-frequency-appearance="midnight"] .experience-scroll button{background:#171d27;color:#d1d3da}
+html[data-frequency-appearance="midnight"] .experience-scroll button.selected{background:#e8dfd5;color:#202732}
+html[data-frequency-appearance="midnight"] .world-detail-section-head .primary-action{color:#151b25}
+html[data-frequency-appearance="midnight"] .now-controls .main-play{color:#151922}

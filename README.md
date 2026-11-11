@@ -194,3 +194,27 @@ Technical files: `frequency-appearance.css`, `frequency-appearance.js`,
 `scripts/test_appearance_preference.js`; the service worker caches both
 appearance assets. The original `listening-room.css` and
 `frequency-parity.css` remain unchanged for the default theme.
+
+## Reversible four-tab Classic comparison (November 11, 2026)
+
+Open **<https://l1gh7c0d35.github.io/frequency-music-public/?view=classic>**
+to compare the 2026-10-12-inspired **Discover · Worlds · Music · Favorites**
+navigation, original charcoal-blue look, and historic hero copy against the
+current 5-tab Frequency experience. This is **not another hosted site or
+another music player**. It reuses the current 64-track/11-world catalog,
+playback engine, locally saved ratings/favorites, and performance fixes.
+The button **5-tab view** switches back instantly; in the current version
+**You → Navigation style** also controls the layout. The selection is
+saved on that browser under `frequency-web-view-v1`.
+
+A full audit of historical differences, remaining visual leaks, song
+metadata changes, and the 17 original audio files rewritten for streaming
+is in `docs/FREQUENCY_WEB_CLASSIC_AUDIT_20261111.md`. For Midnight,
+a generated opt-in stylesheet extends the original blue palette to the
+35 separate public HTML pages, plus the song-sharing redirect. Run
+`python3 scripts/build_legacy_appearance.py --install` after adding
+or regenerating static subpages.
+
+**Do not blindly check out or publish the old October 12 tree:** it had
+only 28 tracks, while the current catalog has 64 and additional
+listening/search fixes. Do not add a new temporary player or hosting setup.

@@ -16,11 +16,14 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="listening-room.css?v=20261013lyrics1">
   <link rel="stylesheet" href="frequency-parity.css?v=20261020experiments1">
+  <script>(function(){try{const q=new URLSearchParams(location.search).get('view');const saved=localStorage.getItem('frequency-web-view-v1');if(q==='classic'||(q!=='modern'&&saved==='classic')){document.documentElement.dataset.frequencyView='classic';document.documentElement.dataset.frequencyAppearance='midnight'}}catch(_){}})();</script>
   <script>try{if(localStorage.getItem('frequency-web-appearance-v1')==='midnight')document.documentElement.dataset.frequencyAppearance='midnight'}catch(_){}</script>
-  <link rel="stylesheet" href="frequency-appearance.css?v=20261111a">
+  <link rel="stylesheet" href="frequency-appearance.css?v=20261111c">
+  <link rel="stylesheet" href="frequency-classic.css?v=20261111a">
   <script src="listening-room.js?v=20261013lyrics1" defer></script>
   <script src="frequency-parity.js?v=20261111appearance1" defer></script>
   <script src="frequency-appearance.js?v=20261111b" defer></script>
+  <script src="frequency-classic.js?v=20261111a" defer></script>
 </head>
 <body>
 <div class="app-shell">
@@ -34,6 +37,12 @@
       <button class="side-link" data-app-tab="words"><span class="nav-icon">❝</span><span>Words</span></button>
       <button class="side-link" data-app-tab="you"><span class="nav-icon">◯</span><span>You</span></button>
     </nav>
+    <nav class="side-links classic-side-links" aria-label="Classic Frequency navigation">
+      <button class="side-link selected" data-classic-tab="discover"><span class="nav-icon">✧</span><span>Discover</span></button>
+      <button class="side-link" data-classic-tab="worlds"><span class="nav-icon">▦</span><span>Worlds</span></button>
+      <button class="side-link" data-classic-tab="music"><span class="nav-icon">♫</span><span>Music</span></button>
+      <button class="side-link" data-classic-tab="favorites"><span class="nav-icon">♡</span><span>Favorites</span></button>
+    </nav>
     <div class="sidebar-lower">
       <div class="side-note"><span class="note-dot"></span> ORIGINAL SOUND WORLDS <p>Explore the feeling. Find your favorites.</p></div>
       <a class="side-archive" href="legacy-library.html">Classic song pages ↗</a>
@@ -46,6 +55,7 @@
     <header class="topbar">
       <div class="topbar-left"><span class="mobile-logo">◒ <b>frequency</b></span><div class="breadcrumb"><span>EXPLORE</span><span class="divider-dot">/</span><strong id="crumb">Discover</strong></div></div>
       <div class="topbar-right">
+        <button id="switchToModern" class="classic-switch" type="button" aria-label="Switch to current five-tab Frequency view">5-tab view</button>
         <button id="topSearch" class="icon-button top-search" title="Search all recordings" aria-label="Search all recordings"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 4.5 4.5"/></svg></button>
         <button id="openFeedback" class="top-action"><span class="top-action-star">✧</span> Listening notes</button>
         <button id="shareRoom" class="icon-button" title="Share listening room" aria-label="Share listening room"><svg viewBox="0 0 24 24"><path d="M12 16V3m0 0-4.5 4.5M12 3l4.5 4.5M5 14v5.5c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V14"/></svg></button>
@@ -149,6 +159,15 @@
         </div>
         <p class="appearance-hint" id="appearanceHint" role="status" aria-live="polite">Forest is selected. This choice stays on this device.</p>
       </section>
+      <section class="you-card frequency-view-settings" aria-labelledby="frequencyViewHeading">
+        <h3 id="frequencyViewHeading">Navigation style</h3>
+        <p>Compare the original four-section listening room with today's five-tab app. Both use the same music catalog and player.</p>
+        <div class="frequency-view-options" role="radiogroup" aria-label="Frequency navigation style">
+          <button class="frequency-view-choice" type="button" role="radio" data-view-choice="classic" aria-checked="false"><strong>✧ Classic</strong><small>Discover · Worlds · Music · Favorites</small></button>
+          <button class="frequency-view-choice" type="button" role="radio" data-view-choice="modern" aria-checked="true"><strong>◉ Current</strong><small>Home · Rituals · Sounds · Words · You</small></button>
+        </div>
+        <p class="frequency-view-hint" id="frequencyViewHint" role="status" aria-live="polite">Current navigation is selected.</p>
+      </section>
       <div class="you-card"><h3>Use Frequency on Android</h3><p>Open this link in Chrome. You can add it to your home screen for an app-like shortcut; audio plays through the browser.</p><button id="installHelp">＋ Add to home screen <span>›</span></button></div>
       <div class="app-fine">Web test build · Android & iPhone · Original sound worlds aren't separate verified performer credits.</div>
     </section>
@@ -161,6 +180,12 @@
   <button data-app-tab="sounds" aria-label="Sounds"><span>♫</span><small>Sounds</small></button>
   <button data-app-tab="words" aria-label="Words"><span>❝</span><small>Words</small></button>
   <button data-app-tab="you" aria-label="You"><span>◯</span><small>You</small></button>
+</nav>
+<nav class="mobile-nav classic-mobile-nav" aria-label="Classic Frequency tabs">
+  <button data-classic-tab="discover" class="selected" aria-label="Discover"><span>✧</span><small>Discover</small></button>
+  <button data-classic-tab="worlds" aria-label="Worlds"><span>▦</span><small>Worlds</small></button>
+  <button data-classic-tab="music" aria-label="Music"><span>♫</span><small>Music</small></button>
+  <button data-classic-tab="favorites" aria-label="Favorites"><span>♡</span><small>Favorites</small></button>
 </nav>
 <div class="mini-player" id="miniPlayer" hidden>
   <button id="miniOpen" class="mini-information" aria-label="Open now playing"><img id="miniCover" alt="Current song artwork" src="artwork/already-arrived.jpg"><span class="mini-copy"><b id="miniTitle">Music</b><small id="miniSubtitle">Frequency Originals</small></span><span class="eq mini-eq" id="miniEq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>

@@ -1,0 +1,316 @@
+/* GENERATED. Opt-in midnight colors for classic/experimental Frequency pages.
+
+   Keep source HTML layout intact; regenerate via scripts/build_legacy_appearance.py. */
+
+/* experiments.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"]{--bg:#090c12;--panel:#151a22;--line:#303844;--mint:#d1bca0}
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"] body{background:radial-gradient(ellipse at 50% -20%,#263246,transparent 55%),var(--bg)}
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"] .notice{background:#1d2532;border:1px solid #37455a}
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"] .toolbar{background:linear-gradient(#0e121a 86%,transparent)}
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"] input[type=search]{background:#1b2532}
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"] .play,
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"] .rate{background:#253043}
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"] .rate.on{background:#364356}
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"] .player{border:1px solid #515b6c}
+html[data-frequency-appearance="midnight"][data-frequency-page="experiments.html"] .transport button{background:#2d3849}
+
+/* legacy-library.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] body{background:radial-gradient(circle at 50% -8%,#203045 0,#0e131b 38%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] .playIcon{border-left:14px solid #0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] .song.active .songPlay .playIcon{background:linear-gradient(to right,#0c0f15 0 34%,transparent 34% 66%,#0c0f15 66% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] .rank{background:#222d3b}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] .badge{background:#2c3b50}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] .miniPlay.playing .playIcon{background:linear-gradient(to right,#0c0f15 0 33%,transparent 33% 67%,#0c0f15 67% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] .time{color:#747780}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-library.html"] .openNow{color:#0c0f15}
+
+/* legacy-music.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] body{background:radial-gradient(circle at 50% -8%,#203045 0,#0e131b 38%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] .playIcon{border-left:14px solid #0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] .song.active .songPlay .playIcon{background:linear-gradient(to right,#0c0f15 0 34%,transparent 34% 66%,#0c0f15 66% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] .rank{background:#222d3b}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] .badge{background:#2c3b50}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] .miniPlay.playing .playIcon{background:linear-gradient(to right,#0c0f15 0 33%,transparent 33% 67%,#0c0f15 67% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] .time{color:#747780}
+html[data-frequency-appearance="midnight"][data-frequency-page="legacy-music.html"] .openNow{color:#0c0f15}
+
+/* new-batch.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="new-batch.html"] body{background:radial-gradient(circle at 50% -8%,#203045 0,#0e131b 38%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="new-batch.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="new-batch.html"] .playIcon{border-left:14px solid #0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="new-batch.html"] .song.active .songPlay .playIcon{background:linear-gradient(to right,#0c0f15 0 34%,transparent 34% 66%,#0c0f15 66% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="new-batch.html"] .rank{background:#222d3b}
+html[data-frequency-appearance="midnight"][data-frequency-page="new-batch.html"] .badge{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="new-batch.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="new-batch.html"] .miniPlay.playing .playIcon{background:linear-gradient(to right,#0c0f15 0 33%,transparent 33% 67%,#0c0f15 67% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="new-batch.html"] .time{color:#747780}
+
+/* reset-batch.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="reset-batch.html"] body{background:radial-gradient(circle at 50% -8%,#252935 0,#0d0e12 38%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="reset-batch.html"] .brand{color:#a0afd5}
+html[data-frequency-appearance="midnight"][data-frequency-page="reset-batch.html"] .note{color:#717580}
+html[data-frequency-appearance="midnight"][data-frequency-page="reset-batch.html"] .letter{background:#202531}
+html[data-frequency-appearance="midnight"][data-frequency-page="reset-batch.html"] .sub{color:#828ca7}
+html[data-frequency-appearance="midnight"][data-frequency-page="reset-batch.html"] .vote button{background:#14171d}
+html[data-frequency-appearance="midnight"][data-frequency-page="reset-batch.html"] .vote button.on{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="reset-batch.html"] .rule{color:#9fa4b1}
+
+/* song-already-arrived.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-arrived.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-arrived.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-arrived.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-arrived.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-arrived.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-arrived.html"] .note{color:#747780}
+
+/* song-already-grateful.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-grateful.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-grateful.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-grateful.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-grateful.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-grateful.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-already-grateful.html"] .note{color:#747780}
+
+/* song-built-for-this.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-built-for-this.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-built-for-this.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-built-for-this.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-built-for-this.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-built-for-this.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-built-for-this.html"] .note{color:#747780}
+
+/* song-command-the-day.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-command-the-day.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-command-the-day.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-command-the-day.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-command-the-day.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-command-the-day.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-command-the-day.html"] .note{color:#747780}
+
+/* song-crowned-by-fire.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-crowned-by-fire.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-crowned-by-fire.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-crowned-by-fire.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-crowned-by-fire.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-crowned-by-fire.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-crowned-by-fire.html"] .note{color:#747780}
+
+/* song-future-in-the-room.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-future-in-the-room.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-future-in-the-room.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-future-in-the-room.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-future-in-the-room.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-future-in-the-room.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-future-in-the-room.html"] .note{color:#747780}
+
+/* song-gold-on-my-mind.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-gold-on-my-mind.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-gold-on-my-mind.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-gold-on-my-mind.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-gold-on-my-mind.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-gold-on-my-mind.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-gold-on-my-mind.html"] .note{color:#747780}
+
+/* song-golden-hour.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-golden-hour.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-golden-hour.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-golden-hour.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-golden-hour.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-golden-hour.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-golden-hour.html"] .note{color:#747780}
+
+/* song-good-things-find-me.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-good-things-find-me.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-good-things-find-me.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-good-things-find-me.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-good-things-find-me.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-good-things-find-me.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-good-things-find-me.html"] .note{color:#747780}
+
+/* song-i-decide.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-decide.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-decide.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-decide.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-decide.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-decide.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-decide.html"] .note{color:#747780}
+
+/* song-i-do-not-break.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-do-not-break.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-do-not-break.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-do-not-break.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-do-not-break.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-do-not-break.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-i-do-not-break.html"] .note{color:#747780}
+
+/* song-light-finds-me.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-light-finds-me.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-light-finds-me.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-light-finds-me.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-light-finds-me.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-light-finds-me.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-light-finds-me.html"] .note{color:#747780}
+
+/* song-made-of-mountains.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-made-of-mountains.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-made-of-mountains.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-made-of-mountains.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-made-of-mountains.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-made-of-mountains.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-made-of-mountains.html"] .note{color:#747780}
+
+/* song-momentum-is-mine.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-momentum-is-mine.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-momentum-is-mine.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-momentum-is-mine.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-momentum-is-mine.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-momentum-is-mine.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-momentum-is-mine.html"] .note{color:#747780}
+
+/* song-money-meets-motion.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-money-meets-motion.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-money-meets-motion.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-money-meets-motion.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-money-meets-motion.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-money-meets-motion.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-money-meets-motion.html"] .note{color:#747780}
+
+/* song-move-like-money.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-move-like-money.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-move-like-money.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-move-like-money.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-move-like-money.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-move-like-money.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-move-like-money.html"] .note{color:#747780}
+
+/* song-open-to-more.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-open-to-more.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-open-to-more.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-open-to-more.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-open-to-more.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-open-to-more.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-open-to-more.html"] .note{color:#747780}
+
+/* song-pressure-into-power.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-pressure-into-power.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-pressure-into-power.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-pressure-into-power.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-pressure-into-power.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-pressure-into-power.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-pressure-into-power.html"] .note{color:#747780}
+
+/* song-quiet-empire.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-quiet-empire.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-quiet-empire.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-quiet-empire.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-quiet-empire.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-quiet-empire.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-quiet-empire.html"] .note{color:#747780}
+
+/* song-soft-life-strong-mind.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-soft-life-strong-mind.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-soft-life-strong-mind.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-soft-life-strong-mind.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-soft-life-strong-mind.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-soft-life-strong-mind.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-soft-life-strong-mind.html"] .note{color:#747780}
+
+/* song-storm-in-my-blood.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-storm-in-my-blood.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-storm-in-my-blood.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-storm-in-my-blood.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-storm-in-my-blood.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-storm-in-my-blood.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-storm-in-my-blood.html"] .note{color:#747780}
+
+/* song-the-room-changes.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-the-room-changes.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-the-room-changes.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-the-room-changes.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-the-room-changes.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-the-room-changes.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-the-room-changes.html"] .note{color:#747780}
+
+/* song-this-is-my-normal.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-this-is-my-normal.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-this-is-my-normal.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-this-is-my-normal.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-this-is-my-normal.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-this-is-my-normal.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-this-is-my-normal.html"] .note{color:#747780}
+
+/* song-watch-me-build.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="song-watch-me-build.html"] body{background:radial-gradient(circle at 50% -12%,#263346 0,#10131b 43%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-watch-me-build.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-watch-me-build.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-watch-me-build.html"] .primary{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-watch-me-build.html"] .secondary{background:#2c3b4e}
+html[data-frequency-appearance="midnight"][data-frequency-page="song-watch-me-build.html"] .note{color:#747780}
+
+/* state-layer-lab.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="state-layer-lab.html"] body{background:radial-gradient(circle at 50% -10%,#1c2231 0,#0d0f14 40%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="state-layer-lab.html"] .brand{color:#9faed4}
+html[data-frequency-appearance="midnight"][data-frequency-page="state-layer-lab.html"] .note{color:#787f90}
+html[data-frequency-appearance="midnight"][data-frequency-page="state-layer-lab.html"] .num{background:#202531}
+html[data-frequency-appearance="midnight"][data-frequency-page="state-layer-lab.html"] .tag{color:#0c0f15}
+
+/* studio.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="studio.html"]{--bg:#090c12;--moss:#78859b}
+html[data-frequency-appearance="midnight"][data-frequency-page="studio.html"] body{background:radial-gradient(circle at 55% -10%,#1a1e28 0,#0d0e12 35%,var(--bg) 68%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="studio.html"] .cover{background:linear-gradient(145deg,#262a34,#111317)}
+html[data-frequency-appearance="midnight"][data-frequency-page="studio.html"] .chip.sel{color:#111215}
+html[data-frequency-appearance="midnight"][data-frequency-page="studio.html"] .miniCover{background:linear-gradient(145deg,#262a34,#111317)}
+html[data-frequency-appearance="midnight"][data-frequency-page="studio.html"] .sheetCard{background:linear-gradient(#181a20,#090c12 45%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="studio.html"] .bigCover{background:linear-gradient(145deg,#2a2e3a,#111317)}
+
+/* style-batch.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="style-batch.html"] body{background:radial-gradient(circle at 50% -8%,#203045 0,#0e131b 38%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="style-batch.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="style-batch.html"] .playIcon{border-left:14px solid #0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="style-batch.html"] .song.active .songPlay .playIcon{background:linear-gradient(to right,#0c0f15 0 34%,transparent 34% 66%,#0c0f15 66% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="style-batch.html"] .rank{background:#222d3b}
+html[data-frequency-appearance="midnight"][data-frequency-page="style-batch.html"] .badge{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="style-batch.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="style-batch.html"] .miniPlay.playing .playIcon{background:linear-gradient(to right,#0c0f15 0 33%,transparent 33% 67%,#0c0f15 67% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="style-batch.html"] .time{color:#747780}
+
+/* vault-inspired-lab.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="vault-inspired-lab.html"] body{background:radial-gradient(circle at 50% -8%,#242936 0,#0b0c10 38%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="vault-inspired-lab.html"] .brand{color:#9fadd2}
+html[data-frequency-appearance="midnight"][data-frequency-page="vault-inspired-lab.html"] .note{color:#787b84}
+html[data-frequency-appearance="midnight"][data-frequency-page="vault-inspired-lab.html"] .num{background:#222631}
+html[data-frequency-appearance="midnight"][data-frequency-page="vault-inspired-lab.html"] .badge{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="vault-inspired-lab.html"] .sub{color:#9daacb}
+html[data-frequency-appearance="midnight"][data-frequency-page="vault-inspired-lab.html"] .vote button{background:#191c24}
+html[data-frequency-appearance="midnight"][data-frequency-page="vault-inspired-lab.html"] .vote button.on{color:#0c0f15}
+
+/* viral-research-batch.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] body{background:radial-gradient(circle at 50% -8%,#232836 0,#0e131b 40%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .note{color:#a9b5c5}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .playIcon{border-left:14px solid #0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .song.active .songPlay .playIcon{background:linear-gradient(to right,#0c0f15 0 34%,transparent 34% 66%,#0c0f15 66% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .rank{background:#222d3b}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .badge{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .lane{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .miniPlay.playing .playIcon{background:linear-gradient(to right,#0c0f15 0 33%,transparent 33% 67%,#0c0f15 67% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="viral-research-batch.html"] .time{color:#747780}
+
+/* wave1.html */
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] body{background:radial-gradient(circle at 50% -8%,#203045 0,#0e131b 38%,#090c12 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .brand{color:#96a4c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .eyebrow{color:#adb7c8}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .groupHead p{color:#818590}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .playIcon{border-left:13px solid #0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .song.active .songPlay .playIcon{background:linear-gradient(to right,#0c0f15 0 34%,transparent 34% 66%,#0c0f15 66% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .rank{background:#222d3b}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .sub{color:#9ca9cb}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .vote button{background:#13151a}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .vote button.sel{color:#0c0f15}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .miniPlay.playing .playIcon{background:linear-gradient(to right,#0c0f15 0 33%,transparent 33% 67%,#0c0f15 67% 100%)}
+html[data-frequency-appearance="midnight"][data-frequency-page="wave1.html"] .time{color:#747780}

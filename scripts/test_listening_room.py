@@ -248,6 +248,56 @@ class ListeningRoomTests(unittest.TestCase):
         self.assertIn("'./frequency-appearance.js'",sw)
         self.assertEqual(json.loads((ROOT/'manifest.webmanifest').read_text())['start_url'],'./?app=1')
 
+    def test_classic_navigation_preserves_current_catalog(self):
+        html=self.html
+        for name in ('discover','worlds','music','favorites'):
+            self.assertIn('data-classic-tab="'+name+'"',html)
+        self.assertIn('data-view-choice="classic"',html)
+        self.assertIn('data-view-choice="modern"',html)
+        self.assertIn('frequency-classic.css',html)
+        self.assertIn('frequency-classic.js',html)
+        self.assertIn('frequency-web-view-v1',html)
+        css=(ROOT/'frequency-classic.css').read_text()
+        self.assertIn('data-frequency-view="classic"',css)
+        self.assertIn('repeat(4,minmax(0,1fr))',css)
+        script=(ROOT/'frequency-classic.js').read_text()
+        self.assertIn("app.resetLibrary()",script)
+        self.assertIn("app.state.favoritesOnly=next==='favorites'",script)
+        self.assertIn("window.FrequencyWebNavigation?.tab",script)
+        self.assertNotIn("new Audio",script)
+        self.assertEqual(len(self.data['tracks']),64)
+        self.assertEqual(len(self.data['worlds']),11)
+        runner=shutil.which('node') or shutil.which('bun')
+        self.assertIsNotNone(runner)
+        result=subprocess.run([runner,str(ROOT/'scripts/test_classic_view.js')],
+                              capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertIn('Classic navigation PASS',result.stdout)
+
+    def test_classic_midnight_covers_entire_public_site(self):
+        css=(ROOT/'frequency-legacy-appearance.css').read_text()
+        subpages=[
+            p for p in ROOT.glob('*.html')
+            if 'frequency-legacy-appearance.css?v=' in p.read_text()
+        ]
+        self.assertGreaterEqual(len(subpages),35)
+        for page in subpages:
+            with self.subTest(page=page.name):
+                text=page.read_text()
+                self.assertEqual(text.count('frequency-legacy-appearance.css?v='),1)
+                self.assertIn('frequency-web-view-v1',text)
+                self.assertIn('frequency-web-appearance-v1',text)
+                self.assertIn('data-frequency-appearance="midnight"',css)
+                self.assertIn('data-frequency-page="'+page.name+'"',css)
+        for selector in ('.world-song.active','.world-song','.track-row.active',
+                         '.experience-scroll button','.lyrics-body','.world-detail-body'):
+            self.assertIn(selector,(ROOT/'frequency-appearance.css').read_text())
+        self.assertIn("'./frequency-legacy-appearance.css'",(ROOT/'sw.js').read_text())
+        from generate_song_pages import page
+        generated=page(self.data['tracks'][0])
+        self.assertIn('frequency-web-view-v1',generated)
+        self.assertIn('#090c12',generated)
+
     def test_appearance_preference_behavior(self):
         runner=shutil.which('node') or shutil.which('bun')
         self.assertIsNotNone(runner,'Node or Bun is needed for preference interactions')
@@ -260,7 +310,7 @@ class ListeningRoomTests(unittest.TestCase):
         checker=shutil.which('node') or shutil.which('deno')
         self.assertIsNotNone(checker,'Node or Deno is needed to validate browser JavaScript')
         command=[checker,'--check'] if Path(checker).name=='node' else [checker,'check']
-        for name in ('listening-room.js','frequency-parity.js','frequency-appearance.js','sw.js'):
+        for name in ('listening-room.js','frequency-parity.js','frequency-appearance.js','frequency-classic.js','sw.js'):
             result=subprocess.run([*command,str(ROOT/name)],capture_output=True,text=True)
             self.assertEqual(result.returncode,0,f'{name}: {result.stderr}')
 
