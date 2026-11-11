@@ -229,72 +229,92 @@ function soundEnergy(){if(state.playing&&analyser&&fft){analyser.getByteFrequenc
 function drawWave(canvas,mode,energy,time){
  const cfg=canvasSize(canvas);
  if(!cfg)return;
- const {ctx,w,h}=cfg,cx=w/2,cy=h/2;
- const unit=Math.min(w,h);
- const active=Boolean(state.playing&&fft&&analyser);
- // Six averaged spectral bands: every deformation remains a continuous harmonic.
- // Never map raw, discontinuous FFT-bin indices directly onto a circular path.
- const bands=[0,0,0,0,0,0];
+ const {ctx,w,h}=cfg,cx=w/2,cy=h/2,unit=Math.min(w,h);
+ const active=Boolean(state.playing && analyser && fft && !audio.paused);
+ const colors=["#75f2ff","#b39cff","#f2a5dc"];
+ const bandPowers=[0,0,0,0,0,0];
  if(active){
+  // Average contiguous FFT frequency ranges. Raw sequential bins at the seam
+  // previously produced discontinuities and hard corners around the circle.
   const start=4,span=Math.min(156,fft.length-start);
-  for(let k=0;k<bands.length;k++){
-   const from=start+Math.floor(span*k/bands.length);
-   const to=start+Math.floor(span*(k+1)/bands.length);
+  for(let k=0;k<6;k++){
+   const from=start+Math.floor(span*k/6);
+   const to=start+Math.floor(span*(k+1)/6);
    let sum=0;
    for(let j=from;j<to;j++)sum+=fft[j];
-   bands[k]=sum/Math.max(1,to-from)/255;
+   bandPowers[k]=Math.sqrt(sum/Math.max(1,to-from)/255);
   }
  }
- const colors=["#75f2ff","#b39cff","#f2a5dc"];
- const motion=time*(active?.00031:.000055);
- const maxRadius=unit/2-22; // includes glow margin, so no clipped edges
+ // 2.25 radians of travel per second while music plays vs .31 previously.
+ // The paused figure only breathes imperceptibly; it does not fake music input.
+ const motion=state.started?audio.currentTime*2.25:time*.000075;
+ const overall=active?Math.min(1,Math.sqrt(Math.max(0,energy)*7.0)):0;
+ const bases=[unit*.314,unit*.356,unit*.394];
+ const maxima=[unit*.048,unit*.058,unit*.067];
+ const mix=Math.min(1,Math.max(0,overall));
+ const pointCount=240;
+ ctx.save();
+ ctx.globalCompositeOperation="lighter";
+ ctx.lineJoin="round";
+ ctx.lineCap="round";
  for(let layer=0;layer<3;layer++){
-  const radius=unit*(.347+.038*layer);
-  const phase=layer*1.19;
-  const n=240;
-  ctx.beginPath();
-  let minR=999,maxR=0;
-  for(let i=0;i<=n;i++){
-   const a=i/n*Math.PI*2;
-   const ambient=2.8*Math.sin(a*(3+layer)+motion+phase)
-                +2.2*Math.cos(a*(6+layer)+motion*.71-phase)
-                +1.25*Math.sin(a*9-motion*.4+phase);
-   const response=active?
-       10.0*bands[(layer+1)%6]*Math.sin(a*4+motion*1.18+phase)
-      +7.0*bands[(layer+3)%6]*Math.cos(a*7-motion*.9-phase)
-      +4.3*bands[(layer+5)%6]*Math.sin(a*11+motion*.55+phase)
-      :0;
-   const rad=Math.max(unit*.295,Math.min(maxRadius,radius+ambient+response));
-   minR=Math.min(minR,rad);maxR=Math.max(maxR,rad);
-   const x=cx+Math.cos(a)*rad,y=cy+Math.sin(a)*rad;
-   if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  const phase=layer*1.47;
+  const direction=layer===1?-1:1;
+  const progress=motion*(.84+layer*.17)*direction;
+  const b0=bandPowers[(layer+1)%6];
+  const b1=bandPowers[(layer+3)%6];
+  const b2=bandPowers[(layer+5)%6];
+  const amp=active?maxima[layer]*(.45+.55*mix):unit*.006;
+  const shape=(angle)=>{
+    // All angular harmonics have integer periods: closed, fluid loops even
+    // when the audio spectrum changes abruptly between frames.
+    const first=Math.sin(angle*(3+layer)+progress+phase)*(0.40+0.15*b0);
+    const second=Math.cos(angle*(6+layer)-progress*.83+phase*.7)*(0.29+0.14*b1);
+    const third=Math.sin(angle*(10-layer*2)+progress*1.37-phase*.43)*(0.17+0.10*b2);
+    const total=first+second+third;
+    return Math.min(unit*.455,Math.max(unit*.27,bases[layer]+amp*total));
+  };
+  function strokeRibbon(offset,alpha,width,blur){
+    ctx.beginPath();
+    for(let i=0;i<=pointCount;i++){
+      const angle=i/pointCount*Math.PI*2;
+      const r=shape(angle)+offset;
+      const x=cx+Math.cos(angle)*r,y=cy+Math.sin(angle)*r;
+      if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.globalAlpha=alpha;
+    ctx.lineWidth=width;
+    ctx.shadowColor=colors[layer];
+    ctx.shadowBlur=blur;
+    ctx.strokeStyle=colors[layer];
+    ctx.stroke();
   }
-  ctx.closePath();
-  ctx.lineWidth=layer===1?1.9:1.65;
-  ctx.lineJoin="round";ctx.lineCap="round";
-  ctx.strokeStyle=colors[layer];
-  ctx.shadowColor=colors[layer];
-  ctx.shadowBlur=8+(active?Math.min(1,energy)*11:3);
-  ctx.globalAlpha=.87;
-  ctx.stroke();
-  ctx.globalAlpha=.24;
-  ctx.lineWidth=3.1;
-  ctx.shadowBlur=17;
-  ctx.stroke();
+  // Two delicate luminous fibers give movement dimensionality without
+  // becoming three thick, hard-edged rings or obscuring the artwork.
+  strokeRibbon(-3.4,active?.23:.10,.72,5);
+  strokeRibbon(3.1,active?.20:.09,.7,5);
+  strokeRibbon(0,.94,1.8,12+(active?9*mix:0));
+  strokeRibbon(0,.13,4.3,15);
  }
- // Contained shimmer points — atmosphere, never a discontinuous waveform.
- ctx.shadowBlur=0;ctx.globalAlpha=1;
- const partR=unit*.45;
- for(let i=0;i<40;i++){
-  const a=i/40*Math.PI*2+motion*.1;
-  const r=partR+Math.sin(i*6+motion)*1.5;
+ // Quiet peripheral starlight, safely within the 350px visualizer canvas.
+ ctx.shadowBlur=0;
+ const particleR=unit*.465;
+ for(let i=0;i<38;i++){
+  const angle=i/38*Math.PI*2+motion*.09;
+  const r=particleR+Math.sin(i*6+motion)*1.2;
   ctx.beginPath();
-  ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,i%6===0?1.1:.55,0,Math.PI*2);
+  ctx.arc(cx+Math.cos(angle)*r,cy+Math.sin(angle)*r,i%6===0?1.1:.55,0,Math.PI*2);
   ctx.fillStyle=i%2===0?"#b6eeff":"#e4bcff";
-  ctx.globalAlpha=.19+.2*(.5+.5*Math.sin(i+motion));
+  ctx.globalAlpha=.16+.20*(.5+.5*Math.sin(i+motion));
   ctx.fill();
  }
- ctx.globalAlpha=1;
+ ctx.restore();
+ // Diagnostic metadata supports repeatable live-motion and containment QA.
+ canvas.dataset.waveActive=active?"1":"0";
+ canvas.dataset.waveEnergy=energy.toFixed(3);
+ canvas.dataset.waveAmplitude=(maxima[2]*(.45+.55*mix)).toFixed(1);
+ canvas.dataset.wavePhase=motion.toFixed(2);
 }
 function drawTone(canvas,time){
  const c=canvasSize(canvas);if(!c)return;const {ctx,w,h}=c,cx=w/2,cy=h/2;
